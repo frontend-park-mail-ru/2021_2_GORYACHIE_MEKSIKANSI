@@ -1,0 +1,58 @@
+.restaurant-block {
+    width: 315px;
+    height: 188px;
+}
+
+.restaurant-block__img {
+    width: 315px;
+    height: 125px;
+}
+
+.restaurant-block__information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.information__restaurant-title {
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+}
+
+.information__delivery-info {
+    margin-top: 10px;
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+}
+
+.restaurant-block__rating {
+    width: 26px;
+    height: 26px;
+    background: #EEEEEE;
+    border-radius: 13px;
+    margin-right: 5px;
+
+    align-items: center;
+}
+
+.rating__text {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
