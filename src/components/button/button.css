@@ -1,0 +1,59 @@
+body {
+    font-family: "Raleway", sans-serif;
+}
+
+.button {
+    font-size: 16px;
+    font-weight: 800;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    border: 0;
+    height: 48px;
+}
+
+.button_shape_rounded {
+    border: 0 solid;
+    border-radius: 30px;
+}
+
+.button_color_black {
+    background-color: black;
+    color: white;
+}
+
+.button_color_green {
+    background-color: #3E9920;
+}
+
+.button_color_gray {
+    background-color: #F6F6F6;
+}
+
+.button_color_white {
+    background-color: white;
+}
+
+.button_size_s {
+    width: 112px;
+}
+
+.button_size_m {
+    width: 222px;
+}
+
+.button_size_l {
+    width: 442px;
+}
+
+.button__icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 3px;
+}
+
+.button__icon_nav {
+    width: 40px;
+    height: 40px;
+}
