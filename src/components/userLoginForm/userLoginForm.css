@@ -1,9 +1,8 @@
-.login-page {
+.register-page {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     font-family: Raleway, sans-serif;
-    border: 3px solid #f1f1f1;
 }
 
 .login-page__logo-container {
@@ -31,12 +30,8 @@
 }
 
 .login-page__login_input {
-    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .login-page__submit-button {
