@@ -4,17 +4,17 @@
     --color-black: black;
     --color-white: white;
 
-    --width-small: 112px;
-    --height-small: 26px;
+    --button-width-small: 112px;
+    --button-height-small: 26px;
 
-    --width-medium: 222px;
-    --height-medium: 48px;
+    --button-width-medium: 222px;
+    --button-height-medium: 48px;
 
-    --width-big: 442px;
-    --height-big: 68px;
+    --button-width-big: 442px;
+    --button-height-big: 68px;
 
-    --height: 48px;
-    --font-size: 16px;
+    --button-height: 48px;
+    --button-font-size: 16px;
 
     --button__icon-size: 14px;
     --button__icon-nav-size: 40px;
@@ -25,7 +25,7 @@ body {
 }
 
 .button {
-    font-size: var(--font-size);
+    font-size: var(--button-font-size);
     font-weight: 800;
 
     padding-left: 10px;
@@ -34,7 +34,7 @@ body {
     background-color: var(--color-primary);
 
     border: 0;
-    height: var(--height-medium);
+    height: var(--button-height-medium);
 }
 
 .button_shape_rounded {
@@ -56,27 +56,27 @@ body {
 }
 
 .button_height_s {
-    height: var(--height-small);
+    height: var(--button-height-small);
 }
 
 .button_height_m {
-    height: var(--height-medium);
+    height: var(--button-height-medium);
 }
 
 .button_height_b {
-    height: var(--height-big);
+    height: var(--button-height-big);
 }
 
 .button_width_s {
-    width: var(--width-small);
+    width: var(--button-width-small);
 }
 
 .button_width_m {
-    width: var(--width-medium);
+    width: var(--button-width-medium);
 }
 
 .button_width_b {
-    width: var(--width-big);
+    width: var(--button-width-big);
 }
 
 
