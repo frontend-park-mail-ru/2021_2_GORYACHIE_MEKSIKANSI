@@ -1,6 +1,8 @@
+@import "../variables/colors.css";
+
 .footer {
-    background: #000000;
-    padding: 30px 0px 50px;
+    background: var(--main-black-color);
+    padding: 30px 0 50px;
 }
 
 .footer__upper-footer {
@@ -9,6 +11,9 @@
 }
 
 .footer__image {
+    min-width: 50vw;
+    max-height: 40vw;
+    border-radius: 50%;
     flex-grow: 1;
 }
 
@@ -25,14 +30,14 @@
     text-decoration: none;
     font-family: Raleway, sans-serif;
     list-style: none;
-    color: #FFFFFFFF;
+    color: var(--main-white-color);
     margin-top: 16px;
 }
 
 .footer__line {
     margin: 0 40px;
     border: none;
-    background-color: #ffffff;
+    background-color: var(--main-white-color);
     height: 2px;
 }
 
@@ -42,7 +47,7 @@
 }
 
 .footer__title {
-    color: white;
+    color: var(--main-white-color);
     padding: 0 200px 0 0;
     margin: 50px 0 0 0;
     font-family: Raleway, sans-serif;

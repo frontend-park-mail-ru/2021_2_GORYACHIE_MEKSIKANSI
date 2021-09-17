@@ -1,3 +1,5 @@
+@import "../variables/colors.css";
+
 .register-page {
     display: flex;
     flex-flow: column nowrap;
@@ -11,8 +13,8 @@
 }
 
 .register-page__logo {
-    width: 40%;
-    border-radius: 50%;
+    min-width: 20vw;
+    max-height: 20vw;
 }
 
 .register-page__login-container {
@@ -35,8 +37,8 @@
 }
 
 .register-page__submit-button {
-    background-color: #3E9920;
-    color: white;
+    background-color: var(--main-green-color);
+    color: var(--main-white-color);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -59,5 +61,5 @@
 }
 
 .register-page__register-container_register {
-    color: #3E9920;
+    color: var(--main-green-color);
 }
