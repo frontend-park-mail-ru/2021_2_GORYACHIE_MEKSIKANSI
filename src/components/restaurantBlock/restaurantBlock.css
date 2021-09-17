@@ -1,42 +1,82 @@
+:root {
+    --restaurant-block_width_primary: 315px;
+    --restaurant-block_height_primary: 188px;
+
+    --restaurant-block__img-widht: 315px;
+    --restaurant-block__img-height: 125px;
+
+    --restaurant-block__title_font-size: 20px;
+    --restaurant-block__title_font-weight: 800;
+
+    --restaurant-block__delivery-cost-font-size: 13px;
+    --restaurant-block__delivery-cost-font-weight: 500;
+
+    --restaurant-block__delivery-time-font-size: 13px;
+    --restaurant-block__delivery-time-font-weight: 300;
+}
+
 .restaurant-block {
-    width: 315px;
-    height: 188px;
+    width: var(--restaurant-block_width_primary);
+    height: var(--restaurant-block_height_primary);
+}
+
+.restaurant-block__img-box {
+    position: relative;
+    overflow: hidden;
+    width: var(--restaurant-block__img-widht);
+    height: var(--restaurant-block__img-height);
 }
 
 .restaurant-block__img {
-    width: 315px;
-    height: 125px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--restaurant-block__img-widht);
+    height: var(--restaurant-block__img-height);
+    object-fit: cover;
 }
 
 .restaurant-block__information {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
-.information__restaurant-title {
-    font-family: "Raleway", sans-serif;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 23px;
+.restaurant-block__text-box {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurant-block__delivery-info {
+    padding-top: 7px;
     display: flex;
     align-items: center;
+}
+
+.restaurant-block__restaurant-title {
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+    font-weight: var(--restaurant-block__title_font-weight);
+    font-size: var(--restaurant-block__title_font-size);
+    line-height: 23px;
     letter-spacing: 0.05em;
 }
 
-.information__delivery-info {
-    margin-top: 10px;
+.information__delivery-cost {
     font-family: "Raleway", sans-serif;
     font-style: normal;
-    font-weight: 500;
-    font-size: 11px;
+    font-weight: var(--restaurant-block__delivery-cost-font-weight);
+    font-size: var(--restaurant-block__delivery-cost-font-size);
     line-height: 13px;
     /* identical to box height */
-
-    display: flex;
-    align-items: center;
     letter-spacing: 0.05em;
+}
+
+.information__delivery-time {
+    font-weight: var(--restaurant-block__delivery-time-font-weight);
+    font-size: var(--restaurant-block__delivery-time-font-size);
+    color: rgba(0, 0, 0, 0.7)
 }
 
 .restaurant-block__rating {
@@ -47,6 +87,7 @@
     margin-right: 5px;
 
     align-items: center;
+    margin-left: auto;
 }
 
 .rating__text {

@@ -1,16 +1,35 @@
+:root {
+    --color-primary: #F6F6F6;
+    --color-green: #3E9920;
+    --color-black: black;
+    --color-white: white;
+
+    --width-small: 112px;
+    --width-medium: 222px;
+    --width-big: 442px;
+
+    --height: 48px;
+    --font-size: 16px;
+
+    --button__icon-size: 14px;
+    --button__icon-nav-size: 40px;
+}
+
 body {
     font-family: "Raleway", sans-serif;
 }
 
 .button {
-    font-size: 16px;
+    font-size: var(--font-size);
     font-weight: 800;
 
     padding-left: 10px;
     padding-right: 10px;
 
+    background-color: var(--color-primary);
+
     border: 0;
-    height: 48px;
+    height: var(--height);
 }
 
 .button_shape_rounded {
@@ -24,36 +43,32 @@ body {
 }
 
 .button_color_green {
-    background-color: #3E9920;
-}
-
-.button_color_gray {
-    background-color: #F6F6F6;
+    background-color: var(--color-green);
 }
 
 .button_color_white {
-    background-color: white;
+    background-color: var(--color-white);
 }
 
 .button_size_s {
-    width: 112px;
+    width: var(--width-small);
 }
 
 .button_size_m {
-    width: 222px;
+    width: var(--width-medium);
 }
 
-.button_size_l {
-    width: 442px;
+.button_size_b {
+    width: var(--width-big);
 }
 
 .button__icon {
-    width: 14px;
-    height: 14px;
+    width: var(--button__icon-size);
+    height: var(--button__icon-size);
     margin-right: 3px;
 }
 
 .button__icon_nav {
-    width: 40px;
-    height: 40px;
+    width: var(--button__icon-nav-size);
+    height: var(--button__icon-nav-size);
 }
