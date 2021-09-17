@@ -1,0 +1,21 @@
+:root {
+    --sort-underheader_height: 100px;
+    --sort-underheader__border_color: #e2e2e2;
+    --sort-underheader__border_size: 1px;
+}
+
+.sort-underheader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: var(--sort-underheader_height);
+
+    border-bottom-style: solid;
+    border-bottom-width: var(--sort-underheader__border_size);
+    border-bottom-color: var(--sort-underheader__border_color);
+}
+
+.sort-underheader__button {
+    margin-left: 15px;
+    margin-right: 15px;
+}
