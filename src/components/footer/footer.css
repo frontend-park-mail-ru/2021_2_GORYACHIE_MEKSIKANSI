@@ -1,8 +1,10 @@
 @import "../variables/colors.css";
+@import "../variables/fonts.css";
 
 .footer {
     background: var(--main-black-color);
     padding: 30px 0 50px;
+    font-family: var(--raleway-font)
 }
 
 .footer__upper-footer {
@@ -28,7 +30,6 @@
     font-size: 18px;
     font-weight: 500;
     text-decoration: none;
-    font-family: Raleway, sans-serif;
     list-style: none;
     color: var(--main-white-color);
     margin-top: 16px;
@@ -50,7 +51,6 @@
     color: var(--main-white-color);
     padding: 0 200px 0 0;
     margin: 50px 0 0 0;
-    font-family: Raleway, sans-serif;
     font-size: 21px;
 }
 

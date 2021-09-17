@@ -1,10 +1,11 @@
 @import "../variables/colors.css";
+@import "../variables/fonts.css";
 
 .register-page {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    font-family: Raleway, sans-serif;
+    font-family: var(--raleway-font);
 }
 
 .login-page__logo-container {
