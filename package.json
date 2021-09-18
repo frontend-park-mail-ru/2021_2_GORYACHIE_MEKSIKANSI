@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "compile_hbs": "globstar -- npx handlebars src/components/*/*.hbs -f src/assets/js/handlebars.precompiled.js",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -23,12 +24,14 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "express": "^4.17.1",
+    "handlebars": "^4.7.7",
     "nodemon": "^2.0.12",
     "path": "^0.12.7"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-promise": "^5.1.0"
+    "eslint-plugin-promise": "^5.1.0",
+    "globstar": "^1.0.0"
   }
 }

@@ -1,16 +1,16 @@
 @import "../variables/colors.css";
 @import "../variables/fonts.css";
 
-.register-page {
+.login-page {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     font-family: var(--raleway-font);
+    padding-bottom: 10%;
 }
 
 .login-page__logo-container {
     display:flex;
-
     justify-content: center;
 }
 
@@ -21,6 +21,7 @@
 
 .login-page__login-container {
     display: flex;
+    flex-flow: row wrap;
     justify-content: center;
 }
 
@@ -29,8 +30,9 @@
 }
 
 .login-page__login-form {
+    display: flex;
     flex-flow: column nowrap;
-    max-width: 600px;
+    min-width: 30%;
 }
 
 .login-page__login_input {
