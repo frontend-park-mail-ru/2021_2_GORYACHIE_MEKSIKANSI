@@ -1,0 +1,66 @@
+@import "../variables/colors.css";
+@import "../variables/fonts.css";
+
+.login-page {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-family: var(--raleway-font);
+}
+
+.register-page__logo-container {
+    display:flex;
+    justify-content: center;
+}
+
+.register-page__logo {
+    min-width: 20vw;
+    max-height: 20vw;
+}
+
+.register-page__login-container {
+    display: flex;
+    justify-content: center;
+}
+
+.register-page__login_welcome-back-text {
+    font-weight: 300;
+}
+
+.register-page__login-form {
+    flex-flow: column nowrap;
+    max-width: 600px;
+}
+
+.register-page__login_input {
+    padding: 12px 20px;
+    margin: 8px 0;
+}
+
+.register-page__submit-button {
+    background-color: var(--main-green-color);
+    color: var(--main-white-color);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.register-page__submit-button:hover {
+    opacity: 0.8;
+}
+
+.register-page__register-container_span {
+    float: right;
+    padding-top: 16px;
+}
+
+.register-page__register-container {
+    display: flex;
+    justify-content: center;
+}
+
+.register-page__register-container_register {
+    color: var(--main-green-color);
+}

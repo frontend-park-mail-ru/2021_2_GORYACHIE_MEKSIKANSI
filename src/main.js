@@ -1,6 +1,12 @@
 'use strict';
 import {HomePage} from './pages/homePage/homePage.js';
 
+// const application = document.getElementById('app');
+// const footer = document.getElementById('foot');
+// const loginTemplate = Handlebars.templates['userLoginForm.hbs'];
+// const footerTemplate = Handlebars.templates['footer.hbs'];
+// application.innerHTML = loginTemplate({});
+// footer.innerHTML = footerTemplate({});
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant', Handlebars.templates['restaurantBlock.hbs']);
 Handlebars.registerPartial('promoLine', Handlebars.templates['promoLine.hbs']);
