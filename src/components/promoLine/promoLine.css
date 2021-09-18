@@ -1,5 +1,5 @@
 .promo-line {
-    height: 160px;
+    min-height: 160px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,6 +26,7 @@
 .promo-line__blocks {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .promo-line__promo-block {

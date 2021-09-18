@@ -3,6 +3,8 @@
 
 .sort-box {
     font-family: var(--raleway-font);
+    display: flex;
+    flex-flow: column wrap;
     max-width: 25vh;
 }
 

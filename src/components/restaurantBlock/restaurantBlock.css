@@ -13,6 +13,8 @@
 
     --restaurant-block__delivery-time-font-size: 13px;
     --restaurant-block__delivery-time-font-weight: 300;
+
+    --restaurant-block__text_cut: 250px;
 }
 
 .restaurant-block {
@@ -48,6 +50,9 @@
 }
 
 .restaurant-block__text-box {
+    width: var(--restaurant-block__text_cut);
+    padding-left: 10px;
+
     padding-top: 10px;
     display: flex;
     flex-direction: column;
@@ -60,6 +65,10 @@
 }
 
 .restaurant-block__restaurant-title {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+
     font-family: "Raleway", sans-serif;
     font-style: normal;
     font-weight: var(--restaurant-block__title_font-weight);
