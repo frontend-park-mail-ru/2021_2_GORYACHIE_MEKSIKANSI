@@ -1,0 +1,28 @@
+{{> header }}
+
+<div class="home-page">
+<div class="home-page__content">
+    {{>sortUnderheader }}
+    <div class="home-page__promo-line">
+        {{>promoLine }}
+    </div>
+
+    <div>
+        <div class="home-page__sort">
+
+        </div>
+
+        <div class="home-page__restaurants-list">
+            <div class="home-page__restaurant-block-title">
+                <h3>Популярное</h3>
+            </div>
+            {{#each restaurantList}}
+                <div class="home-page__restaurant-block">
+                    {{> restaurant this }}
+                </div>
+            {{/each }}
+        </div>
+    </div>
+</div>
+</div>
+
