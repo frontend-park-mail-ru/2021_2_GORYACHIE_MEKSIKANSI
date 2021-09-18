@@ -1,9 +1,8 @@
-const restaurantList = { restaurantList:
+const restaurantList = {restaurantList:
   [
     {name: 'mac'},
     {name: 'kfc'},
-  ]
-}
+  ]};
 
 /**
  * Class that render HomePage
@@ -20,6 +19,7 @@ export class HomePage {
    * method that render home page in inner HTML of element
    */
   render() {
+    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['homePage.hbs'];
 
     // const template = Handlebars.templates['restaurantBlock.hbs'];

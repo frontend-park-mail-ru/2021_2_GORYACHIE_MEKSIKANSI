@@ -41,8 +41,8 @@
 }
 
 .login-page__submit-button {
-    background-color: var(--main-green-color);
-    color: var(--main-white-color);
+    background-color: var(--color-green);
+    color: var(--color-white);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -65,5 +65,5 @@
 }
 
 .login-page__register-container_register {
-    color: var(--main-green-color);
+    color: var(--color-green);
 }
