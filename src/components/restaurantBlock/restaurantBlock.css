@@ -16,8 +16,13 @@
 }
 
 .restaurant-block {
+    text-decoration: none;
     width: var(--restaurant-block_width_primary);
     height: var(--restaurant-block_height_primary);
+}
+
+.restaurant-block:visited {
+    color: black;
 }
 
 .restaurant-block__img-box {
@@ -96,4 +101,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 11px;
 }

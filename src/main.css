@@ -2,3 +2,7 @@
 @import "components/button/button.css";
 @import "components/search-input/search-input.css";
 @import "components/restaurantBlock/restaurantBlock.css";
+@import "components/promoLine/promoLine.css";
+@import "components/promoBlock/promoBlock.css";
+@import "components/sortUnderheader/sortUnderheader.css";
+@import "pages/homePage/homePage.css";

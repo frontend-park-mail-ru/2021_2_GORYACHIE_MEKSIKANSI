@@ -1,16 +1,28 @@
+const restaurantList = { restaurantList:
+  [
+    {name: 'mac'},
+    {name: 'kfc'},
+  ]
+}
+
 /**
  * Class that render HomePage
  */
 export class HomePage {
   /**
-   * method that render home page in inner HTML of element
+   * Construct HomePage class
    * @param {HTMLElement} parent
    */
-  render(parent) {
-    // eslint-disable-next-line no-undef
+  constructor(parent) {
+    this.parent = parent;
+  }
+  /**
+   * method that render home page in inner HTML of element
+   */
+  render() {
     const template = Handlebars.templates['homePage.hbs'];
-    // eslint-disable-next-line no-undef
-    parent.innerHTML = template({restaurants: [1, 2, 3]});
-    // parent.innerHTML =
+
+    // const template = Handlebars.templates['restaurantBlock.hbs'];
+    this.parent.innerHTML = template(restaurantList);
   }
 }
