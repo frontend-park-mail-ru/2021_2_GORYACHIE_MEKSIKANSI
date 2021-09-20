@@ -2,6 +2,19 @@
 import {HomePage} from './pages/homePage/homePage.js';
 import {SignUpPage} from './pages/signUpPage/signUpPage.js';
 import {LoginPage} from './pages/loginPage/loginPage.js';
+import Http from './modules/http.js'
+
+const http = new Http()
+
+http.ajaxGet()
+    .then(response => {
+      console.log(response)
+      console.log('hello world');
+    })
+    .catch(response => {
+      console.log(response)
+    })
+
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
