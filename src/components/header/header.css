@@ -20,10 +20,11 @@ body {
 }
 
 .right-box {
-    width: 40vw;
+    width: 45%;
     margin-left: auto;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .header__content {

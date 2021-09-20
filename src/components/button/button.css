@@ -3,16 +3,16 @@
     --button-height-small: 26px;
 
     --button-width-medium: 222px;
-    --button-height-medium: 48px;
+    --button-height-medium: 36px;
 
     --button-width-big: 442px;
-    --button-height-big: 68px;
+    --button-height-big: 48px;
 
     --button-height: 48px;
     --button-font-size: 16px;
 
     --button__icon-size: 14px;
-    --button__icon-nav-size: 40px;
+    --button__icon-nav-size: 30px;
 }
 
 body {
@@ -30,6 +30,12 @@ body {
 
     border: 0;
     height: var(--button-height-medium);
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--color-light-gray);
 }
 
 .button_shape_rounded {
@@ -41,6 +47,12 @@ body {
     background-color: black;
     color: white;
 }
+
+.button_color_black:hover {
+    background-color: rgb(26, 26, 26);
+    color: white;
+}
+
 
 .button_color_green {
     background-color: var(--color-green);
@@ -92,6 +104,24 @@ body {
     align-items: center;
 }
 
+.button_sort-type:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+
+}
+
 .button__icon-sort {
     margin-bottom: 10px;
+}
+
+.nav-button {
+    padding: 0;
+    width: var(--button__icon-nav-size);
+    height: var(--button__icon-nav-size);
+}
+
+.nav-button:hover {
+    background-color: var(--color-white);
 }
