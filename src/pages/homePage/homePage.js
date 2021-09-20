@@ -1,4 +1,4 @@
-
+import {Navbar} from '../../components/navbar/navbar.js';
 
 const randomInteger = (min, max) => {
   // получить случайное число от (min-0.5) до (max+0.5)
@@ -99,12 +99,27 @@ export class HomePage {
    */
   constructor(parent) {
     this.parent = parent;
+    this.navbar = new Navbar(this.parent);
+    this.parent.addEventListener('click', (e) => {
+      const {target} = e;
+
+      const navbar = this.parent.getElementsByClassName('navbar')[0];
+
+      if (this.navbar.opened && !navbar.contains(e.target)) {
+        console.log(e.target);
+        this.navbar.close();
+      } else if (target.getAttribute('href') === 'navbar') {
+        this.navbar.open();
+      }
+    });
   }
   /**
    * method that render home page in inner HTML of element
    */
   render() {
+    this.navbar.render();
+    this.navbar.close();
     const template = Handlebars.templates['homePage.hbs'];
-    this.parent.innerHTML = template(restaurantList);
+    this.parent.innerHTML += template(restaurantList);
   }
 }

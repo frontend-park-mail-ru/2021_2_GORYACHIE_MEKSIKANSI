@@ -10,6 +10,8 @@
 @import "./components/promoBlock/promoBlock.css";
 @import "./components/sortUnderheader/sortUnderheader.css";
 @import "./pages/homePage/homePage.css";
+@import "./components/navbar/navbar.css";
+@import "./components/navProfile/navProfile.css";
 
 body {
     font-family: var(--raleway-font);

@@ -13,7 +13,6 @@ export class SignUpPage {
      * method that render sign up page in inner HTML of element
      */
   render() {
-    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['signUpPage.hbs'];
     this.parent.innerHTML = template({});
   }
