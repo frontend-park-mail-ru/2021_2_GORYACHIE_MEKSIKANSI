@@ -8,6 +8,19 @@ export class Navbar {
   constructor(parent = document.body) {
     this.parent = parent;
     this.opened = false;
+
+    this.parent.addEventListener('click', (e) => {
+      const {target} = e;
+
+      const navbar = this.parent.getElementsByClassName('navbar')[0];
+
+      if (this.opened && !navbar.contains(e.target)) {
+        console.log(e.target);
+        this.close();
+      } else if (target.getAttribute('href') === 'navbar') {
+        this.open();
+      }
+    });
   }
 
   /**
@@ -16,6 +29,7 @@ export class Navbar {
   render() {
     const template = Handlebars.templates['navbar.hbs'];
     this.parent.innerHTML = template({});
+    this.close();
   }
 
   /**

@@ -12,7 +12,7 @@
     --button-font-size: 16px;
 
     --button__icon-size: 14px;
-    --button__icon-nav-size: 30px;
+    --button__icon-nav-size: 25px;
 }
 
 body {
@@ -32,10 +32,6 @@ body {
     height: var(--button-height-medium);
 
     cursor: pointer;
-}
-
-.button:hover {
-    background-color: var(--color-light-gray);
 }
 
 .button_shape_rounded {

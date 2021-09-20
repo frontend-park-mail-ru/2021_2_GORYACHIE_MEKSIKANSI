@@ -28,8 +28,13 @@
     animation-duration: 0.4s;
 }
 
-.navbar__button {
+.navbar__gray-button {
     color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar__button {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .navbar__line {

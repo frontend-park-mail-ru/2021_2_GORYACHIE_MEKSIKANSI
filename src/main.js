@@ -2,6 +2,7 @@
 import {HomePage} from './pages/homePage/homePage.js';
 import {SignUpPage} from './pages/signUpPage/signUpPage.js';
 import {LoginPage} from './pages/loginPage/loginPage.js';
+import {ProfilePage} from './pages/profilePage/profilePage.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -30,6 +31,7 @@ footer.innerHTML = footerTemplate({});
 const homePage = new HomePage(application);
 const loginPage = new LoginPage(application);
 const signUpPage = new SignUpPage(application);
+const profilePage = new ProfilePage(application);
 
 const homePageRender = () => {
   homePage.render();
@@ -43,6 +45,10 @@ const signUpPageRender = () => {
   signUpPage.render();
 };
 
+const profilePageRender = () => {
+  profilePage.render();
+};
+
 const config = {
   login: {
     open: loginPageRender,
@@ -53,10 +59,13 @@ const config = {
   home: {
     open: homePageRender,
   },
+  profile: {
+    open: profilePageRender,
+  },
 };
 
 
-loginPage.render();
+homePageRender();
 
 application.addEventListener('click', (e) => {
   const {target} = e;
