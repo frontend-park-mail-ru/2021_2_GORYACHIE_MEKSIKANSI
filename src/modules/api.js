@@ -5,22 +5,30 @@ const http = new Http()
 /**
  * Server post request to register user/courier/host
  *
+ * @param {string} type
  * @param {string} name
- * @param {object} type
- * @param {object} login
- * @param {string} password
+ * @param {string} email
+ * @param {string} phone
+ * @param {object} password
  * @returns {Promise<{parsedJSON: object, status: number}>}
  *
  */
 
-export function signupPost({name, type, login, password}) {
+export function signupPost({
+                               type,
+                               name,
+                               email,
+                               phone,
+                               password
+}) {
     return http.ajaxPost({
-        url: '/auth/signup',
+        url: '/signup',
         body: {
-            name,
             type,
-            contacts: login,
-            password
+            name,
+            email,
+            phone,
+            password,
         }
     })
         .then()
@@ -29,15 +37,15 @@ export function signupPost({name, type, login, password}) {
 /**
  * Server post request to login user/courier/host
  *
- * @param {object} type
- * @param {object} login
+ * @param {string} email
+ * @param {object} phone
  * @param {string} password
  * @returns {Promise<{parsedJSON: object, status: number}>}
  */
-export function loginPost ({ type, login, password }) {
+export function loginPost ({ email, phone, password }) {
     return http.ajaxPost({
-        url: '/auth/login',
-        body: {type, login, password}
+        url: '/login',
+        body: {email, phone, password}
     })
         .then()
 }
