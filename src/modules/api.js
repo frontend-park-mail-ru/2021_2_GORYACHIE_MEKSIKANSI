@@ -1,4 +1,5 @@
 import Http from './http.js';
+import { auth } from "./auth.js";
 
 const http = new Http()
 
@@ -31,7 +32,7 @@ export function signupPost({
             password,
         }
     })
-        .then()
+        .then(auth)
 }
 
 /**
@@ -47,5 +48,5 @@ export function loginPost ({ email, phone, password }) {
         url: '/login',
         body: {email, phone, password}
     })
-        .then()
+        .then(auth)
 }

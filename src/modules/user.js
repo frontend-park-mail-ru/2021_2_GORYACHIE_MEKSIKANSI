@@ -1,10 +1,10 @@
 import { AuthStatus } from "../events/Auth.js";
-import eventBus from "../eventBus.js";
+import eventBus from "./eventBus.js";
 
 class User {
     constructor() {
-        eventBus.subscribe(AuthStatus.userLogin, this.login.bind(this))
-        eventBus.subscribe(AuthStatus.userLogout, this.logout.bind(this))
+        eventBus.addEventListener(AuthStatus.userLogin, this.login.bind(this))
+        eventBus.addEventListener(AuthStatus.userLogout, this.logout.bind(this))
     }
 
     logout() {
