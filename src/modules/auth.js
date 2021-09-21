@@ -1,6 +1,13 @@
 import { AuthStatus } from "../events/Auth.js";
 import eventBus from "./eventBus.js";
 
+/**
+ * emitting events for user auth
+ *
+ * @param {{status: int, parsedJSON: json}} response
+ * @returns null
+ *
+ */
 export function auth(response) {
     if (response.status === 401) {
         eventBus.emitEventListener(AuthStatus.notAuth, {});
