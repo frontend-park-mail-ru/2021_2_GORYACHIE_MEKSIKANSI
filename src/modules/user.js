@@ -7,6 +7,10 @@ class User {
         eventBus.addEventListener(AuthStatus.userLogout, this.logout.bind(this))
     }
 
+    /**
+     * setting all user fields to empty string
+     *
+     */
     logout() {
         this.type = '';
         this.name = '';
@@ -15,6 +19,12 @@ class User {
         this.Auth = false;
     }
 
+    /**
+     * setting all user fields to passed fields
+     *
+     * @param {{type: string, name: string, email: string, phone: string}} params
+     *
+     */
     login({
               type = '',
               name = '',

@@ -12,6 +12,14 @@ const validResult = {
 }
 
 export default class Validation {
+
+    /**
+     * Validating passed email with RegExp
+     *
+     * @param {string} email
+     * @return {Object}
+     *
+     */
     validateEmail (email) {
         if (email === '') {
             return emptyResult;
@@ -27,12 +35,19 @@ export default class Validation {
         return validResult;
     }
 
-    validatePhoneNumber (number) {
-        if (number === '') {
+    /**
+     * Validating passed phone number with RegExp
+     *
+     * @param {string} phone
+     * @return {Object}
+     *
+     */
+    validatePhoneNumber (phone) {
+        if (phone === '') {
             return emptyResult;
         }
 
-        if (!phoneRegExpression.test(number)) {
+        if (!phoneRegExpression.test(phone)) {
             return {
                 validationResult: flase,
                 validationText: 'Введен неверный номер телефона',
@@ -42,6 +57,13 @@ export default class Validation {
         return validResult;
     }
 
+    /**
+     * Validating passed password
+     *
+     * @param {string} password
+     * @return {Object}
+     *
+     */
     validatePassword (password) {
         if (password === '') {
             return emptyResult;
@@ -57,6 +79,14 @@ export default class Validation {
         return validResult;
     }
 
+    /**
+     * Validating passed passwords on equal
+     *
+     * @param {string} password
+     * @param {string} repeatPassword
+     * @return {Object}
+     *
+     */
     validatePasswordRepeat (password, repeatPassword) {
         if (repeatPassword === '') {
             return emptyResult;
