@@ -11,7 +11,7 @@ const validResult = {
     validationText: '',
 }
 
-export default class Validation {
+export class Validation {
 
     /**
      * Validating passed email with RegExp
