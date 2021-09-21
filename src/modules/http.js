@@ -35,8 +35,8 @@ function getData ({
 /**
  * Fetching server
  *
- * @param {{url: string, method: string, body: object, type: string}} params
- * @returns {Object}
+ * @param {Object<{url: string, method: string, body: object, type: string}>} params
+ * @returns {Object<{status: string, parsedJSON: object}>}
  *
  */
 async function makeFetch({
@@ -60,7 +60,7 @@ export default class Http {
      * ajaxGet request
      *
      * @param {{url: string}} params
-     * @returns {Object}
+     * @returns {Object<{status: string, parsedJSON: object}>}
      *
      */
     async ajaxGet({
@@ -74,7 +74,7 @@ export default class Http {
      * ajaxPost request
      *
      * @param {{url: string, body: object}} params
-     * @returns {Object}
+     * @returns {Object<{status: string, parsedJSON: object}>}
      *
      */
     async ajaxPost ({

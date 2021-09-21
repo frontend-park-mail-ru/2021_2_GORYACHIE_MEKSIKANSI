@@ -1,4 +1,4 @@
-export const SignInEvents = {
+export const LoginEvents = {
     loginDone: 'loginDone',
     loginFailed: 'loginFailed',
 }
