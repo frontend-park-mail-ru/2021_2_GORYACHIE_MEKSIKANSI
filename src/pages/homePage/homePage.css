@@ -19,13 +19,37 @@ h3 {
 
 .home-page__restaurant-block-title {
     display: inline-block;
-    font-size: 30px;
-    font-weight: 800;
+    font-size: 36px;
+    font-weight: var(--font_bold);
     min-width: 100%;
+}
+
+.promo__main-title {
+    font-weight: var(--font_bold);
+    font-size: 28px;
+}
+
+.promo__description-title {
+    font-weight: var(--font_thin);
+    font-size: 18px;
 }
 
 .home-page__promo-line {
     margin-top: 20px;
+}
+
+.home-page__promo-line-title {
+    width: 16%;
+}
+
+.home-page__promo-line-blocks {
+    display: flex;
+    width: 81%;
+    margin-left: auto;
+}
+
+.home-page__promo-block {
+    margin-right: 10px;
 }
 
 .home-page__restaurants-list {
@@ -39,7 +63,8 @@ h3 {
 }
 
 .home-page__restaurant-block {
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .home-page__sort {

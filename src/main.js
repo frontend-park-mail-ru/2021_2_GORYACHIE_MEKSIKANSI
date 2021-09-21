@@ -7,7 +7,8 @@ import {ProfilePage} from './pages/profilePage/profilePage.js';
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
-Handlebars.registerPartial('promoLine', Handlebars.templates['promoLine.hbs']);
+Handlebars.registerPartial('promoBlock',
+    Handlebars.templates['promoBlock.hbs']);
 Handlebars.registerPartial('sortUnderheader',
     Handlebars.templates['sortUnderheader.hbs']);
 Handlebars.registerPartial('sortBox', Handlebars.templates['sortBox.hbs']);

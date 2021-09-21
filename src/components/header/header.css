@@ -1,10 +1,6 @@
-body {
-    margin: 0;
-}
-
 .header {
     font-family: "Raleway", sans-serif;
-    font-weight: 800;
+    font-weight: var(--font_bold);
 
     width:100vw;
     height: 96px;
@@ -20,11 +16,14 @@ body {
 }
 
 .right-box {
-    width: 45%;
     margin-left: auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
+}
+
+.right-box__spacer {
+    margin-left: 30px;
 }
 
 .header__content {

@@ -11,12 +11,12 @@ export class ProfilePage {
   constructor(parent) {
     this.navbar = new Navbar(parent);
     this.parent = parent;
-    window.document.getElementsByClassName('footer')[0].style.marginTop = '0';
   }
   /**
    * method that render profile page in inner HTML of element
    */
   render() {
+    window.document.getElementsByClassName('footer')[0].style.marginTop = '0';
     this.navbar.render();
     const template = Handlebars.templates['profilePage1.hbs'];
     this.parent.innerHTML += template({});

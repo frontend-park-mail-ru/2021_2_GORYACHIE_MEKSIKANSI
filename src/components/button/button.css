@@ -12,16 +12,12 @@
     --button-font-size: 16px;
 
     --button__icon-size: 14px;
-    --button__icon-nav-size: 25px;
-}
-
-body {
-    font-family: "Raleway", sans-serif;
+    --button__icon-nav-size: 24px;
 }
 
 .button {
     font-size: var(--button-font-size);
-    font-weight: 800;
+    font-weight: var(--font_bold);
 
     padding-left: 10px;
     padding-right: 10px;
@@ -52,6 +48,7 @@ body {
 
 .button_color_green {
     background-color: var(--color-green);
+    color: white;
 }
 
 .button_color_white {
@@ -82,7 +79,6 @@ body {
     width: var(--button-width-big);
 }
 
-
 .button__icon {
     width: var(--button__icon-size);
     height: var(--button__icon-size);
@@ -105,7 +101,6 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: white;
-
 }
 
 .button__icon-sort {
