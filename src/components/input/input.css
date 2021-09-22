@@ -3,4 +3,7 @@
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    height: 48px;
+    padding-left: 15px;
+    padding-right: 15px;
 }

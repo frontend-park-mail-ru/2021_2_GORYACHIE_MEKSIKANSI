@@ -17,6 +17,7 @@
 .login-page__logo {
     min-width: 20vw;
     max-height: 20vw;
+    cursor: pointer;
 }
 
 .login-page__login-container {

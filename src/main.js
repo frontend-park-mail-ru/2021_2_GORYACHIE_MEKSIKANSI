@@ -2,13 +2,15 @@
 import {HomePage} from './pages/homePage/homePage.js';
 import {SignUpPage} from './pages/signUpPage/signUpPage.js';
 import {LoginPage} from './pages/loginPage/loginPage.js';
+import {ProfilePage} from './pages/profilePage/profilePage.js';
 import { Router } from './modules/router.js'
 import Http from './modules/http.js'
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
-Handlebars.registerPartial('promoLine', Handlebars.templates['promoLine.hbs']);
+Handlebars.registerPartial('promoBlock',
+    Handlebars.templates['promoBlock.hbs']);
 Handlebars.registerPartial('sortUnderheader',
     Handlebars.templates['sortUnderheader.hbs']);
 Handlebars.registerPartial('sortBox', Handlebars.templates['sortBox.hbs']);
@@ -32,6 +34,7 @@ footer.innerHTML = footerTemplate({});
 const homePage = new HomePage(application);
 const loginPage = new LoginPage(application);
 const signUpPage = new SignUpPage(application);
+const profilePage = new ProfilePage(application);
 
 const homePageRender = () => {
   homePage.render();
@@ -50,5 +53,5 @@ router.addRoute('home', homePageRender);
 router.addRoute('signup', signUpPageRender);
 router.addRoute('login', loginPageRender);
 
-loginPage.render();
+homePageRender();
 

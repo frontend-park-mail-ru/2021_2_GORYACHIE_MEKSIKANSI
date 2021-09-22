@@ -5,7 +5,7 @@
     font-family: var(--raleway-font);
     display: flex;
     flex-flow: column wrap;
-    max-width: 25vh;
+    max-width: 25vw;
 }
 
 .sort-box__text-container {
@@ -13,7 +13,7 @@
 }
 
 .sort-box__text {
-    font-weight: 700;
+    font-weight: var(--font_bold);
     line-height: 36px;
     font-size: 28px;
 

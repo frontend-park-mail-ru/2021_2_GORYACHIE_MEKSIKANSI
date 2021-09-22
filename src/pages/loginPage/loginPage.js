@@ -39,7 +39,6 @@ export class LoginPage {
      * method that render login page in inner HTML of element
      */
   render() {
-    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['loginPage.hbs'];
     this.root.innerHTML = template({});
     this.addSubmitEventListeners();

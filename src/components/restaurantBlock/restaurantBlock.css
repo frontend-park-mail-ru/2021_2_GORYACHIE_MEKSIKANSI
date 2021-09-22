@@ -5,7 +5,7 @@
     --restaurant-block__img-widht: 315px;
     --restaurant-block__img-height: 125px;
 
-    --restaurant-block__title_font-size: 20px;
+    --restaurant-block__title_font-size: 25px;
     --restaurant-block__title_font-weight: 800;
 
     --restaurant-block__delivery-cost-font-size: 13px;
@@ -51,7 +51,6 @@
 
 .restaurant-block__text-box {
     width: var(--restaurant-block__text_cut);
-    padding-left: 10px;
 
     padding-top: 10px;
     display: flex;
@@ -73,8 +72,6 @@
     font-style: normal;
     font-weight: var(--restaurant-block__title_font-weight);
     font-size: var(--restaurant-block__title_font-size);
-    line-height: 23px;
-    letter-spacing: 0.05em;
 }
 
 .information__delivery-cost {
