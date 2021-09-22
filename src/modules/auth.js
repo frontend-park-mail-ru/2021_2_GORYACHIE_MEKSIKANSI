@@ -1,6 +1,6 @@
 import { AuthStatus } from "../events/Auth.js";
 import eventBus from "./eventBus.js";
-import {debugFunc} from "../debugMod.js";
+import {debugFunc} from "./debugMod.js";
 
 /**
  * emitting events for user auth

@@ -2,19 +2,8 @@
 import {HomePage} from './pages/homePage/homePage.js';
 import {SignUpPage} from './pages/signUpPage/signUpPage.js';
 import {LoginPage} from './pages/loginPage/loginPage.js';
+import { Router } from './modules/router.js'
 import Http from './modules/http.js'
-
-const http = new Http()
-
-http.ajaxGet()
-    .then(response => {
-      console.log(response)
-      console.log('hello world');
-    })
-    .catch(response => {
-      console.log(response)
-    })
-
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -56,29 +45,10 @@ const signUpPageRender = () => {
   signUpPage.render();
 };
 
-const config = {
-  login: {
-    open: loginPageRender,
-  },
-  signUp: {
-    open: signUpPageRender,
-  },
-  home: {
-    open: homePageRender,
-  },
-};
-
+const router = new Router(application);
+router.addRoute('home', homePageRender);
+router.addRoute('signup', signUpPageRender);
+router.addRoute('login', loginPageRender);
 
 loginPage.render();
 
-application.addEventListener('click', (e) => {
-  const {target} = e;
-
-  if (target instanceof HTMLAnchorElement ||
-      target instanceof HTMLButtonElement ||
-      target instanceof HTMLImageElement) {
-    e.preventDefault();
-    console.log(config[target.getAttribute('href')]);
-    config[target.getAttribute('href')].open();
-  }
-});
