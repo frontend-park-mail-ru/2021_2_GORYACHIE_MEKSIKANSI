@@ -27,7 +27,6 @@ class LoginModel {
             })
             .catch(response => {
                 eventBus.emitEventListener(LoginEvents.loginFailed, response);
-                console.log(response);
                 debugFunc(response, 'login result');
             })
     }

@@ -44,6 +44,8 @@ class User {
         if (phone) {
             this.phone = phone;
         }
+
+        this.Auth = true;
     }
 }
 
