@@ -1,3 +1,5 @@
+import {debugFunc} from "../debugMod";
+
 window.serverAddress = "http://127.0.0.1:5000";
 
 /**
@@ -27,6 +29,14 @@ function getData ({
 
      if (method !== 'GET') {
          data.body = body;
+     }
+
+     if (method !== 'GET') {
+         const csrf = document.cookie.match(/csrf=([\w]+)/);
+         debugFunc(csrf, 'csrf token value')
+         if (csrf) {
+             data.header['X-XSRF-Token'] = csrf;
+         }
      }
 
      return data;

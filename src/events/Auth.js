@@ -1,6 +1,5 @@
 export const AuthStatus = {
-    userLogin: 'userSignIn',
+    userLogin: 'userLogin',
     userLogout: 'userLogout',
-    offline: 'offlineRequest',
     notAuth: 'notAuth',
 }

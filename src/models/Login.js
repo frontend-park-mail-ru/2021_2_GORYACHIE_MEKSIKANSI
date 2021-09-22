@@ -19,16 +19,16 @@ class LoginModel {
             .then(response => {
                 if (response.status === 200) {
                     eventBus.emitEventListener(LoginEvents.loginDone, {});
-                    debugFunc(response, 'login result')
+                    debugFunc(response, 'login result');
                 } else {
                     eventBus.emitEventListener(LoginEvents.loginFailed, response);
-                    debugFunc(response, 'login result')
+                    debugFunc(response, 'login result');
                 }
             })
             .catch(response => {
                 eventBus.emitEventListener(LoginEvents.loginFailed, response);
                 console.log(response);
-                debugFunc(response, 'login result')
+                debugFunc(response, 'login result');
             })
     }
 }

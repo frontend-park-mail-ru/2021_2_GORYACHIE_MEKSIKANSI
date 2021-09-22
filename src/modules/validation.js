@@ -20,7 +20,7 @@ export class Validation {
      * @return {Object}
      *
      */
-    validateEmail (email) {
+    static validateEmail (email) {
         if (email === '') {
             return emptyResult;
         }
@@ -42,7 +42,7 @@ export class Validation {
      * @return {Object}
      *
      */
-    validatePhoneNumber (phone) {
+    static validatePhoneNumber (phone) {
         if (phone === '') {
             return emptyResult;
         }
@@ -64,7 +64,7 @@ export class Validation {
      * @return {Object}
      *
      */
-    validatePassword (password) {
+    static validatePassword (password) {
         if (password === '') {
             return emptyResult;
         }
@@ -87,7 +87,7 @@ export class Validation {
      * @return {Object}
      *
      */
-    validatePasswordRepeat (password, repeatPassword) {
+    static validatePasswordRepeat (password, repeatPassword) {
         if (repeatPassword === '') {
             return emptyResult;
         }
