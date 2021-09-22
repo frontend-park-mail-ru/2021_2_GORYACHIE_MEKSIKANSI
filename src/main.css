@@ -11,7 +11,7 @@
 @import "./pages/homePage/homePage.css";
 @import "./components/navbar/navbar.css";
 @import "./components/navProfile/navProfile.css";
-@import "./pages/profilePage/profilePage.css";
+@import "views/profileView/profilePage.css";
 @import "./components/input/input.css";
 
 body {

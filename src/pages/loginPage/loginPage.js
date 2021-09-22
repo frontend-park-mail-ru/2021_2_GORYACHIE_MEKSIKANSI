@@ -1,8 +1,8 @@
 /**
  * Class that render LoginPage
  */
-import {LoginController} from "../../controllers/Login.js";
-import {debugFunc} from "../../modules/debugMod.js";
+import {LoginController} from '../../controllers/Login.js';
+import {debugFunc} from '../../modules/debugMod.js';
 
 export class LoginPage {
   /**
@@ -10,16 +10,16 @@ export class LoginPage {
      *
      */
   constructor({
-      root,
-      routeTo,
-      controller = new LoginController({root, routeTo}),
-              } = {}) {
+    root,
+    routeTo,
+    controller = new LoginController({root, routeTo}),
+  } = {}) {
     this.root = root;
     this.routeTo = routeTo;
     this.controller = controller;
   }
 
- addSubmitEventListeners() {
+  addSubmitEventListeners() {
     const login = document.getElementById('login');
     const password = document.getElementById('password');
 
@@ -29,11 +29,10 @@ export class LoginPage {
       const loginResult = this.controller.login('', login.value, password.value);
 
       if (loginResult.error) {
-        debugFunc(loginResult.error, "login error, smth wrong");
+        debugFunc(loginResult.error, 'login error, smth wrong');
       }
-    })
-
- }
+    });
+  }
 
   /**
      * method that render login page in inner HTML of element

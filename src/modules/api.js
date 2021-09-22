@@ -1,7 +1,7 @@
 import Http from './http.js';
-import { auth } from "./auth.js";
+import {auth} from './auth.js';
 
-const http = new Http()
+const http = new Http();
 
 /**
  * Server post request to register user/courier/host
@@ -16,23 +16,23 @@ const http = new Http()
  */
 
 export function signupPost({
-                               type,
-                               name,
-                               email,
-                               phone,
-                               password
+  type,
+  name,
+  email,
+  phone,
+  password,
 }) {
-    return http.ajaxPost({
-        url: '/signup',
-        body: {
-            type,
-            name,
-            email,
-            phone,
-            password,
-        }
-    })
-        .then(auth)
+  return http.ajaxPost({
+    url: '/signup',
+    body: {
+      type,
+      name,
+      email,
+      phone,
+      password,
+    },
+  })
+      .then(auth);
 }
 
 /**
@@ -41,12 +41,12 @@ export function signupPost({
  * @param {string} email
  * @param {object} phone
  * @param {string} password
- * @returns {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{parsedJSON: object, status: number}>}
  */
-export function loginPost ({ email, phone, password }) {
-    return http.ajaxPost({
-        url: '/login',
-        body: {email, phone, password}
-    })
-        .then(auth)
+export function loginPost({email, phone, password}) {
+  return http.ajaxPost({
+    url: '/login',
+    body: {email, phone, password},
+  })
+      .then(auth);
 }
