@@ -20,9 +20,9 @@ export class View {
 
   /**
    * Base render method
-   * @param {Object} data needed for rendering view
+   * @param {Object} props needed for rendering view
    */
-  render({props}) {}
+  render(props = {}) {}
 
   /**
    * Method for setting up before rendering elements

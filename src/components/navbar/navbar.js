@@ -1,3 +1,5 @@
+import User from '../../modules/user.js';
+
 /**
  * Left navigation bar class
  */
@@ -9,18 +11,20 @@ export class Navbar {
     this.parent = parent;
     this.opened = false;
 
-    this.parent.addEventListener('click', (e) => {
-      const {target} = e;
+    this.parent.addEventListener('click', this.openListener.bind(this));
+  }
 
-      const navbar = this.parent.getElementsByClassName('navbar')[0];
+  openListener(event) {
+    const {target} = event;
 
-      if (this.opened && !navbar.contains(e.target)) {
-        console.log(e.target);
-        this.close();
-      } else if (target.getAttribute('href') === 'navbar') {
-        this.open();
-      }
-    });
+    const navbar = this.parent.getElementsByClassName('navbar')[0];
+
+    if (this.opened && !navbar.contains(event.target)) {
+      console.log(event.target);
+      this.close();
+    } else if (target.getAttribute('href') === 'navbar') {
+      this.open();
+    }
   }
 
   /**
@@ -28,7 +32,7 @@ export class Navbar {
    */
   render() {
     const template = Handlebars.templates['navbar.hbs'];
-    this.parent.innerHTML = template({});
+    this.parent.innerHTML = template({user: {auth: User.Auth, name: User.name}});
     this.close();
   }
 
@@ -52,5 +56,9 @@ export class Navbar {
     this.parent.getElementsByClassName('navbar')[0].style.display = 'none';
     this.parent.getElementsByClassName('navbar-wrapper')[0].style.display = 'none';
     this.opened = false;
+  }
+
+  remove() {
+    this.parent.removeEventListener('click', this.openListener.bind(this));
   }
 }

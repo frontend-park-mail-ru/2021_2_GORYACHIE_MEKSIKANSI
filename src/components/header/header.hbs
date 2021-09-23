@@ -52,9 +52,11 @@
                 </svg>
                 Корзина
             </button>
+            {{#unless auth}}
             <button href="login" class="right-box__spacer button button_shape_rounded button_width_s">
                 Войти
             </button>
+            {{/unless}}
         </div>
     </div>
 </div>

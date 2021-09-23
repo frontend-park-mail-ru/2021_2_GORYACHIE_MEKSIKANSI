@@ -7,3 +7,7 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.red_border_red {
+    border-color: red;
+}

@@ -70,8 +70,8 @@ export class Validation {
 
     if (password.length > 28 || password.length < 8) {
       return {
-        result: false,
-        text: 'Введите пароль от 8 до 28 символов',
+        validationResult: false,
+        validationText: 'Введите пароль от 8 до 28 символов',
       };
     }
 
@@ -87,15 +87,25 @@ export class Validation {
      *
      */
   static validatePasswordRepeat(password, repeatPassword) {
-    if (repeatPassword === '') {
-      return emptyResult;
-    }
-
     if (password !== repeatPassword) {
       return {
-        result: false,
-        text: 'Пароли не совпадают',
+        validationResult: false,
+        validationText: 'Пароли не совпадают',
       };
+    }
+
+    return validResult;
+  }
+
+  /**
+   * Validating name in form
+   *
+   * @param name
+   * @return {{validationText: string, validationResult: boolean}}
+   */
+  static validateName(name) {
+    if (name === '') {
+      return emptyResult;
     }
 
     return validResult;

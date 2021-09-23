@@ -16,6 +16,7 @@
 .register-page__logo {
     min-width: 20vw;
     max-height: 20vw;
+    cursor: pointer;
 }
 
 .register-page__login-container {
@@ -46,6 +47,8 @@
     border: none;
     cursor: pointer;
     width: 100%;
+
+    font-size: 20px;
 }
 
 .register-page__submit-button:hover {

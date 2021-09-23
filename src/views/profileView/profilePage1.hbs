@@ -7,23 +7,27 @@
             <div class="profile-page__input-box">
                 <label class="profile-page__input-label">
                     Имя
-                    <input value="Максим" required class="input profile-page__input">
+                    <input value="{{user.name}}" required class="input profile-page__input">
                 </label>
                 <label class="profile-page__input-label">
                     Номер телефона
-                    <input value="+7-999-999-99-99" required class="input profile-page__input">
+                    <input value="{{user.phone}}" required class="input profile-page__input">
                 </label>
                 <label class="profile-page__input-label">
                     Электронная почта
-                    <input value="maksim@mail.ru" required class="input profile-page__input">
-                </label>
-                <label class="profile-page__input-label">
-                    Пароль
-                    <input value="**********" required class="input profile-page__input">
+                    <input value="{{user.email}}" required class="input profile-page__input">
                 </label>
                 <label class="profile-page__input-label" for="localdate">
                     Дата рождения:
                     <input type="date" id="localdate" required class="input profile-page__input" name="date"/>
+                </label>
+                <label class="profile-page__input-label">
+                    Изменение пароля. Введите новый пароль
+                    <input value="" type="password" required class="input profile-page__input">
+                </label>
+                <label class="profile-page__input-label">
+                    Повторите пароль
+                    <input value="" type="password" required class="input profile-page__input">
                 </label>
                 <label class="profile-page__input-label" for="localdate">
                     Изменить аватар:

@@ -8,7 +8,7 @@
 @import "./components/restaurantBlock/restaurantBlock.css";
 @import "./components/promoBlock/promoBlock.css";
 @import "./components/sortUnderheader/sortUnderheader.css";
-@import "./pages/homePage/homePage.css";
+@import "views/homeView/homePage.css";
 @import "./components/navbar/navbar.css";
 @import "./components/navProfile/navProfile.css";
 @import "views/profileView/profilePage.css";
@@ -18,5 +18,12 @@ body {
     font-family: var(--raleway-font);
     margin: 0;
     overflow-x: hidden;
-
 }
+
+.error-label {
+    font-weight: var(--font_thin);
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: red;
+}
+

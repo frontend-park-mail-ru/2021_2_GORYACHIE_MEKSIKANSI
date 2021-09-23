@@ -1,5 +1,5 @@
 import {View} from '../View.js';
-import {debugFunc} from '../../modules/debugMod.js';
+import {LoginController} from '../../controllers/loginController.js';
 
 /**
  * View for Login Page
@@ -14,7 +14,7 @@ export class LoginView extends View {
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
-    controller: controller,
+    controller: controller = new LoginController({parent: parent, routeTo: routeTo}),
   }) {
     super({
       parent: parent,
@@ -25,7 +25,7 @@ export class LoginView extends View {
   /**
    * Method that render login page in inner HTML of element
    */
-  render({props}) {
+  render(props = {}) {
     const template = Handlebars.templates['loginPage.hbs'];
     this.parent.innerHTML = template({});
 
@@ -40,14 +40,32 @@ export class LoginView extends View {
   _submitListener(event) {
     const login = document.getElementById('login');
     const password = document.getElementById('password');
-    console.log(login.value, password.value);
-    console.log(this.controller);
     event.preventDefault();
     const loginResult = this.controller.login(login.value, password.value);
 
     if (loginResult.error) {
-      debugFunc(loginResult.error, 'login error, smth wrong');
+      if (!loginResult.loginValidation.validationResult ||
+          !loginResult.passwordValidation.validationResult) {
+        this.showError('Некорректный логин или пароль');
+      }
     }
+  }
+
+  showError(errorText) {
+    const login = document.getElementById('login');
+    const password = document.getElementById('password');
+    login.style.borderColor = 'red';
+    password.style.borderColor = 'red';
+
+    const errorLabel = document.getElementById('error_label');
+    errorLabel.style.color = 'red';
+    errorLabel.innerHTML = errorText;
+  }
+
+  hideError() {
+    document.getElementById('login').style.borderColor = 'black';
+    document.getElementById('password').style.borderColor = 'black';
+    document.getElementById('error_label').innerHTML = '';
   }
 
   /**
@@ -62,7 +80,7 @@ export class LoginView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
-    const form = document.getElementById('form');
+    const form = document.getElementById('form_submit');
     form.removeEventListener('click', this._submitListener.bind(this));
 
     this.parent.innerHTML = '';

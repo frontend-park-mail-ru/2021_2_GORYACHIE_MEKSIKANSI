@@ -49,6 +49,8 @@
     border: none;
     cursor: pointer;
     width: 100%;
+
+    font-size: 20px;
 }
 
 .login-page__submit-button:hover {

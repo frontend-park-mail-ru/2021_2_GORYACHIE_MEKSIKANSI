@@ -1,11 +1,9 @@
 'use strict';
-import {HomePage} from './pages/homePage/homePage.js';
-import {SignUpPage} from './pages/signUpPage/signUpPage.js';
-import {LoginPage} from './pages/loginPage/loginPage.js';
-import {ProfilePage} from './pages/profilePage/profilePage.js';
 import {Router} from './modules/router.js';
-import {LoginView} from './views/LoginView/loginView.js';
-import {LoginController} from "./controllers/Login.js";
+import {LoginController} from './controllers/loginController.js';
+import {HomeController} from './controllers/homeController.js';
+import {SignUpController} from './controllers/signUpController.js';
+import {ProfileController} from './controllers/profileController.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -32,31 +30,20 @@ const application = document.getElementById('app');
 const footer = document.getElementById('foot');
 const footerTemplate = Handlebars.templates['footer.hbs'];
 footer.innerHTML = footerTemplate({});
-const homePage = new HomePage(application);
-const signUpPage = new SignUpPage(application);
-const profilePage = new ProfilePage(application);
 
 const router = new Router(application);
 const routeTo = (url) => {
   router.open(url);
-}
-
-const loginController = new LoginController({parent: application, routeTo: routeTo});
-
-const homePageRender = () => {
-  homePage.render();
 };
 
-// const loginPageRender = () => {
-//   loginView.render({});
-// };
-//
-// const signUpPageRender = () => {
-//   signUpPage.render();
-// };
+const loginController = new LoginController({parent: application, routeTo: routeTo});
+const homeController = new HomeController({parent: application, routeTo: routeTo});
+const signUpController = new SignUpController({parent: application, routeTo: routeTo});
+const profileController = new ProfileController({parent: application, routeTo: routeTo});
 
-// router.addRoute('home', homePageRender);
-// router.addRoute('signup', signUpPageRender);
 router.addRoute('login', loginController);
+router.addRoute('profile', profileController);
+router.addRoute('home', homeController);
+router.addRoute('signup', signUpController);
 
 loginController.render();

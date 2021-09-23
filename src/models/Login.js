@@ -14,7 +14,7 @@ class LoginModel {
      * @return {Promise<{status: int, parsedJSON: object}>}
      *
      */
-  login(email = '', phone = '', password) {
+  login(type, email = '', phone = '', password) {
     loginPost({email, phone, password})
         .then((response) => {
           if (response.status === 200) {

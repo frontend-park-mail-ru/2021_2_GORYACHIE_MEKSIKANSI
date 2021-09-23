@@ -1,4 +1,4 @@
-import {Navbar} from '../../components/navbar/navbar.js';
+import {HomeView} from '../views/homeView/homeView.js';
 
 const randomInteger = (min, max) => {
   // получить случайное число от (min-0.5) до (max+0.5)
@@ -64,17 +64,17 @@ const makeid = () => {
   return restNames[randomInteger(0, restNames.length - 1)];
 };
 
-const restaurantList = {restaurantList:
-        [
-          {
-            name: 'mac',
-            imgUrl: 'https://st.depositphotos.com/2075661/2208/i/600/depositphotos_22080415-stock-photo-kfc-logo.jpg',
-            cost: '299',
-            minDeliveryTime: '12',
-            maxDeliveryTime: '22',
-            rating: '6.7',
-          },
-        ]};
+const restaurantList =
+  [
+    {
+      name: 'mac',
+      imgUrl: 'https://st.depositphotos.com/2075661/2208/i/600/depositphotos_22080415-stock-photo-kfc-logo.jpg',
+      cost: '299',
+      minDeliveryTime: '12',
+      maxDeliveryTime: '22',
+      rating: '6.7',
+    },
+  ];
 
 for (let i = 0; i < 100; ++i) {
   const random = {
@@ -86,27 +86,24 @@ for (let i = 0; i < 100; ++i) {
     rating: randomInteger(1, 5).toString(),
   };
 
-  restaurantList.restaurantList.push(random);
+  restaurantList.push(random);
 }
 
-/**
- * Class that render HomePage
- */
-export class HomePage {
-  /**
-   * Construct HomePage class
-   * @param {HTMLElement} parent
-   */
-  constructor(parent) {
-    this.navbar = new Navbar(parent);
+export class HomeController {
+  constructor({
+    parent: parent = document.body,
+    routeTo: routeTo = () => {},
+  }) {
+    this.routeTo = routeTo;
     this.parent = parent;
+    this.homeView = new HomeView({parent: parent, routeTo: this.routeTo, controller: this});
   }
-  /**
-   * method that render home page in inner HTML of element
-   */
+
   render() {
-    this.navbar.render();
-    const template = Handlebars.templates['homePage.hbs'];
-    this.parent.innerHTML += template(restaurantList);
+    this.homeView.render({restaurantList: restaurantList});
+  }
+
+  remove() {
+    this.homeView.remove();
   }
 }

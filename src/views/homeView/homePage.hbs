@@ -1,4 +1,4 @@
-{{> header }}
+{{>header auth=auth }}
 
 <div class="home-page">
     <div class="home-page__content">
@@ -34,7 +34,7 @@
                 </div>
                 {{#each restaurantList}}
                     <div class="home-page__restaurant-block">
-                        {{> restaurant this }}
+                        {{>restaurant this }}
                     </div>
                 {{/each }}
             </div>

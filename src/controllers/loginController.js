@@ -25,6 +25,7 @@ export class LoginController {
 
     if (loginValidation.validationResult && passwordValidation.validationResult) {
       LoginModel.login(login, '', password);
+      this.loginView.hideError();
       return {
         error: false,
       };
@@ -32,6 +33,7 @@ export class LoginController {
       loginValidation = Validation.validatePhoneNumber(login);
       if (loginValidation.validationResult && passwordValidation.validationResult) {
         LoginModel.login('', login, password);
+        this.loginView.hideError();
         return {
           error: false,
         };
@@ -64,6 +66,7 @@ export class LoginController {
   }
 
   loginFailed(error) {
+    this.loginView.showError('Неправильный логин или пароль/Не удалось установить соединение');
     debugFunc({error}, 'login failed');
   }
 

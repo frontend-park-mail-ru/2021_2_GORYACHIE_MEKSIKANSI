@@ -1,22 +1,22 @@
 <a href="#" class="restaurant-block">
     <div class="restaurant-block__img-box">
-        <img class="restaurant-block__img" src={{ this.imgUrl }} alt="restaurant image"/>
+        <img class="restaurant-block__img" src={{ imgUrl }} alt="restaurant image"/>
     </div>
 
     <div class="restaurant-block__information">
         <div class="restaurant-block__text-box">
-            <div class="restaurant-block__restaurant-title">{{ this.name }}</div>
+            <div class="restaurant-block__restaurant-title">{{ name }}</div>
             <div class="restaurant-block__delivery-info">
-                <div class="information__delivery-cost">от {{ this.cost }}₽ Беспл. доставка</div>
+                <div class="information__delivery-cost">от {{ cost }}₽ Беспл. доставка</div>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.37165 5.24686C9.5425 5.076 9.5425 4.799 9.37165 4.62814C9.2008 4.45729 8.92379 4.45729 8.75293 4.62814L6.9999 6.38117L5.24686 4.62814C5.07601 4.45729 4.799 4.45729 4.62815 4.62814C4.45729 4.799 4.45729 5.07601 4.62815 5.24686L6.38118 6.99989L4.62814 8.75293C4.45729 8.92378 4.45729 9.20079 4.62814 9.37165C4.799 9.5425 5.076 9.5425 5.24686 9.37165L6.9999 7.61861L8.75294 9.37165C8.92379 9.5425 9.2008 9.5425 9.37165 9.37165C9.54251 9.20079 9.54251 8.92378 9.37165 8.75293L7.61862 6.99989L9.37165 5.24686Z" fill="black"/>
                 </svg>
-                <div class="information__delivery-time">{{ this.minDeliveryTime }} - {{ this.maxDeliveryTime }} мин</div>
+                <div class="information__delivery-time">{{ minDeliveryTime }} - {{ maxDeliveryTime }} мин</div>
             </div>
         </div>
 
         <div class="restaurant-block__rating">
-            <div class="rating__text">{{ this.rating }}</div>
+            <div class="rating__text">{{ rating }}</div>
         </div>
     </div>
 </a>
