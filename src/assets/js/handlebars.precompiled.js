@@ -107,7 +107,7 @@ templates['homePage.hbs'] = template({"1":function(container,depth0,helpers,part
     + ((stack1 = container.invokePartial(lookupProperty(partials,"promoBlock"),depth0,{"name":"promoBlock","data":data,"indent":"                    ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "                </div>\n            </div>\n        </div>\n\n        <div class=\"home-page__line\">\n            <div class=\"home-page__sort\">\n"
     + ((stack1 = container.invokePartial(lookupProperty(partials,"sortBox"),depth0,{"name":"sortBox","data":data,"indent":"                ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "            </div>\n\n            <div class=\"home-page__restaurants-list\">\n                <div class=\"home-page__restaurant-block-title\">\n                    Популярное\n                </div>\n"
+    + "            </div>\n\n            <div class=\"home-page__restaurants-list\">\n                <div class=\"home-page__restaurant-block-title\">\n                    Рестораны\n                </div>\n"
     + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"restaurantList") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":35,"column":16},"end":{"line":39,"column":26}}})) != null ? stack1 : "")
     + "            </div>\n        </div>\n    </div>\n</div>\n\n";
 },"usePartial":true,"useData":true});
