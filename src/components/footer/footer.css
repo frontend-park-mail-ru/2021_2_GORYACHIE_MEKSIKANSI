@@ -24,11 +24,12 @@
 }
 
 .footer__logo {
-    margin-left: 30px;
+    margin-left: 100px;
 }
 
 .footer__navigation-ul {
     display: flex;
+    margin-left:50px;
     flex-flow: column wrap;
 }
 

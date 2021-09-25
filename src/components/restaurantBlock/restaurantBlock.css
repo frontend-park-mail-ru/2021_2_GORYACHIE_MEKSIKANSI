@@ -19,12 +19,9 @@
 
 .restaurant-block {
     text-decoration: none;
+    color: inherit;
     width: var(--restaurant-block_width_primary);
     height: var(--restaurant-block_height_primary);
-}
-
-.restaurant-block:visited {
-    color: black;
 }
 
 .restaurant-block__img-box {

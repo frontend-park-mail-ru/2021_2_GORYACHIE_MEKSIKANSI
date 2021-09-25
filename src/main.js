@@ -4,6 +4,7 @@ import {LoginController} from './controllers/loginController.js';
 import {HomeController} from './controllers/homeController.js';
 import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
+import User from './modules/user.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -36,6 +37,7 @@ const routeTo = (url) => {
   router.open(url);
 };
 
+
 const loginController = new LoginController({parent: application, routeTo: routeTo});
 const homeController = new HomeController({parent: application, routeTo: routeTo});
 const signUpController = new SignUpController({parent: application, routeTo: routeTo});
@@ -47,3 +49,5 @@ router.addRoute('home', homeController);
 router.addRoute('signup', signUpController);
 
 loginController.render();
+
+
