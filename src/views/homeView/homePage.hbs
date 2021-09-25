@@ -2,7 +2,6 @@
 
 <div class="home-page">
     <div class="home-page__content">
-        {{>sortUnderheader }}
         <div class="home-page__line home-page__promo-line">
             <div class="promo-line__title home-page__promo-line-title">
                 <div class="promo__main-title">
@@ -20,6 +19,9 @@
                 <div class="home-page__promo-block">
                     {{>promoBlock }}
                 </div>
+                <div class="home-page__promo-block">
+                    {{>promoBlock }}
+                </div>
             </div>
         </div>
 
@@ -29,6 +31,7 @@
             </div>
 
             <div class="home-page__restaurants-list">
+                {{>sortUnderheader }}
                 <div class="home-page__restaurant-block-title">
                     Рестораны
                 </div>

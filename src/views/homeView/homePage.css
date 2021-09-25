@@ -77,3 +77,8 @@ h3 {
     display: flex;
     align-items: flex-start;
 }
+
+.home-page__restaurant-block-title {
+    padding-top: 15px;
+    border-top: solid var(--sort-underheader__border_size) var(--sort-underheader__border_color);
+}

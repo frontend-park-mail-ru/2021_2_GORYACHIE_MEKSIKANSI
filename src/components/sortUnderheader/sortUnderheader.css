@@ -1,7 +1,7 @@
 :root {
     --sort-underheader_height: 100px;
     --sort-underheader__border_color: #e2e2e2;
-    --sort-underheader__border_size: 1px;
+    --sort-underheader__border_size: 2px;
 }
 
 .sort-underheader {
@@ -10,9 +10,7 @@
     justify-content: flex-start;
     height: var(--sort-underheader_height);
 
-    border-bottom-style: solid;
-    border-bottom-width: var(--sort-underheader__border_size);
-    border-bottom-color: var(--sort-underheader__border_color);
+    margin-bottom: 5px;
 }
 
 .sort-underheader__button {
