@@ -18,6 +18,7 @@ Handlebars.registerPartial('loginUserInput',
     Handlebars.templates['userLoginForm.hbs']);
 Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
+Handlebars.registerPartial('footer', Handlebars.templates['footer.hbs']);
 
 Handlebars.registerHelper('times', function(n, block) {
   let accum = '';
@@ -28,9 +29,6 @@ Handlebars.registerHelper('times', function(n, block) {
 });
 
 const application = document.getElementById('app');
-const footer = document.getElementById('foot');
-const footerTemplate = Handlebars.templates['footer.hbs'];
-footer.innerHTML = footerTemplate({});
 
 const router = new Router(application);
 const routeTo = (url) => {

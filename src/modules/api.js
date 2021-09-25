@@ -51,6 +51,10 @@ export function loginPost({email, phone, password}) {
       .then(auth);
 }
 
-export function restaurantsGet ({url = '/'}) {
-  return http.ajaxGet({url})
+export function profileGet({url = '/profile'}) {
+  return http.ajaxGet({url});
+}
+
+export function restaurantsGet({url = '/'}) {
+  return http.ajaxGet({url});
 }

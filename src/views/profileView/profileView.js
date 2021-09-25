@@ -25,10 +25,10 @@ export class ProfileView extends View {
    * Method that render login page in inner HTML of element
    */
   render(props = {}) {
-    window.document.getElementsByClassName('footer')[0].style.marginTop = '0';
     this.navbar.render();
     const template = Handlebars.templates['profilePage1.hbs'];
     this.parent.innerHTML += template({user: {name: User.name, phone: User.phone, email: User.email}, auth: User.Auth});
+    window.document.querySelector('.footer').style.marginTop = '0';
 
     this.settingUp();
   }

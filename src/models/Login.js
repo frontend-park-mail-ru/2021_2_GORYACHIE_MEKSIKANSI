@@ -1,7 +1,8 @@
-import {loginPost} from '../modules/api.js';
+import {loginPost, profileGet} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {debugFunc} from '../modules/debugMod.js';
+import User from '../modules/user.js';
 
 
 class LoginModel {

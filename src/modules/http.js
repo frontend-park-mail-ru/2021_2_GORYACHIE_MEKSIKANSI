@@ -90,6 +90,6 @@ export default class Http {
     url = '/',
     body = null,
   } = {}) {
-    return await makeFetch({url: url, method: 'POST', body: body});
+    return await makeFetch({url: url, method: 'POST', body: JSON.stringify(body)});
   }
 }

@@ -6,11 +6,13 @@ import {LoginEvents} from '../events/Login.js';
 import {debugFunc} from '../modules/debugMod.js';
 import historyRedirection from '../modules/historyRedirection.js';
 import {LoginView} from '../views/LoginView/loginView.js';
+import {profileGet} from "../modules/api.js";
+import User from "../modules/user.js";
 
 export class LoginController {
   constructor({
     parent: parent = document.body,
-    routeTo: routeTo = () => {},
+    routeTo: routeTo,
   }) {
     this.routeTo = routeTo;
     this.parent = parent;
@@ -24,7 +26,7 @@ export class LoginController {
     let loginValidation = Validation.validateEmail(login);
 
     if (loginValidation.validationResult && passwordValidation.validationResult) {
-      LoginModel.login(login, '', password);
+      LoginModel.login('user', login, '', password);
       this.loginView.hideError();
       return {
         error: false,
@@ -32,7 +34,7 @@ export class LoginController {
     } else {
       loginValidation = Validation.validatePhoneNumber(login);
       if (loginValidation.validationResult && passwordValidation.validationResult) {
-        LoginModel.login('', login, password);
+        LoginModel.login('user','', login, password);
         this.loginView.hideError();
         return {
           error: false,
@@ -56,13 +58,20 @@ export class LoginController {
   }
 
   correctLogin() {
-    const routeTo = historyRedirection.pop();
-    if (routeTo !== '') {
-      this.routeTo(routeTo);
-      return;
-    }
+    profileGet({url: '/profile'}).then((response) => {
+      if (response.status === 200) {
+        User.login(response.parsedJSON);
+        debugFunc(response.parsedJSON);
+      }
+    });
 
-    this.routeTo('/');
+    // const routeTo = historyRedirection.pop();
+    // if (routeTo !== undefined && routeTo !== '') {
+    //   this.routeTo(routeTo);
+    //   return;
+    // }
+
+    this.routeTo('home');
   }
 
   loginFailed(error) {
