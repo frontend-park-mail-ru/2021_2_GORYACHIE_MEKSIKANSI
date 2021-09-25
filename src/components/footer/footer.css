@@ -19,6 +19,12 @@
     max-height: 40vw;
     border-radius: 50%;
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.footer__logo {
+    margin-left: 30px;
 }
 
 .footer__navigation-ul {
@@ -38,7 +44,7 @@
 }
 
 .footer__line {
-    margin: 0 40px;
+    margin: 100px 40px;
     border: none;
     background-color: var(--color-white);
     height: 2px;
