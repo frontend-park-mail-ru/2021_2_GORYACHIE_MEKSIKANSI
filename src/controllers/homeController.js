@@ -94,6 +94,7 @@ export class HomeController {
     parent: parent = document.body,
     routeTo: routeTo = () => {},
   }) {
+
     this.routeTo = routeTo;
     this.parent = parent;
     this.homeView = new HomeView({parent: parent, routeTo: this.routeTo, controller: this});
