@@ -12,14 +12,14 @@ window.serverAddress = 'http://127.0.0.1:5000';
 function getData({
   method = 'GET',
   body = null,
-  type = 'application/json',
+  type = 'application/json; charset=utf8',
 } = {}) {
   const data = {
     mode: 'cors',
     credentials: 'include',
     method,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'http://127.0.0.1',
     },
   };
 
@@ -59,8 +59,8 @@ async function makeFetch({
   const responseJSON = await response.json();
 
   return {
-    status: responseJSON.code,
-    parsedJSON: responseJSON,
+    status: responseJSON.status,
+    parsedJSON: responseJSON.parsedJSON,
   };
 }
 

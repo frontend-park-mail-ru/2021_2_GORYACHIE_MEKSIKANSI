@@ -97,10 +97,10 @@ class HomeModel {
         restaurantsGet({url: '/'})
             .then((response) => {
                 if (response.status === 200) {
-                    eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess, restaurantList);
+                    eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess, response.parsedJSON);
                     debugFunc(response.status, 'everything is ok, but fetch failed');
                 } else {
-                    debugFunc("everything is ok");
+                    debugFunc(response, "everything is ok");
                 }
             })
             .catch((response) => {
