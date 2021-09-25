@@ -6,6 +6,11 @@
     height: 48px;
     padding-left: 15px;
     padding-right: 15px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
 }
 
 .red_border_red {
