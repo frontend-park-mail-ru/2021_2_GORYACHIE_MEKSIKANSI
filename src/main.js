@@ -48,6 +48,7 @@ router.addRoute('profile', profileController);
 router.addRoute('home', homeController);
 router.addRoute('signup', signUpController);
 
-loginController.render();
+User.Auth = true;
+homeController.render();
 
 
