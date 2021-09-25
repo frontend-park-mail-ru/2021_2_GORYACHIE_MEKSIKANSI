@@ -28,7 +28,7 @@ export class ProfileView extends View {
     window.document.getElementsByClassName('footer')[0].style.marginTop = '0';
     this.navbar.render();
     const template = Handlebars.templates['profilePage1.hbs'];
-    this.parent.innerHTML += template({user: {name: User.name, phone: User.phone, email: User.email}});
+    this.parent.innerHTML += template({user: {name: User.name, phone: User.phone, email: User.email}, auth: User.Auth});
 
     this.settingUp();
   }
