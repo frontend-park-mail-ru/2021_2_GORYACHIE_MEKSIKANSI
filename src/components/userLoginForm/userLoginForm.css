@@ -18,6 +18,7 @@
     min-width: 20vw;
     max-height: 20vw;
     cursor: pointer;
+    margin: 50px 0 40px;
 }
 
 .login-page__login-container {
