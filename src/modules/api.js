@@ -50,3 +50,7 @@ export function loginPost({email, phone, password}) {
   })
       .then(auth);
 }
+
+export function restaurantsGet ({url = '/'}) {
+  return http.ajaxGet({url})
+}
