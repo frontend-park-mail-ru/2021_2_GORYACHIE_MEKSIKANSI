@@ -1,6 +1,6 @@
 import {debugFunc} from './debugMod.js';
 
-window.serverAddress = 'http://127.0.0.1:5000';
+window.serverAddress = 'http://167.172.179.1:5000';
 
 /**
  * Getting object data with info to fetch
