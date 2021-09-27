@@ -1,4 +1,6 @@
+// eslint-disable-next-line max-len
 const emailRegExpression = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+// eslint-disable-next-line max-len
 const phoneRegExpression = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
 const emptyResult = {
@@ -11,6 +13,9 @@ const validResult = {
   validationText: '',
 };
 
+/**
+ * Validation class
+ */
 export class Validation {
   /**
      * Validating passed email with RegExp
@@ -100,7 +105,7 @@ export class Validation {
   /**
    * Validating name in form
    *
-   * @param name
+   * @param {string} name
    * @return {{validationText: string, validationResult: boolean}}
    */
   static validateName(name) {

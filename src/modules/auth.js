@@ -4,9 +4,8 @@ import {debugFunc} from './debugMod.js';
 
 /**
  * emitting events for user auth
- *
  * @param {{status: int, parsedJSON: json}} response
- * @return null
+ * @return {Object} response
  *
  */
 export function auth(response) {

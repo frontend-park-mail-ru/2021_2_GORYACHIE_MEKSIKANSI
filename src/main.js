@@ -36,10 +36,18 @@ const routeTo = (url) => {
 };
 
 
-const loginController = new LoginController({parent: application, routeTo: routeTo});
-const homeController = new HomeController({parent: application, routeTo: routeTo});
-const signUpController = new SignUpController({parent: application, routeTo: routeTo});
-const profileController = new ProfileController({parent: application, routeTo: routeTo});
+const loginController = new LoginController({
+  parent: application,
+  routeTo: routeTo});
+const homeController = new HomeController({
+  parent: application,
+  routeTo: routeTo});
+const signUpController = new SignUpController({
+  parent: application,
+  routeTo: routeTo});
+const profileController = new ProfileController({
+  parent: application,
+  routeTo: routeTo});
 
 router.addRoute('login', loginController);
 router.addRoute('profile', profileController);

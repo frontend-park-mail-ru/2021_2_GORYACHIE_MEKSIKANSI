@@ -6,15 +6,17 @@ import {LoginController} from '../../controllers/loginController.js';
  */
 export class LoginView extends View {
   /**
-   *
-   * @param parent
-   * @param routeTo
-   * @param controller
+   * Constructor for login view
+   * @param {HTMLElement} parent
+   * @param {Function} routeTo
+   * @param {Object} controller
    */
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
-    controller: controller = new LoginController({parent: parent, routeTo: routeTo}),
+    controller: controller = new LoginController({
+      parent: parent,
+      routeTo: routeTo}),
   }) {
     super({
       parent: parent,
@@ -24,6 +26,7 @@ export class LoginView extends View {
   }
   /**
    * Method that render login page in inner HTML of element
+   * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
     const template = Handlebars.templates['loginPage.hbs'];
@@ -34,7 +37,7 @@ export class LoginView extends View {
 
   /**
    * Method calling by
-   * @param event
+   * @param {Object} event
    * @private
    */
   _submitListener(event) {
@@ -51,6 +54,10 @@ export class LoginView extends View {
     }
   }
 
+  /**
+   * Show error under login form
+   * @param {string} errorText
+   */
   showError(errorText) {
     const login = document.getElementById('login');
     const password = document.getElementById('password');
@@ -62,6 +69,9 @@ export class LoginView extends View {
     errorLabel.innerHTML = errorText;
   }
 
+  /**
+   * Hide error under login form
+   */
   hideError() {
     document.getElementById('login').style.borderColor = 'black';
     document.getElementById('password').style.borderColor = 'black';

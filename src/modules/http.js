@@ -1,6 +1,6 @@
 import {debugFunc} from './debugMod.js';
 
-window.serverAddress = 'http://127.0.0.1:5000/api';
+window.serverAddress = 'http://167.172.179.1:5000/api';
 
 /**
  * Getting object data with info to fetch
@@ -19,7 +19,7 @@ function getData({
     mode: 'cors',
     credentials: 'include',
     headers: {
-      'Access-Control-Allow-Origin': 'http://127.0.0.1',
+      'Access-Control-Allow-Origin': 'http://167.172.179.1',
     },
   };
 
@@ -41,7 +41,7 @@ function getData({
 /**
  * Fetching server
  *
- * @param {Object<{url: string, method: string, body: object, type: string}>} params
+ * @param {Object} params
  * @return {Object<{status: string, parsedJSON: object}>}
  *
  */
@@ -51,7 +51,8 @@ async function makeFetch({
   body = null,
   type = 'application/json',
 } = {}) {
-  const response = await fetch(window.serverAddress + url, getData({method, body, type}));
+  const response = await fetch(window.serverAddress + url,
+      getData({method, body, type}));
   const responseJSON = await response.json();
 
   if (method !== 'GET') {
@@ -66,6 +67,10 @@ async function makeFetch({
   };
 }
 
+/**
+ * Http class for get and post req
+ *
+ */
 export default class Http {
   /**
      * ajaxGet request
@@ -92,14 +97,23 @@ export default class Http {
     url = '/',
     body = null,
   } = {}) {
-    return await makeFetch({url: url, method: 'POST', body: JSON.stringify(body)});
+    return await makeFetch({url: url, method: 'POST',
+      body: JSON.stringify(body)});
   }
 }
-
+/**
+ * setting csrf token
+ * @param {string} token
+ *
+ */
 function setCsrfToken(token) {
   localStorage.setItem('token', token);
 }
 
+/**
+ * getting csrf token
+ * @return {string}
+ */
 function getCsrfToken() {
   return localStorage.getItem('token');
 }

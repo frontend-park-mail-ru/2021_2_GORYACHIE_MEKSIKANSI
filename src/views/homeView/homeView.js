@@ -2,12 +2,15 @@ import {View} from '../View.js';
 import {Navbar} from '../../components/navbar/navbar.js';
 import User from '../../modules/user.js';
 
+/**
+ * Home view class
+ */
 export class HomeView extends View {
   /**
    *
-   * @param parent
-   * @param routeTo
-   * @param controller
+   * @param {HTMLElement} parent
+   * @param {Function} routeTo
+   * @param {Class}controller
    */
   constructor({
     parent: parent = document.body,
@@ -23,19 +26,20 @@ export class HomeView extends View {
   }
   /**
    * Method that render login page in inner HTML of element
+   * @param {Object} props
    */
   render(props = {}) {
     this.navbar.render();
     const template = Handlebars.templates['homePage.hbs'];
-    this.parent.innerHTML += template({restaurantList: props.restaurantList, auth: User.Auth});
+    this.parent.innerHTML += template({restaurantList: props.restaurantList,
+      auth: User.Auth});
 
     this.settingUp();
   }
 
   /**
    * Method calling by
-   * @param event
-   * @private
+   * @param {name} event
    */
   _submitListener(event) {}
 

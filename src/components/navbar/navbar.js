@@ -1,6 +1,6 @@
 import User from '../../modules/user.js';
-import eventBus from "../../modules/eventBus.js";
-import {AuthStatus} from "../../events/Auth.js";
+import eventBus from '../../modules/eventBus.js';
+import {AuthStatus} from '../../events/Auth.js';
 
 /**
  * Left navigation bar class
@@ -16,6 +16,10 @@ export class Navbar {
     this.parent.addEventListener('click', this.openListener.bind(this));
   }
 
+  /**
+   * Navbar listener monitoring open, close, logout actions
+   * @param {Object} event js event
+   */
   openListener(event) {
     const {target} = event;
 
@@ -31,36 +35,41 @@ export class Navbar {
   }
 
   /**
-   * method rendering Navbar to the parent
+   * Method rendering Navbar to the parent
    */
   render() {
     const template = Handlebars.templates['navbar.hbs'];
-    this.parent.innerHTML = template({user: {auth: User.Auth, name: User.name}});
+    this.parent.innerHTML = template({user:
+        {auth: User.Auth, name: User.name},
+    });
     this.close();
   }
 
   /**
-   * method opening overlay navbar
+   * Method opening overlay navbar
    */
   open() {
     window.document.body.style.overflowY = 'hidden';
     this.parent.getElementsByClassName('navbar')[0].style.display = 'flex';
-    this.parent.getElementsByClassName('navbar')[0].style.zIndex = '100';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].style.display = 'block';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].style.zIndex = '100';
+    this.parent.getElementsByClassName('navbar-wrapper')[0].
+        style.display = 'block';
     this.opened = true;
   }
 
   /**
-   * closing overlay
+   * Closing overlay action
    */
   close() {
     window.document.body.style.overflowY = 'scroll';
     this.parent.getElementsByClassName('navbar')[0].style.display = 'none';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].style.display = 'none';
+    this.parent.getElementsByClassName('navbar-wrapper')[0].
+        style.display = 'none';
     this.opened = false;
   }
 
+  /**
+   * Remove event listeners relates for navbar
+   */
   remove() {
     this.parent.removeEventListener('click', this.openListener.bind(this));
   }

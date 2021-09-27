@@ -11,10 +11,9 @@ const http = new Http();
  * @param {string} email
  * @param {string} phone
  * @param {object} password
- * @returns {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{parsedJSON: object, status: number}>}
  *
  */
-
 export function signupPost({
   type,
   name,
@@ -50,19 +49,43 @@ export function loginPost({type, email, phone, password}) {
   })
 }
 
+/**
+ * profile get server func
+ *
+ * @param {string} url
+ * @return {Promise<{parsedJSON: object, status: number}>}
+ */
 export function profileGet({url = '/profile'}) {
   return http.ajaxGet({url})
       .then(auth);
 }
 
+/**
+ * restaurants get
+ *
+ * @param {string} url
+ * @return {Promise<{parsedJSON: object, status: number}>}
+ */
 export function restaurantsGet({url = '/'}) {
   return http.ajaxGet({url});
 }
 
+/**
+ * check auth func
+ *
+ * @param {string} url
+ * @return {Promise<{parsedJSON: object, status: number}>}
+ */
 export function checkAuth({url = '/check'}) {
   return http.ajaxGet({url});
 }
 
+/**
+ * logout request
+ *
+ * @param {string} url
+ * @return {Promise<{parsedJSON: object, status: number}>}
+ */
 export function logoutPost() {
-  return http.ajaxPost({url: '/logout', body: {}})
+  return http.ajaxPost({url: '/logout', body: {}});
 }

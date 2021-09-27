@@ -1,8 +1,14 @@
 import {AuthStatus} from '../events/Auth.js';
 import eventBus from './eventBus.js';
-import {logoutPost} from './api.js'
+import {logoutPost} from './api.js';
 
+/**
+ * User class
+ */
 class User {
+  /**
+   * User constructor
+   */
   constructor() {
     eventBus.addEventListener(AuthStatus.userLogin, this.login.bind(this));
     eventBus.addEventListener(AuthStatus.userLogout, this.logout.bind(this));
@@ -24,7 +30,7 @@ class User {
   /**
      * setting all user fields to passed fields
      *
-     * @param {{type: string, name: string, email: string, phone: string}} params
+     * @param {{type: string, name: string, email: string, phone: string}}params
      *
      */
   login({
