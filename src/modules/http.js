@@ -30,9 +30,9 @@ function getData({
   if (method !== 'GET') {
     data.body = body;
     if (getCsrfToken()) {
-      data.header['X-CSRF-Token'] = getCsrfToken();
+      data.headers['X-Csrf-Token'] = getCsrfToken()
+      debugFunc(getCsrfToken(), 'csrf token value');
     }
-    debugFunc(getCsrfToken(), 'csrf token value');
   }
 
   return data;
@@ -56,8 +56,9 @@ async function makeFetch({
   const responseJSON = await response.json();
 
   if (method !== 'GET') {
-    if (response.headers.get('X-CSRF-Token')) {
-      setCsrfToken(response.headers.get('X-CSRF-Token'));
+    response.headers.forEach(function(val, key) { console.log(key + ' -> ' + val); });
+    if (response.headers.get('X-Csrf-Token')) {
+      setCsrfToken(response.headers.get('X-Csrf-Token'));
     }
   }
 
