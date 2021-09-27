@@ -19,7 +19,7 @@ export class HomeController {
   }) {
     eventBus.addEventListener(HomeEvents.homeGetRestaurantsSuccess,
         this.getRender.bind(this));
-    eventBus.addEventListener(AuthStatus.userLogout, this.rerender.bind(this));
+    eventBus.addEventListener(AuthStatus.userLoggedOut, this.rerender.bind(this));
     this.routeTo = routeTo;
     this.parent = parent;
     this.homeView = new HomeView({

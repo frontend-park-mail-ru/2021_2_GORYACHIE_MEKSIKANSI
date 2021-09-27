@@ -19,12 +19,16 @@ class User {
      *
      */
   logout() {
-    logoutPost();
-    this.type = '';
-    this.name = '';
-    this.email = '';
-    this.phone = '';
-    this.Auth = false;
+    logoutPost()
+        .then((response) => {
+            this.type = '';
+            this.name = '';
+            this.email = '';
+            this.phone = '';
+            this.Auth = false;
+            eventBus.emitEventListener(AuthStatus.userLoggedOut, {});
+            eventBus.addEventListener(AuthStatus.userLogout, this.logout.bind(this));
+        })
   }
 
   /**

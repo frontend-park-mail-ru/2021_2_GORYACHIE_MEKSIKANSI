@@ -29,7 +29,7 @@ class EventBus {
    * @param {Function} listener
    * @return {Object}
    */
-  unsubscribe(eventName, listener) {
+  unsubscribe(eventName) {
     if (!this.eventTopics[eventName] ||
         this.eventTopics[eventName].length < 1) {
       return undefined;

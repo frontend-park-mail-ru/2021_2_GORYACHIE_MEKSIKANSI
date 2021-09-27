@@ -29,6 +29,7 @@ export class Navbar {
       this.close();
     } else if (target.getAttribute('href') === 'logout' && User.Auth) {
       eventBus.emitEventListener(AuthStatus.userLogout, {});
+      eventBus.unsubscribe(AuthStatus.userLogout);
     } else if (target.getAttribute('href') === 'navbar') {
       this.open();
     }
