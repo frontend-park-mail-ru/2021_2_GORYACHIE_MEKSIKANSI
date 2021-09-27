@@ -2,8 +2,6 @@ import {loginPost, profileGet} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {debugFunc} from '../modules/debugMod.js';
-import User from '../modules/user.js';
-
 
 class LoginModel {
   /**
@@ -20,6 +18,7 @@ class LoginModel {
         .then((response) => {
           if (response.status === 200) {
             eventBus.emitEventListener(LoginEvents.loginDone, {});
+            profileGet({url: '/profile'});
             debugFunc(response, 'login result');
           } else {
             eventBus.emitEventListener(LoginEvents.loginFailed, response);

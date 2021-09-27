@@ -11,9 +11,6 @@ const urls = {
   profile: {
     url: '/profile',
   },
-  logout: {
-    url: '/logout',
-  },
 };
 
 

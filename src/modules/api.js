@@ -52,7 +52,8 @@ export function loginPost({type, email, phone, password}) {
 }
 
 export function profileGet({url = '/profile'}) {
-  return http.ajaxGet({url});
+  return http.ajaxGet({url})
+      .then(auth);
 }
 
 export function restaurantsGet({url = '/'}) {
@@ -61,4 +62,8 @@ export function restaurantsGet({url = '/'}) {
 
 export function checkAuth({url = '/check'}) {
   return http.ajaxGet({url});
+}
+
+export function logoutPost() {
+  return http.ajaxPost({url: '/logout', body: {}})
 }

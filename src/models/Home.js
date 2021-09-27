@@ -95,22 +95,6 @@ for (let i = 0; i < 100; ++i) {
 }
 
 class HomeModel {
-  check() {
-    checkAuth({url: '/check'})
-        .then((response) => {
-          if (response.status === 200) {
-            profileGet({url: '/profile'}).then((response) => {
-              if (response.status === 200) {
-                User.login(response.parsedJSON);
-                eventBus.emitEventListener(HomeEvents.homeUserLoggedIn, {});
-                debugFunc(response.parsedJSON);
-              }
-            });
-          }
-        })
-        .catch();
-  }
-
   getRestaurants() {
     restaurantsGet({url: '/'})
         .then((response) => {
@@ -130,15 +114,9 @@ class HomeModel {
     checkAuth({url: '/check'})
       .then((response) => {
         if (response.status === 200) {
-          profileGet({url: '/profile'}).then((response) => {
-            if (response.status === 200) {
-              User.login(response.parsedJSON);
-              eventBus.emitEventListener(HomeEvents.homeUserLoggedIn, {});
-              this.getRestaurants();
-              debugFunc(response.parsedJSON);
-            }
-          });
+          profileGet({url: '/profile'});
         }
+        this.getRestaurants();
       })
       .catch();
   }

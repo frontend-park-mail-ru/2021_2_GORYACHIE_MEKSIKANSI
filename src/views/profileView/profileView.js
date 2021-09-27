@@ -30,7 +30,7 @@ export class ProfileView extends View {
     this.parent.innerHTML += template({user: {name: User.name, phone: User.phone, email: User.email}, auth: User.Auth});
     window.document.querySelector('.footer').style.marginTop = '0';
 
-    this.settingUp();
+    //this.settingUp();
   }
 
   /**

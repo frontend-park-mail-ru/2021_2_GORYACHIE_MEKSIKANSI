@@ -1,5 +1,6 @@
 import {AuthStatus} from '../events/Auth.js';
 import eventBus from './eventBus.js';
+import {logoutPost} from './api.js'
 
 class User {
   constructor() {
@@ -12,6 +13,7 @@ class User {
      *
      */
   logout() {
+    logoutPost();
     this.type = '';
     this.name = '';
     this.email = '';

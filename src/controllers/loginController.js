@@ -58,19 +58,6 @@ export class LoginController {
   }
 
   correctLogin() {
-    profileGet({url: '/profile'}).then((response) => {
-      if (response.status === 200) {
-        User.login(response.parsedJSON);
-        debugFunc(response.parsedJSON);
-      }
-    });
-
-    // const routeTo = historyRedirection.pop();
-    // if (routeTo !== undefined && routeTo !== '') {
-    //   this.routeTo(routeTo);
-    //   return;
-    // }
-
     this.routeTo('home');
   }
 

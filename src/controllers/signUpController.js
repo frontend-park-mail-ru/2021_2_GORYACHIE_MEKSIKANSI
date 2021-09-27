@@ -74,12 +74,6 @@ export class SignUpController {
   }
 
   signupSuccess() {
-    const routeTo = historyRedirection.pop();
-    if (routeTo !== '') {
-      this.routeTo(routeTo);
-      return;
-    }
-
     this.routeTo('/');
   }
 }

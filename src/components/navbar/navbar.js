@@ -1,4 +1,6 @@
 import User from '../../modules/user.js';
+import eventBus from "../../modules/eventBus.js";
+import {AuthStatus} from "../../events/Auth.js";
 
 /**
  * Left navigation bar class
@@ -20,8 +22,9 @@ export class Navbar {
     const navbar = this.parent.getElementsByClassName('navbar')[0];
 
     if (this.opened && !navbar.contains(event.target)) {
-      console.log(event.target);
       this.close();
+    } else if (target.getAttribute('href') === 'logout' && User.Auth) {
+      eventBus.emitEventListener(AuthStatus.userLogout, {});
     } else if (target.getAttribute('href') === 'navbar') {
       this.open();
     }

@@ -29,14 +29,12 @@ function getData({
 
   if (method !== 'GET') {
     data.body = body;
-  }
 
-  if (method !== 'GET') {
-    const csrf = document.cookie.match(/csrf=([\w]+)/);
-    debugFunc(csrf, 'csrf token value');
+    const csrf = this.getCsrfToken();
     if (csrf) {
-      data.header['X-XSRF-Token'] = csrf;
+      data.header['X-CSRF-Token'] = csrf;
     }
+    debugFunc(csrf, 'csrf token value');
   }
 
   return data;
@@ -57,6 +55,12 @@ async function makeFetch({
 } = {}) {
   const response = await fetch(window.serverAddress + url, getData({method, body, type}));
   const responseJSON = await response.json();
+
+  if (method !== 'GET') {
+    if (response.headers.get('X-CSRF-Token')) {
+      this.setCsrfToken(response.headers.get('X-CSRF-Token'));
+    }
+  }
 
   return {
     status: responseJSON.status,
@@ -90,6 +94,17 @@ export default class Http {
     url = '/',
     body = null,
   } = {}) {
-    return await makeFetch({url: url, method: 'POST', body: JSON.stringify(body)});
+    return await makeFetch({url: url, method: 'POST', body: JSON.stringify(body)})
+        .then((response) => {
+          this.setCsrfToken(response.parsedJSON.csrfToken);
+        })
+  }
+
+  setCsrfToken(token) {
+    localStorage.setItem('token', token);
+  }
+
+  getCsrfToken() {
+    return localStorage.getItem('token');
   }
 }
