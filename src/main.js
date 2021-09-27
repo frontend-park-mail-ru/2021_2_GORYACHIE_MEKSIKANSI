@@ -18,7 +18,9 @@ Handlebars.registerPartial('loginUserInput',
     Handlebars.templates['userLoginForm.hbs']);
 Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
-Handlebars.registerPartial('footer', Handlebars.templates['footer.hbs']);
+
+document.getElementById('foot').innerHTML = Handlebars.
+    templates['footer.hbs']({});
 
 Handlebars.registerHelper('times', function(n, block) {
   let accum = '';

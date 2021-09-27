@@ -3,6 +3,7 @@ import {HomeEvents} from '../events/Home.js';
 import {profileGet, restaurantsGet} from '../modules/api.js';
 import {checkAuth} from '../modules/api.js';
 import {debugFunc} from '../modules/debugMod.js';
+import User from '../modules/user.js';
 
 /**
  * Class Home Model
