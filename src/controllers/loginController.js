@@ -3,6 +3,7 @@ import {Validation} from '../modules/validation.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {LoginView} from '../views/LoginView/loginView.js';
+import User from '../modules/user.js'
 
 /**
  *  Login controller class
@@ -69,7 +70,7 @@ export class LoginController {
    * Rendering view
    */
   render() {
-    if (user.Auth) {
+    if (User.Auth) {
       return;
     }
 

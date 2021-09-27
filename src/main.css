@@ -16,8 +16,9 @@
 
 body {
     font-family: var(--raleway-font);
-    margin: 0;
+    margin: 0 auto;
     overflow-x: hidden;
+    width: 1920px;
 }
 
 .error-label {
