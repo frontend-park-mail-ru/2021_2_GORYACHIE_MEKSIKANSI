@@ -33,7 +33,6 @@ class HomeModel {
    */
   checkAuthAndGetRestaurants() {
     checkAuth({url: '/check'})
-<<<<<<< HEAD
       .then((response) => {
         if (!User.Auth && response.status === 200) {
           profileGet({url: '/profile'});
@@ -41,15 +40,6 @@ class HomeModel {
         this.getRestaurants();
       })
       .catch();
-=======
-        .then((response) => {
-          if (response.status === 200) {
-            profileGet({url: '/profile'});
-          }
-          this.getRestaurants();
-        })
-        .catch();
->>>>>>> 398f72b9fc330468c936bc476da1763e4653f498
   }
 }
 
