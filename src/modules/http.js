@@ -1,6 +1,6 @@
 import {debugFunc} from './debugMod.js';
 
-window.serverAddress = 'http://167.172.179.1:5000';
+window.serverAddress = 'http://127.0.0.1:5000/api';
 
 /**
  * Getting object data with info to fetch
@@ -15,9 +15,9 @@ function getData({
   type = 'application/json; charset=utf8',
 } = {}) {
   const data = {
+    method,
     mode: 'cors',
     credentials: 'include',
-    method,
     headers: {
       'Access-Control-Allow-Origin': 'http://127.0.0.1',
     },

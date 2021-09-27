@@ -18,7 +18,7 @@ export function auth(response) {
 
   if (response.status === 200) {
     eventBus.emitEventListener(AuthStatus.userLogin, response.parsedJSON);
-    debugFunc('user is not logged in', response.status);
+    debugFunc('user is logged in', response.status);
     return response;
   }
 }

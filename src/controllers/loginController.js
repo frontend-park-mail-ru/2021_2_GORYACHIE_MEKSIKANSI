@@ -26,7 +26,7 @@ export class LoginController {
     let loginValidation = Validation.validateEmail(login);
 
     if (loginValidation.validationResult && passwordValidation.validationResult) {
-      LoginModel.login('user', login, '', password);
+      LoginModel.login('client', login, '', password);
       this.loginView.hideError();
       return {
         error: false,
@@ -34,7 +34,7 @@ export class LoginController {
     } else {
       loginValidation = Validation.validatePhoneNumber(login);
       if (loginValidation.validationResult && passwordValidation.validationResult) {
-        LoginModel.login('user','', login, password);
+        LoginModel.login('client','', login, password);
         this.loginView.hideError();
         return {
           error: false,

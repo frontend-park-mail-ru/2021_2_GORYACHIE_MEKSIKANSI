@@ -43,10 +43,10 @@ export function signupPost({
  * @param {string} password
  * @return {Promise<{parsedJSON: object, status: number}>}
  */
-export function loginPost({email, phone, password}) {
+export function loginPost({type, email, phone, password}) {
   return http.ajaxPost({
     url: '/login',
-    body: {email, phone, password},
+    body: {type, email, phone, password},
   })
       .then(auth);
 }

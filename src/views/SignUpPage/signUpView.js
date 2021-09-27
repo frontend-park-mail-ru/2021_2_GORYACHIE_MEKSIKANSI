@@ -43,7 +43,7 @@ export class SignUpView extends View {
     const passwordRepeat = document.getElementById('password_repeat');
     event.preventDefault();
 
-    const type = 'user';
+    const type = 'client';
     const signUpResult = this.controller.signUp(type, name.value, email.value, phone.value, password.value, passwordRepeat.value);
 
     if (signUpResult.error) {

@@ -16,11 +16,12 @@ class LoginModel {
      *
      */
   login(type, email = '', phone = '', password) {
-    loginPost({email, phone, password})
+    loginPost({type, email, phone, password})
         .then((response) => {
           if (response.status === 200) {
             eventBus.emitEventListener(LoginEvents.loginDone, {});
             debugFunc(response, 'login result');
+
           } else {
             eventBus.emitEventListener(LoginEvents.loginFailed, response);
             debugFunc(response, 'login result');
