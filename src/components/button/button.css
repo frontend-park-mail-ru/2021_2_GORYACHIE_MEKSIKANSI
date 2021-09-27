@@ -30,6 +30,10 @@
     cursor: pointer;
 }
 
+.button_hover_gray:hover {
+    background-color: var(--color-light-gray);
+}
+
 .button_shape_rounded {
     border: 0 solid;
     border-radius: 30px;
