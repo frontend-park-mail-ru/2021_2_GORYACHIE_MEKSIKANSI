@@ -21,8 +21,7 @@ export class HomeController {
   }
 
   render() {
-    HomeModel.getRestaurants();
-    HomeModel.check();
+    HomeModel.checkAuthAndGetRestaurants();
   }
 
   remove() {

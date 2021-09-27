@@ -115,7 +115,6 @@ class HomeModel {
     restaurantsGet({url: '/'})
         .then((response) => {
           if (response.status === 200) {
-            this.check({url: 'check/'});
             eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess, response.parsedJSON);
             debugFunc(response.status, 'everything is ok, but fetch failed');
           } else {
@@ -125,6 +124,23 @@ class HomeModel {
         .catch((response) => {
           eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess, restaurantList);
         });
+  }
+
+  checkAuthAndGetRestaurants() {
+    checkAuth({url: '/check'})
+      .then((response) => {
+        if (response.status === 200) {
+          profileGet({url: '/profile'}).then((response) => {
+            if (response.status === 200) {
+              User.login(response.parsedJSON);
+              eventBus.emitEventListener(HomeEvents.homeUserLoggedIn, {});
+              this.getRestaurants();
+              debugFunc(response.parsedJSON);
+            }
+          });
+        }
+      })
+      .catch();
   }
 }
 
