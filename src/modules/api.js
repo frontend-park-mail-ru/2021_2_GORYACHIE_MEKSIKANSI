@@ -58,3 +58,7 @@ export function profileGet({url = '/profile'}) {
 export function restaurantsGet({url = '/'}) {
   return http.ajaxGet({url});
 }
+
+export function checkAuth({url = '/check'}) {
+  return http.ajaxGet({url});
+}

@@ -1,7 +1,9 @@
 import eventBus from '../modules/eventBus.js'
 import {HomeEvents} from "../events/Home.js";
-import {restaurantsGet} from "../modules/api.js";
+import {profileGet, restaurantsGet} from "../modules/api.js";
+import {checkAuth} from "../modules/api.js";
 import {debugFunc} from "../modules/debugMod.js";
+import User from "../modules/user.js";
 
 const randomInteger = (min, max) => {
     // получить случайное число от (min-0.5) до (max+0.5)
@@ -93,6 +95,20 @@ for (let i = 0; i < 100; ++i) {
 }
 
 class HomeModel {
+    check() {
+        checkAuth({url: '/check'})
+            .then((response) => {
+                if (response.status === 200) {
+                    profileGet({url: '/profile'}).then((response) => {
+                        if (response.status === 200) {
+                            User.login(response.parsedJSON);
+                            debugFunc(response.parsedJSON);
+                        }
+                    });
+                }
+            })
+            .catch()
+    }
     getRestaurants() {
         restaurantsGet({url: '/'})
             .then((response) => {
