@@ -3,14 +3,19 @@ import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {debugFunc} from '../modules/debugMod.js';
 
+
+/**
+ * class login model
+ *
+ */
 class LoginModel {
   /**
      * emitting events for login success
      *
-     * @param {string} email
-     * @param {string} phone
-     * @param {string} password
-     * @return {Promise<{status: int, parsedJSON: object}>}
+     * @param {string} type user type
+     * @param {string} email user email
+     * @param {string} phone user phone
+     * @param {string} password user password
      *
      */
   login(type, email = '', phone = '', password) {

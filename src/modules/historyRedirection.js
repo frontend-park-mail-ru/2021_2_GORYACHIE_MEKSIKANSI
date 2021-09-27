@@ -1,4 +1,10 @@
+/**
+ * History redirection func
+ */
 class HistoryRedirection {
+  /**
+   * History redirection constructor
+   */
   constructor() {
     this.redirectionUrl = [];
   }

@@ -1,18 +1,22 @@
+/**
+ * Class event bus, observer pattern
+ */
 class EventBus {
+  /**
+   * Constructor for event bus
+   */
   constructor() {
     this.eventTopics = {};
   }
 
   /**
      * add new event to listen
-     *
      * @param {string} eventName
      * @param {Function} listener
-     * @return null
-     *
      */
   addEventListener(eventName, listener) {
-    if (!this.eventTopics[eventName] || this.eventTopics[eventName].length < 1) {
+    if (!this.eventTopics[eventName] ||
+        this.eventTopics[eventName].length < 1) {
       this.eventTopics[eventName] = [];
     }
 
@@ -20,36 +24,38 @@ class EventBus {
   }
 
   /**
-     * delete listener from event bus
-     *
-     * @param {string} eventName
-     * @param {Function} listener
-     * @return null
-     *
-     */
+   * delete listener from event bus
+   * @param {string} eventName
+   * @param {Function} listener
+   * @return {Object}
+   */
   unsubscribe(eventName, listener) {
-    if (!this.eventTopics[eventName] || this.eventTopics[eventName].length < 1) {
-      return;
+    if (!this.eventTopics[eventName] ||
+        this.eventTopics[eventName].length < 1) {
+      return undefined;
     }
 
     delete this.eventTopics[eventName];
   }
 
+  /**
+   * Get listener for event
+   * @param {string} eventName
+   * @return {*}
+   */
   getListener(eventName) {
     return this.eventTopics[eventName];
   }
 
 
   /**
-     * trigger event listener of event
-     *
+     * Trigger event listener of event
      * @param {string} eventName
      * @param {Object} params
-     * @return null
-     *
      */
   emitEventListener(eventName, params) {
-    if (!this.eventTopics[eventName] || this.eventTopics[eventName].length < 1) {
+    if (!this.eventTopics[eventName] ||
+        this.eventTopics[eventName].length < 1) {
       return;
     }
     this.eventTopics[eventName].forEach(function(listener) {
