@@ -1,6 +1,6 @@
 import {View} from '../View.js';
 import {Navbar} from '../../components/navbar/navbar.js';
-import User from '../../modules/user.js'
+import User from '../../modules/user.js';
 
 export class ProfileView extends View {
   /**

@@ -6,8 +6,8 @@ import {LoginEvents} from '../events/Login.js';
 import {debugFunc} from '../modules/debugMod.js';
 import historyRedirection from '../modules/historyRedirection.js';
 import {LoginView} from '../views/LoginView/loginView.js';
-import {profileGet} from "../modules/api.js";
-import User from "../modules/user.js";
+import {profileGet} from '../modules/api.js';
+import User from '../modules/user.js';
 
 export class LoginController {
   constructor({
@@ -34,7 +34,7 @@ export class LoginController {
     } else {
       loginValidation = Validation.validatePhoneNumber(login);
       if (loginValidation.validationResult && passwordValidation.validationResult) {
-        LoginModel.login('client','', login, password);
+        LoginModel.login('client', '', login, password);
         this.loginView.hideError();
         return {
           error: false,

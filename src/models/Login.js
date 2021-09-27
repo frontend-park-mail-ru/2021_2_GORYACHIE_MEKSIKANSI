@@ -21,7 +21,6 @@ class LoginModel {
           if (response.status === 200) {
             eventBus.emitEventListener(LoginEvents.loginDone, {});
             debugFunc(response, 'login result');
-
           } else {
             eventBus.emitEventListener(LoginEvents.loginFailed, response);
             debugFunc(response, 'login result');

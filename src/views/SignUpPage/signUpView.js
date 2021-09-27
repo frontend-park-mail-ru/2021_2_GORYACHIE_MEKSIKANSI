@@ -54,16 +54,16 @@ export class SignUpView extends View {
       } else {
         this.hideError('password_error', password, passwordRepeat);
       }
-        if (!signUpResult.emailValidation.validationResult) {
-          this.showError('email_error', signUpResult.emailValidation.validationText, email);
-        } else {
-          this.hideError('email_error', email);
-        }
-        if (!signUpResult.phoneValidation.validationResult) {
-          this.showError('phone_error', signUpResult.phoneValidation.validationText, phone);
-        } else {
-          this.hideError('phone_error', phone);
-        }
+      if (!signUpResult.emailValidation.validationResult) {
+        this.showError('email_error', signUpResult.emailValidation.validationText, email);
+      } else {
+        this.hideError('email_error', email);
+      }
+      if (!signUpResult.phoneValidation.validationResult) {
+        this.showError('phone_error', signUpResult.phoneValidation.validationText, phone);
+      } else {
+        this.hideError('phone_error', phone);
+      }
       if (!signUpResult.nameValidation.validationResult) {
         this.showError('name_error', signUpResult.nameValidation.validationText, name);
       } else {
