@@ -29,12 +29,10 @@ function getData({
 
   if (method !== 'GET') {
     data.body = body;
-
-    const csrf = this.getCsrfToken();
-    if (csrf) {
-      data.header['X-CSRF-Token'] = csrf;
+    if (getCsrfToken()) {
+      data.header['X-CSRF-Token'] = getCsrfToken();
     }
-    debugFunc(csrf, 'csrf token value');
+    debugFunc(getCsrfToken(), 'csrf token value');
   }
 
   return data;
@@ -58,7 +56,7 @@ async function makeFetch({
 
   if (method !== 'GET') {
     if (response.headers.get('X-CSRF-Token')) {
-      this.setCsrfToken(response.headers.get('X-CSRF-Token'));
+      setCsrfToken(response.headers.get('X-CSRF-Token'));
     }
   }
 
@@ -94,17 +92,14 @@ export default class Http {
     url = '/',
     body = null,
   } = {}) {
-    return await makeFetch({url: url, method: 'POST', body: JSON.stringify(body)})
-        .then((response) => {
-          this.setCsrfToken(response.parsedJSON.csrfToken);
-        })
+    return await makeFetch({url: url, method: 'POST', body: JSON.stringify(body)});
   }
+}
 
-  setCsrfToken(token) {
-    localStorage.setItem('token', token);
-  }
+function setCsrfToken(token) {
+  localStorage.setItem('token', token);
+}
 
-  getCsrfToken() {
-    return localStorage.getItem('token');
-  }
+function getCsrfToken() {
+  return localStorage.getItem('token');
 }
