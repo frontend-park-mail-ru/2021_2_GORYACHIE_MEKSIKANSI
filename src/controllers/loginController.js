@@ -50,7 +50,7 @@ export class LoginController {
   }
 
   render() {
-    if (user.Auth) {
+    if (User.Auth) {
       return;
     }
 

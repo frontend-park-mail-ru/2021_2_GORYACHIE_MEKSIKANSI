@@ -113,7 +113,7 @@ class HomeModel {
   checkAuthAndGetRestaurants() {
     checkAuth({url: '/check'})
       .then((response) => {
-        if (response.status === 200) {
+        if (!User.Auth && response.status === 200) {
           profileGet({url: '/profile'});
         }
         this.getRestaurants();

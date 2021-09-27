@@ -48,7 +48,6 @@ export function loginPost({type, email, phone, password}) {
     url: '/login',
     body: {type, email, phone, password},
   })
-      .then(auth);
 }
 
 export function profileGet({url = '/profile'}) {

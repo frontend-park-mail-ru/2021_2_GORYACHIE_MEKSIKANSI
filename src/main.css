@@ -18,6 +18,7 @@ body {
     font-family: var(--raleway-font);
     margin: 0;
     overflow-x: hidden;
+    max-width: 1920px;
 }
 
 .error-label {
