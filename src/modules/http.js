@@ -56,7 +56,6 @@ async function makeFetch({
   const responseJSON = await response.json();
 
   if (method !== 'GET') {
-    response.headers.forEach(function(val, key) { console.log(key + ' -> ' + val); });
     if (response.headers.get('X-Csrf-Token')) {
       setCsrfToken(response.headers.get('X-Csrf-Token'));
     }
