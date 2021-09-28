@@ -39,7 +39,7 @@ export class ProfileView extends View {
           phone: User.phone,
           email: User.email}, auth: User.Auth,
     });
-    window.document.querySelector('.footer').style.marginTop = '0';
+    document.querySelector('.footer').style.marginTop = '0';
   }
 
   /**

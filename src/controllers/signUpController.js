@@ -36,7 +36,7 @@ export class SignUpController {
    */
   render() {
     if (user.Auth) {
-      return;
+      this.routeTo('/');
     }
 
     this.signUpView.render({});
@@ -102,7 +102,7 @@ export class SignUpController {
   /**
    * Show errors if signup failed
    */
-  signupFailed() {
+  signupFailed(response) {
     this.signUpView.showErrorFromController('Не удалось установить соединение');
     debugFunc({error}, 'login failed');
   }

@@ -19,9 +19,6 @@ Handlebars.registerPartial('loginUserInput',
 Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
 
-document.getElementById('foot').innerHTML = Handlebars.
-    templates['footer.hbs']({});
-
 Handlebars.registerHelper('times', function(n, block) {
   let accum = '';
   for (let i = 0; i < n; ++i) {
@@ -56,7 +53,7 @@ router.addRoute('profile', profileController);
 router.addRoute('home', homeController);
 router.addRoute('signup', signUpController);
 
-User.Auth = false;
 homeController.render();
-
+document.getElementById('foot').innerHTML = Handlebars.
+    templates['footer.hbs']({});
 
