@@ -48,7 +48,7 @@
 }
 
 .footer__line {
-    margin: 100px 40px;
+    margin: 50px 40px;
     border: none;
     background-color: var(--color-white);
     height: 2px;
@@ -62,7 +62,6 @@
 .footer__title {
     color: var(--color-white);
     padding: 0 200px 0 0;
-    margin: 50px 0 0 0;
     font-size: 21px;
 }
 

@@ -103,8 +103,11 @@ export class SignUpController {
    * Show errors if signup failed
    */
   signupFailed(response) {
-    this.signUpView.showErrorFromController('Не удалось установить соединение');
-    debugFunc({error}, 'login failed');
+    if (response === 200) {
+      this.signUpView.showErrorFromController(response.parsedJSON);
+    } else {
+      this.signUpView.showErrorFromController('Неизветсная ошибка');
+    }
   }
 
   /**

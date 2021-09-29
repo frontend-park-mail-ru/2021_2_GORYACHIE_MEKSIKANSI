@@ -21,6 +21,10 @@ body {
     max-width: 1920px;
 }
 
+#app {
+    min-height: 100vh;
+}
+
 .error-label {
     font-weight: var(--font_thin);
     font-size: 14px;

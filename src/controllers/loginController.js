@@ -71,7 +71,7 @@ export class LoginController {
    */
   render() {
     if (User.Auth) {
-      this.routeTo('home')
+      this.routeTo('home');
     }
 
     this.loginView.render({});
@@ -87,9 +87,13 @@ export class LoginController {
   /**
    * Action that emits when emits incorrect login event
    */
-  loginFailed() {
-    this.loginView.showError('Неправильный логин или пароль' +
-      '/Не удалось установить соединение');
+  loginFailed(response) {
+    if (response === 200) {
+      this.loginView.showError(response.parsedJSON);
+    } else {
+      this.loginView.showError('Неизвестная ошибка');
+
+    }
   }
 
   /**

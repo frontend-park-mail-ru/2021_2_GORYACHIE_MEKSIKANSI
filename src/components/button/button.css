@@ -39,6 +39,10 @@
     border-radius: 30px;
 }
 
+.button__container {
+    margin: auto;
+}
+
 .button_color_black {
     background-color: black;
     color: white;
