@@ -1,0 +1,20 @@
+:root {
+    --raleway-font: Raleway, sans-serif;
+
+    --font_bold: 800;
+    --font_medium: 500;
+    --font_thin: 400;
+}
+
+.font_bold {
+    font-weight: var(--font_bold);
+}
+
+.font_medium {
+    font-weight: var(--font_medium);
+}
+
+.font_thin {
+    font-weight: var(--font_thin);
+}
+

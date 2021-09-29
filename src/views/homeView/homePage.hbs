@@ -1,0 +1,46 @@
+{{>header auth=auth }}
+
+<div class="home-page">
+    <div class="home-page__content">
+        <div class="home-page__line home-page__promo-line">
+            <div class="promo-line__title home-page__promo-line-title">
+                <div class="promo__main-title">
+                    Захотели покушать?!<br>Закажите у нас!
+                </div>
+
+                <div class="promo__description-title">
+                    Найдите свои любимые ресторан, кухню или блюдо
+                </div>
+            </div>
+            <div class="home-page__promo-line-blocks">
+                <div class="home-page__promo-block">
+                    {{>promoBlock }}
+                </div>
+                <div class="home-page__promo-block">
+                    {{>promoBlock }}
+                </div>
+                <div class="home-page__promo-block">
+                    {{>promoBlock }}
+                </div>
+            </div>
+        </div>
+
+        <div class="home-page__line">
+            <div class="home-page__sort">
+                {{>sortBox }}
+            </div>
+
+            <div class="home-page__restaurants-list">
+                {{>sortUnderheader }}
+                <div class="home-page__restaurant-block-title">
+                    Рестораны
+                </div>
+                {{#each restaurantList}}
+                    <div class="home-page__restaurant-block">
+                            {{>restaurant this }}
+                    </div>
+                {{/each }}
+            </div>
+        </div>
+    </div>
+</div>

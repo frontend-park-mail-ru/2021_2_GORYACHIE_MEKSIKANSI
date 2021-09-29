@@ -1,0 +1,129 @@
+:root {
+    --button-width-small: 112px;
+    --button-height-small: 26px;
+
+    --button-width-medium: 222px;
+    --button-height-medium: 36px;
+
+    --button-width-big: 442px;
+    --button-height-big: 48px;
+
+    --button-height: 48px;
+    --button-font-size: 16px;
+
+    --button__icon-size: 14px;
+    --button__icon-nav-size: 24px;
+}
+
+.button {
+    font-size: var(--button-font-size);
+    font-weight: var(--font_bold);
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    background-color: var(--color-primary);
+
+    border: 0;
+    height: var(--button-height-medium);
+
+    cursor: pointer;
+}
+
+.button_hover_gray:hover {
+    background-color: var(--color-light-gray);
+}
+
+.button_shape_rounded {
+    border: 0 solid;
+    border-radius: 30px;
+}
+
+.button__container {
+    margin: auto;
+}
+
+.button_color_black {
+    background-color: black;
+    color: white;
+}
+
+.button_color_black:hover {
+    background-color: rgb(26, 26, 26);
+    color: white;
+}
+
+
+.button_color_green {
+    background-color: var(--color-green);
+    color: white;
+}
+
+.button_color_white {
+    background-color: var(--color-white);
+}
+
+.button_height_s {
+    height: var(--button-height-small);
+}
+
+.button_height_m {
+    height: var(--button-height-medium);
+}
+
+.button_height_b {
+    height: var(--button-height-big);
+}
+
+.button_width_s {
+    width: var(--button-width-small);
+}
+
+.button_width_m {
+    width: var(--button-width-medium);
+}
+
+.button_width_b {
+    width: var(--button-width-big);
+}
+
+.button__icon {
+    width: var(--button__icon-size);
+    height: var(--button__icon-size);
+    margin-right: 3px;
+}
+
+.button__icon_nav {
+    width: var(--button__icon-nav-size);
+    height: var(--button__icon-nav-size);
+}
+
+.button_sort-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60px;
+}
+
+.button_sort-type:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.button__icon-sort {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 5px;
+}
+
+.nav-button {
+    padding: 0;
+    width: var(--button__icon-nav-size);
+    height: var(--button__icon-nav-size);
+}
+
+.nav-button:hover {
+    background-color: var(--color-white);
+}
