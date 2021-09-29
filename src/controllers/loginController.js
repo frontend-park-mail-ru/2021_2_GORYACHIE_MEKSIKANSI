@@ -71,7 +71,7 @@ export class LoginController {
    */
   render() {
     if (User.Auth) {
-      return;
+      this.routeTo('home')
     }
 
     this.loginView.render({});
