@@ -103,7 +103,8 @@ export class SignUpController {
    * Show errors if signup failed
    */
   signupFailed(response) {
-    if (response === 200) {
+    if (response.status !== 500) {
+      console.log(response);
       this.signUpView.showErrorFromController(response.parsedJSON);
     } else {
       this.signUpView.showErrorFromController('Неизветсная ошибка');

@@ -88,11 +88,10 @@ export class LoginController {
    * Action that emits when emits incorrect login event
    */
   loginFailed(response) {
-    if (response === 200) {
+    if (response !== 500) {
       this.loginView.showError(response.parsedJSON);
     } else {
       this.loginView.showError('Неизвестная ошибка');
-
     }
   }
 

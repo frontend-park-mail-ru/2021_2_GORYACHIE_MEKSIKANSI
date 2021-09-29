@@ -9,7 +9,7 @@ import {debugFunc} from './debugMod.js';
  *
  */
 export function auth(response) {
-  if (response.status === 401) {
+  if (response.status === 409) {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
     debugFunc('user is not logged in', response.status);
     return response;
@@ -20,4 +20,5 @@ export function auth(response) {
     debugFunc('user is logged in', response.status);
     return response;
   }
+  return {};
 }
