@@ -16,11 +16,8 @@ class HomeModel {
     restaurantsGet({url: '/'})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-              profileGet({url: '/profile'})
-                  .then(() => {
                       eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess,
                           response.parsedJSON);
-                  })
               debugFunc(response, 'everything is ok');
           } else {
           }
@@ -36,8 +33,15 @@ class HomeModel {
    */
   checkAuthAndGetRestaurants() {
     checkAuth({url: '/check'})
-      .then(() => {
-            this.getRestaurants();
+      .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+              profileGet({url: '/profile'})
+                  .then(() => {
+                      this.getRestaurants();
+                  });
+          } else {
+              this.getRestaurants();
+          }
       })
       .catch();
   }

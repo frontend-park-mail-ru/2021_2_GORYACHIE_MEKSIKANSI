@@ -11,7 +11,6 @@ import {ResponseEvents} from "../events/Responses.js";
  */
 export function auth(response) {
   if (response.status === ResponseEvents.UserNotFound) {
-    eventBus.emitEventListener(AuthStatus.notAuth, {});
     debugFunc('user is not logged in', response.status);
     return response;
   }
