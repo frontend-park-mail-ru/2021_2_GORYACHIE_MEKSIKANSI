@@ -13,7 +13,7 @@ export class Navbar {
     this.parent = parent;
     this.opened = false;
 
-    this.parent.addEventListener('click', this.openListener.bind(this));
+      this.parent.addEventListener('click', this.openListener.bind(this));
   }
 
   /**

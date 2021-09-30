@@ -22,8 +22,10 @@ class LoginModel {
     loginPost({type, email, phone, password})
         .then((response) => {
           if (response.status === 200) {
-            eventBus.emitEventListener(LoginEvents.loginDone, {});
-            profileGet({url: '/profile'});
+            profileGet({url: '/profile'})
+                .then(() => {
+                    eventBus.emitEventListener(LoginEvents.loginDone, {});
+                })
             debugFunc(response, 'login result');
           } else {
             eventBus.emitEventListener(LoginEvents.loginFailed, response);
