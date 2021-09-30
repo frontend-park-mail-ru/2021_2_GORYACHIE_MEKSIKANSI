@@ -90,15 +90,17 @@ export default class Http {
      * ajaxPost request
      *
      * @param {{url: string, body: object}} params
-     * @return {Object<{status: string, parsedJSON: object}>}
+     * @return {Object<{status: number, parsedJSON: object}>}
      *
      */
   async ajaxPost({
     url = '/',
     body = null,
   } = {}) {
-    return await makeFetch({url: url, method: 'POST',
-      body: JSON.stringify(body)});
+    return makeFetch({
+      url: url, method: 'POST',
+      body: JSON.stringify(body)
+    });
   }
 }
 /**

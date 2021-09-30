@@ -3,7 +3,7 @@ import {HomeEvents} from '../events/Home.js';
 import {profileGet, restaurantsGet} from '../modules/api.js';
 import {checkAuth} from '../modules/api.js';
 import {debugFunc} from '../modules/debugMod.js';
-import User from '../modules/user.js';
+import {ResponseEvents} from "../events/Responses.js";
 
 /**
  * Class Home Model
@@ -15,15 +15,17 @@ class HomeModel {
   getRestaurants() {
     restaurantsGet({url: '/'})
         .then((response) => {
-          if (response.status === 200) {
-            eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess,
-                response.parsedJSON);
-            debugFunc(response.status, 'everything is ok, but fetch failed');
+          if (response.status === ResponseEvents.OK) {
+              profileGet({url: '/profile'})
+                  .then(() => {
+                      eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess,
+                          response.parsedJSON);
+                  })
+              debugFunc(response, 'everything is ok');
           } else {
-            debugFunc(response, 'everything is ok');
           }
         })
-        .catch((response) => {
+        .catch(() => {
           eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess, {});
         });
   }
@@ -34,7 +36,7 @@ class HomeModel {
    */
   checkAuthAndGetRestaurants() {
     checkAuth({url: '/check'})
-      .then((response) => {
+      .then(() => {
             this.getRestaurants();
       })
       .catch();
