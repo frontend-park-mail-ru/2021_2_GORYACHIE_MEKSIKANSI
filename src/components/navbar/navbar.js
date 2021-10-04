@@ -13,14 +13,14 @@ export class Navbar {
     this.parent = parent;
     this.opened = false;
 
-    this.parent.addEventListener('click', this.openListener.bind(this));
+    this.parent.addEventListener('click', this.list);
   }
 
   /**
    * Navbar listener monitoring open, close, logout actions
    * @param {Object} event js event
    */
-  openListener(event) {
+  list = (event) => {
     const {target} = event;
 
     const navbar = this.parent.getElementsByClassName('navbar')[0];
@@ -28,6 +28,7 @@ export class Navbar {
     if (this.opened && navbar !== undefined && !navbar.contains(event.target)) {
       this.close();
     } else if (target.getAttribute('href') === 'logout' && User.Auth) {
+      event.preventDefault();
       eventBus.emitEventListener(AuthStatus.userLogout, {});
     } else if (target.getAttribute('href') === 'navbar') {
       this.open();
@@ -42,6 +43,7 @@ export class Navbar {
     this.parent.innerHTML = template({user:
         {auth: User.Auth, name: User.name},
     });
+
     this.close();
   }
 
@@ -71,6 +73,6 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
-    this.parent.removeEventListener('click', this.openListener.bind(this));
+    this.parent.removeEventListener('click',  this.list);
   }
 }

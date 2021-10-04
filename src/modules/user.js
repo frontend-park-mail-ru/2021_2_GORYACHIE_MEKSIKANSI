@@ -1,6 +1,7 @@
 import {AuthStatus} from '../events/Auth.js';
 import eventBus from './eventBus.js';
 import {logoutPost} from './api.js';
+import {urls} from './urls.js';
 
 /**
  * User class
@@ -21,12 +22,13 @@ class User {
   async logout() {
     await logoutPost()
         .then((response) => {
-            this.type = '';
-            this.name = '';
-            this.email = '';
-            this.phone = '';
-            this.Auth = false;
-            eventBus.emitEventListener(AuthStatus.userLoggedOutHomeRerender, 'home');
+          this.type = '';
+          this.name = '';
+          this.email = '';
+          this.phone = '';
+          this.Auth = false;
+          eventBus.emitEventListener(AuthStatus.userLoggedOutHomeRerender,
+              urls.home.name);
         });
   }
 
