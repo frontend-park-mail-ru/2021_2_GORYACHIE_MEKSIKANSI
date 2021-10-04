@@ -2,7 +2,8 @@ import {loginPost} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {ResponseEvents} from '../events/Responses.js';
-
+import {urls} from '../modules/urls.js';
+import {ErrorsText} from '../events/Errors.js';
 
 /**
  * class login model
@@ -22,14 +23,15 @@ class LoginModel {
     loginPost({type, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(LoginEvents.loginDone, {});
+            eventBus.emitEventListener(LoginEvents.loginDone, urls.home.url);
           } else {
-            eventBus.emitEventListener(LoginEvents.loginFailed, response);
+            eventBus.emitEventListener(LoginEvents.loginFailed,
+                response.parsedJSON);
           }
         })
         .catch(() => {
           eventBus.emitEventListener(LoginEvents.loginFailed,
-              {status: ResponseEvents.InternalError});
+              ErrorsText.FailedToFetch);
         });
   }
 }

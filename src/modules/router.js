@@ -1,17 +1,4 @@
-const urls = {
-  home: {
-    url: '/',
-  },
-  login: {
-    url: '/login',
-  },
-  signup: {
-    url: '/signUp',
-  },
-  profile: {
-    url: '/profile',
-  },
-};
+import {urls} from './urls.js';
 
 /**
  * Router class

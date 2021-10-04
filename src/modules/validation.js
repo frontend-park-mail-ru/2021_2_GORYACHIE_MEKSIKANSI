@@ -1,3 +1,5 @@
+import {ValidationLength} from '../events/Validation.js';
+
 // eslint-disable-next-line max-len
 const emailRegExpression = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 // eslint-disable-next-line max-len
@@ -25,11 +27,13 @@ export class Validation {
      *
      */
   static validateEmail(email) {
-    if (email === '') {
+    if (email === '' ) {
       return emptyResult;
     }
 
-    if (!emailRegExpression.test(email)) {
+    if (!emailRegExpression.test(email) ||
+      email.length > ValidationLength.MaxEmailLength ||
+      email.length < ValidationLength.MinEmailLength) {
       return {
         validationResult: false,
         validationText: 'Введен неверный адрес электронной почты',
@@ -51,7 +55,9 @@ export class Validation {
       return emptyResult;
     }
 
-    if (!phoneRegExpression.test(phone)) {
+    if (!phoneRegExpression.test(phone) ||
+      phone.length > ValidationLength.MaxPhoneLength ||
+      phone.length < ValidationLength.MinPhoneLength) {
       return {
         validationResult: false,
         validationText: 'Введен неверный номер телефона',
@@ -73,10 +79,12 @@ export class Validation {
       return emptyResult;
     }
 
-    if (password.length > 28 || password.length < 8) {
+    if (password.length > ValidationLength.MaxPasswordLength ||
+      password.length < ValidationLength.MinPasswordLength) {
       return {
         validationResult: false,
-        validationText: 'Введите пароль от 8 до 28 символов',
+        validationText: `Введите пароль от ${ValidationLength.MinPasswordLength}
+         до ${ValidationLength.MaxPasswordLength} символов`,
       };
     }
 

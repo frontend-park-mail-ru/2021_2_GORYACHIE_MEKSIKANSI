@@ -28,9 +28,9 @@ export class LoginController {
       controller: this});
 
     eventBus.addEventListener(LoginEvents.loginFailed,
-        this.loginFailed.bind(this));
+      this.loginView.showError.bind(this.loginView));
     eventBus.addEventListener(LoginEvents.loginDone,
-      this.correctLogin.bind(this));
+      this.routeTo);
   }
 
   /**
@@ -41,31 +41,25 @@ export class LoginController {
    */
   login(login, password) {
     const passwordValidation = Validation.validatePassword(password);
-    let loginValidation = Validation.validateEmail(login);
+    const emailValidation = Validation.validateEmail(login);
+    const phoneValidation = Validation.validatePhoneNumber(login);
 
-    if (loginValidation.validationResult &&
-        passwordValidation.validationResult) {
-      LoginModel.login('client', login, '', password);
-      this.loginView.hideError();
-      return {
-        error: false,
-      };
-    } else {
-      loginValidation = Validation.validatePhoneNumber(login);
-      if (loginValidation.validationResult &&
-          passwordValidation.validationResult) {
+    if (passwordValidation.validationResult) {
+      if (emailValidation.validationResult) {
+        LoginModel.login('client', login, '', password);
+        this.loginView.hideError();
+        return {error: false};
+      }
+
+      if (phoneValidation.validationResult) {
         LoginModel.login('client', '', login, password);
         this.loginView.hideError();
-        return {
-          error: false,
-        };
+        return {error: false};
       }
     }
 
     return {
       error: true,
-      loginValidation,
-      passwordValidation,
     };
   }
 
@@ -75,27 +69,10 @@ export class LoginController {
   render() {
     if (User.Auth) {
       this.routeTo('home');
+      return;
     }
 
     this.loginView.render({});
-  }
-
-  /**
-   * Action that emits when emits correct login event
-   */
-  correctLogin() {
-    this.routeTo('home');
-  }
-
-  /**
-   * Action that emits when emits incorrect login event
-   */
-  loginFailed(response) {
-    if (response.status !== ResponseEvents.InternalError) {
-      this.loginView.showError(response.parsedJSON);
-      return;
-    }
-    this.loginView.showError(ErrorsText.FailedToFetch);
   }
 
   /**

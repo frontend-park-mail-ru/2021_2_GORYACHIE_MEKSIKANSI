@@ -27,7 +27,7 @@ export class HomeController {
 
     eventBus.addEventListener(HomeEvents.homeGetRestaurantsSuccess,
         this.homeView.render.bind(this.homeView));
-    eventBus.addEventListener(AuthStatus.userLoggedOut, this.routeTo);
+    eventBus.addEventListener(AuthStatus.userLoggedOutHomeRerender, this.routeTo);
   }
   /**
    * Rendering home page with restaurants and checking auth
