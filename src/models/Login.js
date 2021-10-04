@@ -24,10 +24,10 @@ class LoginModel {
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(LoginEvents.loginDone, urls.home.url);
-          } else {
-            eventBus.emitEventListener(LoginEvents.loginFailed,
-                response.parsedJSON);
+            return;
           }
+          eventBus.emitEventListener(LoginEvents.loginFailed,
+              response.parsedJSON);
         })
         .catch(() => {
           eventBus.emitEventListener(LoginEvents.loginFailed,

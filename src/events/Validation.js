@@ -5,4 +5,6 @@ export const ValidationLength = {
   MinPhoneLength: 9,
   MaxPasswordLength: 28,
   MinPasswordLength: 8,
+  MaxNameLength: 20,
+  MinNameLength: 2,
 };

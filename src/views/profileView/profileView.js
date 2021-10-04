@@ -46,14 +46,14 @@ export class ProfileView extends View {
    * Method calling by
    * @param {string} event
    */
-  _submitListener(event) {}
+  submitListener(event) {}
 
   /**
    * Method for setting up before rendering elements
    */
   settingUp() {
     const form = document.getElementById('form_submit');
-    form.addEventListener('click', this._submitListener.bind(this));
+    form.addEventListener('click', this.submitListener.bind(this));
   }
 
   /**

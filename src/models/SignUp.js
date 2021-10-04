@@ -1,7 +1,9 @@
 import {signupPost} from '../modules/api.js';
 import {SignUpEvents} from '../events/SignUp.js';
 import eventBus from '../modules/eventBus.js';
-import {ResponseEvents} from '../events/Responses.js'
+import {ResponseEvents} from '../events/Responses.js';
+import {ErrorsText} from '../events/Errors.js';
+import {urls} from '../modules/urls.js';
 
 /**
  * Class SignUp Model
@@ -20,13 +22,16 @@ class SignUpModel {
     signupPost({type, name, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(SignUpEvents.userSignUpSuccess, {});
-          } else {
-            eventBus.emitEventListener(SignUpEvents.userSignUpFailed, response);
+            eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
+                urls.home.url);
+            return;
           }
+          eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
+              response.parsedJSON);
         })
-        .catch((response) => {
-          eventBus.emitEventListener(SignUpEvents.userSignUpFailed, response);
+        .catch(() => {
+          eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
+              ErrorsText.FailedToFetch);
         });
   }
 }

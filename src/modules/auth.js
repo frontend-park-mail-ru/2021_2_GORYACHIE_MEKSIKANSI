@@ -12,5 +12,5 @@ export function auth(response) {
   if (response.status === ResponseEvents.OK) {
     eventBus.emitEventListener(AuthStatus.userLogin, response.parsedJSON);
   }
-  // return response;
+  return response;
 }

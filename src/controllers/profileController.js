@@ -1,5 +1,6 @@
 import {ProfileView} from '../views/profileView/profileView.js';
 import User from '../modules/user.js';
+import {urls} from '../modules/urls.js';
 
 /**
  *  Profile controller class
@@ -26,8 +27,8 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    if (User.Auth === undefined || !User.Auth) {
-      this.routeTo('login');
+    if (!User.Auth) {
+      this.routeTo(urls.login.url);
       return;
     }
 

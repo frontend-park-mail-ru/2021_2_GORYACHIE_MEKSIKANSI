@@ -117,7 +117,9 @@ export class Validation {
    * @return {{validationText: string, validationResult: boolean}}
    */
   static validateName(name) {
-    if (name === '') {
+    if (name === '' ||
+      name.length > ValidationLength.MaxNameLength ||
+      name.length < ValidationLength.MinNameLength) {
       return emptyResult;
     }
 
