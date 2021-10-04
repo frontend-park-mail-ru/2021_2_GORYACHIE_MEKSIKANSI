@@ -1,8 +1,7 @@
-import {loginPost, profileGet} from '../modules/api.js';
+import {loginPost} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
-import {debugFunc} from '../modules/debugMod.js';
-import {ResponseEvents} from '../events/Responses.js'
+import {ResponseEvents} from '../events/Responses.js';
 
 
 /**
@@ -23,16 +22,14 @@ class LoginModel {
     loginPost({type, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-              eventBus.emitEventListener(LoginEvents.loginDone, {});
-            debugFunc(response, 'login result');
+            eventBus.emitEventListener(LoginEvents.loginDone, {});
           } else {
             eventBus.emitEventListener(LoginEvents.loginFailed, response);
-            debugFunc(response, 'login result');
           }
         })
-        .catch((response) => {
-          eventBus.emitEventListener(LoginEvents.loginFailed, response);
-          debugFunc(response, 'login result');
+        .catch(() => {
+          eventBus.emitEventListener(LoginEvents.loginFailed,
+              {status: ResponseEvents.InternalError});
         });
   }
 }

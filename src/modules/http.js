@@ -1,5 +1,3 @@
-import {debugFunc} from './debugMod.js';
-
 window.serverAddress = 'http://127.0.0.1:5000/api';
 
 /**
@@ -31,7 +29,6 @@ function getData({
     data.body = body;
     if (getCsrfToken()) {
       data.headers['X-Csrf-Token'] = getCsrfToken()
-      debugFunc(getCsrfToken(), 'csrf token value');
     }
   }
 

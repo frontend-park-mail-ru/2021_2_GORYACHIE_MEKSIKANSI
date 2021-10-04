@@ -4,6 +4,8 @@ import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {LoginView} from '../views/LoginView/loginView.js';
 import User from '../modules/user.js'
+import {ResponseEvents} from '../events/Responses.js';
+import {ErrorsText} from '../events/Errors.js';
 
 /**
  *  Login controller class
@@ -20,14 +22,15 @@ export class LoginController {
   }) {
     this.routeTo = routeTo;
     this.parent = parent;
-    eventBus.addEventListener(LoginEvents.loginDone,
-        this.correctLogin.bind(this));
     this.loginView = new LoginView({
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
+
     eventBus.addEventListener(LoginEvents.loginFailed,
         this.loginFailed.bind(this));
+    eventBus.addEventListener(LoginEvents.loginDone,
+      this.correctLogin.bind(this));
   }
 
   /**
@@ -88,11 +91,11 @@ export class LoginController {
    * Action that emits when emits incorrect login event
    */
   loginFailed(response) {
-    if (response !== 500) {
+    if (response.status !== ResponseEvents.InternalError) {
       this.loginView.showError(response.parsedJSON);
-    } else {
-      this.loginView.showError('Неизвестная ошибка');
+      return;
     }
+    this.loginView.showError(ErrorsText.FailedToFetch);
   }
 
   /**

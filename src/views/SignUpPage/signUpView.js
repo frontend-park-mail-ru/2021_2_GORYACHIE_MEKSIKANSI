@@ -1,6 +1,5 @@
 import {View} from '../View.js';
 import {SignUpController} from '../../controllers/signUpController.js';
-import {debugFunc} from '../../modules/debugMod.js';
 
 /**
  * SignUp View Class
@@ -93,7 +92,6 @@ export class SignUpView extends View {
         this.hideError('name_error', name);
       }
     }
-    debugFunc(signUpResult.error, 'error of signup');
   }
 
   /**

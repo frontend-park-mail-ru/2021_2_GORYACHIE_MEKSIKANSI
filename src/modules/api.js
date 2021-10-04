@@ -46,7 +46,7 @@ export function loginPost({type, email, phone, password}) {
   return http.ajaxPost({
     url: '/login',
     body: {type, email, phone, password},
-  })
+  });
 }
 
 /**
@@ -67,16 +67,6 @@ export function profileGet({url = '/profile'}) {
  * @return {Promise<{parsedJSON: object, status: number}>}
  */
 export function restaurantsGet({url = '/'}) {
-  return http.ajaxGet({url});
-}
-
-/**
- * check auth func
- *
- * @param {string} url
- * @return {Promise<{parsedJSON: object, status: number}>}
- */
-export function checkAuth({url = '/check'}) {
   return http.ajaxGet({url});
 }
 

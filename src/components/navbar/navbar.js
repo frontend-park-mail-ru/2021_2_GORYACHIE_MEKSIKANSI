@@ -13,7 +13,7 @@ export class Navbar {
     this.parent = parent;
     this.opened = false;
 
-      this.parent.addEventListener('click', this.openListener.bind(this));
+    this.parent.addEventListener('click', this.openListener.bind(this));
   }
 
   /**
@@ -25,7 +25,7 @@ export class Navbar {
 
     const navbar = this.parent.getElementsByClassName('navbar')[0];
 
-    if (this.opened && !navbar.contains(event.target)) {
+    if (this.opened && navbar !== undefined && !navbar.contains(event.target)) {
       this.close();
     } else if (target.getAttribute('href') === 'logout' && User.Auth) {
       eventBus.emitEventListener(AuthStatus.userLogout, {});

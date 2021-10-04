@@ -3,7 +3,6 @@ import {Validation} from '../modules/validation.js';
 import SignUpModel from '../models/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {SignUpEvents} from '../events/SignUp.js';
-import {debugFunc} from '../modules/debugMod.js';
 import user from '../modules/user.js';
 
 /**

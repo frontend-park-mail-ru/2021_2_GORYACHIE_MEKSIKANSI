@@ -31,17 +31,11 @@ export class HomeView extends View {
   render(props = {}) {
     this.navbar.render();
     const template = Handlebars.templates['homePage.hbs'];
-    this.parent.innerHTML += template({restaurantList: props.restaurantList,
+    this.parent.innerHTML += template({restaurantList: props,
       auth: User.Auth});
 
     this.settingUp();
   }
-
-  /**
-   * Method calling by
-   * @param {name} event
-   */
-  _submitListener(event) {}
 
   /**
    * Method for setting up before rendering elements

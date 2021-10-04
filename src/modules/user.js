@@ -26,9 +26,9 @@ class User {
             this.email = '';
             this.phone = '';
             this.Auth = false;
-            eventBus.emitEventListener(AuthStatus.userLoggedOut, {});
+            eventBus.emitEventListener(AuthStatus.userLoggedOut, 'home');
             eventBus.addEventListener(AuthStatus.userLogout, this.logout.bind(this));
-        })
+        });
   }
 
   /**
