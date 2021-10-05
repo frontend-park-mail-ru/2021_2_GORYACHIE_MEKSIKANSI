@@ -96,15 +96,27 @@
 
 .restaurant-nav__line {
     width: 100%;
+    color: #e2e2e2;
 }
 
 .restaurant-nav__list {
+    background-color: white;
     display: flex;
     flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .restaurant-nav__btn {
     font-weight: var(--font_bold);
     font-size: 20px;
     padding: 10px;
+    cursor: pointer;
+}
+
+.sticky {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
 }
