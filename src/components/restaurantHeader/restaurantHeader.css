@@ -90,3 +90,21 @@
     margin-right: 10px;
 }
 
+.restaurant-nav {
+    padding: 30px;
+}
+
+.restaurant-nav__line {
+    width: 100%;
+}
+
+.restaurant-nav__list {
+    display: flex;
+    flex-direction: row;
+}
+
+.restaurant-nav__btn {
+    font-weight: var(--font_bold);
+    font-size: 20px;
+    padding: 10px;
+}
