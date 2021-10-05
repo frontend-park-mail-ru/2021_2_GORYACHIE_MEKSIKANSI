@@ -1,0 +1,92 @@
+.restaurant-header {
+    width: 100%;
+    height: 240px;
+    position: relative;
+}
+
+.restaurant-header__image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.restaurant-header__gradient  {
+    display: flex;
+    position: absolute;
+    top: 0;
+    margin-top: 100px;
+    height: 140px;
+    width: 100%;
+    background: linear-gradient( 0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+}
+
+.restaurant-header__text {
+    margin-top: auto;
+    padding: 20px 30px;
+    color: white;
+}
+
+.restaurant-header__title {
+    font-weight: var(--font_bold);
+    font-size: 40px;
+}
+
+.restaurant-header__info {
+    padding-top: 10px;
+    font-weight: var(--font_thin);
+    font-size: 18px;
+}
+
+.restaurant-header__right-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: auto;
+    margin-left: auto;
+    padding-right: 30px;
+    padding-bottom: 20px;
+}
+
+.restaurant-header__button {
+    display: flex;
+    align-items: center;
+}
+
+.restaurant-header__button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.restaurant-header__love-icon {
+    margin-left: 16px;
+    width: 26px;
+    height: 26px;
+}
+
+.love-color {
+    fill: white;
+}
+
+.restaurant-underheader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+}
+
+.restaurant-underheader__tags {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.restaurant-underheader__tag {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid var(--color-gray);
+    margin-right: 10px;
+}
+

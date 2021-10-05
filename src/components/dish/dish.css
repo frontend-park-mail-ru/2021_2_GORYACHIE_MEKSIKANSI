@@ -9,6 +9,7 @@
     flex-grow: 1;
 
     border: 1px solid #e2e2e2;
+    cursor: pointer;
 }
 
 .dish__text {
