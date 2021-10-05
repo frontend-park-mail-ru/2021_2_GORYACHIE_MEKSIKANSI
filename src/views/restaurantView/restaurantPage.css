@@ -1,0 +1,17 @@
+.restaurant-page__dishes {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.restaurant-page__dish {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.restaurant-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

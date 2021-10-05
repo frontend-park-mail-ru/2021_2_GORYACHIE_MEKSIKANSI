@@ -24,7 +24,7 @@
 
 .restaurant-header__text {
     margin-top: auto;
-    padding: 20px 30px;
+    padding: 30px 20px 20px 3%;
     color: white;
 }
 
@@ -45,7 +45,7 @@
     align-items: center;
     margin-top: auto;
     margin-left: auto;
-    padding-right: 30px;
+    padding-right: 3%;
     padding-bottom: 20px;
 }
 
@@ -74,7 +74,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .restaurant-underheader__tags {
@@ -91,7 +92,8 @@
 }
 
 .restaurant-nav {
-    padding: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 .restaurant-nav__line {

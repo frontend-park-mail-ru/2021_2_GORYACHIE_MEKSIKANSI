@@ -13,6 +13,9 @@
 @import "./components/navProfile/navProfile.css";
 @import "views/profileView/profilePage.css";
 @import "./components/input/input.css";
+@import "./components/dish/dish.css";
+@import "./components/restaurantHeader/restaurantHeader.css";
+@import "./views/restaurantView/restaurantPage.css";
 
 body {
     font-family: var(--raleway-font);
