@@ -27,7 +27,7 @@ class LoginModel {
             return;
           }
           eventBus.emitEventListener(LoginEvents.loginFailed,
-              response.parsedJSON);
+              response.explain);
         })
         .catch(() => {
           eventBus.emitEventListener(LoginEvents.loginFailed,
