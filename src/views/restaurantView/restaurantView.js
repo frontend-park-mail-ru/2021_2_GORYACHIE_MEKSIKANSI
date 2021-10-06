@@ -116,10 +116,9 @@ export class RestaurantView extends View {
     }
   }
 
-  scrollingToMenu = (e, anchor) => {
+  scrollingToMenu = (e) => {
     e.preventDefault();
-
-    const blockID = anchor.getAttribute('href').substr(1);
+    const blockID = e.target.closest('a').getAttribute('href').substr(1);
 
     document.getElementById(blockID).scrollIntoView({
       behavior: 'smooth',
