@@ -1,10 +1,11 @@
 .profile-page__content {
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     background-color: #F6F6F6;
 
-    padding: 30px 10% 300px;
+    padding: 50px 3% 150px;
 }
 
 .profile-page__title {
@@ -19,13 +20,14 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: nowrap;
-    width: 60%;
+    width: 50%;
     background-color: var(--color-white);
+    border-radius: 30px;
 }
 
 .profile-page__right-box {
-    width: 40%;
-    margin-left: auto;
+
+    margin-right: auto;
 }
 
 .profile-page__input-box {
@@ -47,8 +49,10 @@
 }
 
 .profile-page__button {
-    margin-top: 30px;
+    margin-top: 50px;
     font-size: 20px;
+    border-radius: 30px;
+    width: 100%;
 }
 
 .profile-page__button_wrapper {

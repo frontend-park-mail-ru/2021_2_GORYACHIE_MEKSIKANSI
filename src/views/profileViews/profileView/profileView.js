@@ -1,6 +1,6 @@
-import {View} from '../baseView/View.js';
-import {Navbar} from '../../components/navbar/navbar.js';
-import User from '../../modules/user.js';
+import {View} from '../../baseView/View.js';
+import {Navbar} from '../../../components/navbar/navbar.js';
+import User from '../../../modules/user.js';
 
 
 /**
@@ -32,13 +32,17 @@ export class ProfileView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['profilePage1.hbs'];
-    this.parent.innerHTML += template({user:
-        {
+    const template = Handlebars.templates['baseProfilePage.hbs'];
+    this.parent.innerHTML += template({
+      head: Handlebars.templates['header.hbs'],
+      content: Handlebars.templates['profilePage1.hbs']({
+        user: {
           name: User.name,
           phone: User.phone,
-          email: User.email}, auth: User.Auth,
-    });
+          email: User.email,
+        },
+        auth: User.Auth,
+      })});
     document.querySelector('.footer').style.marginTop = '0';
   }
 

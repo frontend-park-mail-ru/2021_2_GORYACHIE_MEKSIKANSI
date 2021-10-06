@@ -6,6 +6,8 @@ import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantView} from './views/restaurantView/restaurantView.js';
 
+import User from './modules/user.js';
+
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
@@ -58,10 +60,14 @@ const restaurantView = new RestaurantView({
   parent: application,
   routeTo: routeTo,
 });
-restaurantView.render();
-// homeController.homeView.render();
-
 
 document.getElementById('foot').innerHTML = Handlebars.
-    templates['footer.hbs']({});
+  templates['footer.hbs']({});
+// restaurantView.render();
+// homeController.homeView.render();
+User.Auth = true;
+User.email = 'email@example.ru';
+profileController.render();
+
+
 

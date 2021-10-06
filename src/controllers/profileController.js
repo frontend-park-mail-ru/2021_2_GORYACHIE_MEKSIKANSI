@@ -1,4 +1,4 @@
-import {ProfileView} from '../views/profileView/profileView.js';
+import {ProfileView} from '../views/profileViews/profileView/profileView.js';
 import User from '../modules/user.js';
 
 /**

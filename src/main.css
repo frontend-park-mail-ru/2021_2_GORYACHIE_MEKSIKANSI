@@ -11,7 +11,7 @@
 @import "views/homeView/homePage.css";
 @import "./components/navbar/navbar.css";
 @import "./components/navProfile/navProfile.css";
-@import "views/profileView/profilePage.css";
+@import "views/profileViews/profilePage.css";
 @import "./components/input/input.css";
 @import "./components/dish/dish.css";
 @import "./components/restaurantHeader/restaurantHeader.css";
