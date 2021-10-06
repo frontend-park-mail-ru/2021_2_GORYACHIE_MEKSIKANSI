@@ -3,12 +3,8 @@
     flex-direction: row;
 
     height: 158px;
-    /*min-width: 175px;*/
-    /*max-width: 560px;*/
 
-    width: 560px;
-
-    flex-grow: 1;
+    width: 430px;
 
     border: 1px solid #e2e2e2;
     cursor: pointer;

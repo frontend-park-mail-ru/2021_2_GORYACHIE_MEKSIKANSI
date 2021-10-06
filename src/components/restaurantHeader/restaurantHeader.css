@@ -122,3 +122,8 @@
     top: 0;
     width: 100%;
 }
+
+.restaurant-underheader__a {
+    text-decoration: none;
+    color: black;
+}

@@ -1,4 +1,4 @@
-import {View} from '../View.js';
+import {View} from '../baseView/View.js';
 import {LoginController} from '../../controllers/loginController.js';
 
 /**

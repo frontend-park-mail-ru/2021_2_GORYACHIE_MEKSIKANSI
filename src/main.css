@@ -16,6 +16,7 @@
 @import "./components/dish/dish.css";
 @import "./components/restaurantHeader/restaurantHeader.css";
 @import "./views/restaurantView/restaurantPage.css";
+@import "./views/baseView/page.css";
 
 body {
     font-family: var(--raleway-font);

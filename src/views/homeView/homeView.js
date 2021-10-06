@@ -1,4 +1,4 @@
-import {View} from '../View.js';
+import {View} from '../baseView/View.js';
 import {Navbar} from '../../components/navbar/navbar.js';
 import User from '../../modules/user.js';
 
@@ -30,9 +30,13 @@ export class HomeView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['homePage.hbs'];
-    this.parent.innerHTML += template({restaurantList: props.restaurantList,
-      auth: User.Auth});
+    const template = Handlebars.templates['page.hbs'];
+    this.parent.innerHTML += template({
+      head: Handlebars.templates['header.hbs']({auth: User.Auth}),
+      content: Handlebars.templates['homePage.hbs']({
+        promos: [1, 2, 3],
+        restaurantList: props.restaurantList,
+      })});
 
     this.settingUp();
   }

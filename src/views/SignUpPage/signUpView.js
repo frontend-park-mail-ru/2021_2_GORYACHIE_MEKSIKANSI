@@ -1,4 +1,4 @@
-import {View} from '../View.js';
+import {View} from '../baseView/View.js';
 import {SignUpController} from '../../controllers/signUpController.js';
 import {debugFunc} from '../../modules/debugMod.js';
 
