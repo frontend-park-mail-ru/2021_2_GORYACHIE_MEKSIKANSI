@@ -70,22 +70,13 @@ export class RestaurantView extends View {
   }
 
   settingUp() {
-    const anchors = document.querySelectorAll('a[href*="#"]');
+    this.anchors = document.querySelectorAll('a[href*="#"]');
     this.menuNavsTitles = document.querySelectorAll('.restaurant-page__menu-title');
     this.menuNavsButtons = document.querySelectorAll('.restaurant-nav__btn');
 
 
-    for (const anchor of anchors) {
-      anchor.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const blockID = anchor.getAttribute('href').substr(1);
-
-        document.getElementById(blockID).scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      });
+    for (const anchor of this.anchors) {
+      anchor.addEventListener('click', this.scrollingToMenu);
     }
 
     window.addEventListener('scroll', this.stickNavbar);
@@ -125,9 +116,23 @@ export class RestaurantView extends View {
     }
   }
 
+  scrollingToMenu = (e, anchor) => {
+    e.preventDefault();
+
+    const blockID = anchor.getAttribute('href').substr(1);
+
+    document.getElementById(blockID).scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
   remove() {
     window.removeEventListener('scroll', this.stickNavbar);
     window.removeEventListener('scroll', this.navHighlight);
+    this.anchors.forEach((anchor) => {
+      anchor.removeEventListener('click', this.scrollingToMenu);
+    })
     this.navbar.remove();
     this.parent.innerHTML = '';
   }
