@@ -4,15 +4,15 @@ export const urls = {
     name: 'home',
   },
   login: {
-    url: '/login',
+    url: '/login/',
     name: 'login',
   },
   signup: {
-    url: '/signUp',
+    url: '/signup/',
     name: 'signup',
   },
   profile: {
-    url: '/profile',
+    url: '/profile/',
     name: 'profile',
   },
 };

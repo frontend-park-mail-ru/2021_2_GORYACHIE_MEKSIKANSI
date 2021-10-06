@@ -44,6 +44,7 @@ router.addRoute(urls.profile.name, profileController);
 router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 
-homeController.render();
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
+
+router.start();

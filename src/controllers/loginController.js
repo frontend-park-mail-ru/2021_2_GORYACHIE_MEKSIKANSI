@@ -6,11 +6,12 @@ import {LoginView} from '../views/LoginView/loginView.js';
 import User from '../modules/user.js'
 import {ResponseEvents} from '../events/Responses.js';
 import {ErrorsText} from '../events/Errors.js';
+import {BaseController} from './baseController.js';
 
 /**
  *  Login controller class
  */
-export class LoginController {
+export class LoginController extends BaseController {
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -20,6 +21,7 @@ export class LoginController {
     parent: parent = document.body,
     routeTo: routeTo,
   }) {
+    super();
     this.routeTo = routeTo;
     this.parent = parent;
     this.loginView = new LoginView({
@@ -73,6 +75,7 @@ export class LoginController {
     }
 
     this.loginView.render({});
+    this.viewIsActive = true;
   }
 
   /**
@@ -80,5 +83,6 @@ export class LoginController {
    */
   remove() {
     this.loginView.remove();
+    this.viewIsActive = false;
   }
 }

@@ -1,11 +1,14 @@
 import {ProfileView} from '../views/profileView/profileView.js';
 import User from '../modules/user.js';
-import {urls} from '../modules/urls.js';
+import ProfileModel from '../models/Profile.js';
+import eventBus from '../modules/eventBus.js';
+import {ProfileEvents} from '../events/Profile.js';
+import {BaseController} from './baseController.js';
 
 /**
  *  Profile controller class
  */
-export class ProfileController {
+export class ProfileController extends BaseController {
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -13,14 +16,17 @@ export class ProfileController {
    */
   constructor({
     parent: parent = document.body,
-    routeTo: routeTo = () => {},
+    routeTo: routeTo,
   }) {
+    super();
     this.routeTo = routeTo;
     this.parent = parent;
     this.profileView = new ProfileView({
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
+    eventBus.addEventListener(ProfileEvents.userLoggedIn, this.profileView.render.bind(this.profileView));
+    eventBus.addEventListener(ProfileEvents.userNotAuth, this.routeTo);
   }
 
   /**
@@ -28,11 +34,18 @@ export class ProfileController {
    */
   render() {
     if (!User.Auth) {
-      this.routeTo(urls.login.url);
+      ProfileModel.checkAuth();
       return;
     }
 
     this.profileView.render({});
+    this.viewIsActive = true;
+
+    // if (!User.Auth) {
+    //   HomeModel.checkAuthAndGetRestaurants();
+    //   return;
+    // }
+    // HomeModel.getRestaurants();
   }
 
   /**
@@ -40,5 +53,6 @@ export class ProfileController {
    */
   remove() {
     this.profileView.remove();
+    this.viewIsActive = false;
   }
 }

@@ -4,11 +4,12 @@ import SignUpModel from '../models/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {SignUpEvents} from '../events/SignUp.js';
 import user from '../modules/user.js';
+import {BaseController} from './baseController.js';
 
 /**
  * Signup page controller
  */
-export class SignUpController {
+export class SignUpController extends BaseController  {
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -18,6 +19,7 @@ export class SignUpController {
     parent: parent = document.body,
     routeTo: routeTo = () => {},
   }) {
+    super();
     this.routeTo = routeTo;
     this.parent = parent;
     this.signUpView = new SignUpView({
@@ -40,6 +42,7 @@ export class SignUpController {
     }
 
     this.signUpView.render({});
+    this.viewIsActive = true;
   }
 
   /**
@@ -84,5 +87,6 @@ export class SignUpController {
    */
   remove() {
     this.signUpView.remove();
+    this.viewIsActive = false;
   }
 }
