@@ -29,15 +29,6 @@ class User {
           this.Auth = false;
           eventBus.emitEventListener(AuthStatus.userLoggedOutHomeRerender,
               urls.home.name);
-        })
-        .catch(() => {
-          this.type = '';
-          this.name = '';
-          this.email = '';
-          this.phone = '';
-          this.Auth = false;
-          eventBus.emitEventListener(AuthStatus.userLoggedOutHomeRerender,
-              urls.home.name);
         });
   }
 
