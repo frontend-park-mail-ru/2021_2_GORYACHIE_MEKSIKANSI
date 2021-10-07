@@ -73,7 +73,11 @@ export class RestaurantView extends View {
     this.anchors = document.querySelectorAll('a[href*="#"]');
     this.menuNavsTitles = document.querySelectorAll('.restaurant-page__menu-title');
     this.menuNavsButtons = document.querySelectorAll('.restaurant-nav__btn');
+    this.dishes = document.querySelectorAll('.dish');
 
+    this.dishes.forEach((item) => {
+      item.addEventListener('click', this.showPopUp);
+    });
 
     for (const anchor of this.anchors) {
       anchor.addEventListener('click', this.scrollingToMenu);
@@ -125,6 +129,20 @@ export class RestaurantView extends View {
       block: 'start',
     });
   }
+
+  showPopUp = () => {
+    const div = document.createElement('div');
+    div.classList.add('dish-pop-up');
+    div.innerHTML = Handlebars.templates['dishPopUp.hbs']();
+    document.body.appendChild(div);
+    document.body.style.overflowY = 'hidden';
+    document.body.querySelector('.dish-pop-it__close-button').addEventListener('click', this.removePopUp);
+  }
+
+  removePopUp = () => {
+    document.body.removeChild(document.body.querySelector('.dish-pop-up'));
+    document.body.style.overflowY = 'scroll';
+}
 
   remove() {
     window.removeEventListener('scroll', this.stickNavbar);
