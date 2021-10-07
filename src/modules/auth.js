@@ -1,6 +1,6 @@
 import {AuthStatus} from '../events/Auth.js';
 import eventBus from './eventBus.js';
-import {debugFunc} from './debugMod.js';
+import {ResponseEvents} from '../events/Responses.js';
 
 /**
  * emitting events for user auth
@@ -9,16 +9,8 @@ import {debugFunc} from './debugMod.js';
  *
  */
 export function auth(response) {
-  if (response.status === 409) {
-    eventBus.emitEventListener(AuthStatus.notAuth, {});
-    debugFunc('user is not logged in', response.status);
-    return response;
-  }
-
-  if (response.status === 200) {
+  if (response.status === ResponseEvents.OK) {
     eventBus.emitEventListener(AuthStatus.userLogin, response.parsedJSON);
-    debugFunc('user is logged in', response.status);
-    return response;
   }
-  return {};
+  return response;
 }

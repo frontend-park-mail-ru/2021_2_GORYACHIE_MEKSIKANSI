@@ -3,7 +3,6 @@ import {Validation} from '../modules/validation.js';
 import SignUpModel from '../models/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {SignUpEvents} from '../events/SignUp.js';
-import {debugFunc} from '../modules/debugMod.js';
 import user from '../modules/user.js';
 
 /**
@@ -25,10 +24,11 @@ export class SignUpController {
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
+
     eventBus.addEventListener(SignUpEvents.userSignUpSuccess,
-        this.signupSuccess.bind(this));
+        this.routeTo);
     eventBus.addEventListener(SignUpEvents.userSignUpFailed,
-        this.signupFailed.bind(this));
+        this.signUpView.showErrorFromController.bind(this.signUpView));
   }
 
   /**
@@ -56,40 +56,27 @@ export class SignUpController {
     const emailValidation = Validation.validateEmail(email);
     const phoneValidation = Validation.validatePhoneNumber(phone);
     const nameValidation = Validation.validateName(name);
-    let passwordRepeatValidation = {};
     const passwordValidation = Validation.validatePassword(password);
-    if (passwordValidation.validationResult) {
-      passwordRepeatValidation = Validation.validatePasswordRepeat(password,
-          repeatPassword);
-    } else {
-      return {
-        error: true,
-        emailValidation,
-        phoneValidation,
-        passwordValidation,
-        passwordRepeatValidation,
-        nameValidation,
-      };
-    }
+    const passwordRepeatValidation = Validation.validatePasswordRepeat(password,
+        repeatPassword);
 
     if (passwordValidation.validationResult &&
         passwordRepeatValidation.validationResult &&
-        emailValidation.validationResult && phoneValidation.validationResult) {
+        emailValidation.validationResult &&
+        phoneValidation.validationResult) {
       SignUpModel.signUp({type, name, email, phone, password});
       this.signUpView.hideErrors();
-      return {
-        error: false,
-      };
-    } else {
-      return {
-        error: true,
-        emailValidation,
-        phoneValidation,
-        passwordValidation,
-        passwordRepeatValidation,
-        nameValidation,
-      };
+      return {error: false};
     }
+
+    return {
+      error: true,
+      emailValidation,
+      phoneValidation,
+      passwordValidation,
+      passwordRepeatValidation,
+      nameValidation,
+    };
   }
 
   /**
@@ -97,24 +84,5 @@ export class SignUpController {
    */
   remove() {
     this.signUpView.remove();
-  }
-
-  /**
-   * Show errors if signup failed
-   */
-  signupFailed(response) {
-    if (response.status !== 500) {
-      console.log(response);
-      this.signUpView.showErrorFromController(response.parsedJSON);
-    } else {
-      this.signUpView.showErrorFromController('Неизветсная ошибка');
-    }
-  }
-
-  /**
-   * Render home page if signup success
-   */
-  signupSuccess() {
-    this.routeTo('/');
   }
 }

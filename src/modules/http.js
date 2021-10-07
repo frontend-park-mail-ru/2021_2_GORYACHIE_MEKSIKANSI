@@ -1,6 +1,4 @@
-import {debugFunc} from './debugMod.js';
-
-window.serverAddress = 'http://167.172.179.1:5000/api';
+window.serverAddress = 'http://hmeats.ru:5000/api';
 
 /**
  * Getting object data with info to fetch
@@ -19,7 +17,7 @@ function getData({
     mode: 'cors',
     credentials: 'include',
     headers: {
-      'Access-Control-Allow-Origin': 'http://167.172.179.1',
+      'Access-Control-Allow-Origin': 'http://hmeats.ru',
     },
   };
 
@@ -31,7 +29,6 @@ function getData({
     data.body = body;
     if (getCsrfToken()) {
       data.headers['X-Csrf-Token'] = getCsrfToken()
-      debugFunc(getCsrfToken(), 'csrf token value');
     }
   }
 
@@ -90,15 +87,17 @@ export default class Http {
      * ajaxPost request
      *
      * @param {{url: string, body: object}} params
-     * @return {Object<{status: string, parsedJSON: object}>}
+     * @return {Object<{status: number, parsedJSON: object}>}
      *
      */
   async ajaxPost({
     url = '/',
     body = null,
   } = {}) {
-    return await makeFetch({url: url, method: 'POST',
-      body: JSON.stringify(body)});
+    return makeFetch({
+      url: url, method: 'POST',
+      body: JSON.stringify(body)
+    });
   }
 }
 /**

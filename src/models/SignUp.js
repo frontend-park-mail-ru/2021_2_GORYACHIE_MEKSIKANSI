@@ -1,7 +1,9 @@
 import {signupPost} from '../modules/api.js';
 import {SignUpEvents} from '../events/SignUp.js';
 import eventBus from '../modules/eventBus.js';
-import {debugFunc} from '../modules/debugMod.js';
+import {ResponseEvents} from '../events/Responses.js';
+import {ErrorsText} from '../events/Errors.js';
+import {urls} from '../modules/urls.js';
 
 /**
  * Class SignUp Model
@@ -19,17 +21,17 @@ class SignUpModel {
   signUp({type, name, email, phone, password}) {
     signupPost({type, name, email, phone, password})
         .then((response) => {
-          if (response.status === 200) {
-            eventBus.emitEventListener(SignUpEvents.userSignUpSuccess, {});
-            debugFunc(response, 'signup success message from server');
-          } else {
-            eventBus.emitEventListener(SignUpEvents.userSignUpFailed, response);
-            debugFunc(response, 'signup fail message from server');
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
+                urls.home.url);
+            return;
           }
+          eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
+              response.parsedJSON);
         })
-        .catch((response) => {
-          eventBus.emitEventListener(SignUpEvents.userSignUpFailed, response);
-          debugFunc(response, 'signup fail message from server');
+        .catch(() => {
+          eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
+              ErrorsText.FailedToFetch);
         });
   }
 }

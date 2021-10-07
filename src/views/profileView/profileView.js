@@ -23,7 +23,6 @@ export class ProfileView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = new Navbar(parent);
   }
 
   /**
@@ -31,6 +30,7 @@ export class ProfileView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    this.navbar = new Navbar(this.parent);
     this.navbar.render();
     const template = Handlebars.templates['profilePage1.hbs'];
     this.parent.innerHTML += template({user:
@@ -46,14 +46,14 @@ export class ProfileView extends View {
    * Method calling by
    * @param {string} event
    */
-  _submitListener(event) {}
+  submitListener(event) {}
 
   /**
    * Method for setting up before rendering elements
    */
   settingUp() {
     const form = document.getElementById('form_submit');
-    form.addEventListener('click', this._submitListener.bind(this));
+    form.addEventListener('click', this.submitListener.bind(this));
   }
 
   /**

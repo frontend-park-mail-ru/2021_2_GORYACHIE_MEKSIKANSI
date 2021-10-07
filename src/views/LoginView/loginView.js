@@ -40,17 +40,14 @@ export class LoginView extends View {
    * @param {Object} event
    * @private
    */
-  _submitListener(event) {
+  submitListener(event) {
     const login = document.getElementById('login');
     const password = document.getElementById('password');
     event.preventDefault();
     const loginResult = this.controller.login(login.value, password.value);
 
     if (loginResult.error) {
-      if (!loginResult.loginValidation.validationResult ||
-          !loginResult.passwordValidation.validationResult) {
-        this.showError('Некорректный логин или пароль');
-      }
+      this.showError('Некорректный логин или пароль');
     }
   }
 
@@ -65,7 +62,6 @@ export class LoginView extends View {
     password.style.borderColor = 'red';
 
     const errorLabel = document.getElementById('error_label');
-    errorLabel.style.color = 'red';
     errorLabel.innerHTML = errorText;
   }
 
@@ -83,7 +79,7 @@ export class LoginView extends View {
    */
   settingUp() {
     const form = document.getElementById('form_submit');
-    form.addEventListener('click', this._submitListener.bind(this));
+    form.addEventListener('click', this.submitListener.bind(this));
   }
 
   /**
@@ -91,7 +87,7 @@ export class LoginView extends View {
    */
   remove() {
     const form = document.getElementById('form_submit');
-    form.removeEventListener('click', this._submitListener.bind(this));
+    form.removeEventListener('click', this.submitListener.bind(this));
 
     this.parent.innerHTML = '';
   }
