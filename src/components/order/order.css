@@ -1,0 +1,116 @@
+.order {
+    background-color: var(--color-white);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.order__main-info {
+    padding: 40px 75px 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    border-bottom: solid 1px #e2e2e2;
+}
+
+.order__main-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.order__row-margin {
+    margin-bottom: 10px;
+}
+
+.order__restaurant-title {
+    font-weight: var(--font_bold);
+    font-size: 24px;
+}
+
+.order__date {
+    font-weight: var(--font_thin);
+    font-size: 15px;
+}
+
+.order__address {
+    font-weight: var(--font_thin);
+    color: gray;
+    font-size: 15px;
+}
+
+.order__status {
+    margin-top: 10px;
+    font-weight: var(--font_bold);
+    padding: 6px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-right: auto;
+}
+
+.order__status_done {
+    background-color: var(--color-green);
+    color: white;
+}
+
+.order__status_cancel {
+    background-color: red;
+    color: black;
+}
+
+.order__image-wrapper {
+    margin-left: auto;
+}
+
+.order__main-info-img {
+    /*border-radius: 30px;*/
+    object-fit: cover;
+    width: 150px;
+}
+
+
+.order__info {
+    padding: 20px 75px 40px;
+}
+
+.order__item {
+    font-size: 15px;
+    font-weight: var(--font_thin);
+
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 10px;
+}
+
+.order__item-num {
+    color: gray;
+    margin-left: auto;
+}
+
+.order__item-cost {
+    padding-left: 10%;
+}
+
+.order__delivery-title {
+    color: gray;
+}
+
+.order__delivery-cost {
+    color: gray;
+    margin-left: auto;
+}
+
+.order__summary {
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 10px;
+
+    font-size: 18px;
+}
+
+.order__summary-cost {
+    margin-left: auto;
+}

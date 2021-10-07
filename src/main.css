@@ -11,12 +11,15 @@
 @import "views/homeView/homePage.css";
 @import "./components/navbar/navbar.css";
 @import "./components/navProfile/navProfile.css";
-@import "views/profileViews/profilePage.css";
+@import "views/profileViews/baseProfilePage.css";
+@import "views/profileViews/profileView/profilePage.css";
+@import "views/profileViews/historyView/historyPage.css";
 @import "./components/input/input.css";
 @import "./components/dish/dish.css";
 @import "./components/restaurantHeader/restaurantHeader.css";
 @import "./views/restaurantView/restaurantPage.css";
 @import "./views/baseView/page.css";
+@import "./components/order/order.css";
 
 body {
     font-family: var(--raleway-font);

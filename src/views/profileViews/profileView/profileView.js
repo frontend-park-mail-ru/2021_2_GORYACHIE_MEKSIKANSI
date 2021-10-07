@@ -34,14 +34,14 @@ export class ProfileView extends View {
     this.navbar.render();
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
-      head: Handlebars.templates['header.hbs'],
-      content: Handlebars.templates['profilePage1.hbs']({
+      pageTitle: 'Личные данные',
+      head: Handlebars.templates['header.hbs']({auth: User.Auth}),
+      content: Handlebars.templates['profilePage.hbs']({
         user: {
           name: User.name,
           phone: User.phone,
           email: User.email,
         },
-        auth: User.Auth,
       })});
     document.querySelector('.footer').style.marginTop = '0';
   }

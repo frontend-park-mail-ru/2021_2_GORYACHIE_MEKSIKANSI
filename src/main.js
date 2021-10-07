@@ -7,6 +7,7 @@ import {ProfileController} from './controllers/profileController.js';
 import {RestaurantView} from './views/restaurantView/restaurantView.js';
 
 import User from './modules/user.js';
+import {HistoryView} from './views/profileViews/historyView/historyView.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -21,6 +22,7 @@ Handlebars.registerPartial('loginUserInput',
 Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
 Handlebars.registerPartial('dish', Handlebars.templates['dish.hbs']);
+Handlebars.registerPartial('order', Handlebars.templates['order.hbs']);
 
 Handlebars.registerHelper('times', function(n, block) {
   let accum = '';
@@ -61,13 +63,18 @@ const restaurantView = new RestaurantView({
   routeTo: routeTo,
 });
 
+const historyView = new HistoryView({
+  parent: application,
+  routeTo: routeTo,
+});
+
 document.getElementById('foot').innerHTML = Handlebars.
   templates['footer.hbs']({});
 // restaurantView.render();
 // homeController.homeView.render();
 User.Auth = true;
 User.email = 'email@example.ru';
-profileController.render();
-
+// profileController.render();
+historyView.render();
 
 
