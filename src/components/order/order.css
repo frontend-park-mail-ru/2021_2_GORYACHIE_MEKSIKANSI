@@ -18,6 +18,7 @@
 .order__main-info-text {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .order__row-margin {
@@ -64,9 +65,9 @@
 }
 
 .order__main-info-img {
-    /*border-radius: 30px;*/
+    border-radius: 15px;
     object-fit: cover;
-    width: 150px;
+    width: 250px;
 }
 
 
