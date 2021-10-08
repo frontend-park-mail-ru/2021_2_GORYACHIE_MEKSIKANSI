@@ -144,19 +144,21 @@ export class RestaurantView extends View {
   };
 
   navHighlight = () => {
-    for (let i = 0; i < this.menuNavsTitles.length - 1; i++) {
-      if (window.pageYOffset >= this.menuNavsTitles[i].offsetTop &&
-          window.pageYOffset < this.menuNavsTitles[i + 1].offsetTop ) {
-        this.menuNavsButtons[i].style.borderBottom = 'solid 1px black';
-      } else {
-        this.menuNavsButtons[i].style.borderBottom = '';
-      }
-    }
+    // turn off highlight
+    this.menuNavsButtons.forEach((item) => {
+      item.style.borderBottom = '';
+    })
 
-    if (window.pageYOffset >= this.menuNavsTitles[this.menuNavsTitles.length - 1].offsetTop) {
-      this.menuNavsButtons[this.menuNavsTitles.length - 1].style.borderBottom = 'solid 1px black';
-    } else {
-      this.menuNavsButtons[this.menuNavsTitles.length - 1].style.borderBottom = '';
+    // find the needed title
+    let title;
+    this.menuNavsTitles.forEach((item, i) => {
+      if (item.offsetTop <= window.pageYOffset) {
+        title = this.menuNavsButtons[i];
+      }
+    });
+    // if it is not undef highlight it
+    if (title) {
+      title.style.borderBottom = 'solid 1px black';
     }
   }
 
