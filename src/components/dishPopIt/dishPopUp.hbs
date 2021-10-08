@@ -11,367 +11,72 @@
                 </div>
             </div>
             <div class="dish-pop-it__image-wrapper">
-                <img class="dish-pop-it__image" src="https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg">
+                <img class="dish-pop-it__image" src="{{dishImg}}">
             </div>
 
             <div class="dish-pop-it__dish-title">
-                ЧикенМакнаггетс
+                {{ dishTitle }}
             </div>
         </div>
         <div class="dish-pop-it__dish-setting">
             <div class="dish-pop-it__description">
-                Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов
+                {{ dishDescription }}
+<!--                Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов-->
             </div>
-            <div class="dish-pop-it__checkboxes-wrapper-title">
-                Выберите соус
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="radio" checked="checked" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
+            {{#each dishRadios }}
+                <div class="dish-pop-it__checkboxes-wrapper-title">
+                    {{ dishRadioTitle }}
                 </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
+                <div class="dish-pop-it__checkboxes-wrapper">
+                    {{#each dishRadioRows}}
+                        <div class="dish-pop-it__checkbox-row">
+                            <label class="container">
+                                <input type="radio" name="{{../dishRadioTitle}}">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div class="dish-pop-it__checkbox-title">
+                                {{ dishRadioName }}
+                            </div>
+                        </div>
+                    {{/each}}
                 </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                </div>
-            </div>
+            {{/each}}
 
-            <div class="dish-pop-it__checkboxes-wrapper-title">
-                Выберите добавочные ингридиенты
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
+            {{#each dishCheckboxes}}
+                <div class="dish-pop-it__checkboxes-wrapper-title">
+                    {{ dishCheckboxTitle }}
                 </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
+                <div class="dish-pop-it__checkboxes-wrapper">
+                    {{#each dishCheckboxesRows}}
+                        <div class="dish-pop-it__checkbox-row">
+                            <label class="container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div class="dish-pop-it__checkbox-title">
+                                {{ dishCheckboxRowTitle }}
+                            </div>
+                            <div class="dish-pop-it__add-item-cost">
+                                +
+                                <div class="dish-pop-it__checkbox-cost">
+                                    {{ dishCheckboxRowCost }}
+                                </div>
+                                 ₽
+                            </div>
+                        </div>
+                    {{/each}}
                 </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
-            <div class="dish-pop-it__checkboxes-wrapper">
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-                <div class="dish-pop-it__checkbox-row">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="dish-pop-it__checkbox-title">
-                        Кисло-сладкий соус
-                    </div>
-                    <div class="dish-pop-it__add-item-cost">
-                        + 28 ₽
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
         <div class="dish-pop-it__selector-buy-button-box">
             <div class="dish-pop-it__num-selector-box">
-                <div class="button dish-pop-it__selector-button">
+                <div class="button minus dish-pop-it__selector-button">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </div>
                 <div class="dish-pop-it__number">1</div>
-                <div class="button dish-pop-it__selector-button">
+                <div class="button plus dish-pop-it__selector-button">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
                         <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
@@ -381,7 +86,10 @@
             <div class="button button_color_black button_shape_rounded dish-pop-it__buy-button">
                 Добавить в корзину
                 <div class="dish-pop-it__cost">
-                    100 ₽
+                    <div class="dish-pop-it__summary-cost">
+                        {{ dishCost }}
+                    </div>
+                     ₽
                 </div>
             </div>
         </div>

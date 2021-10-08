@@ -8,9 +8,49 @@ for (let i = 0; i < 10; i++) {
     {
       id: '1',
       dishTitle: 'ЧикенМакнаггетс',
-      dishCost: '100₽',
+      dishCost: '100',
       dishCcal: '420ккал',
+      dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
       dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      dishRadios: [
+        {
+          dishRadioTitle: 'Выберите соус(1/2)',
+          dishRadioRows: [
+            {
+              dishRadioName: 'Кисло-сладкий соус',
+            },
+            {
+              dishRadioName: 'Сырный соус',
+            },
+          ]
+        },
+        {
+          dishRadioTitle: 'Выберите соус(2/2)',
+          dishRadioRows: [
+            {
+              dishRadioName: 'Кисло-сладкий соус',
+            },
+            {
+              dishRadioName: 'Сырный соус',
+            },
+          ]
+        },
+      ],
+      dishCheckboxes: [
+        {
+          dishCheckboxTitle: 'Хотите добавить котлетку?',
+          dishCheckboxesRows: [
+            {
+              dishCheckboxRowTitle: 'Котлетка',
+              dishCheckboxRowCost: '30',
+            },
+            {
+              dishCheckboxRowTitle: 'Креветка',
+              dishCheckboxRowCost: '50',
+            },
+          ]
+        }
+      ]
     });
 }
 
@@ -133,16 +173,67 @@ export class RestaurantView extends View {
   showPopUp = () => {
     const div = document.createElement('div');
     div.classList.add('dish-pop-up');
-    div.innerHTML = Handlebars.templates['dishPopUp.hbs']();
+    div.innerHTML = Handlebars.templates['dishPopUp.hbs'](dishesList[0]);
     document.body.appendChild(div);
     document.body.style.overflowY = 'hidden';
     document.body.querySelector('.dish-pop-it__close-button').addEventListener('click', this.removePopUp);
+
+    document.body.querySelector('.plus').addEventListener('click', this.increaseNumber);
+    document.body.querySelector('.minus').addEventListener('click', this.decreaseNumber);
+
+    document.body.querySelectorAll('.container').forEach((item) => {
+      item.addEventListener('click', this.checkboxSummaryCostChange);
+    })
+
   }
 
   removePopUp = () => {
     document.body.removeChild(document.body.querySelector('.dish-pop-up'));
     document.body.style.overflowY = 'scroll';
-}
+  }
+
+  increaseNumber = () => {
+    const number = document.body.querySelector('.dish-pop-it__number');
+    number.innerHTML = String(Number(number.innerHTML) + 1);
+  }
+
+  decreaseNumber = () => {
+    const number = document.body.querySelector('.dish-pop-it__number');
+    if (Number(number.innerHTML) > 0) {
+      number.innerHTML = String(Number(number.innerHTML) - 1);
+    }
+  }
+
+  checkboxSummaryCostChange = (e) => {
+    const checkbox = e.target.closest('input');
+    console.log(checkbox);
+    if (!checkbox.hasAttribute('checked')) {
+      e.target.closest('input').setAttribute('checked', 'false');
+    } else {
+        if (checkbox.getAttribute('checked') === 'true') {
+          checkbox.setAttribute('checked', 'false');
+        } else {
+          checkbox.setAttribute('checked', 'true');
+        }
+    }
+
+    if (checkbox.getAttribute('checked') === 'true') {
+      this.increaseSummaryCost(Number(e.target.closest('.dish-pop-it__checkbox-cost').innerHTML));
+    } else {
+      console.log(checkbox.closest('.dish-pop-it__checkbox-cost'));
+      this.decreaseSummaryCost(Number(checkbox.closest('.dish-pop-it__checkbox-cost').innerHTML));
+    }
+  }
+
+  decreaseSummaryCost = (val) => {
+    const summaryCost = document.body.querySelector('.dish-pop-it__summary-cost');
+    summaryCost.innerHTML = String(Number(summaryCost) - val);
+  }
+
+  increaseSummaryCost = (val) => {
+    const summaryCost = document.body.querySelector('.dish-pop-it__summary-cost');
+    summaryCost.innerHTML = String(Number(summaryCost) + val);
+  }
 
   remove() {
     window.removeEventListener('scroll', this.stickNavbar);

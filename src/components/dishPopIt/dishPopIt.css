@@ -67,7 +67,7 @@
 
 .dish-pop-it__dish-title {
     display: flex;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: var(--font_bold);
 }
 
@@ -77,12 +77,12 @@
 
 .dish-pop-it__description {
     font-weight: var(--font_thin);
-    font-size: 12px;
+    font-size: 18px;
     padding-bottom: 16px;
 }
 
 .dish-pop-it__checkboxes-wrapper-title {
-    font-size: 14px;
+    font-size: 22px;
     font-weight: var(--font_bold);
 }
 
@@ -105,20 +105,21 @@
 }
 
 .dish-pop-it__checkbox-title {
-    font-size: 13px;
+    font-size: 18px;
     font-weight: var(--font_thin);
 }
 
 .dish-pop-it__add-item-cost {
+    display: flex;
     margin-left: auto;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 .container {
     display: flex;
     position: relative;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 18px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -191,9 +192,9 @@
 }
 
 .dish-pop-it__number {
-    font-size: 16px;
-    margin-right: 5px;
-    margin-left: 5px;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .dish-pop-it__selector-button {
@@ -212,9 +213,10 @@
     align-items: center;
     margin-left: auto;
 
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .dish-pop-it__cost {
+    display: flex;
     margin-left: 40px;
 }
