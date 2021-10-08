@@ -116,7 +116,7 @@ export class RestaurantView extends View {
     this.dishes = document.querySelectorAll('.dish');
 
     this.dishes.forEach((item) => {
-      item.addEventListener('click', this.showPopUp);
+      item.addEventListener('click', this.showPopup);
     });
 
     for (const anchor of this.anchors) {
@@ -170,69 +170,66 @@ export class RestaurantView extends View {
     });
   }
 
-  showPopUp = () => {
+  showPopup = () => {
     const div = document.createElement('div');
-    div.classList.add('dish-pop-up');
+    div.classList.add('dish-popup-div');
     div.innerHTML = Handlebars.templates['dishPopUp.hbs'](dishesList[0]);
     document.body.appendChild(div);
     document.body.style.overflowY = 'hidden';
-    document.body.querySelector('.dish-pop-it__close-button').addEventListener('click', this.removePopUp);
+    document.body.querySelector('.dish-popup__close-button').addEventListener('click', this.removePopup);
+    document.body.querySelector('.dish-popup-wrapper').addEventListener('click', this.outsidePopupClick);
 
     document.body.querySelector('.plus').addEventListener('click', this.increaseNumber);
     document.body.querySelector('.minus').addEventListener('click', this.decreaseNumber);
 
-    document.body.querySelectorAll('.container').forEach((item) => {
-      item.addEventListener('click', this.checkboxSummaryCostChange);
-    })
+    document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
+      item.addEventListener('input', this.refreshSummary);
+    });
+    this.refreshSummary();
 
   }
 
-  removePopUp = () => {
-    document.body.removeChild(document.body.querySelector('.dish-pop-up'));
+  outsidePopupClick = (e) => {
+    console.log(document.body.querySelector('.dish-popup').contains(e.target));
+    if (!document.body.querySelector('.dish-popup').contains(e.target)) {
+      this.removePopup();
+    }
+  }
+
+  removePopup = () => {
+    document.body.removeChild(document.body.querySelector('.dish-popup-div'));
     document.body.style.overflowY = 'scroll';
   }
 
   increaseNumber = () => {
-    const number = document.body.querySelector('.dish-pop-it__number');
+    const number = document.body.querySelector('.dish-popup__number');
     number.innerHTML = String(Number(number.innerHTML) + 1);
+
+    this.refreshSummary();
   }
 
   decreaseNumber = () => {
-    const number = document.body.querySelector('.dish-pop-it__number');
-    if (Number(number.innerHTML) > 0) {
+    const number = document.body.querySelector('.dish-popup__number');
+    if (Number(number.innerHTML) > 1) {
       number.innerHTML = String(Number(number.innerHTML) - 1);
     }
+
+    this.refreshSummary();
   }
 
-  checkboxSummaryCostChange = (e) => {
-    const checkbox = e.target.closest('input');
-    console.log(checkbox);
-    if (!checkbox.hasAttribute('checked')) {
-      e.target.closest('input').setAttribute('checked', 'false');
-    } else {
-        if (checkbox.getAttribute('checked') === 'true') {
-          checkbox.setAttribute('checked', 'false');
-        } else {
-          checkbox.setAttribute('checked', 'true');
-        }
-    }
+  refreshSummary = () => {
+    let cost = Number(dishesList[Number(document.body.querySelector('.dish-popup').id)].dishCost);
 
-    if (checkbox.getAttribute('checked') === 'true') {
-      this.increaseSummaryCost(Number(e.target.closest('.dish-pop-it__checkbox-cost').innerHTML));
-    } else {
-      console.log(checkbox.closest('.dish-pop-it__checkbox-cost'));
-      this.decreaseSummaryCost(Number(checkbox.closest('.dish-pop-it__checkbox-cost').innerHTML));
-    }
-  }
+    const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
+    checkboxes.forEach((item) => {
+      if (item.querySelector('input').checked) {
+        cost += Number(item.querySelector('.dish-popup__checkbox-cost').innerHTML);
+      }
+    });
 
-  decreaseSummaryCost = (val) => {
-    const summaryCost = document.body.querySelector('.dish-pop-it__summary-cost');
-    summaryCost.innerHTML = String(Number(summaryCost) - val);
-  }
-
-  increaseSummaryCost = (val) => {
-    const summaryCost = document.body.querySelector('.dish-pop-it__summary-cost');
-    summaryCost.innerHTML = String(Number(summaryCost) + val);
+    const summary = document.body.querySelector('.dish-popup__summary-cost');
+    const number = document.body.querySelector('.dish-popup__number');
+    summary.innerHTML = String(cost * Number(number.innerHTML));
   }
 
   remove() {

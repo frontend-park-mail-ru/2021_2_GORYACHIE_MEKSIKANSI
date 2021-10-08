@@ -1,4 +1,4 @@
-.dish-pop-it-wrapper {
+.dish-popup-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -21,7 +21,7 @@
     padding-bottom: 100px;
 }
 
-.dish-pop-it {
+.dish-popup {
     border-radius: 30px;
 
     background-color: var(--color-white);
@@ -31,31 +31,32 @@
 
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
 }
 
-.dish-pop-it__main-info {
+.dish-popup__main-info {
     padding: 16px;
     border-bottom: 1px solid #e2e2e2;
 }
 
-.dish-pop-it__close-button-wrapper {
+.dish-popup__close-button-wrapper {
     width: 100%;
     display: flex;
 }
 
-.dish-pop-it__close-button {
+.dish-popup__close-button {
     align-items: center;
     margin-left: auto;
     height: 24px;
     padding: 0;
 }
 
-.dish-pop-it__image-wrapper {
+.dish-popup__image-wrapper {
     width: 100%;
     display: flex;
 }
 
-.dish-pop-it__image {
+.dish-popup__image {
     width: 200px;
     height: 200px;
 
@@ -65,28 +66,28 @@
     margin-left: auto;
 }
 
-.dish-pop-it__dish-title {
+.dish-popup__dish-title {
     display: flex;
     font-size: 30px;
     font-weight: var(--font_bold);
 }
 
-.dish-pop-it__dish-setting {
+.dish-popup__dish-setting {
     padding: 16px;
 }
 
-.dish-pop-it__description {
+.dish-popup__description {
     font-weight: var(--font_thin);
     font-size: 18px;
     padding-bottom: 16px;
 }
 
-.dish-pop-it__checkboxes-wrapper-title {
+.dish-popup__checkboxes-wrapper-title {
     font-size: 22px;
     font-weight: var(--font_bold);
 }
 
-.dish-pop-it__checkboxes-wrapper {
+.dish-popup__checkboxes-wrapper {
     margin-top: 10px;
 
     width: 100%;
@@ -97,19 +98,26 @@
     padding-bottom: 16px;
 }
 
-.dish-pop-it__checkbox-row {
+.dish-popup__checkbox-row {
     display: flex;
     align-items: center;
     margin-top: 7px;
     margin-bottom: 7px;
 }
 
-.dish-pop-it__checkbox-title {
+.dish-popup__radio-row {
+    display: flex;
+    align-items: center;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.dish-popup__checkbox-title {
     font-size: 18px;
     font-weight: var(--font_thin);
 }
 
-.dish-pop-it__add-item-cost {
+.dish-popup__add-item-cost {
     display: flex;
     margin-left: auto;
     font-size: 18px;
@@ -178,7 +186,7 @@
     transform: rotate(45deg);
 }
 
-.dish-pop-it__selector-buy-button-box {
+.dish-popup__selector-buy-button-box {
     display: flex;
     flex-direction: row;
 
@@ -186,18 +194,18 @@
     border-top: solid 1px #e2e2e2;
 }
 
-.dish-pop-it__num-selector-box {
+.dish-popup__num-selector-box {
     display: flex;
     align-items: center;
 }
 
-.dish-pop-it__number {
+.dish-popup__number {
     font-size: 20px;
     margin-right: 10px;
     margin-left: 10px;
 }
 
-.dish-pop-it__selector-button {
+.dish-popup__selector-button {
     display: flex;
     width: 24px;
     height: 24px;
@@ -208,7 +216,7 @@
     background-color: var(--color-light-gray);
 }
 
-.dish-pop-it__buy-button {
+.dish-popup__buy-button {
     display: flex;
     align-items: center;
     margin-left: auto;
@@ -216,7 +224,7 @@
     font-size: 18px;
 }
 
-.dish-pop-it__cost {
+.dish-popup__cost {
     display: flex;
     margin-left: 40px;
 }
