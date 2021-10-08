@@ -1,79 +1,7 @@
 import User from '../../modules/user.js';
 import {Navbar} from '../../components/navbar/navbar.js';
 import {View} from '../baseView/View.js';
-
-const dishesList = [];
-for (let i = 0; i < 10; i++) {
-  dishesList.push(
-    {
-      id: '1',
-      dishTitle: 'ЧикенМакнаггетс',
-      dishCost: '100',
-      dishCcal: '420ккал',
-      dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
-      dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
-      dishRadios: [
-        {
-          dishRadioTitle: 'Выберите соус(1/2)',
-          dishRadioRows: [
-            {
-              dishRadioName: 'Кисло-сладкий соус',
-            },
-            {
-              dishRadioName: 'Сырный соус',
-            },
-          ]
-        },
-        {
-          dishRadioTitle: 'Выберите соус(2/2)',
-          dishRadioRows: [
-            {
-              dishRadioName: 'Кисло-сладкий соус',
-            },
-            {
-              dishRadioName: 'Сырный соус',
-            },
-          ]
-        },
-      ],
-      dishCheckboxes: [
-        {
-          dishCheckboxTitle: 'Хотите добавить котлетку?',
-          dishCheckboxesRows: [
-            {
-              dishCheckboxRowTitle: 'Котлетка',
-              dishCheckboxRowCost: '30',
-            },
-            {
-              dishCheckboxRowTitle: 'Креветка',
-              dishCheckboxRowCost: '50',
-            },
-          ]
-        }
-      ]
-    });
-}
-
-const menuNavs = [
-  {
-    menuId: 'Menu1',
-    menuTitle: 'Популярное',
-    dishes: dishesList,
-  },
-  {
-    menuId: 'Menu2',
-    menuTitle: 'МакКомбо',
-    dishes: dishesList,
-  },
-  {
-    menuId: 'Menu3',
-    menuTitle: 'Типа напитки',
-    dishes: dishesList,
-  },
-];
-
-
-
+import {getRestaurantMock} from '../mocks.js';
 
 export class RestaurantView extends View {
   constructor({
@@ -90,20 +18,14 @@ export class RestaurantView extends View {
   }
 
   render(props = {}) {
+    this.restaurant = getRestaurantMock();
+
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
     this.parent.innerHTML += template({
       auth: User.Auth,
-      head: Handlebars.templates['header.hbs']({auth: User.Auth}) + Handlebars.templates['restaurantHeader.hbs']({
-        name: 'МакДоналдс',
-        cost: 300,
-        minDeliveryTime: 20,
-        maxDeliveryTime: 30,
-        rating: 4.7,
-      }),
-      content: Handlebars.templates['restaurantUnderheader.hbs']({
-        menuNavs: menuNavs,
-      }) + Handlebars.templates['restaurantPage.hbs']({menuBlock: menuNavs}),
+      head: Handlebars.templates['header.hbs']({auth: User.Auth}) + Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
+      content: Handlebars.templates['restaurantUnderheader.hbs'](this.restaurant) + Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     });
 
     this.settingUp();
@@ -126,20 +48,20 @@ export class RestaurantView extends View {
     window.addEventListener('scroll', this.stickNavbar);
     window.addEventListener('scroll', this.navHighlight);
 
-    this.menuNavbar = document.querySelector('.restaurant-nav__list');
-    this.sticky = this.menuNavbar.offsetTop;
+    this.sticky = document.querySelector('.restaurant-nav__list').offsetTop;
   }
 
   stickNavbar = () => {
+    const menuNavbar = document.querySelector('.restaurant-nav__list');
     if (window.pageYOffset >= this.sticky) {
-      this.menuNavbar.classList.add('sticky');
-      this.menuNavbar.style.left = '0';
-      this.menuNavbar.style.borderBottom = 'solid 1px #e2e2e2';
-      this.menuNavbar.style.paddingLeft = '3%';
+      menuNavbar.classList.add('sticky');
+      menuNavbar.style.left = '0';
+      menuNavbar.style.borderBottom = 'solid 1px #e2e2e2';
+      menuNavbar.style.paddingLeft = '3%';
     } else {
-      this.menuNavbar.classList.remove('sticky');
-      this.menuNavbar.style.borderBottom = '';
-      this.menuNavbar.style.paddingLeft = '0';
+      menuNavbar.classList.remove('sticky');
+      menuNavbar.style.borderBottom = '';
+      menuNavbar.style.paddingLeft = '0';
     }
   };
 
@@ -172,12 +94,24 @@ export class RestaurantView extends View {
     });
   }
 
-  showPopup = () => {
+  showPopup = (e) => {
+    const dishId = e.target.closest('.dish').id;
+
+    const dishes = [];
+    this.restaurant.menuNavs.forEach((item) => {
+      dishes.push(item.dishes);
+    });
+
+    const dish = dishes.flat(Infinity).find((item) => {
+      return dishId === item.id;
+    });
+
     const div = document.createElement('div');
     div.classList.add('dish-popup-div');
-    div.innerHTML = Handlebars.templates['dishPopUp.hbs'](dishesList[0]);
+    div.innerHTML = Handlebars.templates['dishPopup.hbs'](dish);
     document.body.appendChild(div);
     document.body.style.overflowY = 'hidden';
+
     document.body.querySelector('.dish-popup__close-button').addEventListener('click', this.removePopup);
     document.body.querySelector('.dish-popup-wrapper').addEventListener('click', this.outsidePopupClick);
 
@@ -187,12 +121,9 @@ export class RestaurantView extends View {
     document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
       item.addEventListener('input', this.refreshSummary);
     });
-    this.refreshSummary();
-
   }
 
   outsidePopupClick = (e) => {
-    console.log(document.body.querySelector('.dish-popup').contains(e.target));
     if (!document.body.querySelector('.dish-popup').contains(e.target)) {
       this.removePopup();
     }
@@ -208,6 +139,7 @@ export class RestaurantView extends View {
     document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
       item.removeEventListener('input', this.refreshSummary);
     });
+
     document.body.removeChild(document.body.querySelector('.dish-popup-div'));
     document.body.style.overflowY = 'scroll';
   }
@@ -229,7 +161,12 @@ export class RestaurantView extends View {
   }
 
   refreshSummary = () => {
-    let cost = Number(dishesList[Number(document.body.querySelector('.dish-popup').id)].dishCost);
+    const dishes = [];
+    this.restaurant.menuNavs.forEach((item) => {
+      dishes.push(item.dishes);
+    });
+
+    let cost = Number(dishes.flat(Infinity)[Number(document.body.querySelector('.dish-popup').id)].dishCost);
 
     const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
     checkboxes.forEach((item) => {
