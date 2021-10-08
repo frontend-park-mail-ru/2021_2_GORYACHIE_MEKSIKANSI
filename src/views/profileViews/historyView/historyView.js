@@ -11,7 +11,7 @@ const orders = [
     items: [
       {
         name: 'МакНаггетс',
-        num: 1,
+        num: 3,
         cost: 100,
       },
       {
@@ -25,6 +25,7 @@ const orders = [
         cost: 100,
       },
     ],
+    deliveryCost: 123,
     status: true,
     summaryCost: 500,
   },
@@ -49,6 +50,7 @@ const orders = [
         cost: 100,
       },
     ],
+    deliveryCost: 400,
     status: false,
     summaryCost: 500,
   },
