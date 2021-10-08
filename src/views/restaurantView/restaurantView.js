@@ -197,6 +197,15 @@ export class RestaurantView extends View {
   }
 
   removePopup = () => {
+    document.body.querySelector('.dish-popup__close-button').removeEventListener('click', this.removePopup);
+    document.body.querySelector('.dish-popup-wrapper').removeEventListener('click', this.outsidePopupClick);
+
+    document.body.querySelector('.plus').removeEventListener('click', this.increaseNumber);
+    document.body.querySelector('.minus').removeEventListener('click', this.decreaseNumber);
+
+    document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
+      item.removeEventListener('input', this.refreshSummary);
+    });
     document.body.removeChild(document.body.querySelector('.dish-popup-div'));
     document.body.style.overflowY = 'scroll';
   }
