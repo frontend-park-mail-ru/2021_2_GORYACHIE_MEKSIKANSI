@@ -1,12 +1,13 @@
-.order {
+.history-order {
     background-color: var(--color-white);
-    border-radius: 30px;
+    border-radius: 32px;
     display: flex;
     flex-direction: column;
     width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
 }
 
-.order__main-info {
+.history-order__main-info {
     padding: 40px 75px 10px;
 
     display: flex;
@@ -15,67 +16,67 @@
     border-bottom: solid 1px #e2e2e2;
 }
 
-.order__main-info-text {
+.history-order__main-info-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.order__row-margin {
+.history-order__row-margin {
     margin-bottom: 10px;
 }
 
-.order__restaurant-title {
+.history-order__restaurant-title {
     font-weight: var(--font_bold);
     font-size: 24px;
 }
 
-.order__date {
+.history-order__date {
     font-weight: var(--font_thin);
     font-size: 15px;
 }
 
-.order__address {
+.history-order__address {
     font-weight: var(--font_thin);
     color: gray;
     font-size: 15px;
 }
 
-.order__status {
+.history-order__status {
     margin-top: 10px;
     font-weight: var(--font_bold);
     padding: 6px;
     font-size: 15px;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-right: auto;
 }
 
-.order__status_done {
+.history-order__status_done {
     background-color: var(--color-green);
     color: white;
 }
 
-.order__status_cancel {
+.history-order__status_cancel {
     background-color: red;
     color: black;
 }
 
-.order__image-wrapper {
+.history-order__image-wrapper {
     margin-left: auto;
 }
 
-.order__main-info-img {
-    border-radius: 15px;
+.history-order__main-info-img {
+    border-radius: 16px;
     object-fit: cover;
     width: 250px;
 }
 
 
-.order__info {
+.history-order__info {
     padding: 20px 75px 40px;
 }
 
-.order__item {
+.history-order__item {
     font-size: 15px;
     font-weight: var(--font_thin);
 
@@ -84,25 +85,25 @@
     padding: 10px 0 10px;
 }
 
-.order__item-num {
+.history-order__item-num {
     color: gray;
     margin-left: auto;
 }
 
-.order__item-cost {
+.history-order__item-cost {
     padding-left: 10%;
 }
 
-.order__delivery-title {
+.history-order__delivery-title {
     color: gray;
 }
 
-.order__delivery-cost {
+.history-order__delivery-cost {
     color: gray;
     margin-left: auto;
 }
 
-.order__summary {
+.history-order__summary {
     margin-top: 20px;
 
     display: flex;
@@ -112,6 +113,6 @@
     font-size: 18px;
 }
 
-.order__summary-cost {
+.history-order__summary-cost {
     margin-left: auto;
 }

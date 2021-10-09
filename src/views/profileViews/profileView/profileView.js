@@ -42,7 +42,8 @@ export class ProfileView extends View {
           phone: User.phone,
           email: User.email,
         },
-      })});
+      }),
+      rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
     document.querySelector('.footer').style.marginTop = '0';
   }
 

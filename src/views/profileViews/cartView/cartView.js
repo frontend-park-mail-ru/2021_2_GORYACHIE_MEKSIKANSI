@@ -2,8 +2,7 @@ import {View} from '../../baseView/View.js';
 import {Navbar} from '../../../components/navbar/navbar.js';
 import User from '../../../modules/user.js';
 
-
-const orders = [
+const orders =
   {
     restaurantTitle: 'МакДоналдс',
     date: '2 октября 2021, 14:07',
@@ -28,38 +27,12 @@ const orders = [
     deliveryCost: 123,
     status: true,
     summaryCost: 500,
-  },
-  {
-    restaurantTitle: 'КФС',
-    date: '2 октября 2021, 14:07',
-    address: 'Россия, Москва, ул. Пушкина д. 14к2',
-    items: [
-      {
-        name: 'МакНаггетс',
-        num: 1,
-        cost: 100,
-      },
-      {
-        name: 'МакНаггетс',
-        num: 1,
-        cost: 100,
-      },
-      {
-        name: 'МакНаггетс',
-        num: 1,
-        cost: 100,
-      },
-    ],
-    deliveryCost: 400,
-    status: false,
-    summaryCost: 500,
-  },
-];
+  };
 
 /**
  * Profile view class
  */
-export class HistoryView extends View {
+export class CartView extends View {
   /**
    *
    * @param {HTMLElement} parent
@@ -87,18 +60,25 @@ export class HistoryView extends View {
     this.navbar.render();
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
-      pageTitle: 'История заказов',
+      pageTitle: 'Оформление заказа',
       head: Handlebars.templates['header.hbs']({auth: User.Auth}),
-      content: Handlebars.templates['historyPage.hbs']({
-        orders: orders,
-      }),
-      rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
+      content: Handlebars.templates['orderDelivery.hbs'](orders),
+      rightMenu: Handlebars.templates['orderSummary.hbs']({})});
     document.querySelector('.footer').style.marginTop = '0';
   }
+
+  /**
+   * Method calling by
+   * @param {string} event
+   */
+  _submitListener(event) {}
+
   /**
    * Method for setting up before rendering elements
    */
   settingUp() {
+    const form = document.getElementById('form_submit');
+    form.addEventListener('click', this._submitListener.bind(this));
   }
 
   /**

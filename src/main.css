@@ -19,7 +19,9 @@
 @import "./components/restaurantHeader/restaurantHeader.css";
 @import "./views/restaurantView/restaurantPage.css";
 @import "./views/baseView/page.css";
-@import "./components/order/order.css";
+@import "components/historyOrder/historyOrder.css";
+@import "components/cartOrder/cartOrderSummary.css";
+@import "components/cartOrder/orderDelivery.css";
 
 body {
     font-family: var(--raleway-font);

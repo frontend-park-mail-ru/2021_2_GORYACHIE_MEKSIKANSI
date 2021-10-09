@@ -20,9 +20,11 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: nowrap;
-    width: 65%;
+    width: 60%;
 }
 
 .base-profile-page__right-box {
     margin-right: auto;
+    display: flex;
+    flex-direction: column;
 }

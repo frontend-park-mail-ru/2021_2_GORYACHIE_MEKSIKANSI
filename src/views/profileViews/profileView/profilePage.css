@@ -1,7 +1,8 @@
 .profile-page__wrapper {
     width: 100%;
     background-color: var(--color-white);
-    border-radius: 30px;
+    border-radius: 32px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
 }
 
 
@@ -20,12 +21,13 @@
 
 .profile-page__input {
     margin-top: 5px;
+    border-radius: 16px;
 }
 
 .profile-page__button {
     margin-top: 40px;
     font-size: 20px;
-    border-radius: 30px;
+    border-radius: 16px;
     width: 100%;
     margin-bottom: 40px;
 }
