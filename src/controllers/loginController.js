@@ -6,12 +6,12 @@ import {LoginView} from '../views/LoginView/loginView.js';
 import User from '../modules/user.js'
 import {ResponseEvents} from '../events/Responses.js';
 import {ErrorsText} from '../events/Errors.js';
-import {BaseController} from './baseController.js';
+import {urls} from '../modules/urls.js';
 
 /**
  *  Login controller class
  */
-export class LoginController extends BaseController {
+export class LoginController {
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -21,7 +21,6 @@ export class LoginController extends BaseController {
     parent: parent = document.body,
     routeTo: routeTo,
   }) {
-    super();
     this.routeTo = routeTo;
     this.parent = parent;
     this.loginView = new LoginView({
@@ -33,6 +32,10 @@ export class LoginController extends BaseController {
       this.loginView.showError.bind(this.loginView));
     eventBus.addEventListener(LoginEvents.loginDone,
       this.routeTo);
+    eventBus.addEventListener(LoginEvents.loginCheckDone,
+      this.routeTo);
+    eventBus.addEventListener(LoginEvents.loginCheckFailed,
+        this.loginView.render.bind(this.loginView));
   }
 
   /**
@@ -69,13 +72,7 @@ export class LoginController extends BaseController {
    * Rendering view
    */
   render() {
-    if (User.Auth) {
-      this.routeTo('home');
-      return;
-    }
-
-    this.loginView.render({});
-    this.viewIsActive = true;
+    LoginModel.checkAuth();
   }
 
   /**
@@ -83,6 +80,5 @@ export class LoginController extends BaseController {
    */
   remove() {
     this.loginView.remove();
-    this.viewIsActive = false;
   }
 }

@@ -158,8 +158,9 @@ export class SignUpView extends View {
    */
   remove() {
     const form = document.getElementById('form_submit');
-    form.removeEventListener('click', this.submitListener.bind(this));
-
+    if (form) {
+      form.removeEventListener('click', this.submitListener.bind(this));
+    }
     this.parent.innerHTML = '';
   }
 }

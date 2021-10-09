@@ -1,4 +1,4 @@
-import {signupPost} from '../modules/api.js';
+import {profileGet, signupPost} from '../modules/api.js';
 import {SignUpEvents} from '../events/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {ResponseEvents} from '../events/Responses.js';
@@ -34,6 +34,19 @@ class SignUpModel {
               ErrorsText.FailedToFetch);
         });
   }
+
+
+    checkAuth() {
+        profileGet({url: '/profile'})
+            .then((response) => {
+                if (response.status === ResponseEvents.OK) {
+                    eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);
+                    return;
+                }
+
+                eventBus.emitEventListener(SignUpEvents.userCheckFailed, {});
+            })
+    }
 }
 
 export default new SignUpModel();

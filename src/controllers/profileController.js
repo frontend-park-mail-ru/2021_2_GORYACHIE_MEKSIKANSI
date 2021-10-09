@@ -3,12 +3,12 @@ import User from '../modules/user.js';
 import ProfileModel from '../models/Profile.js';
 import eventBus from '../modules/eventBus.js';
 import {ProfileEvents} from '../events/Profile.js';
-import {BaseController} from './baseController.js';
+import {urls} from '../modules/urls.js';
 
 /**
  *  Profile controller class
  */
-export class ProfileController extends BaseController {
+export class ProfileController {
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -18,7 +18,6 @@ export class ProfileController extends BaseController {
     parent: parent = document.body,
     routeTo: routeTo,
   }) {
-    super();
     this.routeTo = routeTo;
     this.parent = parent;
     this.profileView = new ProfileView({
@@ -35,17 +34,11 @@ export class ProfileController extends BaseController {
   render() {
     if (!User.Auth) {
       ProfileModel.checkAuth();
+      this.routeTo(urls.login.name);
       return;
     }
 
     this.profileView.render({});
-    this.viewIsActive = true;
-
-    // if (!User.Auth) {
-    //   HomeModel.checkAuthAndGetRestaurants();
-    //   return;
-    // }
-    // HomeModel.getRestaurants();
   }
 
   /**
@@ -53,6 +46,5 @@ export class ProfileController extends BaseController {
    */
   remove() {
     this.profileView.remove();
-    this.viewIsActive = false;
   }
 }

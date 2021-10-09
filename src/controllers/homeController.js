@@ -4,12 +4,11 @@ import {HomeEvents} from '../events/Home.js';
 import HomeModel from '../models/Home.js';
 import {AuthStatus} from '../events/Auth.js';
 import User from '../modules/user.js';
-import {BaseController} from './baseController.js';
 
 /**
  * Home page controller
  */
-export class HomeController extends BaseController {
+export class HomeController {
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -19,7 +18,6 @@ export class HomeController extends BaseController {
     parent: parent = document.body,
     routeTo: routeTo = () => {},
   }) {
-    super();
     this.routeTo = routeTo;
     this.parent = parent;
     this.homeView = new HomeView({
