@@ -38,11 +38,10 @@ export class Router {
   open(pageUrl) {
     Object.entries(urls).forEach(([name, {url}]) => {
       if (pageUrl === name || pageUrl === url) {
-        if (this.currControllerName && this.routes.get(this.currControllerName).viewIsActive) {
+        if (this.currControllerName) {
           this.routes.get(this.currControllerName).remove();
         }
         if (this.routes.get(name)) {
-          console.log(url);
           window.history.pushState({}, '', url);
           this.routes.get(name).render();
           this.currControllerName = name;
