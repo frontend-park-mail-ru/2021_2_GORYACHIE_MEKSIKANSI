@@ -18,7 +18,7 @@ export class RestaurantView extends View {
   }
 
   render(props = {}) {
-    this.restaurant = getRestaurantMock();
+    this.restaurant = getRestaurantMock();  // TODO: Запрос ресторана из модели
 
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];

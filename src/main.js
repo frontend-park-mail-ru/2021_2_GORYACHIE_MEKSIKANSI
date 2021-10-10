@@ -4,12 +4,9 @@ import {LoginController} from './controllers/loginController.js';
 import {HomeController} from './controllers/homeController.js';
 import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
-import {RestaurantView} from './views/restaurantView/restaurantView.js';
+import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
-import {CartView} from './views/profileViews/cartView/cartView.js';
 
-import User from './modules/user.js';
-import {HistoryView} from './views/profileViews/historyView/historyView.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -45,11 +42,15 @@ const signUpController = new SignUpController({
 const profileController = new ProfileController({
   parent: application,
   routeTo: routeTo});
+const restaurantController = new RestaurantController({
+  parent: application,
+  routeTo: routeTo});
 
 router.addRoute(urls.login.name, loginController);
 router.addRoute(urls.profile.name, profileController);
 router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
+router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});

@@ -36,14 +36,19 @@ export class Router {
    * @param {string} pageUrl
    */
   open(pageUrl) {
-    Object.entries(urls).forEach(([name, {url}]) => {
-      if (pageUrl === name || pageUrl === url) {
+    Object.entries(urls).forEach(([name, {url, regUrl}]) => {
+      if (pageUrl === name || pageUrl === url || pageUrl.match(regUrl)) {
         if (this.currControllerName) {
           this.routes.get(this.currControllerName).remove();
         }
         if (this.routes.get(name)) {
-          window.history.pushState({}, '', url);
-          this.routes.get(name).render();
+          if (pageUrl.match(regUrl)) { // TODO: инкастыляция
+            window.history.pushState({}, '', pageUrl);
+            this.routes.get(name).render(pageUrl.match(regUrl)[1]);
+          } else {
+            window.history.pushState({}, '', pageUrl);
+            this.routes.get(name).render();
+          }
           this.currControllerName = name;
         } else {
           this.open(urls.home.url);
@@ -78,9 +83,9 @@ export class Router {
    * @param {Object} event
    */
   linksPrevents(event) {
-    if (event.target.hasAttribute('href')) {
+    if (event.target.closest('a').hasAttribute('href')) { // TODO: инкастыляция сделать отлов не только 'a', но и button с href/поменять button на a
       event.preventDefault();
-      const href = event.target.getAttribute('href');
+      const href = event.target.closest('a').getAttribute('href');
 
       if (href) {
         this.open(href);

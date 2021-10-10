@@ -35,7 +35,7 @@ export class HomeView extends View {
       head: Handlebars.templates['header.hbs']({auth: User.Auth}),
       content: Handlebars.templates['homePage.hbs']({
         promos: [1, 2, 3],
-        restaurantList: props.restaurantList,
+        restaurantList: props,
       })});
 
 
@@ -45,7 +45,8 @@ export class HomeView extends View {
   /**
    * Method for setting up before rendering elements
    */
-  settingUp() {}
+  settingUp() {
+  }
 
   /**
    * Method for removing setted up listeners and other data

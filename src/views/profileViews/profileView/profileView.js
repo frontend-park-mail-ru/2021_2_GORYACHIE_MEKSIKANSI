@@ -65,7 +65,9 @@ export class ProfileView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
-    this.navbar.remove();
+    if (this.navbar) {
+      this.navbar.remove();
+    }
     this.parent.innerHTML = '';
   }
 }
