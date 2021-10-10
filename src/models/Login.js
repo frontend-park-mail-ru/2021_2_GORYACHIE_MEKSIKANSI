@@ -1,8 +1,9 @@
-import {loginPost, profileGet} from '../modules/api.js';
+import {loginPost} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
-import {debugFunc} from '../modules/debugMod.js';
-
+import {ResponseEvents} from '../events/Responses.js';
+import {urls} from '../modules/urls.js';
+import {ErrorsText} from '../events/Errors.js';
 
 /**
  * class login model
@@ -21,18 +22,16 @@ class LoginModel {
   login(type, email = '', phone = '', password) {
     loginPost({type, email, phone, password})
         .then((response) => {
-          if (response.status === 200) {
-            eventBus.emitEventListener(LoginEvents.loginDone, {});
-            profileGet({url: '/profile'});
-            debugFunc(response, 'login result');
-          } else {
-            eventBus.emitEventListener(LoginEvents.loginFailed, response);
-            debugFunc(response, 'login result');
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(LoginEvents.loginDone, urls.home.url);
+            return;
           }
+          eventBus.emitEventListener(LoginEvents.loginFailed,
+              response.parsedJSON);
         })
-        .catch((response) => {
-          eventBus.emitEventListener(LoginEvents.loginFailed, response);
-          debugFunc(response, 'login result');
+        .catch(() => {
+          eventBus.emitEventListener(LoginEvents.loginFailed,
+              ErrorsText.FailedToFetch);
         });
   }
 }

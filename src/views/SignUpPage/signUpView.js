@@ -1,6 +1,5 @@
 import {View} from '../baseView/View.js';
 import {SignUpController} from '../../controllers/signUpController.js';
-import {debugFunc} from '../../modules/debugMod.js';
 
 /**
  * SignUp View Class
@@ -41,7 +40,7 @@ export class SignUpView extends View {
    * @param {Object} event
    * @private
    */
-  _submitListener(event) {
+  submitListener(event) {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const phone = document.getElementById('phone_number');
@@ -71,6 +70,7 @@ export class SignUpView extends View {
       } else {
         this.hideError('password_error', password, passwordRepeat);
       }
+
       if (!signUpResult.emailValidation.validationResult) {
         this.showError('email_error',
             signUpResult.emailValidation.validationText,
@@ -78,6 +78,7 @@ export class SignUpView extends View {
       } else {
         this.hideError('email_error', email);
       }
+
       if (!signUpResult.phoneValidation.validationResult) {
         this.showError('phone_error',
             signUpResult.phoneValidation.validationText,
@@ -85,6 +86,7 @@ export class SignUpView extends View {
       } else {
         this.hideError('phone_error', phone);
       }
+
       if (!signUpResult.nameValidation.validationResult) {
         this.showError('name_error',
             signUpResult.nameValidation.validationText,
@@ -93,7 +95,6 @@ export class SignUpView extends View {
         this.hideError('name_error', name);
       }
     }
-    debugFunc(signUpResult.error, 'error of signup');
   }
 
   /**
@@ -149,7 +150,7 @@ export class SignUpView extends View {
    */
   settingUp() {
     const form = document.getElementById('form_submit');
-    form.addEventListener('click', this._submitListener.bind(this));
+    form.addEventListener('click', this.submitListener.bind(this));
   }
 
   /**
@@ -157,7 +158,7 @@ export class SignUpView extends View {
    */
   remove() {
     const form = document.getElementById('form_submit');
-    form.removeEventListener('click', this._submitListener.bind(this));
+    form.removeEventListener('click', this.submitListener.bind(this));
 
     this.parent.innerHTML = '';
   }

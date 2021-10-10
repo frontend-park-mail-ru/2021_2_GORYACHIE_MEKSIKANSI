@@ -1,17 +1,18 @@
 export const urls = {
-  main: {
+  home: {
     url: '/',
+    name: 'home',
   },
   login: {
     url: '/login',
+    name: 'login',
   },
   signup: {
-    url: '/signup',
+    url: '/signUp',
+    name: 'signup',
   },
   profile: {
     url: '/profile',
-  },
-  logout: {
-    url: '/logout',
+    name: 'profile',
   },
 };

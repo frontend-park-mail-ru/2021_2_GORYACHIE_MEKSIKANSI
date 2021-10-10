@@ -22,13 +22,13 @@ export class HomeView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = new Navbar(parent);
   }
   /**
    * Method that render login page in inner HTML of element
    * @param {Object} props
    */
   render(props = {}) {
+    this.navbar = new Navbar(this.parent);
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
     this.parent.innerHTML += template({
@@ -38,14 +38,9 @@ export class HomeView extends View {
         restaurantList: props.restaurantList,
       })});
 
+
     this.settingUp();
   }
-
-  /**
-   * Method calling by
-   * @param {name} event
-   */
-  _submitListener(event) {}
 
   /**
    * Method for setting up before rendering elements

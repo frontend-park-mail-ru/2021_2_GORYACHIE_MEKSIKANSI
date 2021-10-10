@@ -1,6 +1,7 @@
 import {AuthStatus} from '../events/Auth.js';
 import eventBus from './eventBus.js';
 import {logoutPost} from './api.js';
+import {urls} from './urls.js';
 
 /**
  * User class
@@ -18,17 +19,17 @@ class User {
      * setting all user fields to empty string
      *
      */
-  logout() {
-    logoutPost()
+  async logout() {
+    await logoutPost()
         .then((response) => {
-            this.type = '';
-            this.name = '';
-            this.email = '';
-            this.phone = '';
-            this.Auth = false;
-            eventBus.emitEventListener(AuthStatus.userLoggedOut, {});
-            eventBus.addEventListener(AuthStatus.userLogout, this.logout.bind(this));
-        })
+          this.type = '';
+          this.name = '';
+          this.email = '';
+          this.phone = '';
+          this.Auth = false;
+          eventBus.emitEventListener(AuthStatus.userLoggedOutHomeRerender,
+              urls.home.name);
+        });
   }
 
   /**

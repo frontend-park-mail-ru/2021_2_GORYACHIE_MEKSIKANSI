@@ -4,6 +4,8 @@ import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {LoginView} from '../views/LoginView/loginView.js';
 import User from '../modules/user.js'
+import {ResponseEvents} from '../events/Responses.js';
+import {ErrorsText} from '../events/Errors.js';
 
 /**
  *  Login controller class
@@ -20,14 +22,15 @@ export class LoginController {
   }) {
     this.routeTo = routeTo;
     this.parent = parent;
-    eventBus.addEventListener(LoginEvents.loginDone,
-        this.correctLogin.bind(this));
     this.loginView = new LoginView({
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
+
     eventBus.addEventListener(LoginEvents.loginFailed,
-        this.loginFailed.bind(this));
+      this.loginView.showError.bind(this.loginView));
+    eventBus.addEventListener(LoginEvents.loginDone,
+      this.routeTo);
   }
 
   /**
@@ -38,31 +41,25 @@ export class LoginController {
    */
   login(login, password) {
     const passwordValidation = Validation.validatePassword(password);
-    let loginValidation = Validation.validateEmail(login);
+    const emailValidation = Validation.validateEmail(login);
+    const phoneValidation = Validation.validatePhoneNumber(login);
 
-    if (loginValidation.validationResult &&
-        passwordValidation.validationResult) {
-      LoginModel.login('client', login, '', password);
-      this.loginView.hideError();
-      return {
-        error: false,
-      };
-    } else {
-      loginValidation = Validation.validatePhoneNumber(login);
-      if (loginValidation.validationResult &&
-          passwordValidation.validationResult) {
+    if (passwordValidation.validationResult) {
+      if (emailValidation.validationResult) {
+        LoginModel.login('client', login, '', password);
+        this.loginView.hideError();
+        return {error: false};
+      }
+
+      if (phoneValidation.validationResult) {
         LoginModel.login('client', '', login, password);
         this.loginView.hideError();
-        return {
-          error: false,
-        };
+        return {error: false};
       }
     }
 
     return {
       error: true,
-      loginValidation,
-      passwordValidation,
     };
   }
 
@@ -72,27 +69,10 @@ export class LoginController {
   render() {
     if (User.Auth) {
       this.routeTo('home');
+      return;
     }
 
     this.loginView.render({});
-  }
-
-  /**
-   * Action that emits when emits correct login event
-   */
-  correctLogin() {
-    this.routeTo('home');
-  }
-
-  /**
-   * Action that emits when emits incorrect login event
-   */
-  loginFailed(response) {
-    if (response !== 500) {
-      this.loginView.showError(response.parsedJSON);
-    } else {
-      this.loginView.showError('Неизвестная ошибка');
-    }
   }
 
   /**

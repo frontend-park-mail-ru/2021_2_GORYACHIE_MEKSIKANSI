@@ -5,6 +5,7 @@ import {HomeController} from './controllers/homeController.js';
 import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantView} from './views/restaurantView/restaurantView.js';
+import {urls} from './modules/urls.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -20,21 +21,12 @@ Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
 Handlebars.registerPartial('dish', Handlebars.templates['dish.hbs']);
 
-Handlebars.registerHelper('times', function(n, block) {
-  let accum = '';
-  for (let i = 0; i < n; ++i) {
-    accum += block.fn(i);
-  }
-  return accum;
-});
-
 const application = document.getElementById('app');
 
 const router = new Router(application);
 const routeTo = (url) => {
   router.open(url);
 };
-
 
 const loginController = new LoginController({
   parent: application,
@@ -49,10 +41,10 @@ const profileController = new ProfileController({
   parent: application,
   routeTo: routeTo});
 
-router.addRoute('login', loginController);
-router.addRoute('profile', profileController);
-router.addRoute('home', homeController);
-router.addRoute('signup', signUpController);
+router.addRoute(urls.login.name, loginController);
+router.addRoute(urls.profile.name, profileController);
+router.addRoute(urls.home.name, homeController);
+router.addRoute(urls.signup.name, signUpController);
 
 const restaurantView = new RestaurantView({
   parent: application,
@@ -64,4 +56,3 @@ restaurantView.render();
 
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
-
