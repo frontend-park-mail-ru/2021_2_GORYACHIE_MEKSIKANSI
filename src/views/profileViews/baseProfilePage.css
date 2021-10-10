@@ -1,0 +1,30 @@
+.base-profile-page__content {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #F6F6F6;
+
+    padding: 50px 3% 150px;
+}
+
+.base-profile-page__title {
+    min-width: 100%;
+    font-weight: 800;
+    font-size: 30px;
+    padding-bottom: 30px;
+}
+
+.base-profile-page__left-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 60%;
+}
+
+.base-profile-page__right-box {
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+}

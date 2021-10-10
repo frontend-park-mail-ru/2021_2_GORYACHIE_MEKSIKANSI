@@ -6,6 +6,10 @@ import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantView} from './views/restaurantView/restaurantView.js';
 import {urls} from './modules/urls.js';
+import {CartView} from './views/profileViews/cartView/cartView.js';
+
+import User from './modules/user.js';
+import {HistoryView} from './views/profileViews/historyView/historyView.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
@@ -20,6 +24,7 @@ Handlebars.registerPartial('loginUserInput',
 Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
 Handlebars.registerPartial('dish', Handlebars.templates['dish.hbs']);
+Handlebars.registerPartial('order', Handlebars.templates['historyOrder.hbs']);
 
 const application = document.getElementById('app');
 
@@ -50,9 +55,24 @@ const restaurantView = new RestaurantView({
   parent: application,
   routeTo: routeTo,
 });
-restaurantView.render();
+
+const historyView = new HistoryView({
+  parent: application,
+  routeTo: routeTo,
+});
+
+const cartView = new CartView({
+  parent: application,
+  routeTo: routeTo,
+});
+
+
+document.getElementById('foot').innerHTML = Handlebars.templates['footer.hbs']({});
+// restaurantView.render();
 // homeController.homeView.render();
+User.Auth = true;
+User.email = 'email@example.ru';
+// profileController.render();
+// historyView.render();
+cartView.render();
 
-
-document.getElementById('foot').innerHTML = Handlebars.
-    templates['footer.hbs']({});

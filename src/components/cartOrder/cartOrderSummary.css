@@ -1,0 +1,109 @@
+.cart-order-summary {
+    margin-left: 100px;
+    background-color: var(--color-white);
+    width: 100%;
+    border-radius: 32px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
+}
+
+.cart-order-summary__payment-title {
+    font-size: 30px;
+    font-weight: var(--font_bold);
+}
+
+.cart-order-summary__payment-box {
+    display: flex;
+    flex-direction: column;
+
+    padding: 32px 32px 16px 32px ;
+
+    border-bottom: solid 1px #e2e2e2;
+}
+
+.cart-order-summary__radio-buttons-wrapper {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.cart-order-summary__radio-button-box {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.cart-order-summary__summary {
+    padding: 16px 32px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-order-summary__summary-text-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.cart-order-summary__summary-title {
+    font-size: 30px;
+    font-weight: var(--font_bold);
+    margin-right: auto;
+}
+
+.cart-order-summary__summary-cost {
+    margin-left: auto;
+    font-size: 30px;
+    font-weight: var(--font_bold);
+}
+
+.cart-order-summary__pay-button {
+    margin-top: 30px;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: var(--font_bold);
+}
+
+.cart-order-summary__radio-button-box input[type=radio] {
+    display: none;
+}
+
+.cart-order-summary__radio-button-box label {
+    display: flex;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #999;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.cart-order-summary__radio-button-box input[type=radio]:checked + label {
+    background-color: var(--color-gray);
+}
+
+.cart-order-summary__radio-button-box label:hover {
+    background-color: var(--color-light-gray);
+}
+
+.cart-order-summary__radio-button-box input[type=radio]:disabled + label {
+    background: slategray;
+    color: #666;
+}
+
+.cart-order-summary__radio-button {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.cart-order-summary__radio-button-icon {
+    margin-right: 5px;
+}
+
+
