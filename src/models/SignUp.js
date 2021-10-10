@@ -1,4 +1,4 @@
-import {signupPost} from '../modules/api.js';
+import {profileGet, signupPost} from '../modules/api.js';
 import {SignUpEvents} from '../events/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {ResponseEvents} from '../events/Responses.js';
@@ -21,19 +21,32 @@ class SignUpModel {
   signUp({type, name, email, phone, password}) {
     signupPost({type, name, email, phone, password})
         .then((response) => {
-          if (response.status === ResponseEvents.OK) {
+            if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
                 urls.home.url);
             return;
           }
           eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
-              response.parsedJSON);
+              response.explain);
         })
         .catch(() => {
           eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
               ErrorsText.FailedToFetch);
         });
   }
+
+
+    checkAuth() {
+        profileGet({url: '/profile'})
+            .then((response) => {
+                if (response.status === ResponseEvents.OK) {
+                    eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);
+                    return;
+                }
+
+                eventBus.emitEventListener(SignUpEvents.userCheckFailed, {});
+            })
+    }
 }
 
 export default new SignUpModel();

@@ -1,5 +1,8 @@
 import {ProfileView} from '../views/profileViews/profileView/profileView.js';
 import User from '../modules/user.js';
+import ProfileModel from '../models/Profile.js';
+import eventBus from '../modules/eventBus.js';
+import {ProfileEvents} from '../events/Profile.js';
 import {urls} from '../modules/urls.js';
 
 /**
@@ -13,7 +16,7 @@ export class ProfileController {
    */
   constructor({
     parent: parent = document.body,
-    routeTo: routeTo = () => {},
+    routeTo: routeTo,
   }) {
     this.routeTo = routeTo;
     this.parent = parent;
@@ -21,6 +24,8 @@ export class ProfileController {
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
+    eventBus.addEventListener(ProfileEvents.userLoggedIn, this.profileView.render.bind(this.profileView));
+    eventBus.addEventListener(ProfileEvents.userNotAuth, this.routeTo);
   }
 
   /**
@@ -28,7 +33,8 @@ export class ProfileController {
    */
   render() {
     if (!User.Auth) {
-      this.routeTo(urls.login.url);
+      ProfileModel.checkAuth();
+      this.routeTo(urls.login.name);
       return;
     }
 

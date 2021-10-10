@@ -51,28 +51,7 @@ router.addRoute(urls.profile.name, profileController);
 router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 
-const restaurantView = new RestaurantView({
-  parent: application,
-  routeTo: routeTo,
-});
+document.getElementById('foot').innerHTML = Handlebars.
+    templates['footer.hbs']({});
 
-const historyView = new HistoryView({
-  parent: application,
-  routeTo: routeTo,
-});
-
-const cartView = new CartView({
-  parent: application,
-  routeTo: routeTo,
-});
-
-
-document.getElementById('foot').innerHTML = Handlebars.templates['footer.hbs']({});
-// restaurantView.render();
-// homeController.homeView.render();
-User.Auth = true;
-User.email = 'email@example.ru';
-// profileController.render();
-// historyView.render();
-cartView.render();
-
+router.start();

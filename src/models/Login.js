@@ -1,4 +1,4 @@
-import {loginPost} from '../modules/api.js';
+import {loginPost, profileGet} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {ResponseEvents} from '../events/Responses.js';
@@ -27,12 +27,24 @@ class LoginModel {
             return;
           }
           eventBus.emitEventListener(LoginEvents.loginFailed,
-              response.parsedJSON);
+              response.explain);
         })
         .catch(() => {
           eventBus.emitEventListener(LoginEvents.loginFailed,
               ErrorsText.FailedToFetch);
         });
+  }
+
+  checkAuth() {
+      profileGet({url: '/profile'})
+          .then((response) => {
+              if (response.status === ResponseEvents.OK) {
+                  eventBus.emitEventListener(LoginEvents.loginCheckDone, urls.home.url);
+                  return;
+              }
+
+              eventBus.emitEventListener(LoginEvents.loginCheckFailed, {});
+          })
   }
 }
 

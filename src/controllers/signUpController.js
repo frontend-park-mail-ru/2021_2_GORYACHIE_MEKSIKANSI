@@ -4,6 +4,7 @@ import SignUpModel from '../models/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {SignUpEvents} from '../events/SignUp.js';
 import user from '../modules/user.js';
+import {urls} from '../modules/urls.js';
 
 /**
  * Signup page controller
@@ -29,17 +30,17 @@ export class SignUpController {
         this.routeTo);
     eventBus.addEventListener(SignUpEvents.userSignUpFailed,
         this.signUpView.showErrorFromController.bind(this.signUpView));
+    eventBus.addEventListener(SignUpEvents.userCheckFailed,
+        this.signUpView.render.bind(this.signUpView));
+    eventBus.addEventListener(SignUpEvents.userCheckDone,
+        this.routeTo);
   }
 
   /**
    * Rendering signup page
    */
   render() {
-    if (user.Auth) {
-      this.routeTo('/');
-    }
-
-    this.signUpView.render({});
+    SignUpModel.checkAuth();
   }
 
   /**

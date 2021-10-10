@@ -11,9 +11,24 @@ export class Router {
   constructor(root) {
     this.root = root;
     this.routes = new Map();
-    this.currControllerName = urls.home.name;
     this.linksPrevents = this.linksPrevents.bind(this);
     this.root.addEventListener('click', this.linksPrevents);
+    window.addEventListener('popstate', () => {
+      this.open(window.location.pathname);
+    });
+  }
+
+  /**
+   * Adding page to history API if back is false, replace it if back is true
+   * @param {string} pageUrl
+   * @param {boolean} back
+   */
+  historyPush(pageUrl, back) {
+    if (!back) {
+      window.history.pushState({}, '', pageUrl);
+    }
+
+    window.history.replaceState({}, '', pageUrl);
   }
 
   /**
@@ -23,8 +38,11 @@ export class Router {
   open(pageUrl) {
     Object.entries(urls).forEach(([name, {url}]) => {
       if (pageUrl === name || pageUrl === url) {
-        this.routes.get(this.currControllerName).remove();
+        if (this.currControllerName) {
+          this.routes.get(this.currControllerName).remove();
+        }
         if (this.routes.get(name)) {
+          window.history.pushState({}, '', url);
           this.routes.get(name).render();
           this.currControllerName = name;
         } else {
@@ -41,6 +59,18 @@ export class Router {
    */
   addRoute(url, handler) {
     this.routes.set(url, handler);
+  }
+
+  back() {
+    window.history.back();
+  }
+
+  forward() {
+    window.history.forward();
+  }
+
+  start() {
+    this.open(window.location.pathname);
   }
 
   /**
