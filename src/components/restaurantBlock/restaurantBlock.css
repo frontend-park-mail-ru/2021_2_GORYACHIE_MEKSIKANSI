@@ -29,6 +29,8 @@
     overflow: hidden;
     width: var(--restaurant-block__img-widht);
     height: var(--restaurant-block__img-height);
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
 }
 
 .restaurant-block__img {
@@ -44,6 +46,7 @@
 .restaurant-block__information {
     display: flex;
     align-items: center;
+    padding: 16px;
 }
 
 .restaurant-block__text-box {

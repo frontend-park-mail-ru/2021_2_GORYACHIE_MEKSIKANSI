@@ -1,0 +1,98 @@
+<div class="dish-popup-wrapper">
+    <div class="overflow-wrap">
+    <div class="dish-popup" id="{{id}}">
+        <div class="dish-popup__main-info">
+            <div class="dish-popup__close-button-wrapper">
+                <div class="button button_color_white dish-popup__close-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46458 15.5354L15.5356 8.46436" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M8.46458 8.46458L15.5356 15.5356" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="dish-popup__image-wrapper">
+                <img class="dish-popup__image" src="{{dishImg}}">
+            </div>
+
+            <div class="dish-popup__dish-title">
+                {{ dishTitle }}
+            </div>
+        </div>
+        <div class="dish-popup__dish-setting">
+            <div class="dish-popup__description">
+                {{ dishDescription }}
+<!--                Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов-->
+            </div>
+            {{#each dishRadios }}
+                <div class="dish-popup__checkboxes-wrapper-title">
+                    {{ dishRadioTitle }}
+                </div>
+                <div class="dish-popup__checkboxes-wrapper">
+                    {{#each dishRadioRows}}
+                        <div class="dish-popup__radio-row">
+                            <label class="container">
+                                <input type="radio" name="{{../dishRadioTitle}}">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div class="dish-popup__checkbox-title">
+                                {{ dishRadioName }}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+
+            {{#each dishCheckboxes}}
+                <div class="dish-popup__checkboxes-wrapper-title">
+                    {{ dishCheckboxTitle }}
+                </div>
+                <div class="dish-popup__checkboxes-wrapper">
+                    {{#each dishCheckboxesRows}}
+                        <div class="dish-popup__checkbox-row">
+                            <label class="container">
+                                <input class="dish-popup__checkbox-input" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div class="dish-popup__checkbox-title">
+                                {{ dishCheckboxRowTitle }}
+                            </div>
+                            <div class="dish-popup__add-item-cost">
+                                +
+                                <div class="dish-popup__checkbox-cost">
+                                    {{ dishCheckboxRowCost }}
+                                </div>
+                                 ₽
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+        <div class="dish-popup__selector-buy-button-box">
+            <div class="dish-popup__num-selector-box">
+                <div class="button minus dish-popup__selector-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="dish-popup__number">1</div>
+                <div class="button plus dish-popup__selector-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="button button_color_black button_shape_rounded dish-popup__buy-button">
+                Добавить в корзину
+                <div class="dish-popup__cost">
+                    <div class="dish-popup__summary-cost">
+                        {{ dishCost }}
+                    </div>
+                     ₽
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

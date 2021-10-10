@@ -1,0 +1,25 @@
+.restaurant-page__dishes {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.restaurant-page__dish {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.restaurant-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.restaurant-page__menu-title {
+    font-size: 36px;
+    font-weight: var(--font_bold);
+    width: 100%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
