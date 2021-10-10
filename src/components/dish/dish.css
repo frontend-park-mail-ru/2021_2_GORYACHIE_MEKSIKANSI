@@ -6,8 +6,17 @@
 
     width: 430px;
 
+    border-radius: 16px;
+
     border: 1px solid #e2e2e2;
     cursor: pointer;
+
+    transition-property: border-color;
+    transition-duration: 200ms;
+}
+
+.dish:hover {
+    border-color: black;
 }
 
 .dish__text {
@@ -33,6 +42,9 @@
     flex-shrink: 0;
     width: 158px;
     object-fit: cover;
+
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 .dish-wrapper {
