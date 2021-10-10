@@ -4,6 +4,7 @@ import {LoginController} from './controllers/loginController.js';
 import {HomeController} from './controllers/homeController.js';
 import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
+import {RestaurantView} from './views/restaurantView/restaurantView.js';
 import {urls} from './modules/urls.js';
 
 Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
@@ -18,6 +19,7 @@ Handlebars.registerPartial('loginUserInput',
     Handlebars.templates['userLoginForm.hbs']);
 Handlebars.registerPartial('signUpUserInput',
     Handlebars.templates['userSignUpForm.hbs']);
+Handlebars.registerPartial('dish', Handlebars.templates['dish.hbs']);
 
 const application = document.getElementById('app');
 
@@ -44,6 +46,13 @@ router.addRoute(urls.profile.name, profileController);
 router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 
-homeController.render();
+const restaurantView = new RestaurantView({
+  parent: application,
+  routeTo: routeTo,
+});
+restaurantView.render();
+// homeController.homeView.render();
+
+
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});

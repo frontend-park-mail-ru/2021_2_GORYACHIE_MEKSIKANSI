@@ -2,21 +2,6 @@ h3 {
     margin: 0;
 }
 
-.home-page {
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.home-page__content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    padding-left: 3%;
-    padding-right: 3%;
-}
-
 .home-page__restaurant-block-title {
     display: inline-block;
     font-size: 36px;
