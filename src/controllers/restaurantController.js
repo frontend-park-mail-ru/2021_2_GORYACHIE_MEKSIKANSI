@@ -33,6 +33,10 @@ export class RestaurantController {  // TODO: добавить джсдок
     RestaurantModel.getRestaurant(id);
   }
 
+  getDish(restId, dishId) {
+    RestaurantModel.getDish(restId, dishId);
+  }
+
   /**
    * Removing view
    */

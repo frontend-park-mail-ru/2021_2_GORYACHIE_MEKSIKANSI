@@ -90,3 +90,13 @@ export function logoutPost() {
 export function restaurantGet({url = '/restaurants/0'}) {
   return http.ajaxGet({url});
 }
+
+/**
+ * getting dish of restaurant
+ *
+ * @param {string} url
+ * @return {Promise<{parsedJSON: object, status: number}>}
+ */
+export function dishGet({url = '/restaurants/0/dish/0'}) {
+  return http.ajaxGet({url});
+}
