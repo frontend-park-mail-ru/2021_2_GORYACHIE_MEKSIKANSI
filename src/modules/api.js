@@ -79,3 +79,14 @@ export function restaurantsGet({url = '/'}) {
 export function logoutPost() {
   return http.ajaxPost({url: '/logout', body: {}});
 }
+
+
+/**
+ * getting restaurant with dishes
+ *
+ * @param {string} url
+ * @return {Promise<{parsedJSON: object, status: number}>}
+ */
+export function restaurantGet({url = '/restaurants/0'}) {
+  return http.ajaxGet({url});
+}

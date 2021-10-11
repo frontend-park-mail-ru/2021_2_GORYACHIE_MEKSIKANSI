@@ -1,9 +1,10 @@
 import {RestaurantView} from '../views/restaurantView/restaurantView.js';
-// import eventBus from '../modules/eventBus.js';
-// import {ProfileEvents} from '../events/Profile.js';
+import eventBus from '../modules/eventBus.js';
 // import User from '../modules/user.js';
 // import ProfileModel from '../models/Profile.js';
-// import {urls} from '../modules/urls.js';
+import {urls} from '../modules/urls.js';
+import {RestaurantEvents} from '../events/Restaurant.js';
+import RestaurantModel from '../models/Restaurant.js';
 
 export class RestaurantController {  // TODO: добавить джсдок
   /**
@@ -21,13 +22,15 @@ export class RestaurantController {  // TODO: добавить джсдок
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
+
+    eventBus.addEventListener(RestaurantEvents.restaurantGetSuccess, this.restaurantView.render.bind(this.restaurantView));
   }
 
   /**
    * Rendering view
    */
-  render() {
-    this.restaurantView.render({});
+  render(id = 0) {
+    RestaurantModel.getRestaurant(id);
   }
 
   /**
