@@ -16,6 +16,12 @@ export class RestaurantView extends View {
       controller: controller,
     });
     this.navbar = Navbar;
+
+    this.popup = new DishPopup({
+      parent: document.body,
+      routeTo: this.routeTo,
+      controller: this.controller,
+    });
   }
 
   render(props = {}) {
@@ -30,12 +36,7 @@ export class RestaurantView extends View {
       content: Handlebars.templates['restaurantUnderheader.hbs'](this.restaurant) + Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     }));
 
-    this.popup = new DishPopup({
-      parent: document.body,
-      routeTo: this.routeTo,
-      controller: this.controller,
-      restaurantId: this.restaurant.id,
-    });
+    this.popup.restaurantId = props.restaurantId;
 
     console.log("REST ID: ", this.restaurant);
 
@@ -107,8 +108,9 @@ export class RestaurantView extends View {
     window.removeEventListener('scroll', this.navHighlight);
     this.anchors.forEach((anchor) => {
       anchor.removeEventListener('click', this.scrollingToMenu);
-    })
+    });
     this.navbar.remove();
+    this.popup.remove();
     this.parent.innerHTML = '';
   }
 }

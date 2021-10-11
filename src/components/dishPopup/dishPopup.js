@@ -17,6 +17,7 @@ export class DishPopup {
   }
 
   render(dish) {
+    console.log("RENDERING");
     this.dish = dish;
     const div = document.createElement('div');
     div.classList.add('dish-popup-div');
@@ -49,18 +50,20 @@ export class DishPopup {
   }
 
   remove = () => {
-    document.body.querySelector('.dish-popup__close-button').removeEventListener('click', this.remove);
-    document.body.querySelector('.dish-popup-wrapper').removeEventListener('click', this.outsidePopupClick);
+    if (document.body.querySelector('.dish-popup-div')) {
+      document.body.querySelector('.dish-popup__close-button').removeEventListener('click', this.remove);
+      document.body.querySelector('.dish-popup-wrapper').removeEventListener('click', this.outsidePopupClick);
 
-    document.body.querySelector('.plus').removeEventListener('click', this.increaseNumber);
-    document.body.querySelector('.minus').removeEventListener('click', this.decreaseNumber);
+      document.body.querySelector('.plus').removeEventListener('click', this.increaseNumber);
+      document.body.querySelector('.minus').removeEventListener('click', this.decreaseNumber);
 
-    document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
-      item.removeEventListener('input', this.refreshSummary);
-    });
+      document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
+        item.removeEventListener('input', this.refreshSummary);
+      });
 
-    document.body.removeChild(document.body.querySelector('.dish-popup-div'));
-    document.body.style.overflowY = 'scroll';
+      document.body.removeChild(document.body.querySelector('.dish-popup-div'));
+      document.body.style.overflowY = 'scroll';
+    }
   }
 
   outsidePopupClick = (e) => {
