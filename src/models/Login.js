@@ -23,7 +23,7 @@ class LoginModel {
     loginPost({type, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(LoginEvents.loginDone, urls.home.url);
+            this.checkAuth();
             return;
           }
           eventBus.emitEventListener(LoginEvents.loginFailed,
@@ -44,7 +44,7 @@ class LoginModel {
               }
 
               eventBus.emitEventListener(LoginEvents.loginCheckFailed, {});
-          })
+          });
   }
 }
 

@@ -33,10 +33,6 @@ export class HomeController {
    * Rendering home page with restaurants and checking auth
    */
   render() {
-    if (!User.Auth) {
-      HomeModel.checkAuthAndGetRestaurants();
-      return;
-    }
     HomeModel.getRestaurants();
   }
 

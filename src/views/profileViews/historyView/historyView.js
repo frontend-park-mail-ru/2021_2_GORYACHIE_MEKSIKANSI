@@ -1,5 +1,5 @@
 import {View} from '../../baseView/View.js';
-import {Navbar} from '../../../components/navbar/navbar.js';
+import Navbar from '../../../components/navbar/navbar.js';
 import User from '../../../modules/user.js';
 
 
@@ -76,7 +76,7 @@ export class HistoryView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = new Navbar(parent);
+    this.navbar = Navbar;
   }
 
   /**
@@ -88,7 +88,6 @@ export class HistoryView extends View {
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
       pageTitle: 'История заказов',
-      head: Handlebars.templates['header.hbs']({auth: User.Auth}),
       content: Handlebars.templates['historyPage.hbs']({
         orders: orders,
       }),

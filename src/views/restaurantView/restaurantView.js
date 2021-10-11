@@ -1,5 +1,5 @@
 import User from '../../modules/user.js';
-import {Navbar} from '../../components/navbar/navbar.js';
+import Navbar from '../../components/navbar/navbar.js';
 import {View} from '../baseView/View.js';
 import {getRestaurantMock} from '../mocks.js';
 
@@ -14,7 +14,7 @@ export class RestaurantView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = new Navbar(parent);
+    this.navbar = Navbar;
   }
 
   render(props = {}) {
@@ -22,11 +22,11 @@ export class RestaurantView extends View {
 
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
-    this.parent.innerHTML += template({
+    this.parent.insertAdjacentHTML('afterbegin', template({
       auth: User.Auth,
-      head: Handlebars.templates['header.hbs']({auth: User.Auth}) + Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
+      head: Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
       content: Handlebars.templates['restaurantUnderheader.hbs'](this.restaurant) + Handlebars.templates['restaurantPage.hbs'](this.restaurant),
-    });
+    }));
 
     this.settingUp();
   }

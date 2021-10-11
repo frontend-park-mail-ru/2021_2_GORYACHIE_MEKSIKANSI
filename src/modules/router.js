@@ -83,9 +83,11 @@ export class Router {
    * @param {Object} event
    */
   linksPrevents(event) {
-    if (event.target.closest('a').hasAttribute('href')) { // TODO: инкастыляция сделать отлов не только 'a', но и button с href/поменять button на a
+    const {target} = event;
+    const closest = target.closest('a');
+    if (closest && closest.hasAttribute('href')) { // TODO: инкастыляция сделать отлов не только 'a', но и button с href/поменять button на a
       event.preventDefault();
-      const href = event.target.closest('a').getAttribute('href');
+      const href = closest.getAttribute('href');
 
       if (href) {
         this.open(href);

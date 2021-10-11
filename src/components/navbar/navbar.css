@@ -40,9 +40,18 @@
     margin-bottom: 5px;
 }
 
+.hamburger__a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .navbar__button_align-text_center {
+    display: flex;
+    align-items: center;
     width: 100%;
     text-align: center;
+    justify-content: center;
 }
 
 .navbar__line {

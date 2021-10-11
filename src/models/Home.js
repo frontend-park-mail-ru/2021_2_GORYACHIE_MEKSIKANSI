@@ -25,7 +25,8 @@ class HomeModel {
    * emit HomeEvents.homeGetRestaurantsSuccess
    */
   async checkAuthAndGetRestaurants() {
-    await profileGet({url: '/profile'});
+    await profileGet({url: '/profile'})
+        .catch(() => {}); // TODO: Выводить, тоаст или ошибочную страницу по поводу коннекта с сервером
     this.getRestaurants();
   }
 }

@@ -28,7 +28,7 @@ class User {
           this.phone = '';
           this.Auth = false;
           eventBus.emitEventListener(AuthStatus.userLoggedOutHomeRerender,
-              urls.home.name);
+              urls.home.url);
         });
   }
 

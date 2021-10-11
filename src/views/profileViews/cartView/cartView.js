@@ -1,5 +1,5 @@
 import {View} from '../../baseView/View.js';
-import {Navbar} from '../../../components/navbar/navbar.js';
+import Navbar from '../../../components/navbar/navbar.js';
 import User from '../../../modules/user.js';
 
 const orders =
@@ -49,7 +49,7 @@ export class CartView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = new Navbar(parent);
+    this.navbar = Navbar;
   }
 
   /**
@@ -61,7 +61,6 @@ export class CartView extends View {
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
       pageTitle: 'Оформление заказа',
-      head: Handlebars.templates['header.hbs']({auth: User.Auth}),
       content: Handlebars.templates['orderDelivery.hbs'](orders),
       rightMenu: Handlebars.templates['orderSummary.hbs']({})});
     document.querySelector('.footer').style.marginTop = '0';

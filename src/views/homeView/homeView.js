@@ -1,5 +1,5 @@
 import {View} from '../baseView/View.js';
-import {Navbar} from '../../components/navbar/navbar.js';
+import Navbar from '../../components/navbar/navbar.js';
 import User from '../../modules/user.js';
 
 /**
@@ -22,23 +22,21 @@ export class HomeView extends View {
       routeTo: routeTo,
       controller: controller,
     });
+    this.navbar = Navbar;
   }
   /**
    * Method that render login page in inner HTML of element
    * @param {Object} props
    */
   render(props = {}) {
-    this.navbar = new Navbar(this.parent);
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
-    this.parent.innerHTML += template({
-      head: Handlebars.templates['header.hbs']({auth: User.Auth}),
+    this.parent.insertAdjacentHTML('afterbegin', template({
       content: Handlebars.templates['homePage.hbs']({
         promos: [1, 2, 3],
         restaurantList: props,
-      })});
-
-
+      }),
+    }));
     this.settingUp();
   }
 

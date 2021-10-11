@@ -2,6 +2,8 @@ import User from '../../modules/user.js';
 import eventBus from '../../modules/eventBus.js';
 import {AuthStatus} from '../../events/Auth.js';
 
+import {profileGet} from '../../modules/api.js';
+
 /**
  * Left navigation bar class
  */
@@ -11,28 +13,7 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    this.opened = false;
-
-    this.parent.addEventListener('click', this.list);
-  }
-
-  /**
-   * Navbar listener monitoring open, close, logout actions
-   * @param {Object} event js event
-   */
-  list = (event) => {
-    const {target} = event;
-
-    const navbar = this.parent.getElementsByClassName('navbar')[0];
-
-    if (this.opened && navbar !== undefined && !navbar.contains(event.target)) {
-      this.close();
-    } else if (target.getAttribute('href') === 'logout' && User.Auth) {
-      event.preventDefault();
-      eventBus.emitEventListener(AuthStatus.userLogout, {});
-    } else if (target.getAttribute('href') === 'navbar') {
-      this.open();
-    }
+    profileGet({url: '/profile'});
   }
 
   /**
@@ -40,11 +21,49 @@ export class Navbar {
    */
   render() {
     const template = Handlebars.templates['navbar.hbs'];
-    this.parent.innerHTML = template({user:
-        {auth: User.Auth, name: User.name},
-    });
+    this.parent.insertAdjacentHTML('afterbegin', template({
+      user: {auth: User.Auth, name: User.name},
+    }));
 
     this.close();
+
+    this.settingUp();
+  }
+
+  settingUp() {
+    this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
+    this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
+    this.parent.querySelectorAll('a').forEach((item) => {
+      if (item.hasAttribute('href')) {
+        if (item.getAttribute('href') === 'logout') {
+          item.addEventListener('click', this.logout);
+        }
+      }
+    });
+  }
+
+  openListener = (event) => {
+    event.preventDefault();
+    this.open();
+  }
+
+  closeListener = (event) => {
+    event.preventDefault();
+    const {target} = event;
+
+    console.log(target);
+
+    const navbar = this.parent.querySelector('.navbar');
+
+
+    if (navbar && !navbar.contains(target)) {
+      this.close();
+    }
+  }
+
+  logout = (event) => {
+    event.preventDefault();
+    eventBus.emitEventListener(AuthStatus.userLogout, {});
   }
 
   /**
@@ -55,7 +74,6 @@ export class Navbar {
     this.parent.getElementsByClassName('navbar')[0].style.display = 'flex';
     this.parent.getElementsByClassName('navbar-wrapper')[0].
         style.display = 'block';
-    this.opened = true;
   }
 
   /**
@@ -66,15 +84,28 @@ export class Navbar {
     this.parent.getElementsByClassName('navbar')[0].style.display = 'none';
     this.parent.getElementsByClassName('navbar-wrapper')[0].
         style.display = 'none';
-    this.opened = false;
   }
 
   /**
    * Remove event listeners relates for navbar
    */
   remove() {
-    if (document.querySelector('.navbar')) {
-      this.parent.removeEventListener('click', this.list);
+    if (document.querySelector('.navbar-wrapper') &&
+      document.querySelector('.header')) {
+      this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);
+      this.parent.querySelector('.navbar-wrapper').removeEventListener('click', this.closeListener);
+      this.parent.querySelectorAll('a').forEach((item) => {
+        if (item.hasAttribute('href')) {
+          if (item.getAttribute('href') === 'logout') {
+            item.removeEventListener('click', this.logout);
+          }
+        }
+      });
+
+      document.querySelector('.navbar-wrapper').remove();
+      document.querySelector('.header').remove();
     }
   }
 }
+
+export default new Navbar();

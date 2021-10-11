@@ -8,7 +8,6 @@ import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
 
 
-Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
 Handlebars.registerPartial('promoBlock',
@@ -25,7 +24,7 @@ Handlebars.registerPartial('order', Handlebars.templates['historyOrder.hbs']);
 
 const application = document.getElementById('app');
 
-const router = new Router(application);
+const router = new Router(document.body);
 const routeTo = (url) => {
   router.open(url);
 };
