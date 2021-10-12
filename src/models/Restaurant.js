@@ -30,13 +30,15 @@ class RestaurantModel {
       });
   }
 
-    addDishToCart(restId, dishId) {
-      addDishPost({restId, dishId})
+    addDishToCart(restId, dishId, number) {
+      addDishPost({restId, dishId, number})
           .then((response) => {
               eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
           })
           .catch(() => {
-              eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
+              const dish = getItemToCart();
+              dish.itemNum = number;  // TODO: delete mock
+              eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, dish);
           })
     }
 }
