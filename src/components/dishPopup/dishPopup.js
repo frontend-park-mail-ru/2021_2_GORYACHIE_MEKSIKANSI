@@ -17,12 +17,11 @@ export class DishPopup {
   }
 
   render(dish) {
-    console.log("RENDERING");
     this.dish = dish;
     const div = document.createElement('div');
     div.classList.add('dish-popup-div');
     div.innerHTML = Handlebars.templates['dishPopup.hbs'](this.dish);
-    document.body.appendChild(div);
+    this.parent.appendChild(div);
     document.body.style.overflowY = 'hidden';
 
     document.body.querySelector('.dish-popup__close-button').addEventListener('click', this.remove);

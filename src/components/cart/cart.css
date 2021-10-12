@@ -5,6 +5,14 @@
     flex-direction: column;
 }
 
+.cart__sticky {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    margin-top: 75px;
+    /*width: 100%;*/
+}
+
 .cart__header {
     padding: 20px 20px 10px 20px;
 

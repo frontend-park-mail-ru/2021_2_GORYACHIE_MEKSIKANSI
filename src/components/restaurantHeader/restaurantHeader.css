@@ -110,7 +110,7 @@
 
 .restaurant-nav__btn {
     font-weight: var(--font_bold);
-    font-size: 26px;
+    font-size: 16px;
     padding: 10px;
     cursor: pointer;
 }
