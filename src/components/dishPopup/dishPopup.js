@@ -33,6 +33,13 @@ export class DishPopup {
     document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
       item.addEventListener('input', this.refreshSummary);
     });
+
+    document.body.querySelector('.dish-popup__buy-button').addEventListener('click', this.addDishToCart);
+  }
+
+  addDishToCart = () => {
+    this.controller.addDishToCart(this.restId, this.dish.id);
+    this.remove();
   }
 
   getDish = (e) => {
@@ -55,6 +62,7 @@ export class DishPopup {
 
       document.body.querySelector('.plus').removeEventListener('click', this.increaseNumber);
       document.body.querySelector('.minus').removeEventListener('click', this.decreaseNumber);
+      document.body.querySelector('.dish-popup__buy-button').addEventListener('click', this.addDishToCart);
 
       document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
         item.removeEventListener('input', this.refreshSummary);

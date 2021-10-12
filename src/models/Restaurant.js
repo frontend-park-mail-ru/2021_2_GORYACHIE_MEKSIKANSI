@@ -1,8 +1,8 @@
 import {ResponseEvents} from '../events/Responses.js';
 import eventBus from '../modules/eventBus.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
-import {restaurantGet, dishGet} from '../modules/api.js';
-import {getRestaurantMock, getDish} from '../views/mocks.js';
+import {restaurantGet, dishGet, addDishPost} from '../modules/api.js';
+import {getRestaurantMock, getDish, getItemToCart} from '../views/mocks.js';
 
 class RestaurantModel {
   /**
@@ -29,6 +29,16 @@ class RestaurantModel {
         eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
       });
   }
+
+    addDishToCart(restId, dishId) {
+      addDishPost({restId, dishId})
+          .then((response) => {
+              eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
+          })
+          .catch(() => {
+              eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
+          })
+    }
 }
 
 export default new RestaurantModel();
