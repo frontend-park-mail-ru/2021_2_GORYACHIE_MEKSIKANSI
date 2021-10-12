@@ -1,6 +1,7 @@
 import User from '../../modules/user.js';
 import Navbar from '../../components/navbar/navbar.js';
 import {DishPopup} from '../../components/dishPopup/dishPopup.js';
+import {Cart} from '../../components/cart/cart.js';
 import {View} from '../baseView/View.js';
 import {getRestaurantMock} from '../mocks.js';
 
@@ -22,6 +23,12 @@ export class RestaurantView extends View {
       routeTo: this.routeTo,
       controller: this.controller,
     });
+
+    this.cart = new Cart({
+      parent: this.parent,
+      routeTo: this.routeTo,
+      controller: this.controller,
+    })
   }
 
   render(props = {}) {
@@ -36,11 +43,11 @@ export class RestaurantView extends View {
       content: Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     }));
 
-    this.parent.querySelector('.restaurant-page__cart').innerHTML = Handlebars.templates['cart.hbs']();
+    this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
+    this.cart.render();
+    // this.parent.querySelector('.restaurant-page__cart').innerHTML = Handlebars.templates['cart.hbs']();
 
     this.popup.restaurantId = props.restaurantId;
-
-    console.log("REST ID: ", this.restaurant);
 
     this.settingUp();
   }
@@ -113,6 +120,7 @@ export class RestaurantView extends View {
     });
     this.navbar.remove();
     this.popup.remove();
+    this.cart.remove();
     this.parent.innerHTML = '';
   }
 }
