@@ -1,4 +1,6 @@
 import {getItemToCart} from '../../views/mocks.js';
+import {RestaurantEvents} from '../../events/Restaurant.js';
+import EventBus from '../../modules/eventBus.js';
 
 
 export class Cart {
@@ -6,25 +8,28 @@ export class Cart {
     parent: parent = document.body,
     routeTo: routeTo = () => {},
     controller: controller,
-    restaurantId: id,
   }) {
     this.controller = controller;
     this.routeTo = routeTo;
     this.parent = parent;
-    this.restId = id;
     this.items = [];
+
+    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.addItemToCart.bind(this));
   }
 
   render() {
-    this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: this.items});
+    this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: this.items, restaurant: this.restaurant});
     this.sticky = this.parent.querySelector('.cart').offsetTop;
     this.footY = document.getElementById('foot').offsetTop;
     this.cartWidth = this.parent.querySelector('.cart').offsetWidth;
     console.log(this.cartWidth);
     this.settingUp();
+    this.stickCart();
   }
 
   addItemToCart(item) {
+    console.log(item);
+    console.log('HERE', this.items);
     this.items.push(item);
     this.remove();
     this.render();

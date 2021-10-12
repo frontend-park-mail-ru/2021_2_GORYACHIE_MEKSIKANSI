@@ -100,3 +100,10 @@ export function restaurantGet({url = '/restaurants/0'}) {
 export function dishGet({url = '/restaurants/0/dish/0'}) {
   return http.ajaxGet({url});
 }
+
+export function addDishPost({restId, dishId}) {
+  return http.ajaxPost({
+    url: 'cart/',
+    body: {restId, dishId},
+  });
+}

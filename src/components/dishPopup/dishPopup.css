@@ -152,8 +152,11 @@
     width: 16px;
     background-color: #eee;
 
-    border-radius: 15px;
     border: 1px solid gray;
+}
+
+.checkmark-radius {
+    border-radius: 15px;
 }
 
 .container:hover input ~ .checkmark {
