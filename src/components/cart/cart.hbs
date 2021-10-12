@@ -14,166 +14,40 @@
     </div>
 
     <div class="cart__orders-body">
-        <div class="cart__order-row">
-            <div class="cart__order-row-info">
-                <div class="cart__order-row-title">
-                    Чикен Макнаггетс
-                </div>
+        {{#each items}}
+            <div class="cart__order-row">
                 <div class="cart__order-row-info">
-                    180г • 420ккал
-                </div>
-            </div>
-            <div class="cart__order-row-right-box">
-                <div class="cart__order-row-selector cart__order-row-number-selector">
-                    <div class="dish-popup__num-selector-box">
-                        <div class="button minus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="dish-popup__number">1</div>
-                        <div class="button plus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                    <div class="cart__order-row-title">
+                        {{ itemTitle }}
+                    </div>
+                    <div class="cart__order-row-info">
+                        {{ itemWeight }}  • {{ itemCcal }}ккал
                     </div>
                 </div>
-                <div class="cart__order-row-cost">
-                    100 ₽
-                </div>
-            </div>
-
-        </div>
-        <div class="cart__order-row">
-            <div class="cart__order-row-info">
-                <div class="cart__order-row-title">
-                    Чикен Макнаггетс
-                </div>
-                <div class="cart__order-row-info">
-                    180г • 420ккал
-                </div>
-            </div>
-            <div class="cart__order-row-right-box">
-                <div class="cart__order-row-selector cart__order-row-number-selector">
-                    <div class="dish-popup__num-selector-box">
-                        <div class="button minus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="dish-popup__number">1</div>
-                        <div class="button plus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
+                <div class="cart__order-row-right-box">
+                    <div class="cart__order-row-selector cart__order-row-number-selector">
+                        <div class="dish-popup__num-selector-box">
+                            <div class="button minus dish-popup__selector-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="dish-popup__number">{{ itemNum }}</div>
+                            <div class="button plus dish-popup__selector-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                                    <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="cart__order-row-cost">
-                    100 ₽
-                </div>
-            </div>
-
-        </div>
-        <div class="cart__order-row">
-            <div class="cart__order-row-info">
-                <div class="cart__order-row-title">
-                    Чикен Макнаггетс
-                </div>
-                <div class="cart__order-row-info">
-                    180г • 420ккал
-                </div>
-            </div>
-            <div class="cart__order-row-right-box">
-                <div class="cart__order-row-selector cart__order-row-number-selector">
-                    <div class="dish-popup__num-selector-box">
-                        <div class="button minus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="dish-popup__number">1</div>
-                        <div class="button plus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                    <div class="cart__order-row-cost">
+                        {{ itemCost }} ₽
                     </div>
                 </div>
-                <div class="cart__order-row-cost">
-                    100 ₽
-                </div>
-            </div>
 
-        </div>
-        <div class="cart__order-row">
-            <div class="cart__order-row-info">
-                <div class="cart__order-row-title">
-                    Чикен Макнаггетс
-                </div>
-                <div class="cart__order-row-info">
-                    180г • 420ккал
-                </div>
             </div>
-            <div class="cart__order-row-right-box">
-                <div class="cart__order-row-selector cart__order-row-number-selector">
-                    <div class="dish-popup__num-selector-box">
-                        <div class="button minus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="dish-popup__number">1</div>
-                        <div class="button plus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart__order-row-cost">
-                    100 ₽
-                </div>
-            </div>
-
-        </div>
-        <div class="cart__order-row">
-            <div class="cart__order-row-info">
-                <div class="cart__order-row-title">
-                    Чикен Макнаггетс
-                </div>
-                <div class="cart__order-row-info">
-                    180г • 420ккал
-                </div>
-            </div>
-            <div class="cart__order-row-right-box">
-                <div class="cart__order-row-selector cart__order-row-number-selector">
-                    <div class="dish-popup__num-selector-box">
-                        <div class="button minus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="dish-popup__number">1</div>
-                        <div class="button plus dish-popup__selector-button">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart__order-row-cost">
-                    100 ₽
-                </div>
-            </div>
-
-        </div>
+        {{/each}}
     </div>
 
     <div class="cart__summary">

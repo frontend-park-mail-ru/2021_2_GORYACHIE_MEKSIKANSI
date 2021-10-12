@@ -1,3 +1,4 @@
+import {getItemToCart} from '../../views/mocks.js';
 
 
 export class Cart {
@@ -11,14 +12,24 @@ export class Cart {
     this.routeTo = routeTo;
     this.parent = parent;
     this.restId = id;
+    this.items = [];
+    this.addItemToCart(getItemToCart());
+    this.addItemToCart(getItemToCart());
+    this.addItemToCart(getItemToCart());
   }
 
   render() {
-    this.parent.innerHTML = Handlebars.templates['cart.hbs']();
+    this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: this.items});
     this.sticky = this.parent.querySelector('.cart').offsetTop;
     this.cartWidth = this.parent.querySelector('.cart').offsetWidth;
     console.log(this.cartWidth);
     this.settingUp();
+  }
+
+  addItemToCart(item) {
+    this.items.push(item);
+    this.remove();
+    this.render();
   }
 
   settingUp() {
