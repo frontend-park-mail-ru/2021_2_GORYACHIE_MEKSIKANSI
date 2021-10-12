@@ -18,17 +18,17 @@ export class DishPopup {
 
   render(dish) {
     this.dish = dish;
-    const div = document.createElement('div');
-    div.classList.add('dish-popup-div');
-    div.innerHTML = Handlebars.templates['dishPopup.hbs'](this.dish);
-    this.parent.appendChild(div);
+    this.div = document.createElement('div');
+    this.div.classList.add('dish-popup-div');
+    this.div.innerHTML = Handlebars.templates['dishPopup.hbs'](this.dish);
+    this.parent.appendChild(this.div);
     document.body.style.overflowY = 'hidden';
 
     document.body.querySelector('.dish-popup__close-button').addEventListener('click', this.remove);
     document.body.querySelector('.dish-popup-wrapper').addEventListener('click', this.outsidePopupClick);
 
-    document.body.querySelector('.plus').addEventListener('click', this.increaseNumber);
-    document.body.querySelector('.minus').addEventListener('click', this.decreaseNumber);
+    this.div.querySelector('.plus').addEventListener('click', this.increaseNumber);
+    this.div.querySelector('.minus').addEventListener('click', this.decreaseNumber);
 
     document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
       item.addEventListener('input', this.refreshSummary);
@@ -38,7 +38,8 @@ export class DishPopup {
   }
 
   addDishToCart = () => {
-    this.controller.addDishToCart(this.restId, this.dish.id);
+    const number = this.div.querySelector('.dish-popup__number').innerHTML;
+    this.controller.addDishToCart(this.restId, this.dish.id, Number(number));
     this.remove();
   }
 
@@ -80,14 +81,14 @@ export class DishPopup {
   }
 
   increaseNumber = () => {
-    const number = document.body.querySelector('.dish-popup__number');
+    const number = this.div.querySelector('.dish-popup__number');
     number.innerHTML = String(Number(number.innerHTML) + 1);
 
     this.refreshSummary();
   }
 
   decreaseNumber = () => {
-    const number = document.body.querySelector('.dish-popup__number');
+    const number = this.div.querySelector('.dish-popup__number');
     if (Number(number.innerHTML) > 1) {
       number.innerHTML = String(Number(number.innerHTML) - 1);
     }
@@ -108,7 +109,7 @@ export class DishPopup {
     });
 
     const summary = document.body.querySelector('.dish-popup__summary-cost');
-    const number = document.body.querySelector('.dish-popup__number');
+    const number = this.div.querySelector('.dish-popup__number');
     summary.innerHTML = String(cost * Number(number.innerHTML));
   }
 }
