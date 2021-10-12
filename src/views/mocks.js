@@ -76,6 +76,44 @@ export function getDish() {
   };
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+const items = [
+  {
+    restId: 2,
+    itemId: 2,
+    itemTitle: 'Бургер',
+    itemWeight: 180,
+    itemCcal: 420,
+    itemCost: 200,
+    itemNum: 1,
+  },
+  {
+    restId: 2,
+    itemId: 2,
+    itemTitle: 'Макнаггетс',
+    itemWeight: 180,
+    itemCcal: 420,
+    itemCost: 100,
+    itemNum: 2,
+  },
+  {
+    restId: 2,
+    itemId: 3,
+    itemTitle: 'МакКомбо',
+    itemWeight: 180,
+    itemCcal: 720,
+    itemCost: 301,
+    itemNum: 3,
+  },
+];
+
+export function getItemToCart() {
+  return items[getRandomInt(items.length)];
+}
+
 function getDishesListMocks() {
   const dishesList = [];
   for (let i = 0; i < 10; i++) {
