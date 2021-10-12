@@ -13,14 +13,12 @@ export class Cart {
     this.parent = parent;
     this.restId = id;
     this.items = [];
-    this.addItemToCart(getItemToCart());
-    this.addItemToCart(getItemToCart());
-    this.addItemToCart(getItemToCart());
   }
 
   render() {
     this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: this.items});
     this.sticky = this.parent.querySelector('.cart').offsetTop;
+    this.footY = document.getElementById('foot').offsetTop;
     this.cartWidth = this.parent.querySelector('.cart').offsetWidth;
     console.log(this.cartWidth);
     this.settingUp();
@@ -38,7 +36,11 @@ export class Cart {
 
   stickCart = () => {
     const cart = document.querySelector('.cart');
-    if (window.pageYOffset + 75 >= this.sticky) {
+    if (window.pageYOffset + 75 + cart.offsetHeight >= this.footY) {
+      cart.style.top = String(this.footY - (window.pageYOffset + 75 + cart.offsetHeight)) + 'px';
+      this.cartWidth = cart.offsetWidth;
+    } else if (window.pageYOffset + 75 >= this.sticky) {
+      cart.style.top = String(0) + 'px';
       cart.classList.add('cart__sticky');
       cart.style.width = this.cartWidth + 'px';
     } else {
