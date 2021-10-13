@@ -103,7 +103,18 @@ export function dishGet({url = '/restaurants/0/dish/0'}) {
 
 export function addDishPost({restId, dishId, number}) {
   return http.ajaxPost({
-    url: 'cart/',
-    body: {restId, dishId, number},
+    url: '/cart',
+    body: {
+      restId: restId,
+      dishId: dishId,
+      number: number,
+    },
+  });
+}
+
+export function clearCartDelete() {
+  return http.ajaxDelete({
+    url: '/cart',
+    body: {},
   });
 }

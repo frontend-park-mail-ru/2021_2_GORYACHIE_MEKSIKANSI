@@ -36,7 +36,12 @@ export class Cart {
   }
 
   settingUp() {
+    this.parent.querySelector('.cart__clear-button').addEventListener();
     window.addEventListener('scroll', this.stickCart);
+  }
+
+  clearCart() {
+    this.controller.clearCart();
   }
 
   stickCart = () => {

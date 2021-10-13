@@ -3,7 +3,7 @@ import {Validation} from '../modules/validation.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {LoginView} from '../views/LoginView/loginView.js';
-import User from '../modules/user.js'
+import User from '../modules/user.js';
 import {ResponseEvents} from '../events/Responses.js';
 import {ErrorsText} from '../events/Errors.js';
 import {urls} from '../modules/urls.js';
@@ -29,11 +29,11 @@ export class LoginController {
       controller: this});
 
     eventBus.addEventListener(LoginEvents.loginFailed,
-      this.loginView.showError.bind(this.loginView));
+        this.loginView.showError.bind(this.loginView));
     eventBus.addEventListener(LoginEvents.loginDone,
-      this.routeTo);
+        this.routeTo);
     eventBus.addEventListener(LoginEvents.loginCheckDone,
-      this.routeTo);
+        this.routeTo);
     eventBus.addEventListener(LoginEvents.loginCheckFailed,
         this.loginView.render.bind(this.loginView));
   }

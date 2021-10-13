@@ -28,7 +28,7 @@ function getData({
   if (method !== 'GET') {
     data.body = body;
     if (getCsrfToken()) {
-      data.headers['X-Csrf-Token'] = getCsrfToken()
+      data.headers['X-Csrf-Token'] = getCsrfToken();
     }
   }
 
@@ -58,7 +58,7 @@ async function makeFetch({
     }
   }
 
-  return responseJSON
+  return responseJSON;
 }
 
 /**
@@ -93,7 +93,24 @@ export default class Http {
   } = {}) {
     return makeFetch({
       url: url, method: 'POST',
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+    });
+  }
+
+  /**
+   * ajaxDelete request
+   *
+   * @param {{url: string, body: object}} params
+   * @return {Object<{status: number, parsedJSON: object}>}
+   *
+   */
+  async ajaxDelete({
+    url = '/',
+    body = null,
+  } = {}) {
+    return makeFetch({
+      url: url, method: 'DELETE',
+      body: JSON.stringify(body),
     });
   }
 }

@@ -67,10 +67,10 @@ export class HistoryView extends View {
    * @param {Class} controller
    */
   constructor({
-                parent: parent = document.body,
-                routeTo: routeTo = () => {},
-                controller: controller,
-              }) {
+    parent: parent = document.body,
+    routeTo: routeTo = () => {},
+    controller: controller,
+  }) {
     super({
       parent: parent,
       routeTo: routeTo,

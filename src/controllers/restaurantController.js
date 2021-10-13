@@ -6,7 +6,7 @@ import {urls} from '../modules/urls.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
 import RestaurantModel from '../models/Restaurant.js';
 
-export class RestaurantController {  // TODO: добавить джсдок
+export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

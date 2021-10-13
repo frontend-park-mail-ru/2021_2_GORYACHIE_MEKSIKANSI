@@ -1,7 +1,7 @@
 import {ResponseEvents} from '../events/Responses.js';
 import eventBus from '../modules/eventBus.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
-import {restaurantGet, dishGet, addDishPost} from '../modules/api.js';
+import {restaurantGet, dishGet, addDishPost, clearCartDelete} from '../modules/api.js';
 import {getRestaurantMock, getDish, getItemToCart} from '../views/mocks.js';
 
 class RestaurantModel {
@@ -15,32 +15,41 @@ class RestaurantModel {
           eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock());
           // eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.parsedJSON);
         })
-        .catch(() => {  // TODO: добавить взаимодействие с серваком...
-          eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock());  // TODO: toast на падение сервака/отсутствие связи
+        .catch(() => { // TODO: добавить взаимодействие с серваком...
+          eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock()); // TODO: toast на падение сервака/отсутствие связи
         });
   }
 
   getDish(restId, dishId) {
     dishGet({url: '/restaurant/' + restId + '/dish/' + dishId})
-      .then((response) => {
-        eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
-    })
-      .catch(() => {
-        eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
-      });
+        .then((response) => {
+          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
+        })
+        .catch(() => {
+          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
+        });
   }
 
-    addDishToCart(restId, dishId, number) {
-      addDishPost({restId, dishId, number})
-          .then((response) => {
-              eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
-          })
-          .catch(() => {
-              const dish = getItemToCart();
-              dish.itemNum = number;  // TODO: delete mock
-              eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, dish);
-          })
-    }
+
+  addDishToCart(restId, dishId, number) {
+    addDishPost({restId, dishId, number})
+        .then((response) => {
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
+        })
+        .catch(() => {
+          const dish = getItemToCart();
+          dish.itemNum = number; // TODO: delete mock
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, dish);
+        });
+  }
+
+  /**
+   * clearCart function
+   * call api clearCartDelete for DELETE method req to server
+   */
+  clearCart() {
+    clearCartDelete();
+  }
 }
 
 export default new RestaurantModel();
