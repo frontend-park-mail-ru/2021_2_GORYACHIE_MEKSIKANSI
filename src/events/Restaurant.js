@@ -3,4 +3,8 @@ export const RestaurantEvents = {
   restaurantGetFailed: 'restaurantGetFailed',
   restaurantPopGetSuccess: 'restaurantPopGetSuccess',
   restaurantCartAdd: 'restaurantCartAdd',
+  clearCartSuccess: 'clearCartSuccess',
+  clearCartFailed: 'clearCartFailed',
+  clearDishSuccess: 'clearDishSuccess',
+  clearDishFailed: 'clearDishFailed',
 };

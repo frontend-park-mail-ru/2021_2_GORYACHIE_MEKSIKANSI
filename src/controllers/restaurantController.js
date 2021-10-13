@@ -41,6 +41,14 @@ export class RestaurantController { // TODO: добавить джсдок
     RestaurantModel.addDishToCart(restId, dishId, number);
   }
 
+  clearCart() {
+    RestaurantModel.clearCart();
+  }
+
+  clearDishFromCart(dishId) {
+    RestaurantModel.clearDishFromCart(dishId);
+  }
+
   /**
    * Removing view
    */
