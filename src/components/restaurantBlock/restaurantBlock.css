@@ -24,28 +24,28 @@
     flex-wrap: wrap;
 }
 
-@media (min-width: 1600px) {
+/*@media (min-width: 1600px) {*/
+/*    .flex_el {*/
+/*        width: calc(100% / 4 - 22px) ;*/
+/*        flex-grow: 0;*/
+/*    }*/
+/*}*/
+
+@media (min-width: 1040px) {
     .flex_el {
-        width: calc(100% / 4 - 30px) ;
+        width: calc(100% / 3 - (33px * 2 / 3));
         flex-grow: 0;
     }
 }
 
-@media (min-width: 1040px) and (max-width: 1600px) {
+@media (min-width: 860px) and (max-width: 1040px) {
     .flex_el {
-        width: calc(100% / 3 - 30px);
+        width: calc(100% / 2 - (45px / 2));
         flex-grow: 0;
     }
 }
 
-@media (min-width: 640px) and (max-width: 1040px) {
-    .flex_el {
-        width: calc(100% / 2 - 30px);
-        flex-grow: 0;
-    }
-}
-
-@media (min-width: 0px) and (max-width: 640px) {
+@media (min-width: 0px) and (max-width: 860px) {
     .flex_el {
         width: calc(100% - 10px);
         flex-grow: 0;

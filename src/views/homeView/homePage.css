@@ -39,12 +39,13 @@ h3 {
     margin-right: 10px;
 }
 
-@media (min-width: 0px) and (max-width: 640px) {
+@media (min-width: 0px) and (max-width: 1000px) {
     .home-page__restaurants-list {
         width: 100%;
     }
 
     .sort-box {
+        transition: all 0.2s ease;
         display: none;
     }
 }
