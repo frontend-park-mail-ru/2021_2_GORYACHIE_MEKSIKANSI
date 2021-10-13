@@ -83,7 +83,7 @@ function getRandomInt(max) {
 const items = [
   {
     restId: 2,
-    itemId: 2,
+    itemId: 1,
     itemTitle: 'Бургер',
     itemWeight: 180,
     itemCcal: 420,

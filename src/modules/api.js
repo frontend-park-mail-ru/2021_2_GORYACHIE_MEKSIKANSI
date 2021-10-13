@@ -119,3 +119,12 @@ export function clearCartDelete() {
     body: {},
   });
 }
+
+export function clearDishFromCartDelete(dishId) {
+  return http.ajaxDelete({
+    url: '/cart',
+    body: {
+      dishId: dishId,
+    },
+  });
+}

@@ -43,11 +43,9 @@ export class RestaurantView extends View {
     }));
 
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
-    this.cart.restaurant = this.restaurant;
-    this.cart.restId = this.restaurant.id;
-    this.cart.render();
+    this.cart.render(this.restaurant);
 
-    this.popup.restaurantId = props.restaurantId;
+    this.popup.restId = props.id;
 
     this.settingUp();
   }

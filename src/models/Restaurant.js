@@ -1,9 +1,13 @@
 import {ResponseEvents} from '../events/Responses.js';
 import eventBus from '../modules/eventBus.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
-import {restaurantGet, dishGet, addDishPost, clearCartDelete} from '../modules/api.js';
+import {restaurantGet, dishGet, addDishPost, clearCartDelete, clearDishFromCartDelete} from '../modules/api.js';
 import {getRestaurantMock, getDish, getItemToCart} from '../views/mocks.js';
 
+/**
+ * RestaurantModel
+ * Model for calling api methods for Restaurant logic
+ */
 class RestaurantModel {
   /**
    * Check user auth and then get restaurantList,
@@ -46,9 +50,34 @@ class RestaurantModel {
   /**
    * clearCart function
    * call api clearCartDelete for DELETE method req to server
+   * with a response result emit clearCartSuccess or clearCartFailed
    */
   clearCart() {
-    clearCartDelete();
+    clearCartDelete()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
+            return;
+          }
+          eventBus.emitEventListener(RestaurantEvents.clearCartFailed, {});
+        })
+        .catch(() => { // TODO: server falls to catch
+          eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
+        });
+  }
+
+  clearDishFromCart(dishId) {
+    clearDishFromCartDelete(dishId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, dishId);
+            return;
+          }
+          eventBus.emitEventListener(RestaurantEvents.clearDishFailed, {});
+        })
+        .catch(() => { // TODO: server falls to catch
+          eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, dishId);
+        });
   }
 }
 
