@@ -39,6 +39,16 @@ h3 {
     margin-right: 10px;
 }
 
+@media (min-width: 0px) and (max-width: 640px) {
+    .home-page__restaurants-list {
+        width: 100%;
+    }
+
+    .sort-box {
+        display: none;
+    }
+}
+
 .home-page__restaurants-list {
     width: 81%;
     display: flex;
@@ -50,9 +60,8 @@ h3 {
 }
 
 .home-page__restaurant-block {
-    /*margin-right: 40px;*/
-    /*margin-top: 10px;*/
-    /*margin-bottom: 10px;*/
+    margin: 10px;
+
     border: solid 1px #e2e2e2;
     border-radius: 16px;
 
@@ -62,7 +71,6 @@ h3 {
 
 .home-page__restaurant-block:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
-    margin: 0 40px 20px 0;
 }
 
 
