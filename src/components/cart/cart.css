@@ -49,13 +49,28 @@
     flex: 1 1 auto;
 }
 
+.cart__summary-val {
+    font-size: 40px;
+    font-weight: var(--font_thin);
+}
+
 .cart__summary-title {
     font-size: 20px;
     font-weight: var(--font_thin);
     color: var(--color-gray);
 }
 
-.cart__summary-val {
+.cart__summary-val-cost {
+    display: flex;
+    flex-direction: row;
+}
+
+.cart__summary-cost {
+    font-size: 40px;
+    font-weight: var(--font_thin);
+}
+
+.cart__P {
     font-size: 40px;
     font-weight: var(--font_thin);
 }
