@@ -6,6 +6,7 @@ import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
+import {MapPopup} from './components/mapPopup/mapPopup.js';
 
 
 Handlebars.registerPartial('restaurant',
@@ -54,4 +55,7 @@ router.addRoute('restaurant', restaurantController); // TODO: поправить
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
 
-router.start();
+// router.start();
+const popup = new MapPopup({});
+
+popup.render();

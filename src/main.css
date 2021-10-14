@@ -23,6 +23,7 @@
 @import "components/historyOrder/historyOrder.css";
 @import "components/cartOrder/cartOrderSummary.css";
 @import "components/cartOrder/orderDelivery.css";
+@import "components/mapPopup/mapPopup.css";
 
 body {
     font-family: var(--raleway-font);
