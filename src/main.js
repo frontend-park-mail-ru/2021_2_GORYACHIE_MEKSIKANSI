@@ -11,6 +11,8 @@ import footer from 'Components/footer/footer.hbs';
 import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
+import {MapPopup} from './components/mapPopup/mapPopup.js';
+
 
 const application = document.getElementById('app');
 const router = new Router(document.body);
@@ -34,7 +36,7 @@ if ('serviceWorker' in navigator) {
 
       });
 }
-
+const popup = new MapPopup({});
 const loginController = new LoginController({
   parent: application,
   routeTo: routeTo});
@@ -63,6 +65,4 @@ router.addRoute(urls.checkout.name, orderingController);
 
 document.getElementById('foot').innerHTML = footer({});
 
-// orderingView.render();
-
-router.start();
+popup.render();
