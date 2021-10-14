@@ -16,7 +16,7 @@ export class Cart {
     this.items = new Map();
 
     EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.addItemToCart.bind(this));
-    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {});
+    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error message
     EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.clearCart);
     EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.clearDish.bind(this));
   }
@@ -28,8 +28,9 @@ export class Cart {
 
   refresh = () => {
     this.remove();
-    console.log(Array.from(this.items.values()));
     this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: Array.from(this.items.values()), restaurant: this.restaurant});
+    this.refreshSummary();
+
     this.sticky = this.parent.querySelector('.cart').offsetTop;
     this.footY = document.getElementById('foot').offsetTop;
     this.cartWidth = this.parent.querySelector('.cart').offsetWidth;
@@ -48,23 +49,40 @@ export class Cart {
 
   increaseNumber = (e) => {
     const {target} = e;
-    const number = target.closest('.cart__order-row').querySelector('.dish-popup__number');
+    const row = target.closest('.cart__order-row');
+    const dishId = row.id;
+    const number = row.querySelector('.dish-popup__number');
+    // increase number
     number.innerHTML = String(Number(number.innerHTML) + 1);
-    const dishId = target.closest('.cart__order-row').id;
-    this.items.get(Number(dishId)).itemNum += 1;
-    this.controller.addDishToCart(this.restaurant.id, this.items.get(Number(dishId)).id, Number(this.items.get(Number(dishId)).itemNum));
-    console.log(this.items.get(Number(dishId)).itemNum);
+    const item = this.items.get(Number(dishId));
+    item.itemNum += 1;
+    this.controller.addDishToCart(this.restaurant.id, item.id, item.itemNum);
+    this.refreshSummary()
   }
 
   decreaseNumber = (e) => {
     const {target} = e;
-    const number = target.closest('.cart__order-row').querySelector('.dish-popup__number');
+    const row = target.closest('.cart__order-row');
+    const number = row.querySelector('.dish-popup__number');
     if (Number(number.innerHTML) === 1) {
-      const dishId = target.closest('.cart__order-row').id;
-      this.clearDishCall(dishId);
+      const dishId = row.id;
+      // call the controller
+      this.controller.clearDishFromCart(dishId);
       return;
     }
+    const item = this.items.get(Number(row.id));
+    item.itemNum -= 1;
     number.innerHTML = String(Number(number.innerHTML) - 1);
+    this.refreshSummary();
+  }
+
+  refreshSummary = () => {
+    let value = 0;
+    this.items.forEach((item) => {
+      console.log(item);
+      value +=  item.itemCost * item.itemNum
+    });
+    this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
   }
 
   addItemToCart(item) {
@@ -82,12 +100,10 @@ export class Cart {
     window.addEventListener('scroll', this.stickCart);
   }
 
-  clearDishCall = (dishId) => {
-    this.controller.clearDishFromCart(dishId);
-  }
-
   clearCartCall = () => {
-    this.controller.clearCart();
+    if (this.items.size !== 0) {
+      this.controller.clearCart();
+    }
   }
 
   clearCart = () => {
