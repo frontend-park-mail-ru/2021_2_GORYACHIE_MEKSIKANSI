@@ -1,14 +1,11 @@
 export class MapPopup {
     constructor({
-                    parent: parent = document.body,
+                    parent: parent = document.querySelector('body'),
                     routeTo: routeTo = () => {
                     },
                     controller: controller,
                 }) {
-        this.mapPopupLinks = document.querySelectorAll('.map-popup__link');
         this.parent = parent;
-        this.lockPadding = document.querySelectorAll('.lock-padding');
-        this.mapPopupCloseIcon = document.querySelectorAll('.close-popup');
         this.unlock = true;
         this.timeout = 800;
     }
@@ -18,6 +15,9 @@ export class MapPopup {
         div.classList.add('map-popup-div');
         div.innerHTML = Handlebars.templates['mapPopup.hbs']({});
         document.body.appendChild(div);
+        this.lockPadding = document.querySelectorAll('.lock-padding');
+        this.mapPopupCloseIcon = document.querySelectorAll('.close-popup');
+        this.mapPopupLinks = document.querySelectorAll('.map-popup__link');
 
         if (this.mapPopupLinks.length > 0) {
             this.mapPopupLinks.forEach((link) => {
@@ -97,7 +97,7 @@ export class MapPopup {
     }
 
     bodyLock() {
-        const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
+        const lockPaddingValue = window.innerWidth - document.querySelector('.app').offsetWidth + 'px';
 
         if (this.lockPadding.length > 0) {
             this.lockPadding.forEach((value) => {
