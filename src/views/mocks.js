@@ -35,6 +35,7 @@ export function getDish() {
     dishRadios: [
       {
         dishRadioTitle: 'Выберите соус(1/2)',
+        dishRadioId: 1,
         dishRadioRows: [
           {
             dishRadioId: 1,
@@ -48,6 +49,7 @@ export function getDish() {
       },
       {
         dishRadioTitle: 'Выберите соус(2/2)',
+        dishRadioId: 2,
         dishRadioRows: [
           {
             dishRadioId: 1,
@@ -83,7 +85,7 @@ function getRandomInt(max) {
 const items = [
   {
     restId: 2,
-    itemId: 1,
+    itemId: 0,
     itemTitle: 'Бургер',
     itemWeight: 180,
     itemCcal: 420,
@@ -92,16 +94,59 @@ const items = [
   },
   {
     restId: 2,
-    itemId: 2,
+    itemId: 1,
     itemTitle: 'Макнаггетс',
     itemWeight: 180,
     itemCcal: 420,
     itemCost: 100,
     itemNum: 2,
+    dishRadios: [
+      {
+        dishRadioTitle: 'Выберите соус(1/2)',
+        dishRadioId: 1,
+        dishRadioRows: [
+          {
+            dishRadioId: 1,
+            dishRadioName: 'Кисло-сладкий соус',
+          },
+          {
+            dishRadioId: 2,
+            dishRadioName: 'Сырный соус',
+          },
+        ],
+      },
+      {
+        dishRadioTitle: 'Выберите соус(2/2)',
+        dishRadioId: 2,
+        dishRadioRows: [
+          {
+            dishRadioId: 1,
+            dishRadioName: 'Кисло-сладкий соус',
+          },
+          {
+            dishRadioId: 2,
+            dishRadioName: 'Сырный соус',
+          },
+        ],
+      },
+    ],
+    dishCheckboxTitle: 'Хотите добавить котлетку?',
+    dishCheckboxesRows: [
+      {
+        dishCheckBoxId: 1,
+        dishCheckboxRowTitle: 'Котлетка',
+        dishCheckboxRowCost: 30,
+      },
+      {
+        dishCheckBoxId: 2,
+        dishCheckboxRowTitle: 'Креветка',
+        dishCheckboxRowCost: 50,
+      },
+    ],
   },
   {
     restId: 2,
-    itemId: 3,
+    itemId: 2,
     itemTitle: 'МакКомбо',
     itemWeight: 180,
     itemCcal: 720,
@@ -110,8 +155,11 @@ const items = [
   },
 ];
 
-export function getItemToCart() {
-  return items[getRandomInt(items.length)];
+export function getItemToCart(dishId) {
+  return items.find((item) => {
+    console.log(item.itemId, dishId);
+    return item.itemId === Number(dishId);
+  });
 }
 
 function getDishesListMocks() {

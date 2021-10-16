@@ -35,15 +35,29 @@ class RestaurantModel {
   }
 
 
-  addDishToCart(restId, dishId, number) {
-    addDishPost({restId, dishId, number})
+  addDishToCart(dishSettings = {}) {
+    addDishPost(dishSettings)
         .then((response) => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart());
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart(dishSettings.dishId));
         })
         .catch(() => {
-          const dish = getItemToCart();
-          dish.itemNum = number; // TODO: delete mock
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, dish);
+          // copy the object of dish
+          const dish = {
+            ...getItemToCart(dishSettings.dishId),
+          };
+          dishSettings.dishCheckboxes.forEach((item) => {
+            const row = dish.dishCheckboxesRows.find((row) => {
+              return row.dishCheckBoxId === Number(item.dishCheckboxId);
+            });
+            if (row) {
+              dish.itemCost += row.dishCheckboxRowCost;
+            }// TODO: delete mock
+          });
+          dish.itemNum = dishSettings.dishNumber;
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {
+            ...dish,
+            ...dishSettings, // TODO: убрать инкастыляцию полей
+          });
         });
   }
 
