@@ -25,13 +25,13 @@
             </div>
             {{#each dishRadios }}
                 <div class="dish-popup__checkboxes-wrapper-title">
-                    {{ dishRadioTitle }}
+                    {{ dishRadioTitle }}*
                 </div>
-                <div class="dish-popup__checkboxes-wrapper">
+                <div id="{{dishRadioId}}" class="dish-popup__checkboxes-wrapper radio-wrapper">
                     {{#each dishRadioRows}}
-                        <div id="{{dishRadioId}}" class="dish-popup__radio-row">
+                        <div class="dish-popup__radio-row">
                             <label class="container">
-                                <input type="radio" name="{{../dishRadioTitle}}">
+                                <input id="{{dishRadioId}}" type="radio" name="{{../dishRadioTitle}}">
                                 <span class="checkmark checkmark-radius"></span>
                             </label>
                             <div class="dish-popup__checkbox-title">
@@ -66,7 +66,7 @@
                         </div>
                     {{/each}}
                 </div>
-
+            <div class="cart__required">* - обязательные</div>
         </div>
         <div class="dish-popup__selector-buy-button-box">
             <div class="dish-popup__num-selector-box">

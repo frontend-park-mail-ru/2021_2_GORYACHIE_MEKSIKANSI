@@ -38,8 +38,41 @@ export class DishPopup {
   }
 
   addDishToCart = () => {
+    const radios = this.div.querySelectorAll('.radio-wrapper');
+    const dishRadios = [];
+    radios.forEach((item) => {
+      item.querySelectorAll('input').forEach((input) => {
+        if (input.checked) {
+          dishRadios.push({
+            dishRadioId: item.id,
+            dishRadioChooseId: input.id,
+          });
+        }
+      });
+    });
+
+    if (dishRadios.length !== radios.length) {
+      // error
+      return;
+    }
+
+    const dishCheckboxes = [];
+    this.div.querySelectorAll('.dish-popup__checkbox-row').forEach((item) => {
+      const input = item.querySelector('input');
+      if (input.checked) {
+        dishCheckboxes.push({
+          dishCheckboxId: item.id,
+        });
+      }
+    });
+
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
-    this.controller.addDishToCart(this.restId, this.dish.id, Number(number));
+    this.controller.addDishToCart({
+      restId: this.restId,
+      dishId: this.dish.id,
+      dishNumber: Number(number),
+      dishRadios: dishRadios,
+      dishCheckboxes: dishCheckboxes});
     this.remove();
   }
 

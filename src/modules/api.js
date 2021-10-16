@@ -101,13 +101,15 @@ export function dishGet({url = '/restaurants/0/dish/0'}) {
   return http.ajaxGet({url});
 }
 
-export function addDishPost({restId, dishId, number}) {
+export function addDishPost(dishSettings = {}) {
   return http.ajaxPost({
     url: '/cart',
     body: {
-      restId: restId,
-      dishId: dishId,
-      number: number,
+      restId: dishSettings.restId,
+      dishId: dishSettings.dishId,
+      number: dishSettings.number,
+      dishRadios: dishSettings.dishRadios,
+      dishCheckboxes: dishSettings.dishCheckboxes,
     },
   });
 }

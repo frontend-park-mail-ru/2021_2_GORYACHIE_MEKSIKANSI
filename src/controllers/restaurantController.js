@@ -37,8 +37,9 @@ export class RestaurantController { // TODO: добавить джсдок
     RestaurantModel.getDish(restId, dishId);
   }
 
-  addDishToCart(restId, dishId, number) {
-    RestaurantModel.addDishToCart(restId, dishId, number);
+  addDishToCart(dishSettings = {}) {
+    console.log(dishSettings.dishRadios, dishSettings.dishCheckboxes);
+    RestaurantModel.addDishToCart(dishSettings);
   }
 
   clearCart() {

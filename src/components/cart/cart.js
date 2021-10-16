@@ -56,7 +56,7 @@ export class Cart {
     number.innerHTML = String(Number(number.innerHTML) + 1);
     const item = this.items.get(Number(dishId));
     item.itemNum += 1;
-    this.controller.addDishToCart(this.restaurant.id, item.id, item.itemNum);
+    this.controller.addDishToCart(item);
     this.refreshSummary()
   }
 
