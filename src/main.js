@@ -64,5 +64,4 @@ router.addRoute('restaurant', restaurantController); // TODO: поправить
 router.addRoute(urls.checkout.name, orderingController);
 
 document.getElementById('foot').innerHTML = footer({});
-
-popup.render();
+router.start();

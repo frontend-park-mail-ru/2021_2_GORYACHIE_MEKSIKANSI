@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs'
 import store from 'Modules/store.js';
 
+=======
+import User from '../../modules/user.js';
+import eventBus from '../../modules/eventBus.js';
+import {AuthStatus} from '../../events/Auth.js';
+import {MapPopup} from '../mapPopup/mapPopup.js';
+import {profileGet} from '../../modules/api.js';
+>>>>>>> map added, work in progress
 
 /**
  * Left navigation bar class
@@ -17,6 +25,7 @@ export class Navbar {
       .then(() => {
         this.profileRequested = true;
       });
+    this.yMap = new MapPopup({});
   }
 
   /**
@@ -54,7 +63,11 @@ export class Navbar {
   }
 
   settingUp() {
+<<<<<<< HEAD
     this.updateCartButtonNumber();
+=======
+    this.yMap.render();
+>>>>>>> map added, work in progress
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {
