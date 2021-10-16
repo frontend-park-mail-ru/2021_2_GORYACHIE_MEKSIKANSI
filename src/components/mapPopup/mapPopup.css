@@ -1,6 +1,3 @@
-@import "../variables/colors.css";
-@import "../variables/fonts.css";
-
 .map-popup {
     position: fixed;
     width: 100%;
@@ -15,9 +12,6 @@
     transition: all 0.8s ease 0s;
 }
 
-.lock {
-    overflow: hidden;
-}
 .map-popup.open {
     opacity: 1;
     visibility: visible;
@@ -65,4 +59,10 @@
 .map-popup:target {
     opacity: 1;
     visibility: visible;
+}
+
+.map-popup__address-confirmation {
+    height: 20vh;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }

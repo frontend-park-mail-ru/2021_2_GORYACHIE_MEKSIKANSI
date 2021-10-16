@@ -55,7 +55,4 @@ router.addRoute('restaurant', restaurantController); // TODO: поправить
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
 
-// router.start();
-const popup = new MapPopup({});
-
-popup.render();
+router.start();

@@ -43,6 +43,7 @@ class User {
     name = '',
     email = '',
     phone = '',
+    address = {},
   } = {}) {
     this.type = type;
 
@@ -58,6 +59,7 @@ class User {
       this.phone = phone;
     }
 
+    this.address = address;
     this.Auth = true;
   }
 }

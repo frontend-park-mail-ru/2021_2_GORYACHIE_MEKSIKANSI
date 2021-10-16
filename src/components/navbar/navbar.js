@@ -1,7 +1,7 @@
 import User from '../../modules/user.js';
 import eventBus from '../../modules/eventBus.js';
 import {AuthStatus} from '../../events/Auth.js';
-
+import {MapPopup} from '../mapPopup/mapPopup.js';
 import {profileGet} from '../../modules/api.js';
 
 /**
@@ -14,6 +14,7 @@ export class Navbar {
   constructor(parent = document.body) {
     this.parent = parent;
     profileGet({url: '/profile'});
+    this.yMap = new MapPopup({});
   }
 
   /**
@@ -31,6 +32,7 @@ export class Navbar {
   }
 
   settingUp() {
+    this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {

@@ -1,6 +1,11 @@
+import {YandexMap} from '../../modules/yMaps.js';
+import address from '../../modules/lsAddress.js';
+import eventBus from '../../modules/eventBus.js';
+import {AuthStatus} from '../../events/Auth.js';
+
 export class MapPopup {
     constructor({
-                    parent: parent = document.querySelector('body'),
+                    parent: parent = document.body,
                     routeTo: routeTo = () => {
                     },
                     controller: controller,
@@ -31,12 +36,33 @@ export class MapPopup {
             });
         }
 
+        this.yaMap = new YandexMap();
+        this.yaMap.render({ id: 'js__map', isStatic: false }, (address, isRenew) => {
+            if (isRenew) {
+                document.getElementById('js__map-add-address').value = address.name;
+            }
+            this.setCoords(address.latitude, address.longitude);
+        });
+
+        this.yaMap.addSearch('js__map-add-address');
+        const address_ = address.getAddress();
+        if (address_.name) {
+            document.getElementById('js__map-add-address').value = address_.name;
+            this.yaMap.addPointCustom(address_);
+        }
+        this.addCloseConfirmationEventListeners(div);
+    }
+
+    setCoords (latitude, longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     settingUp() {
     }
 
     eventPopupOpen = (e) => {
+        console.log(e.target);
         const mapPopupName = e.target.getAttribute('href').replace('#', '');
         const mapCurrentPopup = document.getElementById(mapPopupName);
         this.mapPopupOpen(mapCurrentPopup);
@@ -96,17 +122,36 @@ export class MapPopup {
         }
     }
 
-    bodyLock() {
-        const lockPaddingValue = window.innerWidth - document.querySelector('.app').offsetWidth + 'px';
-
-        if (this.lockPadding.length > 0) {
-            this.lockPadding.forEach((value) => {
-                value.style.paddingRight = lockPaddingValue;
-            });
+    addCloseConfirmationEventListeners (confirmationItem) {
+        const close = this.parent.querySelector('.map-popup');
+        if (!close) {
+            return;
         }
 
-        this.parent.style.paddingRight = lockPaddingValue;
-        this.parent.classList.add('lock');
+        close.querySelector('#js__add-new-address__btn')
+            .addEventListener('click', () => {
+                YandexMap.isAddressCorrect(document.getElementById('js__map-add-address').value)
+                    .then(isCorrect => {
+                        if (isCorrect) {
+                            const address = document.getElementById('js__map-add-address');
+                            if (address.value) {
+                                eventBus.emitEventListener(AuthStatus.changeAddress, {
+                                    longitude: this.longitude,
+                                    latitude: this.latitude,
+                                    name: address.value
+                                });
+                                this.mapPopupClose(document.querySelector('.map-popup'));
+                            } else {
+                                // TODO нужно сделть ошибку...
+                            }
+                        }
+                    })
+            });
+    }
+
+    bodyLock() {
+        this.parent.style.paddingRight =  String(this.getScrollbarWidth()) + 'px';
+        this.parent.style.overflow = 'hidden';
 
         this.unlock = false;
         setTimeout(() => {
@@ -114,13 +159,29 @@ export class MapPopup {
         }, this.timeout);
     }
 
+    getScrollbarWidth() {
+        const outer = document.createElement('div');
+        outer.style.visibility = 'hidden';
+        outer.style.overflow = 'scroll';
+        outer.style.msOverflowStyle = 'scrollbar';
+        document.body.appendChild(outer);
+
+        const inner = document.createElement('div');
+        outer.appendChild(inner);
+
+        const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+        outer.parentNode.removeChild(outer);
+
+        return scrollbarWidth;
+
+    }
+
     bodyUnlock() {
         setTimeout(() => {
-            this.lockPadding.forEach((item) => {
-                item.style.paddingRight = '0';
-            });
             this.parent.style.paddingRight = '0';
-            this.parent.classList.remove('lock');
+            this.parent.style.paddingRight = '0';
+            this.parent.style.overflowY = 'scroll';
         }, this.timeout);
 
         this.unlock = false;
