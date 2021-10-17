@@ -118,14 +118,14 @@ function getDishesListMocks() {
   const dishesList = [];
   for (let i = 0; i < 10; i++) {
     dishesList.push(
-      {
-        id: '1',
-        dishTitle: 'ЧикенМакнаггетс',
-        dishCost: '100',
-        dishCcal: '420ккал',
-        dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
-        dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
-      });
+        {
+          id: '1',
+          dishTitle: 'ЧикенМакнаггетс',
+          dishCost: '100',
+          dishCcal: '420ккал',
+          dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
+          dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+        });
   }
   return dishesList;
 }

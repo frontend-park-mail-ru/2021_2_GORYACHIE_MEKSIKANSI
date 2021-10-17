@@ -21,7 +21,7 @@ class SignUpModel {
   signUp({type, name, email, phone, password}) {
     signupPost({type, name, email, phone, password})
         .then((response) => {
-            if (response.status === ResponseEvents.OK) {
+          if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
                 urls.home.url);
             return;
@@ -36,17 +36,17 @@ class SignUpModel {
   }
 
 
-    checkAuth() {
-        profileGet({url: '/profile'})
-            .then((response) => {
-                if (response.status === ResponseEvents.OK) {
-                    eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);
-                    return;
-                }
+  checkAuth() {
+    profileGet({url: '/profile'})
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);
+            return;
+          }
 
-                eventBus.emitEventListener(SignUpEvents.userCheckFailed, {});
-            })
-    }
+          eventBus.emitEventListener(SignUpEvents.userCheckFailed, {});
+        });
+  }
 }
 
 export default new SignUpModel();

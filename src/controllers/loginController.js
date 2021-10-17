@@ -28,11 +28,11 @@ export class LoginController {
       controller: this});
 
     eventBus.addEventListener(LoginEvents.loginFailed,
-      this.loginView.showError.bind(this.loginView));
+        this.loginView.showError.bind(this.loginView));
     eventBus.addEventListener(LoginEvents.loginDone,
-      this.routeTo);
+        this.routeTo);
     eventBus.addEventListener(LoginEvents.loginCheckDone,
-      this.routeTo);
+        this.routeTo);
     eventBus.addEventListener(LoginEvents.loginCheckFailed,
         this.loginView.render.bind(this.loginView));
   }
