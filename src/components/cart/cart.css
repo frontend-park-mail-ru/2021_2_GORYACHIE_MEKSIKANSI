@@ -108,12 +108,19 @@
 }
 
 .cart__order-row {
+    flex-wrap: wrap;
     padding: 20px 0 20px 0;
     border-bottom: solid 1px darkgrey;
 
     display: flex;
     flex-direction: row;
     width: 100%;
+}
+
+.cart__order-row-additional {
+    margin-top: 5px;
+    width: 100%;
+    color: var(--color-gray);
 }
 
 .cart__order-row-right-box {

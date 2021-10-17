@@ -46,21 +46,36 @@ class RestaurantModel {
           eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
         })
         .catch(() => {
-          console.log(dishSettings);
-          const dishMock = getItemToCart(dishSettings.id);
-          const dish = {
-            ...getItemToCart(dishSettings.id),
-            dishCheckboxes: dishMock.dishCheckboxes.filter((item) => {
-              return !!dishSettings.dishCheckboxes.find((checkbox) => {
+          if ('cartId' in dishSettings) {
+            store.dispatch({
+              actionType: actions.storeCartAddDish,
+              dish: dishSettings,
+            });
+          } else {
+            // get dish mock
+            const dishMock = getItemToCart(dishSettings.id);
+            // select needed checkboxes
+            const dishCheckboxes = dishMock.dishCheckboxes.filter((item) => {
+              return dishSettings.dishCheckboxes.find((checkbox) => {
                 return Number(checkbox.dishCheckboxId) === Number(item.dishCheckBoxId);
               });
-            }),
-          };
-          console.log(dish);
-          store.dispatch({
-            actionType: actions.storeCartAddDish,
-            dish: dish,
-          });
+            });
+            // create dish obj and calc summary cost
+            const dish = {
+              ...getItemToCart(dishSettings.id),
+              dishCheckboxes: dishCheckboxes,
+              dishCost: dishCheckboxes.reduce((prev, item) => {
+                prev += item.dishCheckboxRowCost;
+                return prev;
+              }, dishMock.dishCost),
+              dishRadios: dishSettings.dishRadios,
+            };
+            console.log(dish);
+            store.dispatch({
+              actionType: actions.storeCartAddDish,
+              dish: dish,
+            });
+          }
           eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
         });
   }
@@ -96,7 +111,7 @@ class RestaurantModel {
           if (response.status === ResponseEvents.OK) {
             store.dispatch({
               actionType: actions.storeCartDeleteDish,
-              id: dishId,
+              cartId: dishId,
             });
             eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
             return;
@@ -106,7 +121,7 @@ class RestaurantModel {
         .catch(() => { // TODO: server falls to catch
           store.dispatch({
             actionType: actions.storeCartDeleteDish,
-            id: dishId,
+            cartId: dishId,
           });
           eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
         });

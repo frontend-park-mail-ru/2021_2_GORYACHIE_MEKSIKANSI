@@ -42,12 +42,19 @@ export class DishPopup {
     const dishRadios = [];
     radios.forEach((item) => {
       item.querySelectorAll('input').forEach((input) => {
+        console.log(this.dish.dishRadios);
         if (input.checked) {
           dishRadios.push({
             dishRadioId: item.id,
             dishRadioChooseId: input.id,
+            dishRadioName: this.dish.dishRadios.find((item1) => {
+              return Number(item1.dishRadioId) === Number(item.id);
+            }).dishRadioRows.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
+              return Number(item.dishRadioId) === Number(input.id);
+            }).dishRadioName,
           });
         }
+        console.log(dishRadios);
       });
     });
 

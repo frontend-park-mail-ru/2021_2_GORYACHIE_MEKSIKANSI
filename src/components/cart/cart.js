@@ -61,11 +61,7 @@ export class Cart {
   refreshSummary = () => {
     let value = 0;
     store.getState().cartState.forEach((item) => {
-      let addingCost = 0;
-      item.dishCheckboxes.forEach((checkbox) => {
-        addingCost += Number(checkbox.dishCheckboxRowCost);
-      })
-      value +=  (Number(item.dishCost) + addingCost) * item.number;
+      value +=  Number(item.dishCost) * item.number;
     });
     this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
   }

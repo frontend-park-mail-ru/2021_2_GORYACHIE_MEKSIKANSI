@@ -40,8 +40,9 @@ export class RestaurantController { // TODO: добавить джсдок
   }
   increaseDishInCart(dishId) {
     const dish = store.getState().cartState.find((item) => {
-      return item.id === dishId;
+      return Number(item.cartId) === Number(dishId);
     });
+    console.log(dish);
     if (dish) {
       RestaurantModel.addDishToCart(dish);
     }

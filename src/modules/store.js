@@ -41,39 +41,57 @@ function userReducer(state, action) {
   }
 }
 
+let cartId = 0;
+
 function cartReducer(state, action) {
   switch (action.actionType) {
     case actions.storeCartAddDish: {
-      const dish = state.find((item) => {
-        return item.id === action.dish.id;
-      });
-      if (dish) {
-        return state.map((item) => {
-          if (item.id === action.dish.id) {
-            return {...item, number: item.number + 1};
-          }
-          return item;
-        });
+      if ('cartId' in action.dish) {
+        if (state.find((item) => {
+          return item.cartId === action.dish.cartId;
+        })) {
+          return state.map((item) => {
+            if (item.cartId === action.dish.cartId) {
+              return {...item, number: Number(item.number) + 1};
+            }
+            return item;
+          });
+        }
+      } else {
+        if (state.find((item) => {
+          return JSON.stringify({...item, cartId: 0}) === JSON.stringify({...action.dish, cartId: 0});
+        })) {
+          return state.map((item) => {
+            if (JSON.stringify({...item, cartId: 0}) === JSON.stringify({...action.dish, cartId: 0})) {
+              return {...item, number: Number(item.number) + 1};
+            }
+            return item;
+          });
+        }
       }
+
       return [
         ...state,
-        action.dish,
+        {
+          ...action.dish,
+          cartId: cartId++,
+        },
       ];
     }
     case actions.storeCartDeleteDish: {
       const dish = state.find((item) => {
-        return item.id === action.id;
+        return Number(item.cartId) === Number(action.cartId);
       });
-      console.log(state, dish, action);
       if (dish.number > 1) {
         return state.map((item) => {
-          if (item.id === action.id) {
+          if (Number(item.cartId) === Number(action.cartId)) {
             return {...item, number: item.number - 1};
           }
+          return item;
         });
       }
       return state.filter((item) => {
-        return item.id !== action.id;
+        return Number(item.cartId) !== Number(action.cartId);
       });
     }
     case actions.storeCartDeleteAll:
