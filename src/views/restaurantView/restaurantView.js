@@ -32,8 +32,10 @@ export class RestaurantView extends View {
     this.parent.insertAdjacentHTML('afterbegin', template({
       auth: store.getState().user.auth,
       head: Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
-      content: Handlebars.templates['restaurantUnderheader.hbs'](this.restaurant) + Handlebars.templates['restaurantPage.hbs'](this.restaurant),
+      content: Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     }));
+
+    this.parent.querySelector('.restaurant-page__cart').innerHTML = Handlebars.templates['cart.hbs']();
 
     this.popup.restaurantId = props.restaurantId;
 

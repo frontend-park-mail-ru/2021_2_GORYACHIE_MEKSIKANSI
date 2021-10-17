@@ -9,6 +9,20 @@
     margin-bottom: 10px;
 }
 
+.restaurant-page__menu-cart-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.restaurant-page__menu {
+    width: 100%;
+}
+
+.restaurant-page__cart {
+    width: 35%;
+    margin: 20px;
+}
+
 .restaurant-page {
     width: 100%;
     display: flex;
