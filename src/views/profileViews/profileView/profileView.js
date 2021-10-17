@@ -36,7 +36,7 @@ export class ProfileView extends View {
     this.parent.innerHTML += template({
       pageTitle: 'Личные данные',
       content: Handlebars.templates['profilePage.hbs']({
-        user: store.getState().user,
+        user: store.getState().userState,
       }),
       rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
     document.querySelector('.footer').style.marginTop = '0';

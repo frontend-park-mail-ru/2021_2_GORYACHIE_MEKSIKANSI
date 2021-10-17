@@ -46,8 +46,8 @@ export class Router {
             window.history.pushState({}, '', pageUrl);
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);
           } else {
-            window.history.pushState({}, '', pageUrl);
-            console.log('HERE', pageUrl, name);
+            window.history.pushState({}, '', url);
+            console.log('HERE', pageUrl, name, location);
             this.routes.get(name).render();
           }
           this.currControllerName = name;
@@ -76,7 +76,7 @@ export class Router {
   }
 
   start() {
-    this.open(window.location.pathname);
+    this.open(window.location.pathname.slice(0, window.location.pathname.length - 1)); // TODO: подумать
   }
 
   /**
