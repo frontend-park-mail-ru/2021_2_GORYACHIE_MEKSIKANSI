@@ -1,7 +1,9 @@
 import {ProfileView} from '../views/profileViews/profileView/profileView.js';
-import ProfileModel from '../models/Profile.js';
 import eventBus from '../modules/eventBus.js';
 import {ProfileEvents} from '../events/Profile.js';
+import {AuthStatus} from '../events/Auth.js';
+
+import store from '../modules/store.js';
 
 /**
  *  Profile controller class
@@ -25,13 +27,34 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userLoggedIn,
         this.profileView.render.bind(this.profileView));
     eventBus.addEventListener(ProfileEvents.userNotAuth, this.routeTo);
+    this.getProfile = false;  // TODO: придумать с этим что то, потому что это пиздец...
+    eventBus.addEventListener(AuthStatus.userLogin, () => {this.getProfile = true});
+    eventBus.addEventListener(AuthStatus.notAuth, () => {this.getProfile = true});
   }
 
   /**
    * Rendering view
    */
   render() {
-    ProfileModel.checkAuth();
+    if (this.getProfile === false) {
+      eventBus.addEventListener(AuthStatus.userLogin, this.show);
+      eventBus.addEventListener(AuthStatus.notAuth, () => { this.routeTo('/');
+        eventBus.unsubscribe(AuthStatus.notAuth);
+        eventBus.unsubscribe(AuthStatus.userLogin); });
+    }
+    if (this.getProfile === true) {
+      if (!store.getState().userState.auth) {
+          this.routeTo('/');
+      } else {
+        this.profileView.render();
+      }
+    }
+  }
+
+  show = () => {
+    this.profileView.render();
+    eventBus.unsubscribe(AuthStatus.userLogin);
+    eventBus.unsubscribe(AuthStatus.notAuth);
   }
 
   /**

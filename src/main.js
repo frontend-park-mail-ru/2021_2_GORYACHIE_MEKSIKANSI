@@ -7,6 +7,8 @@ import {ProfileController} from './controllers/profileController.js';
 import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
 
+import {OrderingView} from './views/profileViews/cartView/orderingView.js';
+
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
 Handlebars.registerPartial('promoBlock',
@@ -52,5 +54,11 @@ router.addRoute('restaurant', restaurantController); // TODO: поправить
 
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
+
+const cartView = new OrderingView({
+  parent: application,
+});
+
+// cartView.render();
 
 router.start();

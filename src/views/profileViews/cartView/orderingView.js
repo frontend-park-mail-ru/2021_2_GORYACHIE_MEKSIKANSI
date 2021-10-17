@@ -31,7 +31,7 @@ const orders =
 /**
  * Profile view class
  */
-export class CartView extends View {
+export class OrderingView extends View {
   /**
    *
    * @param {HTMLElement} parent
