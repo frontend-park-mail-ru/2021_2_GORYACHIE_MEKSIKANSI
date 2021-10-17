@@ -4,6 +4,37 @@
     flex-wrap: wrap;
 }
 
+.restaurant-page__dish-media {
+    width: 100%;
+}
+
+@media (min-width: 1040px) and (max-width: 1400px) {
+    .restaurant-page__dish-media {
+        width: calc(100% / 2 - (45px / 2));
+        flex-grow: 0;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 1040px) {
+    .restaurant-page__dish-media {
+        width: calc(100% - 10px);
+        flex-grow: 0;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 1600px) {
+    .restaurant-page__dish-media {
+        transition: all 0.2s ease;
+    }
+}
+
+@media (min-width: 1400px) {
+    .restaurant-page__dish-media {
+        width: calc(100% / 3 - (33px * 2 / 3));
+        flex-grow: 0;
+    }
+}
+
 .restaurant-page__dish {
     margin-right: 10px;
     margin-bottom: 10px;
