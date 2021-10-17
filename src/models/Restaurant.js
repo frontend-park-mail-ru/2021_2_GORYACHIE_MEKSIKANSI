@@ -3,6 +3,7 @@ import eventBus from '../modules/eventBus.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
 import {restaurantGet, dishGet, addDishPost, clearCartDelete, clearDishFromCartDelete} from '../modules/api.js';
 import {getRestaurantMock, getDish, getItemToCart} from '../views/mocks.js';
+import store, {actions} from '../modules/store.js';
 
 /**
  * RestaurantModel
@@ -38,26 +39,29 @@ class RestaurantModel {
   addDishToCart(dishSettings = {}) {
     addDishPost(dishSettings)
         .then((response) => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, getItemToCart(dishSettings.dishId));
+          store.dispatch({
+            actionType: actions.storeCartAddDish,
+            dish: getItemToCart(dishSettings.id),
+          });
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
         })
         .catch(() => {
-          // copy the object of dish
+          console.log(dishSettings);
+          const dishMock = getItemToCart(dishSettings.id);
           const dish = {
-            ...getItemToCart(dishSettings.dishId),
+            ...getItemToCart(dishSettings.id),
+            dishCheckboxes: dishMock.dishCheckboxes.filter((item) => {
+              return !!dishSettings.dishCheckboxes.find((checkbox) => {
+                return Number(checkbox.dishCheckboxId) === Number(item.dishCheckBoxId);
+              });
+            }),
           };
-          dishSettings.dishCheckboxes.forEach((item) => {
-            const row = dish.dishCheckboxesRows.find((row) => {
-              return row.dishCheckBoxId === Number(item.dishCheckboxId);
-            });
-            if (row) {
-              dish.itemCost += row.dishCheckboxRowCost;
-            }// TODO: delete mock
+          console.log(dish);
+          store.dispatch({
+            actionType: actions.storeCartAddDish,
+            dish: dish,
           });
-          dish.itemNum = dishSettings.dishNumber;
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {
-            ...dish,
-            ...dishSettings, // TODO: убрать инкастыляцию полей
-          });
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
         });
   }
 
@@ -70,12 +74,18 @@ class RestaurantModel {
     clearCartDelete()
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
+            store.dispatch({
+              actionType: actions.storeCartDeleteAll,
+            });
             eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
             return;
           }
           eventBus.emitEventListener(RestaurantEvents.clearCartFailed, {});
         })
         .catch(() => { // TODO: server falls to catch
+          store.dispatch({
+            actionType: actions.storeCartDeleteAll,
+          });
           eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
         });
   }
@@ -84,13 +94,21 @@ class RestaurantModel {
     clearDishFromCartDelete(dishId)
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, dishId);
+            store.dispatch({
+              actionType: actions.storeCartDeleteDish,
+              id: dishId,
+            });
+            eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
             return;
           }
           eventBus.emitEventListener(RestaurantEvents.clearDishFailed, {});
         })
         .catch(() => { // TODO: server falls to catch
-          eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, dishId);
+          store.dispatch({
+            actionType: actions.storeCartDeleteDish,
+            id: dishId,
+          });
+          eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
         });
   }
 }

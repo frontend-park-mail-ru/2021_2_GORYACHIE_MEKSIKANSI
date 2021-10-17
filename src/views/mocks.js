@@ -30,6 +30,7 @@ export function getDish() {
     dishTitle: 'ЧикенМакнаггетс',
     dishCost: '100',
     dishCcal: '420ккал',
+    dishRadiosWeight: '180',
     dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
     dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
     dishRadios: [
@@ -84,54 +85,28 @@ function getRandomInt(max) {
 
 const items = [
   {
-    restId: 2,
-    itemId: 0,
-    itemTitle: 'Бургер',
-    itemWeight: 180,
-    itemCcal: 420,
-    itemCost: 200,
-    itemNum: 1,
-  },
-  {
-    restId: 2,
-    itemId: 1,
-    itemTitle: 'Макнаггетс',
-    itemWeight: 180,
-    itemCcal: 420,
-    itemCost: 100,
-    itemNum: 2,
+    id: '1',
+    number: 1,
+    dishTitle: 'ЧикенМакнаггетс',
+    dishCost: '100',
+    dishCcal: '420',
+    dishWeight: '180',
+    dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
+    dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
     dishRadios: [
       {
         dishRadioTitle: 'Выберите соус(1/2)',
         dishRadioId: 1,
-        dishRadioRows: [
-          {
-            dishRadioId: 1,
-            dishRadioName: 'Кисло-сладкий соус',
-          },
-          {
-            dishRadioId: 2,
-            dishRadioName: 'Сырный соус',
-          },
-        ],
+        dishRadioChooseId: 1,
       },
       {
         dishRadioTitle: 'Выберите соус(2/2)',
         dishRadioId: 2,
-        dishRadioRows: [
-          {
-            dishRadioId: 1,
-            dishRadioName: 'Кисло-сладкий соус',
-          },
-          {
-            dishRadioId: 2,
-            dishRadioName: 'Сырный соус',
-          },
-        ],
+        dishRadioChooseId: 1,
       },
     ],
     dishCheckboxTitle: 'Хотите добавить котлетку?',
-    dishCheckboxesRows: [
+    dishCheckboxes: [
       {
         dishCheckBoxId: 1,
         dishCheckboxRowTitle: 'Котлетка',
@@ -144,22 +119,10 @@ const items = [
       },
     ],
   },
-  {
-    restId: 2,
-    itemId: 2,
-    itemTitle: 'МакКомбо',
-    itemWeight: 180,
-    itemCcal: 720,
-    itemCost: 301,
-    itemNum: 3,
-  },
 ];
 
 export function getItemToCart(dishId) {
-  return items.find((item) => {
-    console.log(item.itemId, dishId);
-    return item.itemId === Number(dishId);
-  });
+  return items[0];
 }
 
 function getDishesListMocks() {

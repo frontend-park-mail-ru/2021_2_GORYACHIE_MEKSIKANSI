@@ -1,8 +1,8 @@
 import {RestaurantView} from '../views/restaurantView/restaurantView.js';
 import eventBus from '../modules/eventBus.js';
-import {urls} from '../modules/urls.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
 import RestaurantModel from '../models/Restaurant.js';
+import store from '../modules/store.js';
 
 export class RestaurantController { // TODO: добавить джсдок
   /**
@@ -36,15 +36,22 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
   addDishToCart(dishSettings = {}) {
-    console.log(dishSettings.dishRadios, dishSettings.dishCheckboxes);
     RestaurantModel.addDishToCart(dishSettings);
+  }
+  increaseDishInCart(dishId) {
+    const dish = store.getState().cartState.find((item) => {
+      return item.id === dishId;
+    });
+    if (dish) {
+      RestaurantModel.addDishToCart(dish);
+    }
   }
 
   clearCart() {
     RestaurantModel.clearCart();
   }
 
-  clearDishFromCart(dishId) {
+  deleteDishFromCart(dishId) {
     RestaurantModel.clearDishFromCart(dishId);
   }
 

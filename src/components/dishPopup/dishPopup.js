@@ -69,8 +69,8 @@ export class DishPopup {
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
     this.controller.addDishToCart({
       restId: this.restId,
-      dishId: this.dish.id,
-      dishNumber: Number(number),
+      id: this.dish.id,
+      number: Number(number),
       dishRadios: dishRadios,
       dishCheckboxes: dishCheckboxes});
     this.remove();

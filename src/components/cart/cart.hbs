@@ -15,13 +15,13 @@
 
     <div class="cart__orders-body">
         {{#each items}}
-            <div id="{{itemId}}" class="cart__order-row">
+            <div id="{{id}}" class="cart__order-row">
                 <div class="cart__order-row-info">
                     <div class="cart__order-row-title">
-                        {{ itemTitle }}
+                        {{ dishTitle }}
                     </div>
                     <div class="cart__order-row-info">
-                        {{ itemWeight }}  • {{ itemCcal }}ккал
+                        {{ dishWeight }}г • {{ dishCcal }}ккал
                     </div>
                 </div>
                 <div class="cart__order-row-right-box">
@@ -32,7 +32,7 @@
                                     <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
                                 </svg>
                             </div>
-                            <div class="dish-popup__number">{{ itemNum }}</div>
+                            <div class="dish-popup__number">{{ number }}</div>
                             <div class="button plus dish-popup__selector-button">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 17V7" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="cart__order-row-cost">
-                        {{ itemCost }} ₽
+                        {{ dishCost }} ₽
                     </div>
                 </div>
 

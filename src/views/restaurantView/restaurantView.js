@@ -37,7 +37,7 @@ export class RestaurantView extends View {
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
-      auth: store.getState().user.auth,
+      auth: store.getState().userState.auth,
       head: Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
       content: Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     }));

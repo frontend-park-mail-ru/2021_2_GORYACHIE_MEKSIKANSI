@@ -1,9 +1,11 @@
 export const actions = {
   storeUserLogin: 'storeUserLogin',
   storeUserLogout: 'storeUserLogout',
-  storeCartAdd: 'storeCartAdd',
-  storeCartDelete: 'storeCartDelete',
+  storeCartAddDish: 'storeCartAdd',
+  storeCartDeleteDish: 'storeCartDelete',
   storeCartDeleteAll: 'storeCartDeleteAll',
+  storeCartIncreaseDishNumber: 'storeCartIncreaseDishNumber',
+  storeCartDecreaseDishNumber: 'storeCartDecreaseDishNumber',
 };
 
 function createStore(reducer, initialState) {
@@ -41,15 +43,39 @@ function userReducer(state, action) {
 
 function cartReducer(state, action) {
   switch (action.actionType) {
-    case actions.storeCartAdd:
+    case actions.storeCartAddDish: {
+      const dish = state.find((item) => {
+        return item.id === action.dish.id;
+      });
+      if (dish) {
+        return state.map((item) => {
+          if (item.id === action.dish.id) {
+            return {...item, number: item.number + 1};
+          }
+          return item;
+        });
+      }
       return [
         ...state,
         action.dish,
       ];
-    case actions.storeCartDelete:
-      return state.filter((item) => {
-        return item.restId !== action.restId || item.itemId !== action.itemId;
+    }
+    case actions.storeCartDeleteDish: {
+      const dish = state.find((item) => {
+        return item.id === action.id;
       });
+      console.log(state, dish, action);
+      if (dish.number > 1) {
+        return state.map((item) => {
+          if (item.id === action.id) {
+            return {...item, number: item.number - 1};
+          }
+        });
+      }
+      return state.filter((item) => {
+        return item.id !== action.id;
+      });
+    }
     case actions.storeCartDeleteAll:
       return [];
     default:
