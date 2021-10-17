@@ -1,6 +1,6 @@
 import {RestaurantEvents} from '../../events/Restaurant.js';
 import EventBus from '../../modules/eventBus.js';
-import store, {actions} from '../../modules/store.js';
+import store from '../../modules/store.js';
 
 
 export class Cart {
@@ -30,9 +30,9 @@ export class Cart {
     this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: store.getState().cartState, restaurant: this.restaurant});
     this.refreshSummary();
 
-    this.sticky = this.parent.querySelector('.cart').offsetTop;
+    this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;
     this.footY = document.getElementById('foot').offsetTop;
-    this.cartWidth = this.parent.querySelector('.cart').offsetWidth;
+    this.cartWidth = this.parent.querySelector('.cart-wrapper').offsetWidth;
 
     const rows = this.parent.querySelectorAll('.cart__order-row');
     if (rows) {
@@ -80,7 +80,7 @@ export class Cart {
   }
 
   stickCart = () => {
-    const cart = document.querySelector('.cart');
+    const cart = document.querySelector('.cart-wrapper');
     if (window.pageYOffset + 75 + cart.offsetHeight >= this.footY) {
       cart.style.top = String(this.footY - (window.pageYOffset + 75 + cart.offsetHeight)) + 'px';
       this.cartWidth = cart.offsetWidth;
@@ -96,7 +96,7 @@ export class Cart {
   }
 
   remove() {
-    const cart = this.parent.querySelector('.cart');
+    const cart = this.parent.querySelector('.cart-wrapper');
     if (cart) {
       window.removeEventListener('scroll', this.stickCart);
     }

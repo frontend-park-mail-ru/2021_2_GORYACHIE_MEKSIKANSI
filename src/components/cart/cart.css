@@ -1,6 +1,21 @@
-.cart {
-    background-color: var(--color-light-gray);
+.cart-wrapper {
     height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart__buy-button {
+    margin-top: 15px;
+    height: 60px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart {
+    height: 100%;
+    background-color: var(--color-light-gray);
     display: flex;
     flex-direction: column;
 }
