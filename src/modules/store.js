@@ -1,6 +1,10 @@
 
+export const actions = {
+  storeUserLogin: 'storeUserLogin',
+  storeUserLogout: 'storeUserLogout',
+};
 
-function createStore(reducer, initialState) {
+export function createStore(reducer, initialState) {
   let state = initialState;
   return {
     dispatch: (action) => {
@@ -10,12 +14,21 @@ function createStore(reducer, initialState) {
   };
 }
 
-function userReducer(state, action) {
+export function userReducer(state, action) {
   switch (action.type) {
-    case 'LOGIN': {
-      console.log(action);
-      const state = {
-        // ...state,
+    case actions.storeUserLogout:
+      return {
+        ...state,
+        user: {
+          auth: false,
+          name: '',
+          email: '',
+          phone: '',
+        },
+      };
+    case actions.storeUserLogin:
+      return {
+        ...state,
         user: {
           auth: true,
           name: action.name,
@@ -23,34 +36,20 @@ function userReducer(state, action) {
           phone: action.phone,
         },
       };
-      console.log(state.user);
-      console.log(state);
-      return state;
-    }
-    case 'LOGOUT': {
-      state.user = {
-        ...state.user,
-        auth: false,
-        name: '',
-        email: '',
-        phone: '',
-      };
-      return state;
-    }
     default:
       return state;
   }
 }
 
-const us3r = {
-  auth: false,
-  name: '',
-  phone: '',
-  email: '',
-};
-
 const initialState = {
-  user: us3r,
+  user: {
+    auth: false,
+    name: '',
+    phone: '',
+    email: '',
+  },
 };
 
-export const store = createStore(userReducer, initialState);
+const store = createStore(userReducer, initialState);
+
+export default store;

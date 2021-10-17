@@ -6,22 +6,6 @@ import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
-import {store} from './modules/store.js';
-
-store.dispatch({
-  type: 'LOGIN',
-  name: 'John',
-  email: 'John@example.ru',
-  phone: '79999999999',
-});
-
-console.log(store.getState());
-
-// store.dispatch({
-//   type: 'LOGOUT',
-// });
-//
-// console.log(store.getState());
 
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
