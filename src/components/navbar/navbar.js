@@ -1,8 +1,7 @@
-import User from '../../modules/user.js';
-import eventBus from '../../modules/eventBus.js';
-import {AuthStatus} from '../../events/Auth.js';
+import {profileGet, logoutPost} from '../../modules/api.js';
 
-import {profileGet} from '../../modules/api.js';
+import store from '../../modules/store.js';
+
 
 /**
  * Left navigation bar class
@@ -22,7 +21,7 @@ export class Navbar {
   render() {
     const template = Handlebars.templates['navbar.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
-      user: {auth: User.Auth, name: User.name},
+      user: store.getState().user,
     }));
 
     this.close();
@@ -51,8 +50,6 @@ export class Navbar {
     event.preventDefault();
     const {target} = event;
 
-    console.log(target);
-
     const navbar = this.parent.querySelector('.navbar');
 
 
@@ -63,7 +60,7 @@ export class Navbar {
 
   logout = (event) => {
     event.preventDefault();
-    eventBus.emitEventListener(AuthStatus.userLogout, {});
+    logoutPost();  // TODO: solve the problem of direct api use...
   }
 
   /**

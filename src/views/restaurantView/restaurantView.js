@@ -1,8 +1,7 @@
-import User from '../../modules/user.js';
 import Navbar from '../../components/navbar/navbar.js';
 import {DishPopup} from '../../components/dishPopup/dishPopup.js';
 import {View} from '../baseView/View.js';
-import {getRestaurantMock} from '../mocks.js';
+import store from '../../modules/store.js';
 
 export class RestaurantView extends View {
   constructor({
@@ -31,7 +30,7 @@ export class RestaurantView extends View {
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
-      auth: User.Auth,
+      auth: store.getState().user.auth,
       head: Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
       content: Handlebars.templates['restaurantUnderheader.hbs'](this.restaurant) + Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     }));

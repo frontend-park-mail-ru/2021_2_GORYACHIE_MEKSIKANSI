@@ -1,6 +1,6 @@
 import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
-import User from '../../../modules/user.js';
+import store from '../../../modules/store.js';
 
 
 /**
@@ -36,11 +36,7 @@ export class ProfileView extends View {
     this.parent.innerHTML += template({
       pageTitle: 'Личные данные',
       content: Handlebars.templates['profilePage.hbs']({
-        user: {
-          name: User.name,
-          phone: User.phone,
-          email: User.email,
-        },
+        user: store.getState().user,
       }),
       rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
     document.querySelector('.footer').style.marginTop = '0';

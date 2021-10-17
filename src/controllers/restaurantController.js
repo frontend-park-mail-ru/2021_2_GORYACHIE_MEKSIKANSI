@@ -1,7 +1,5 @@
 import {RestaurantView} from '../views/restaurantView/restaurantView.js';
 import eventBus from '../modules/eventBus.js';
-// import User from '../modules/user.js';
-// import ProfileModel from '../models/Profile.js';
 import {urls} from '../modules/urls.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
 import RestaurantModel from '../models/Restaurant.js';

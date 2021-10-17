@@ -7,7 +7,6 @@ import {ProfileController} from './controllers/profileController.js';
 import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
 
-
 Handlebars.registerPartial('restaurant',
     Handlebars.templates['restaurantBlock.hbs']);
 Handlebars.registerPartial('promoBlock',

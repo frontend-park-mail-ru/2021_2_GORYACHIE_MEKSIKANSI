@@ -1,6 +1,7 @@
-import {AuthStatus} from '../events/Auth.js';
-import eventBus from './eventBus.js';
 import {ResponseEvents} from '../events/Responses.js';
+import store, {actions} from './store.js';
+import eventBus from './eventBus.js';
+import {AuthStatus} from '../events/Auth.js';
 
 /**
  * emitting events for user auth
@@ -10,7 +11,17 @@ import {ResponseEvents} from '../events/Responses.js';
  */
 export function auth(response) {
   if (response.status === ResponseEvents.OK) {
-    eventBus.emitEventListener(AuthStatus.userLogin, response.parsedJSON);
+    store.dispatch({
+      actionType: actions.storeUserLogin,
+      ...response.parsedJSON,
+    });
   }
   return response;
+}
+
+export function logout() {
+  store.dispatch({
+    actionType: actions.storeUserLogout,
+  });
+  eventBus.emitEventListener(AuthStatus.userLogout, '/');
 }

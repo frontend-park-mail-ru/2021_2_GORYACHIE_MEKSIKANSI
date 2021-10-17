@@ -93,7 +93,7 @@ export default class Http {
   } = {}) {
     return makeFetch({
       url: url, method: 'POST',
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
   }
 }
