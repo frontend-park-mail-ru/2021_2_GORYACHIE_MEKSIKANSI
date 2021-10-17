@@ -1,10 +1,9 @@
-
 export const actions = {
   storeUserLogin: 'storeUserLogin',
   storeUserLogout: 'storeUserLogout',
 };
 
-export function createStore(reducer, initialState) {
+function createStore(reducer, initialState) {
   let state = initialState;
   return {
     dispatch: (action) => {
@@ -14,8 +13,8 @@ export function createStore(reducer, initialState) {
   };
 }
 
-export function userReducer(state, action) {
-  switch (action.type) {
+function userReducer(state, action) {
+  switch (action.actionType) {
     case actions.storeUserLogout:
       return {
         ...state,

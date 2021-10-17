@@ -1,5 +1,5 @@
 import Http from './http.js';
-import {auth} from './auth.js';
+import {auth, logout} from './auth.js';
 
 const http = new Http();
 
@@ -77,7 +77,8 @@ export function restaurantsGet({url = '/'}) {
  * @return {Promise<{parsedJSON: object, status: number}>}
  */
 export function logoutPost() {
-  return http.ajaxPost({url: '/logout', body: {}});
+  return http.ajaxPost({url: '/logout', body: {}})
+      .then(logout);
 }
 
 

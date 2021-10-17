@@ -3,8 +3,6 @@ import {Validation} from '../modules/validation.js';
 import SignUpModel from '../models/SignUp.js';
 import eventBus from '../modules/eventBus.js';
 import {SignUpEvents} from '../events/SignUp.js';
-import user from '../modules/user.js';
-import {urls} from '../modules/urls.js';
 
 /**
  * Signup page controller

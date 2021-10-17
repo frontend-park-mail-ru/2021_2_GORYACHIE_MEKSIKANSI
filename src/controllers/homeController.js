@@ -3,7 +3,6 @@ import eventBus from '../modules/eventBus.js';
 import {HomeEvents} from '../events/Home.js';
 import HomeModel from '../models/Home.js';
 import {AuthStatus} from '../events/Auth.js';
-import User from '../modules/user.js';
 
 /**
  * Home page controller
@@ -27,7 +26,7 @@ export class HomeController {
 
     eventBus.addEventListener(HomeEvents.homeGetRestaurantsSuccess,
         this.homeView.render.bind(this.homeView));
-    eventBus.addEventListener(AuthStatus.userLoggedOutHomeRerender, this.routeTo);
+    eventBus.addEventListener(AuthStatus.userLogout, this.routeTo);
   }
   /**
    * Rendering home page with restaurants and checking auth

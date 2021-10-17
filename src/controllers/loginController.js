@@ -3,7 +3,6 @@ import {Validation} from '../modules/validation.js';
 import eventBus from '../modules/eventBus.js';
 import {LoginEvents} from '../events/Login.js';
 import {LoginView} from '../views/LoginView/loginView.js';
-import User from '../modules/user.js'
 import {ResponseEvents} from '../events/Responses.js';
 import {ErrorsText} from '../events/Errors.js';
 import {urls} from '../modules/urls.js';
