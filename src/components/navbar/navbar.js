@@ -13,6 +13,7 @@ export class Navbar {
   constructor(parent = document.body) {
     this.parent = parent;
     profileGet({url: '/profile'});
+    this.isGet = true;
   }
 
   /**

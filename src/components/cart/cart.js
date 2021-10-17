@@ -14,7 +14,7 @@ export class Cart {
     this.parent = parent;
 
     EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error message
+    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error explain
     EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refresh);
     EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refresh);
   }
