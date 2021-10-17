@@ -59,11 +59,11 @@ function cartReducer(state, action) {
         }
       } else {
         if (state.find((item) => {
-          return JSON.stringify({...item, cartId: 0}) === JSON.stringify({...action.dish, cartId: 0});
+          return JSON.stringify({...item, number: 0, cartId: 0}) === JSON.stringify({...action.dish, number: 0, cartId: 0});
         })) {
           return state.map((item) => {
-            if (JSON.stringify({...item, cartId: 0}) === JSON.stringify({...action.dish, cartId: 0})) {
-              return {...item, number: Number(item.number) + 1};
+            if (JSON.stringify({...item, number: 0, cartId: 0}) === JSON.stringify({...action.dish, number: 0, cartId: 0})) {
+              return {...item, number: Number(item.number) + Number(action.dish.number)};
             }
             return item;
           });

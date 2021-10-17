@@ -73,7 +73,10 @@ class RestaurantModel {
             console.log(dish);
             store.dispatch({
               actionType: actions.storeCartAddDish,
-              dish: dish,
+              dish: {
+                ...dish,
+                number: dishSettings.number,
+              },
             });
           }
           eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});

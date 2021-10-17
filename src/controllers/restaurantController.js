@@ -42,7 +42,6 @@ export class RestaurantController { // TODO: добавить джсдок
     const dish = store.getState().cartState.find((item) => {
       return Number(item.cartId) === Number(dishId);
     });
-    console.log(dish);
     if (dish) {
       RestaurantModel.addDishToCart(dish);
     }
