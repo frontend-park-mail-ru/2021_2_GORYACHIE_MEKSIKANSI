@@ -15,10 +15,8 @@ export function auth(response) {
       actionType: actions.storeUserLogin,
       ...response.parsedJSON,
     });
-    eventBus.emitEventListener(AuthStatus.userLogin, {});
-  } else {
-    eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
+  eventBus.emitEventListener(AuthStatus.userDataGot, {});
   return response;
 }
 

@@ -12,7 +12,11 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    profileGet({url: '/profile'});
+    this.profileRequested = false;
+    profileGet({url: '/profile'})
+      .then(() => {
+        this.profileRequested = true;
+      });
   }
 
   /**
@@ -69,8 +73,8 @@ export class Navbar {
   open() {
     window.document.body.style.overflowY = 'hidden';
     this.parent.getElementsByClassName('navbar')[0].style.display = 'flex';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].
-        style.display = 'block';
+    this.parent.getElementsByClassName('navbar-wrapper')[0]
+      .style.display = 'block';
   }
 
   /**
@@ -79,8 +83,8 @@ export class Navbar {
   close() {
     window.document.body.style.overflowY = 'scroll';
     this.parent.getElementsByClassName('navbar')[0].style.display = 'none';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].
-        style.display = 'none';
+    this.parent.getElementsByClassName('navbar-wrapper')[0]
+      .style.display = 'none';
   }
 
   /**
@@ -101,6 +105,7 @@ export class Navbar {
 
       document.querySelector('.navbar-wrapper').remove();
       document.querySelector('.header').remove();
+      window.document.body.style.overflowY = 'scroll';
     }
   }
 }

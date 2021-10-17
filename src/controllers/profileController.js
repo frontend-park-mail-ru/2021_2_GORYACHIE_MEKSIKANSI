@@ -2,8 +2,10 @@ import {ProfileView} from '../views/profileViews/profileView/profileView.js';
 import eventBus from '../modules/eventBus.js';
 import {ProfileEvents} from '../events/Profile.js';
 import {AuthStatus} from '../events/Auth.js';
+import ProfileModel from '../models/Profile.js';
 
 import store from '../modules/store.js';
+import Navbar from '../components/navbar/navbar.js';
 
 /**
  *  Profile controller class
@@ -27,34 +29,26 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userLoggedIn,
         this.profileView.render.bind(this.profileView));
     eventBus.addEventListener(ProfileEvents.userNotAuth, this.routeTo);
-    this.getProfile = false;  // TODO: придумать с этим что то, потому что это пиздец...
-    eventBus.addEventListener(AuthStatus.userLogin, () => {this.getProfile = true});
-    eventBus.addEventListener(AuthStatus.notAuth, () => {this.getProfile = true});
   }
 
   /**
    * Rendering view
    */
   render() {
-    if (this.getProfile === false) {
-      eventBus.addEventListener(AuthStatus.userLogin, this.show);
-      eventBus.addEventListener(AuthStatus.notAuth, () => { this.routeTo('/');
-        eventBus.unsubscribe(AuthStatus.notAuth);
-        eventBus.unsubscribe(AuthStatus.userLogin); });
-    }
-    if (this.getProfile === true) {
-      if (!store.getState().userState.auth) {
-          this.routeTo('/');
-      } else {
-        this.profileView.render();
-      }
+    if (Navbar.profileRequested) {
+      this.show();
+    } else {
+      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
     }
   }
 
   show = () => {
-    this.profileView.render();
-    eventBus.unsubscribe(AuthStatus.userLogin);
-    eventBus.unsubscribe(AuthStatus.notAuth);
+    eventBus.unsubscribe(AuthStatus.userDataGot);
+    if (store.getState().userState.auth) {
+      this.profileView.render();
+    } else {
+      this.routeTo('/');
+    }
   }
 
   /**
