@@ -47,6 +47,7 @@ export class Router {
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);
           } else {
             window.history.pushState({}, '', pageUrl);
+            console.log('HERE', pageUrl, name);
             this.routes.get(name).render();
           }
           this.currControllerName = name;
