@@ -1,7 +1,6 @@
-import {getItemToCart} from '../../views/mocks.js';
 import {RestaurantEvents} from '../../events/Restaurant.js';
 import EventBus from '../../modules/eventBus.js';
-import eventBus from "../../modules/eventBus.js";
+import store from '../../modules/store.js';
 
 
 export class Cart {

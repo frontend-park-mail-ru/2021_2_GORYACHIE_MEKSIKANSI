@@ -21,7 +21,7 @@ export class Navbar {
   render() {
     const template = Handlebars.templates['navbar.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
-      user: store.getState().user,
+      user: store.getState().userState,
     }));
 
     this.close();
