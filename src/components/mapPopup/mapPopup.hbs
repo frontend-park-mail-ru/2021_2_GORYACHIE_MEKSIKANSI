@@ -2,14 +2,17 @@
     <div class="map-popup__body">
         <div class="map-popup__content">
             <div class="js__confirmation-address-container">
-            <a href="#" class="map-popup__close close-popup">X</a>
-            <p><span class="confirmation-address-container__title">Чтобы мы смогли показать тебе правильные рестораны выбери адрес</span></p>
-            <input type="text" id="js__map-add-address"/>
-            <div class="map-popup__text">
-            </div>
+                <div class="map-popup__close-container">
+                    <div class="map-popup__title">Введите адрес доставки</div>
+                    <svg class="map-popup__close close-popup" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46458 15.5354L15.5356 8.46436" stroke="black" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M8.46458 8.46458L15.5356 15.5356" stroke="black" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="map-popup__input">
+                    <input type="text" id="js__map-add-address" class="input" placeholder="Начните вводить адрес"/>
+                <button id="js__add-new-address__btn" class="map-popup__button">Продолжить</button>
+                </div>
                 <div id="js__map" class="map-popup__address-confirmation"></div>
-            <button id="js__add-new-address__btn" class="button">Продолжить</button>
-            </div>
-        </div>
     </div>
 </div>

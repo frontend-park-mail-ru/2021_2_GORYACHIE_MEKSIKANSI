@@ -22,8 +22,7 @@
         </div>
 
         <div class="right-box">
-            <a href="" class="">
-                <button href="#popup" class="right-box__spacer button button_shape_rounded button_color_gray button_hover_gray map-popup__link">
+                <button class="right-box__spacer button button_shape_rounded button_color_gray button_hover_gray map-popup__link">
                     <svg class="button__icon" width="11" height="14" viewBox="0 0 11 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.46851 6.25C3.46851 5.12817 4.37793 4.21875 5.49976 4.21875C6.62158 4.21875 7.53101 5.12817 7.53101 6.25C7.53101 7.37183 6.62158 8.28125 5.49976 8.28125C4.37793 8.28125 3.46851 7.37183 3.46851 6.25Z"
@@ -32,9 +31,14 @@
                               d="M0.35822 5.54837C0.572994 2.94278 2.75036 0.9375 5.36479 0.9375H5.63475C8.24918 0.9375 10.4265 2.94278 10.6413 5.54837C10.757 6.95124 10.3236 8.34424 9.43258 9.43395L6.43692 13.0976C5.95256 13.6899 5.04698 13.6899 4.56262 13.0976L1.56696 9.43395C0.675922 8.34424 0.242584 6.95124 0.35822 5.54837ZM5.49976 3.28125C3.86016 3.28125 2.53101 4.6104 2.53101 6.25C2.53101 7.8896 3.86016 9.21875 5.49976 9.21875C7.13935 9.21875 8.46851 7.8896 8.46851 6.25C8.46851 4.6104 7.13935 3.28125 5.49976 3.28125Z"
                               fill="black"/>
                     </svg>
-                    Москва
+                    <a href="#popup" class="navbar__button-cart-number-wrapper map-popup__link">
+                    {{#if address.addr}}
+                    {{address.addr}}
+                    {{else}}
+                       Кликни на меня, чтобы найти свой дом!
+                    {{/if}}
+                    </a>
                 </button>
-            </a>
 
             <label class="right-box__spacer search-input__label search-input__label_size_m">
                 <svg class="search-label__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
