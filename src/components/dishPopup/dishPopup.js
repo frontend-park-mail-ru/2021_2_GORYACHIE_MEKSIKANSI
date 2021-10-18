@@ -6,12 +6,12 @@ export class DishPopup {
     parent: parent = document.body,
     routeTo: routeTo = () => {},
     controller: controller,
-    restaurantId: id,
+    restaurant: restaurant,
   }) {
     this.controller = controller;
     this.routeTo = routeTo;
     this.parent = parent;
-    this.restId = id;
+    this.restaurant = restaurant;
 
     eventBus.addEventListener(RestaurantEvents.restaurantPopGetSuccess, this.render.bind(this));
   }
@@ -73,7 +73,7 @@ export class DishPopup {
 
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
     this.controller.addDishToCart({
-      restId: this.restId,
+      restaurant: this.restaurant,
       dish: {
         ...this.dish,
         id: this.dish.id,
@@ -88,7 +88,7 @@ export class DishPopup {
   getDish = (e) => {
     const {target} = e;
     const dishId = Number(target.closest('.dish').getAttribute('id'));
-    this.controller.getDish(this.restId, dishId);
+    this.controller.getDish(this.restaurant.id, dishId);
   }
 
   settingUp() {

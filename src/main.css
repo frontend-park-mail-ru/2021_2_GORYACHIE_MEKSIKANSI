@@ -24,6 +24,7 @@
 @import "components/cartOrder/cartOrderSummary.css";
 @import "components/cartOrder/orderDelivery.css";
 @import "components/cart/cart.css";
+@import "components/continuePopup/continuePopup.css";
 
 body {
     font-family: var(--raleway-font);

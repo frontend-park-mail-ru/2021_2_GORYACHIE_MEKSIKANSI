@@ -6,6 +6,8 @@ export const actions = {
   storeCartDeleteAll: 'storeCartDeleteAll',
   storeCartIncreaseDishNumber: 'storeCartIncreaseDishNumber',
   storeCartDecreaseDishNumber: 'storeCartDecreaseDishNumber',
+  storeCartRestaurantSet: 'storeCartRestaurantSet',
+  storeCartRestaurantDelete: 'storeCartRestaurantDelete',
 };
 
 function createStore(reducer, initialState) {
@@ -101,6 +103,18 @@ function cartReducer(state, action) {
   }
 }
 
+function cartRestaurantReducer(state, action) {
+  switch (action.actionType) {
+    case actions.storeCartRestaurantSet: {
+      return action.restaurant;
+    }
+    case actions.storeCartRestaurantDelete: {
+      return null;
+    }
+    default: return state;
+  }
+}
+
 function combineReducers(reducersMap) {
   return function combinationReducers(state, action) {
     const nextState = {};
@@ -119,11 +133,13 @@ const initialState = {
     email: '',
   },
   cartState: [],
+  cartRestaurantState: null
 };
 
 const reducer = combineReducers({
   userState: userReducer,
   cartState: cartReducer,
+  cartRestaurantState: cartRestaurantReducer,
 });
 
 const store = createStore(reducer, initialState);

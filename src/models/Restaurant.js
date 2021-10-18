@@ -60,23 +60,22 @@ class RestaurantModel {
                 return Number(checkbox.id) === Number(item.id);
               });
             });
+            // calc cost of dish with options
+            const cost = dishCheckboxes.reduce((prev, item) => {
+              prev += item.cost;
+              return prev;
+            }, dishMock.cost);
             // create dish obj and calc summary cost
             const dish = {
-              ...getItemToCart(dishSettings.dish.id),
+              ...dishMock,
               checkboxes: dishCheckboxes,
-              cost: dishCheckboxes.reduce((prev, item) => {
-                prev += item.cost;
-                return prev;
-              }, dishMock.cost),
+              cost: cost,
               radios: dishSettings.dish.radios,
+              num: dishSettings.dish.num,
             };
-            console.log(dish);
             store.dispatch({
               actionType: actions.storeCartAddDish,
-              dish: {
-                ...dish,
-                num: dishSettings.dish.num,
-              },
+              dish: dish,
             });
           }
           eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
@@ -95,6 +94,10 @@ class RestaurantModel {
             store.dispatch({
               actionType: actions.storeCartDeleteAll,
             });
+            store.dispatch({
+              actionType: actions.storeCartRestaurantSet,
+              restaurant: null,
+            });
             eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
             return;
           }
@@ -103,6 +106,10 @@ class RestaurantModel {
         .catch(() => { // TODO: server falls to catch
           store.dispatch({
             actionType: actions.storeCartDeleteAll,
+          });
+          store.dispatch({
+            actionType: actions.storeCartRestaurantSet,
+            restaurant: null,
           });
           eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
         });
@@ -116,6 +123,12 @@ class RestaurantModel {
               actionType: actions.storeCartDeleteDish,
               cartId: dishId,
             });
+            if (store.getState().cartState.cart.length === 0) {
+              store.dispatch({
+                actionType: actions.storeCartRestaurantSet,
+                restaurant: null,
+              });
+            }
             eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
             return;
           }
@@ -126,7 +139,39 @@ class RestaurantModel {
             actionType: actions.storeCartDeleteDish,
             cartId: dishId,
           });
+          if (store.getState().cartState.cart.length === 0) {
+            store.dispatch({
+              actionType: actions.storeCartRestaurantSet,
+              restaurant: null,
+            });
+          }
           eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
+        });
+  }
+
+  changeRestaurantAndAddDish(dishSettings = {}) {
+    clearCartDelete()
+        .then(() => {
+          // change restaurant
+          store.dispatch({
+            actionType: actions.storeCartRestaurantSet,
+            restaurant: dishSettings.restaurant,
+          });
+          store.dispatch({
+            actionType: actions.storeCartDeleteAll,
+          });
+          this.addDishToCart(dishSettings);
+        })
+        .catch(() => {
+          // change restaurant
+          store.dispatch({
+            actionType: actions.storeCartRestaurantSet,
+            restaurant: dishSettings.restaurant,
+          });
+          store.dispatch({
+            actionType: actions.storeCartDeleteAll,
+          });
+          this.addDishToCart(dishSettings);
         });
   }
 }

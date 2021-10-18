@@ -45,7 +45,7 @@ export class RestaurantView extends View {
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render(this.restaurant);
 
-    this.popup.restId = props.id;
+    this.popup.restaurant = this.restaurant;
 
     this.settingUp();
   }
@@ -108,6 +108,32 @@ export class RestaurantView extends View {
       behavior: 'smooth',
       block: 'start',
     });
+  }
+
+  continueOrdering = (newR, oldR) => {
+    this.popup.remove();
+    this.continueDiv = document.createElement('div');
+    this.continueDiv.classList.add('continue-popup-div');
+    this.continueDiv.innerHTML = Handlebars.templates['continuePopup.hbs']({new: newR, old: oldR});
+    this.parent.appendChild(this.continueDiv);
+    document.body.style.overflowY = 'hidden';
+
+    this.continueDiv.querySelector('.continue-popup-cancel').addEventListener('click', this.closeContinueOrdering);
+    this.continueDiv.querySelector('.continue-popup-continue').addEventListener('click', this.acceptContinueOrdering);
+  }
+
+  closeContinueOrdering = () => {
+    if (this.continueDiv) {
+      this.continueDiv.querySelector('.continue-popup-cancel').removeEventListener('click', this.closeContinueOrdering);
+      this.continueDiv.querySelector('.continue-popup-continue').removeEventListener('click', this.acceptContinueOrdering);
+      this.parent.removeChild(this.continueDiv);
+    }
+    document.body.style.overflowY = 'scroll';
+  }
+
+  acceptContinueOrdering = () => {
+    this.controller.continueAdding();
+    this.closeContinueOrdering();
   }
 
   remove() {
