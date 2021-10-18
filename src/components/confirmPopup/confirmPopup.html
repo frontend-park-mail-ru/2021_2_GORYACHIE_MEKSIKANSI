@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./../../main.css"/>
+    <title>ConfirmPopup</title>
+</head>
+<body>
+    <div class="confirm-popup-wrapper">
+        <div class="confirm-popup">
+            <div class="confirm-popup__header">
+                <div class="confirm-popup__title">
+                    Онлайн оплата
+                </div>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.46458 15.5354L15.5356 8.46436" stroke="black" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M8.46458 8.46458L15.5356 15.5356" stroke="black" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="confirm-popup__body">
+                <div class="confirm-popup__card-wrapper">
+                    <div class="confirm-popup__info-wrapper">
+                        <div class="confirm-popup__summary-title">
+                            Итого к оплате:
+                        </div>
+                        <div class="confirm-popup__summary-val">
+                            11 ₽
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card__row">
+                            <input type="number" placeholder="Номер карты" class="input card__input">
+                            <input type="number" placeholder="ММ/ГГ" class="input card__input card__input__fs_3">
+                        </div>
+                        <div class="card__row card__row-mt">
+                            <div class="card__cvv-note">
+                                Последние цифры <br>
+                                на обороте карты
+                            </div>
+                            <input type="number" placeholder="CVV" class="input card__input card__input__fs_3">
+                        </div>
+                    </div>
+                    <div class="button button_color_black confirm-popup__pay-button">
+                        Оплатить
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
 import store from '../../../modules/store.js';
+import {urls} from '../../../modules/urls.js';
 
 /**
  * Profile view class
@@ -56,6 +57,7 @@ export class OrderingView extends View {
 
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
     window.addEventListener('scroll', this.stickSummary);
+    this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.confirm);
 
     document.querySelector('.footer').style.marginTop = '0';
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
@@ -76,6 +78,14 @@ export class OrderingView extends View {
       summary.classList.remove('cart-order-summary-sticky');
       summary.style.width = '';
       this.cartWidth = summary.offsetWidth;
+    }
+  }
+
+  confirm = () => {
+    if (store.getState().userState.auth) {
+      // confirm
+    } else {
+      this.routeTo(urls.login.url);
     }
   }
 

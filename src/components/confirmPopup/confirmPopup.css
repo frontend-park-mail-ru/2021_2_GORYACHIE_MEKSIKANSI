@@ -1,0 +1,128 @@
+.confirm-popup-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    overflow: auto;
+}
+
+.confirm-popup {
+    box-sizing: border-box;
+    background-color: var(--color-white);
+    margin: auto;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.confirm-popup__header {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 32px 0 32px;
+}
+
+.confirm-popup__body {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 0 32px 32px 32px;
+}
+
+.confirm-popup__title {
+    font-weight: var(--font_bold);
+    font-size: 30px;
+}
+
+.confirm-popup__card-wrapper {
+    padding: 32px;
+    box-sizing: border-box;
+    margin: 15px 0  15px 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    flex-direction: column;
+    display: flex;
+    width: 490px;
+}
+
+.card {
+    margin: 0 auto 0 auto;
+    width: 424px;
+    height: 248px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card__row {
+    margin: 5px 0 5px 0;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.card__input {
+    border: none;
+    border-bottom: solid 1px black;
+    outline: none;
+    margin: 0 5px 0 5px;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.card__input__fs_3 {
+    flex-shrink: 3;
+}
+
+.card__cvv-note {
+    color: rgba(0,0,0,.4);
+    font-size: 14px;
+    margin-left: auto;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.card__row-mt {
+    margin-top: 30px;
+}
+
+.confirm-popup__info-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.confirm-popup__summary-title {
+    font-size: 18px;
+}
+
+.confirm-popup__summary-val {
+    font-size: 30px;
+}
+
+.confirm-popup__pay-button {
+    margin-top: 25px;
+    font-size: 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
