@@ -11,31 +11,31 @@
                 </div>
             </div>
             <div class="dish-popup__image-wrapper">
-                <img class="dish-popup__image" src="{{dishImg}}">
+                <img class="dish-popup__image" src="{{img}}">
             </div>
 
             <div class="dish-popup__dish-title">
-                {{ dishTitle }}
+                {{ name }}
             </div>
         </div>
         <div class="dish-popup__dish-setting">
             <div class="dish-popup__description">
-                {{ dishDescription }}
+                {{ desc }}
 <!--                Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов-->
             </div>
-            {{#each dishRadios }}
+            {{#each radios }}
                 <div class="dish-popup__checkboxes-wrapper-title">
-                    {{ dishRadioTitle }}*
+                    {{ name }}*
                 </div>
-                <div id="{{dishRadioId}}" class="dish-popup__checkboxes-wrapper radio-wrapper">
-                    {{#each dishRadioRows}}
+                <div id="{{rId}}" class="dish-popup__checkboxes-wrapper radio-wrapper">
+                    {{#each opt}}
                         <div class="dish-popup__radio-row">
                             <label class="container">
-                                <input id="{{dishRadioId}}" type="radio" name="{{../dishRadioTitle}}">
+                                <input id="{{id}}" type="radio" name="{{../name}}">
                                 <span class="checkmark checkmark-radius"></span>
                             </label>
                             <div class="dish-popup__checkbox-title">
-                                {{ dishRadioName }}
+                                {{ name }}
                             </div>
                         </div>
                     {{/each}}
@@ -44,22 +44,22 @@
 
 
                 <div class="dish-popup__checkboxes-wrapper-title">
-                    {{ dishCheckboxTitle }}
+                    Хотите добавить ингридиенты?
                 </div>
                 <div class="dish-popup__checkboxes-wrapper">
-                    {{#each dishCheckboxesRows}}
-                        <div id="{{dishCheckBoxId}}" class="dish-popup__checkbox-row">
+                    {{#each checkboxes}}
+                        <div id="{{id}}" class="dish-popup__checkbox-row">
                             <label class="container">
                                 <input class="dish-popup__checkbox-input" type="checkbox">
                                 <span class="checkmark "></span>
                             </label>
                             <div class="dish-popup__checkbox-title">
-                                {{ dishCheckboxRowTitle }}
+                                {{ name }}
                             </div>
                             <div class="dish-popup__add-item-cost">
                                 +
                                 <div class="dish-popup__checkbox-cost">
-                                    {{ dishCheckboxRowCost }}
+                                    {{ cost }}
                                 </div>
                                  ₽
                             </div>
@@ -87,7 +87,7 @@
                 Добавить в корзину
                 <div class="dish-popup__cost">
                     <div class="dish-popup__summary-cost">
-                        {{ dishCost }}
+                        {{ cost }}
                     </div>
                      ₽
                 </div>

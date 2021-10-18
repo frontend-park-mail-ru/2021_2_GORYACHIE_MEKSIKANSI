@@ -61,7 +61,8 @@ export class Cart {
   refreshSummary = () => {
     let value = 0;
     store.getState().cartState.forEach((item) => {
-      value +=  Number(item.dishCost) * item.number;
+      console.log(Number(item.cost), item.num);
+      value +=  Number(item.cost) * item.num;
     });
     this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
   }

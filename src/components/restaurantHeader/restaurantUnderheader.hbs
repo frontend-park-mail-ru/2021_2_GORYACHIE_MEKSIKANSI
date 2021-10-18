@@ -2,21 +2,21 @@
     <div class="restaurant-underheader__tags">
         {{#each tags}}
             <div class="restaurant-underheader__tag">
-                {{ tagName }}
+                {{ name }}
             </div>
         {{/each}}
     </div>
     <div class="restaurant-underheader__address">
-        {{ address }}
+        {{ addrs }}
     </div>
 </div>
 <div class="restaurant-nav">
     <hr class="restaurant-nav__line">
     <div class="restaurant-nav__list">
-        {{#each menuNavs}}
-            <a href="#{{menuId}}" class="restaurant-underheader__a">
+        {{#each menu}}
+            <a href="#{{id}}" class="restaurant-underheader__a">
                 <div class="restaurant-nav__btn">
-                    {{menuTitle}}
+                    {{name}}
                 </div>
             </a>
         {{/each}}

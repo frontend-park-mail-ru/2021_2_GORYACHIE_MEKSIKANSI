@@ -52,18 +52,18 @@ function cartReducer(state, action) {
         })) {
           return state.map((item) => {
             if (item.cartId === action.dish.cartId) {
-              return {...item, number: Number(item.number) + 1};
+              return {...item, num: Number(item.num) + 1};
             }
             return item;
           });
         }
       } else {
         if (state.find((item) => {
-          return JSON.stringify({...item, number: 0, cartId: 0}) === JSON.stringify({...action.dish, number: 0, cartId: 0});
+          return JSON.stringify({...item, num: 0, cartId: 0}) === JSON.stringify({...action.dish, num: 0, cartId: 0});
         })) {
           return state.map((item) => {
-            if (JSON.stringify({...item, number: 0, cartId: 0}) === JSON.stringify({...action.dish, number: 0, cartId: 0})) {
-              return {...item, number: Number(item.number) + Number(action.dish.number)};
+            if (JSON.stringify({...item, num: 0, cartId: 0}) === JSON.stringify({...action.dish, num: 0, cartId: 0})) {
+              return {...item, num: Number(item.num) + Number(action.dish.num)};
             }
             return item;
           });
@@ -82,10 +82,10 @@ function cartReducer(state, action) {
       const dish = state.find((item) => {
         return Number(item.cartId) === Number(action.cartId);
       });
-      if (dish.number > 1) {
+      if (dish.num > 1) {
         return state.map((item) => {
           if (Number(item.cartId) === Number(action.cartId)) {
-            return {...item, number: item.number - 1};
+            return {...item, num: item.num - 1};
           }
           return item;
         });

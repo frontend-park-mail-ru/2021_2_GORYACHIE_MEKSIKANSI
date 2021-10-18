@@ -55,27 +55,27 @@ class RestaurantModel {
             // get dish mock
             const dishMock = getItemToCart(dishSettings.id);
             // select needed checkboxes
-            const dishCheckboxes = dishMock.dishCheckboxes.filter((item) => {
-              return dishSettings.dishCheckboxes.find((checkbox) => {
-                return Number(checkbox.dishCheckboxId) === Number(item.dishCheckBoxId);
+            const dishCheckboxes = dishMock.checkboxes.filter((item) => {
+              return dishSettings.checkboxes.find((checkbox) => {
+                return Number(checkbox.id) === Number(item.id);
               });
             });
             // create dish obj and calc summary cost
             const dish = {
               ...getItemToCart(dishSettings.id),
-              dishCheckboxes: dishCheckboxes,
-              dishCost: dishCheckboxes.reduce((prev, item) => {
-                prev += item.dishCheckboxRowCost;
+              checkboxes: dishCheckboxes,
+              cost: dishCheckboxes.reduce((prev, item) => {
+                prev += item.cost;
                 return prev;
-              }, dishMock.dishCost),
-              dishRadios: dishSettings.dishRadios,
+              }, dishMock.cost),
+              radios: dishSettings.radios,
             };
             console.log(dish);
             store.dispatch({
               actionType: actions.storeCartAddDish,
               dish: {
                 ...dish,
-                number: dishSettings.number,
+                num: dishSettings.num,
               },
             });
           }

@@ -42,16 +42,19 @@ export class DishPopup {
     const dishRadios = [];
     radios.forEach((item) => {
       item.querySelectorAll('input').forEach((input) => {
-        console.log(this.dish.dishRadios);
+        console.log(this.dish.radios.find((item1) => {
+          console.log(item1.rId, item.id);
+          return Number(item1.rId) === Number(item.id);
+        }));
         if (input.checked) {
           dishRadios.push({
-            dishRadioId: item.id,
-            dishRadioChooseId: input.id,
-            dishRadioName: this.dish.dishRadios.find((item1) => {
-              return Number(item1.dishRadioId) === Number(item.id);
-            }).dishRadioRows.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
-              return Number(item.dishRadioId) === Number(input.id);
-            }).dishRadioName,
+            rId: item.id,
+            id: input.id,
+            name: this.dish.radios.find((item1) => {
+              return Number(item1.rId) === Number(item.id);
+            }).opt.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
+              return Number(item.id) === Number(input.id);
+            }).name,
           });
         }
         console.log(dishRadios);
@@ -68,7 +71,7 @@ export class DishPopup {
       const input = item.querySelector('input');
       if (input.checked) {
         dishCheckboxes.push({
-          dishCheckboxId: item.id,
+          id: item.id,
         });
       }
     });
@@ -77,9 +80,9 @@ export class DishPopup {
     this.controller.addDishToCart({
       restId: this.restId,
       id: this.dish.id,
-      number: Number(number),
-      dishRadios: dishRadios,
-      dishCheckboxes: dishCheckboxes});
+      num: Number(number),
+      radios: dishRadios,
+      checkboxes: dishCheckboxes});
     this.remove();
   }
 
@@ -137,14 +140,13 @@ export class DishPopup {
   }
 
   refreshSummary = () => {
-    let cost = Number(this.dish.dishCost);
+    let cost = Number(this.dish.cost);
     const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
     checkboxes.forEach((DOMitem) => {
       if (DOMitem.querySelector('input').checked) {
-        cost += Number(this.dish.dishCheckboxesRows.find((item) => {
-          return Number(DOMitem.getAttribute('id')) === item.dishCheckBoxId;
-        }).dishCheckboxRowCost);
-
+        cost += Number(this.dish.checkboxes.find((item) => {
+          return Number(DOMitem.id) === item.id;
+        }).cost);
       }
     });
 
