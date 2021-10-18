@@ -106,7 +106,7 @@ export class OrderingView extends View {
   removeConfirm = () => {
     if (this.confirmDiv) {
       this.confirmDiv.querySelector('.confirm-popup__close-button').removeEventListener('click', this.removeConfirm);
-      this.parent.removeChild(this.confirmDiv);
+      this.confirmDiv.remove();
     }
     document.body.style.overflowY = 'scroll';
   }
@@ -117,9 +117,7 @@ export class OrderingView extends View {
   remove() {
     this.navbar.remove();
 
-    if (this.confirmDiv) {
-      this.removeConfirm();
-    }
+    this.removeConfirm();
     this.parent.innerHTML = '';
   }
 }
