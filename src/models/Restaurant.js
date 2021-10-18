@@ -52,6 +52,12 @@ class RestaurantModel {
               dish: dishSettings.dish,
             });
           } else {
+            if (store.getState().cartRestaurantState === null) {
+              store.dispatch({
+                actionType: actions.storeCartRestaurantSet,
+                restaurant: dishSettings.restaurant,
+              });
+            }
             // get dish mock
             const dishMock = getItemToCart(dishSettings.dish.id);
             // select needed checkboxes

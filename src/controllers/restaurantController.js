@@ -46,10 +46,6 @@ export class RestaurantController { // TODO: добавить джсдок
     const cartRestaurant = store.getState().cartRestaurantState;
     if (cartRestaurant === null || cartRestaurant.id === dishSettings.restaurant.id) {
       RestaurantModel.addDishToCart(dishSettings);
-      store.dispatch({
-        actionType: actions.storeCartRestaurantSet,
-        restaurant: {id: 13},
-      });
     } else {
       this.stash = dishSettings;
       this.restaurantView.continueOrdering(dishSettings.restaurant, cartRestaurant);

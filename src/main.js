@@ -58,6 +58,6 @@ router.addRoute(urls.checkout.name, orderingController);
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
 
-// cartView.render();
+// orderingView.render();
 
 router.start();

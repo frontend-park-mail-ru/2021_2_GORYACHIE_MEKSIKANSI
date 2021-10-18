@@ -1,6 +1,6 @@
 import eventBus from '../modules/eventBus.js';
 import OrderingModel from '../models/Ordering.js';
-import {OrderingView} from '../views/profileViews/cartView/orderingView.js';
+import {OrderingView} from '../views/profileViews/orderingView/orderingView.js';
 
 export class OrderingController {
   /**

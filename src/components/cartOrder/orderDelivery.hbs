@@ -17,7 +17,7 @@
             <input placeholder="Напишите, как вас найти или пожелания к заказу..." required class="input cart-order-delivery__input cart-order-delivery__input_sq cart-order-delivery__input_margin-left profile-page__input">
         </div>
         <div class="cart-order-delivery__time-title">
-            Время доставки составит ~ 30-40 мин
+            Время доставки составит ~ {{restaurant.minDTime}}-{{restaurant.maxDTime}} мин
         </div>
     </div>
 </div>
@@ -26,13 +26,10 @@
     <div class="history-order__main-info">
         <div class="history-order__main-info-text">
             <div class="history-order__restaurant-title history-order__row-margin">
-                МакДоналдс
-            </div>
-            <div class="history-order__date history-order__row-margin">
-                                2 октября 2021, 14:07
+                {{restaurant.name}}
             </div>
             <div class="history-order__address history-order__row-margin">
-                                Россия, Москва, ул. Пушкина д. 14к2
+                {{restaurant.addrs}}
             </div>
         </div>
         <div class="history-order__image-wrapper">
@@ -42,9 +39,23 @@
     <div class="history-order__info">
         {{#each items}}
             <div class="history-order__item">
-                <div class="order__item-title">
-                    {{ name }}
+                <div class="order__item-wrapper">
+                    <div class="order__item-title">
+                        {{ name }}
+                    </div>
+                    {{#each radios}}
+                        <div>
+                            *{{ name }}
+                        </div>
+
+                    {{/each}}
+                    {{#each checkboxes}}
+                        <div>
+                            +{{ name }}
+                        </div>
+                    {{/each}}
                 </div>
+
 
                 <div class="history-order__item-num">
                     {{ num }} шт
@@ -61,7 +72,7 @@
             </div>
 
             <div class="history-order__delivery-cost">
-                {{deliveryCost}} ₽
+                {{restaurant.dCost}} ₽
             </div>
         </div>
         <div class="history-order__summary">
@@ -70,7 +81,7 @@
             </div>
 
             <div class="history-order__summary-cost">
-                {{ summaryCost }} ₽
+                {{ sumCost }} ₽
             </div>
         </div>
     </div>

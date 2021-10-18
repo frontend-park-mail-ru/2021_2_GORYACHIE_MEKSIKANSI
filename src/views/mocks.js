@@ -7,6 +7,7 @@ export function getRestaurantMock() {
     cost: 300,
     minDTime: 20,
     maxDTime: 30,
+    dCost: 300,
     rate: 4.7,
     addrs: 'Россия, Москва, ул. Пушкина, дом 10к2, этаж 2',
     tags: [

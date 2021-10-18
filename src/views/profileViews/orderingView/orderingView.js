@@ -1,5 +1,7 @@
 import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
+import store from '../../../modules/store.js';
+
 
 const orders =
   {
@@ -57,11 +59,24 @@ export class OrderingView extends View {
    */
   render(props = {}) {
     this.navbar.render();
+
+    let sumCost = store.getState().cartState.reduce((prev, item) => {
+      prev += item.cost * item.num;
+      return prev;
+    }, 0);
+    sumCost += store.getState().cartRestaurantState.dCost;
+
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
       pageTitle: 'Оформление заказа',
-      content: Handlebars.templates['orderDelivery.hbs'](orders),
-      rightMenu: Handlebars.templates['orderSummary.hbs']({})});
+      content: Handlebars.templates['orderDelivery.hbs']({
+        restaurant: store.getState().cartRestaurantState,
+        items: store.getState().cartState,
+        sumCost: sumCost,
+      }),
+      rightMenu: Handlebars.templates['orderSummary.hbs']({
+        sumCost: sumCost,
+      })});
     document.querySelector('.footer').style.marginTop = '0';
   }
 
