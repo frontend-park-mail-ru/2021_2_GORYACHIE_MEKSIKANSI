@@ -54,10 +54,12 @@ export class OrderingView extends View {
         sumCost: sumCost,
       })});
 
+    this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
     window.addEventListener('scroll', this.stickSummary);
 
     document.querySelector('.footer').style.marginTop = '0';
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
+    this.stickSummary();
   }
 
   stickSummary = () => {
@@ -65,11 +67,11 @@ export class OrderingView extends View {
     this.footY = Number(document.querySelector('.cart-order').offsetTop) + Number(document.querySelector('.cart-order').offsetHeight);
     if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
       summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
-      this.cartWidth = summary.offsetWidth;
+      this.summaryWidth = summary.offsetWidth;
     } else if (window.pageYOffset + 75 >= this.sticky) {
       summary.style.top = String(0) + 'px';
       summary.classList.add('cart-order-summary-sticky');
-      summary.style.width = this.cartWidth + 'px';
+      summary.style.width = this.summaryWidth + 'px';
     } else {
       summary.classList.remove('cart-order-summary-sticky');
       summary.style.width = '';
