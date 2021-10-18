@@ -38,12 +38,15 @@ export class RestaurantController { // TODO: добавить джсдок
   addDishToCart(dishSettings = {}) {
     RestaurantModel.addDishToCart(dishSettings);
   }
-  increaseDishInCart(dishId) {
+  increaseDishInCart(dishSettings) {
     const dish = store.getState().cartState.find((item) => {
-      return Number(item.cartId) === Number(dishId);
+      return Number(item.cartId) === Number(dishSettings.dishId);
     });
     if (dish) {
-      RestaurantModel.addDishToCart(dish);
+      RestaurantModel.addDishToCart({
+        restId: dishSettings.restId,
+        dish: dish,
+      });
     }
   }
 

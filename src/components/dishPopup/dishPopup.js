@@ -42,10 +42,6 @@ export class DishPopup {
     const dishRadios = [];
     radios.forEach((item) => {
       item.querySelectorAll('input').forEach((input) => {
-        console.log(this.dish.radios.find((item1) => {
-          console.log(item1.rId, item.id);
-          return Number(item1.rId) === Number(item.id);
-        }));
         if (input.checked) {
           dishRadios.push({
             rId: item.id,
@@ -57,7 +53,6 @@ export class DishPopup {
             }).name,
           });
         }
-        console.log(dishRadios);
       });
     });
 
@@ -79,10 +74,14 @@ export class DishPopup {
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
     this.controller.addDishToCart({
       restId: this.restId,
-      id: this.dish.id,
-      num: Number(number),
-      radios: dishRadios,
-      checkboxes: dishCheckboxes});
+      dish: {
+        ...this.dish,
+        id: this.dish.id,
+        num: Number(number),
+        radios: dishRadios,
+        checkboxes: dishCheckboxes,
+      },
+    });
     this.remove();
   }
 

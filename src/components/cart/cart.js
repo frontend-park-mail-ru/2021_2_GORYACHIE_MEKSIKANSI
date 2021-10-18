@@ -49,7 +49,10 @@ export class Cart {
   increaseNumber = (e) => {
     const {target} = e;
     const dishId = target.closest('.cart__order-row').id;
-    this.controller.increaseDishInCart(dishId);
+    this.controller.increaseDishInCart({
+      restId: this.restaurant.id,
+      dishId: dishId,
+    });
   }
 
   decreaseNumber = (e) => {

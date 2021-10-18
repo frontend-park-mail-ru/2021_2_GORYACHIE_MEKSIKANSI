@@ -41,41 +41,41 @@ class RestaurantModel {
         .then((response) => {
           store.dispatch({
             actionType: actions.storeCartAddDish,
-            dish: getItemToCart(dishSettings.id),
+            dish: getItemToCart(dishSettings.dish.id),
           });
           eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
         })
         .catch(() => {
-          if ('cartId' in dishSettings) {
+          if ('cartId' in dishSettings.dish) {
             store.dispatch({
               actionType: actions.storeCartAddDish,
-              dish: dishSettings,
+              dish: dishSettings.dish,
             });
           } else {
             // get dish mock
-            const dishMock = getItemToCart(dishSettings.id);
+            const dishMock = getItemToCart(dishSettings.dish.id);
             // select needed checkboxes
             const dishCheckboxes = dishMock.checkboxes.filter((item) => {
-              return dishSettings.checkboxes.find((checkbox) => {
+              return dishSettings.dish.checkboxes.find((checkbox) => {
                 return Number(checkbox.id) === Number(item.id);
               });
             });
             // create dish obj and calc summary cost
             const dish = {
-              ...getItemToCart(dishSettings.id),
+              ...getItemToCart(dishSettings.dish.id),
               checkboxes: dishCheckboxes,
               cost: dishCheckboxes.reduce((prev, item) => {
                 prev += item.cost;
                 return prev;
               }, dishMock.cost),
-              radios: dishSettings.radios,
+              radios: dishSettings.dish.radios,
             };
             console.log(dish);
             store.dispatch({
               actionType: actions.storeCartAddDish,
               dish: {
                 ...dish,
-                num: dishSettings.num,
+                num: dishSettings.dish.num,
               },
             });
           }
