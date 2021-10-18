@@ -3,6 +3,7 @@ import eventBus from '../../modules/eventBus.js';
 import {AuthStatus} from '../../events/Auth.js';
 import {MapPopup} from '../mapPopup/mapPopup.js';
 import {profileGet} from '../../modules/api.js';
+import Address from '../../modules/lsAddress.js';
 
 /**
  * Left navigation bar class
@@ -14,7 +15,14 @@ export class Navbar {
   constructor(parent = document.body) {
     this.parent = parent;
     profileGet({url: '/profile'});
-    this.yMap = new MapPopup({});
+    this.map = new MapPopup({});
+  }
+
+  /**
+   * Updating address in header
+   */
+  updateAddressName = (name) => {
+    this.parent.querySelector('.navbar__button-cart-number-wrapper').innerHTML = String(name);
   }
 
   /**
@@ -24,6 +32,7 @@ export class Navbar {
     const template = Handlebars.templates['navbar.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
       user: {auth: User.Auth, name: User.name},
+      address: {addr: Address.getAddress().name},
     }));
 
     this.close();
@@ -32,7 +41,7 @@ export class Navbar {
   }
 
   settingUp() {
-    this.yMap.render();
+    this.map.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {
@@ -52,8 +61,6 @@ export class Navbar {
   closeListener = (event) => {
     event.preventDefault();
     const {target} = event;
-
-    console.log(target);
 
     const navbar = this.parent.querySelector('.navbar');
 

@@ -54,6 +54,16 @@
     justify-content: center;
 }
 
+.map-popup__link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar__button-cart-number-wrapper {
+    display:inline-block;
+    font-size: 15px;
+}
+
 .navbar__line {
     border: none;
     background-color: var(--color-primary);

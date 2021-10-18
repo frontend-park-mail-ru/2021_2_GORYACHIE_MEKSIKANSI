@@ -2,6 +2,7 @@ import {YandexMap} from '../../modules/yMaps.js';
 import address from '../../modules/lsAddress.js';
 import eventBus from '../../modules/eventBus.js';
 import {AuthStatus} from '../../events/Auth.js';
+import navbar from '../navbar/navbar.js';
 
 export class MapPopup {
     constructor({
@@ -12,7 +13,7 @@ export class MapPopup {
                 }) {
         this.parent = parent;
         this.unlock = true;
-        this.timeout = 800;
+        this.timeout = 100;
     }
 
     render() {
@@ -20,7 +21,6 @@ export class MapPopup {
         div.classList.add('map-popup-div');
         div.innerHTML = Handlebars.templates['mapPopup.hbs']({});
         document.body.appendChild(div);
-        this.lockPadding = document.querySelectorAll('.lock-padding');
         this.mapPopupCloseIcon = document.querySelectorAll('.close-popup');
         this.mapPopupLinks = document.querySelectorAll('.map-popup__link');
 
@@ -44,13 +44,16 @@ export class MapPopup {
             this.setCoords(address.latitude, address.longitude);
         });
 
-        this.yaMap.addSearch('js__map-add-address');
+        this.yaMap.addSuggestView('js__map-add-address');
         const address_ = address.getAddress();
-        if (address_.name) {
-            document.getElementById('js__map-add-address').value = address_.name;
-            this.yaMap.addPointCustom(address_);
-        }
         this.addCloseConfirmationEventListeners(div);
+
+        if (address_.name) {
+            this.yaMap.customPoint(address_);
+        } else {
+            const mapCurrentPopup = document.querySelector('.map-popup');
+            this.mapPopupOpen(mapCurrentPopup);
+        }
     }
 
     setCoords (latitude, longitude) {
@@ -62,7 +65,6 @@ export class MapPopup {
     }
 
     eventPopupOpen = (e) => {
-        console.log(e.target);
         const mapPopupName = e.target.getAttribute('href').replace('#', '');
         const mapCurrentPopup = document.getElementById(mapPopupName);
         this.mapPopupOpen(mapCurrentPopup);
@@ -87,9 +89,9 @@ export class MapPopup {
             });
         }
 
-        const mapPopupName = link.getAttribute('href').replace('#', '');
-        const mapCurrentPopup = document.getElementById(mapPopupName);
-        mapCurrentPopup.removeEventListener('click', this.popupOutsideClickEvent);
+        const close = this.parent.querySelector('.map-popup');
+        close.querySelector('#js__add-new-address__btn')
+            .removeEventListener('click', this.addAddress)
     }
 
     mapPopupOpen(currentPopup) {
@@ -129,24 +131,27 @@ export class MapPopup {
         }
 
         close.querySelector('#js__add-new-address__btn')
-            .addEventListener('click', () => {
-                YandexMap.isAddressCorrect(document.getElementById('js__map-add-address').value)
-                    .then(isCorrect => {
-                        if (isCorrect) {
-                            const address = document.getElementById('js__map-add-address');
-                            if (address.value) {
-                                eventBus.emitEventListener(AuthStatus.changeAddress, {
-                                    longitude: this.longitude,
-                                    latitude: this.latitude,
-                                    name: address.value
-                                });
-                                this.mapPopupClose(document.querySelector('.map-popup'));
-                            } else {
-                                // TODO нужно сделть ошибку...
-                            }
-                        }
-                    })
-            });
+            .addEventListener('click', this.addAddress)
+    }
+
+    addAddress = () => {
+        YandexMap.isAddressCorrect(document.getElementById('js__map-add-address').value)
+            .then(isCorrect => {
+                if (isCorrect) {
+                    const address = isCorrect.properties._data.name
+                    if (address) {
+                        eventBus.emitEventListener(AuthStatus.changeAddress, {
+                            longitude: this.longitude,
+                            latitude: this.latitude,
+                            name: isCorrect.properties._data.name
+                        });
+                        this.mapPopupClose(document.querySelector('.map-popup'));
+                        navbar.updateAddressName(address)
+                    } else {
+                        // TODO нужно сделть ошибку...
+                    }
+                }
+            })
     }
 
     bodyLock() {
