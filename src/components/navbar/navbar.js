@@ -1,4 +1,4 @@
-import {profileGet, logoutPost} from '../../modules/api.js';
+import {logoutPost, profileGet} from '../../modules/api.js';
 
 import store from '../../modules/store.js';
 
@@ -23,16 +23,13 @@ export class Navbar {
    * Method rendering Navbar to the parent
    */
   render() {
+
     const template = Handlebars.templates['navbar.hbs'];
 
 
-    let itemNum = store.getState().cartState.reduce((prev, item) => {
-      prev += item.num;
-      return prev;
-    }, 0);
     this.parent.insertAdjacentHTML('afterbegin', template({
       user: store.getState().userState,
-      itemNum: itemNum,
+      itemNum: this.getNumberOfItems(),
     }));
 
     this.close();
@@ -40,7 +37,19 @@ export class Navbar {
     this.settingUp();
   }
 
+  getNumberOfItems = () => {
+    return store.getState().cartState.reduce((prev, item) => {
+      prev += item.num;
+      return prev;
+    }, 0);
+  }
+
+  updateCartButtonNumber = () => {
+    this.parent.querySelector('.navbar__button-cart-number-wrapper').innerHTML = String(this.getNumberOfItems());
+  }
+
   settingUp() {
+    this.updateCartButtonNumber();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {

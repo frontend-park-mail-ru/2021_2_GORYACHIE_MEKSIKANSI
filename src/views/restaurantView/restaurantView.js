@@ -38,8 +38,7 @@ export class RestaurantView extends View {
   }
 
   refreshNavbar = () => {
-    this.navbar.remove();
-    this.navbar.render();
+    this.navbar.updateCartButtonNumber()
   }
 
   render(props = {}) {
