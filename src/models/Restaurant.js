@@ -145,7 +145,7 @@ class RestaurantModel {
             actionType: actions.storeCartDeleteDish,
             cartId: dishId,
           });
-          if (store.getState().cartState.cart.length === 0) {
+          if (store.getState().cartState.length === 0) {
             store.dispatch({
               actionType: actions.storeCartRestaurantSet,
               restaurant: null,

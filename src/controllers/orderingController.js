@@ -28,7 +28,8 @@ export class OrderingController {
    */
   render() {
     if (store.getState().cartState.length === 0 || store.getState().cartRestaurantState === null) {
-      this.routeTo(urls.home.url);
+      // this.routeTo(urls.home.url);
+      history.back();
     } else {
       this.orderingView.render();
     }

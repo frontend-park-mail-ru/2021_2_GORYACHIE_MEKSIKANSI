@@ -142,6 +142,10 @@ export class RestaurantView extends View {
     this.anchors.forEach((anchor) => {
       anchor.removeEventListener('click', this.scrollingToMenu);
     });
+
+    if (this.continueDiv) {
+      this.closeContinueOrdering();
+    }
     this.navbar.remove();
     this.popup.remove();
     this.cart.remove();

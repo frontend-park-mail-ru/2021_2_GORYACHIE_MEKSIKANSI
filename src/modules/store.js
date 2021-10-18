@@ -133,7 +133,7 @@ const initialState = {
     email: '',
   },
   cartState: [],
-  cartRestaurantState: null
+  cartRestaurantState: null,
 };
 
 const reducer = combineReducers({

@@ -94,11 +94,13 @@ export class OrderingView extends View {
   }
 
   showConfirm = () => {
-    this.confirmDiv = document.createElement('div');
-    this.confirmDiv.innerHTML = Handlebars.templates['confirmPopup.hbs']({sumCost: this.sumCost});
-    this.parent.appendChild(this.confirmDiv);
-    document.body.style.overflowY = 'hidden';
-    this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
+    if (this.parent.querySelector('.card').checked) {
+      this.confirmDiv = document.createElement('div');
+      this.confirmDiv.innerHTML = Handlebars.templates['confirmPopup.hbs']({sumCost: this.sumCost});
+      this.parent.appendChild(this.confirmDiv);
+      document.body.style.overflowY = 'hidden';
+      this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
+    }
   }
 
   removeConfirm = () => {
@@ -114,6 +116,10 @@ export class OrderingView extends View {
    */
   remove() {
     this.navbar.remove();
+
+    if (this.confirmDiv) {
+      this.removeConfirm();
+    }
     this.parent.innerHTML = '';
   }
 }
