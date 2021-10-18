@@ -36,12 +36,12 @@ export class OrderingView extends View {
     const cart = store.getState().cartState;
     const restaurant = store.getState().cartRestaurantState;
 
-    let sumCost = 0;
-    sumCost = cart.reduce((prev, item) => {
+    this.sumCost = 0;
+    this.sumCost = cart.reduce((prev, item) => {
       prev += item.cost * item.num;
       return prev;
     }, 0);
-    sumCost += restaurant.dCost;
+    this.sumCost += restaurant.dCost;
 
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
@@ -49,19 +49,23 @@ export class OrderingView extends View {
       content: Handlebars.templates['orderDelivery.hbs']({
         restaurant: store.getState().cartRestaurantState,
         items: store.getState().cartState,
-        sumCost: sumCost,
+        sumCost: this.sumCost,
       }),
       rightMenu: Handlebars.templates['orderSummary.hbs']({
-        sumCost: sumCost,
+        sumCost: this.sumCost,
       })});
 
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
     window.addEventListener('scroll', this.stickSummary);
     this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.confirm);
 
+    this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
+
     document.querySelector('.footer').style.marginTop = '0';
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
     this.stickSummary();
+
+
   }
 
   stickSummary = () => {
@@ -89,18 +93,20 @@ export class OrderingView extends View {
     }
   }
 
-  /**
-   * Method calling by
-   * @param {string} event
-   */
-  _submitListener(event) {}
+  showConfirm = () => {
+    this.confirmDiv = document.createElement('div');
+    this.confirmDiv.innerHTML = Handlebars.templates['confirmPopup.hbs']({sumCost: this.sumCost});
+    this.parent.appendChild(this.confirmDiv);
+    document.body.style.overflowY = 'hidden';
+    this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
+  }
 
-  /**
-   * Method for setting up before rendering elements
-   */
-  settingUp() {
-    const form = document.getElementById('form_submit');
-    form.addEventListener('click', this._submitListener.bind(this));
+  removeConfirm = () => {
+    if (this.confirmDiv) {
+      this.confirmDiv.querySelector('.confirm-popup__close-button').removeEventListener('click', this.removeConfirm);
+      this.parent.removeChild(this.confirmDiv);
+    }
+    document.body.style.overflowY = 'scroll';
   }
 
   /**

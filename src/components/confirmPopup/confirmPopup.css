@@ -89,6 +89,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     flex-shrink: 3;
 }
 
+.confirm-popup__close-button {
+    cursor: pointer;
+}
+
 .card__cvv-note {
     color: rgba(0,0,0,.4);
     font-size: 14px;
