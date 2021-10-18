@@ -13,6 +13,7 @@ export class Navbar {
   constructor(parent = document.body) {
     this.parent = parent;
     profileGet({url: '/profile'});
+    this.isGet = true;
   }
 
   /**
@@ -21,7 +22,7 @@ export class Navbar {
   render() {
     const template = Handlebars.templates['navbar.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
-      user: store.getState().user,
+      user: store.getState().userState,
     }));
 
     this.close();

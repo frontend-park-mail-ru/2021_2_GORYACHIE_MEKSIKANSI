@@ -1,10 +1,10 @@
 import {RestaurantView} from '../views/restaurantView/restaurantView.js';
 import eventBus from '../modules/eventBus.js';
-import {urls} from '../modules/urls.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
 import RestaurantModel from '../models/Restaurant.js';
+import store from '../modules/store.js';
 
-export class RestaurantController {  // TODO: добавить джсдок
+export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -33,6 +33,26 @@ export class RestaurantController {  // TODO: добавить джсдок
 
   getDish(restId, dishId) {
     RestaurantModel.getDish(restId, dishId);
+  }
+
+  addDishToCart(dishSettings = {}) {
+    RestaurantModel.addDishToCart(dishSettings);
+  }
+  increaseDishInCart(dishId) {
+    const dish = store.getState().cartState.find((item) => {
+      return Number(item.cartId) === Number(dishId);
+    });
+    if (dish) {
+      RestaurantModel.addDishToCart(dish);
+    }
+  }
+
+  clearCart() {
+    RestaurantModel.clearCart();
+  }
+
+  deleteDishFromCart(dishId) {
+    RestaurantModel.clearDishFromCart(dishId);
   }
 
   /**

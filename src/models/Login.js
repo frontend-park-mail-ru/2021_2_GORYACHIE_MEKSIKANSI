@@ -36,15 +36,15 @@ class LoginModel {
   }
 
   checkAuth() {
-      profileGet({url: '/profile'})
-          .then((response) => {
-              if (response.status === ResponseEvents.OK) {
-                  eventBus.emitEventListener(LoginEvents.loginCheckDone, urls.home.url);
-                  return;
-              }
+    profileGet({url: '/profile'})
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(LoginEvents.loginCheckDone, urls.home.url);
+            return;
+          }
 
-              eventBus.emitEventListener(LoginEvents.loginCheckFailed, {});
-          });
+          eventBus.emitEventListener(LoginEvents.loginCheckFailed, {});
+        });
   }
 }
 

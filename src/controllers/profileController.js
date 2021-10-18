@@ -31,7 +31,8 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    ProfileModel.checkAuth();
+    this.profileView.render();
+    // ProfileModel.checkAuth();
   }
 
   /**

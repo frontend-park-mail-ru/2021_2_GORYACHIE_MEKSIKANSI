@@ -1,5 +1,6 @@
 import Navbar from '../../components/navbar/navbar.js';
 import {DishPopup} from '../../components/dishPopup/dishPopup.js';
+import {Cart} from '../../components/cart/cart.js';
 import {View} from '../baseView/View.js';
 import store from '../../modules/store.js';
 
@@ -21,6 +22,12 @@ export class RestaurantView extends View {
       routeTo: this.routeTo,
       controller: this.controller,
     });
+
+    this.cart = new Cart({
+      parent: this.parent,
+      routeTo: this.routeTo,
+      controller: this.controller,
+    })
   }
 
   render(props = {}) {
@@ -30,14 +37,15 @@ export class RestaurantView extends View {
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];
     this.parent.insertAdjacentHTML('afterbegin', template({
-      auth: store.getState().user.auth,
+      auth: store.getState().userState.auth,
       head: Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
-      content: Handlebars.templates['restaurantUnderheader.hbs'](this.restaurant) + Handlebars.templates['restaurantPage.hbs'](this.restaurant),
+      content: Handlebars.templates['restaurantPage.hbs'](this.restaurant),
     }));
 
-    this.popup.restaurantId = props.restaurantId;
+    this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
+    this.cart.render(this.restaurant);
 
-    console.log("REST ID: ", this.restaurant);
+    this.popup.restId = props.id;
 
     this.settingUp();
   }
@@ -110,6 +118,7 @@ export class RestaurantView extends View {
     });
     this.navbar.remove();
     this.popup.remove();
+    this.cart.remove();
     this.parent.innerHTML = '';
   }
 }

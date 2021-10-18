@@ -2,6 +2,33 @@ h3 {
     margin: 0;
 }
 
+@media (min-width: 860px) and (max-width: 1040px) {
+    .home-page__restaurant-block-media {
+        width: calc(100% / 2 - (45px / 2));
+        flex-grow: 0;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 860px) {
+    .home-page__restaurant-block-media {
+        width: calc(100% - 10px);
+        flex-grow: 0;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 1600px) {
+    .home-page__restaurant-block-media {
+        transition: all 0.2s ease;
+    }
+}
+
+@media (min-width: 1040px) {
+    .home-page__restaurant-block-media {
+        width: calc(100% / 3 - (33px * 2 / 3));
+        flex-grow: 0;
+    }
+}
+
 .home-page__restaurant-block-title {
     display: inline-block;
     font-size: 36px;
@@ -71,6 +98,7 @@ h3 {
 }
 
 .home-page__restaurant-block:hover {
+    margin: 0 10px 20px 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
 }
 

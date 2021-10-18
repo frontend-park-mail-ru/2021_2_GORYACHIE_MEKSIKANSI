@@ -101,3 +101,32 @@ export function restaurantGet({url = '/restaurants/0'}) {
 export function dishGet({url = '/restaurants/0/dish/0'}) {
   return http.ajaxGet({url});
 }
+
+export function addDishPost(dishSettings = {}) {
+  return http.ajaxPost({
+    url: '/cart',
+    body: {
+      restId: dishSettings.restId,
+      dishId: dishSettings.dishId,
+      number: dishSettings.number,
+      dishRadios: dishSettings.dishRadios,
+      dishCheckboxes: dishSettings.dishCheckboxes,
+    },
+  });
+}
+
+export function clearCartDelete() {
+  return http.ajaxDelete({
+    url: '/cart',
+    body: {},
+  });
+}
+
+export function clearDishFromCartDelete(dishId) {
+  return http.ajaxDelete({
+    url: '/cart',
+    body: {
+      dishId: dishId,
+    },
+  });
+}
