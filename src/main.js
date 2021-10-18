@@ -6,20 +6,10 @@ import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantController} from './controllers/restaurantController.js';
 import {urls} from './modules/urls.js';
-
-Handlebars.registerPartial('restaurant',
-    Handlebars.templates['restaurantBlock.hbs']);
-Handlebars.registerPartial('promoBlock',
-    Handlebars.templates['promoBlock.hbs']);
-Handlebars.registerPartial('sortUnderheader',
-    Handlebars.templates['sortUnderheader.hbs']);
-Handlebars.registerPartial('sortBox', Handlebars.templates['sortBox.hbs']);
-Handlebars.registerPartial('loginUserInput',
-    Handlebars.templates['userLoginForm.hbs']);
-Handlebars.registerPartial('signUpUserInput',
-    Handlebars.templates['userSignUpForm.hbs']);
-Handlebars.registerPartial('dish', Handlebars.templates['dish.hbs']);
-Handlebars.registerPartial('order', Handlebars.templates['historyOrder.hbs']);
+import footer from './components/footer/footer.hbs';
+import './main.css';
+import './components/variables/colors.css';
+import './components/variables/fonts.css';
 
 const application = document.getElementById('app');
 
@@ -29,7 +19,7 @@ const routeTo = (url) => {
 };
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js', { scope: '/' })
+  navigator.serviceWorker.register('/sw.js', { scope: './' })
       .then((registration) => {
         const data = {
           type: 'CACHE_URLS',
@@ -40,7 +30,9 @@ if ('serviceWorker' in navigator) {
         };
         registration.installing.postMessage(data);
       })
-      .catch((err) => console.log('SW registration FAIL:', err));
+      .catch((err) => {
+
+      });
 }
 
 const loginController = new LoginController({
@@ -65,7 +57,6 @@ router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 
-document.getElementById('foot').innerHTML = Handlebars.
-    templates['footer.hbs']({});
+document.getElementById('foot').innerHTML = footer({});
 
 router.start();

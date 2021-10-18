@@ -1,5 +1,5 @@
 import {profileGet, logoutPost} from '../../modules/api.js';
-
+import navbar from './navbar.hbs'
 import store from '../../modules/store.js';
 
 
@@ -20,8 +20,7 @@ export class Navbar {
    * Method rendering Navbar to the parent
    */
   render() {
-    const template = Handlebars.templates['navbar.hbs'];
-    this.parent.insertAdjacentHTML('afterbegin', template({
+    this.parent.insertAdjacentHTML('afterbegin', navbar({
       user: store.getState().userState,
     }));
 

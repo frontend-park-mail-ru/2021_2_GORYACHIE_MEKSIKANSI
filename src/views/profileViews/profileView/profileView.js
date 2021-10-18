@@ -1,7 +1,9 @@
 import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
 import store from '../../../modules/store.js';
-
+import baseProfilePage from '../baseProfilePage.hbs';
+import profilePage from './profilePage.hbs';
+import profileButtonsNav from '../../../components/profileButtonsNav/profileButtonsNav.hbs';
 
 /**
  * Profile view class
@@ -32,13 +34,12 @@ export class ProfileView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['baseProfilePage.hbs'];
-    this.parent.innerHTML += template({
+    this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Личные данные',
-      content: Handlebars.templates['profilePage.hbs']({
+      content: profilePage({
         user: store.getState().user,
       }),
-      rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
+      rightMenu: profileButtonsNav});
     document.querySelector('.footer').style.marginTop = '0';
   }
 

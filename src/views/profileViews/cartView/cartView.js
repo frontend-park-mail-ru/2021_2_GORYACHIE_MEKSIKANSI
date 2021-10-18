@@ -1,5 +1,8 @@
 import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
+import orderDelivery from '../../../components/cartOrder/orderDelivery.hbs'
+import orderSummary from '../../../components/cartOrder/orderSummary.hbs'
+import baseProfilePage from '../baseProfilePage.hbs'
 
 const orders =
   {
@@ -57,11 +60,10 @@ export class CartView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['baseProfilePage.hbs'];
-    this.parent.innerHTML += template({
+    this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
-      content: Handlebars.templates['orderDelivery.hbs'](orders),
-      rightMenu: Handlebars.templates['orderSummary.hbs']({})});
+      content: orderDelivery(orders),
+      rightMenu: orderSummary({})});
     document.querySelector('.footer').style.marginTop = '0';
   }
 

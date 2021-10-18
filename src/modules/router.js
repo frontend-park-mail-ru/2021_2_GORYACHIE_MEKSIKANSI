@@ -75,7 +75,12 @@ export class Router {
   }
 
   start() {
-    this.open(window.location.pathname);
+    const path = '/';
+    if (window.location.pathname === '/') {
+      this.open(window.location.pathname);
+    } else {
+      this.open(window.location.pathname.slice(0, window.location.pathname.length - 1)); // TODO: подумать
+    }
   }
 
   /**
