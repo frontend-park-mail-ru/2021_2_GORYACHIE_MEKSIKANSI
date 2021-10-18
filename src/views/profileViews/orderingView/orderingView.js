@@ -2,34 +2,6 @@ import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
 import store from '../../../modules/store.js';
 
-
-const orders =
-  {
-    restaurantTitle: 'МакДоналдс',
-    date: '2 октября 2021, 14:07',
-    address: 'Россия, Москва, ул. Пушкина д. 14к2',
-    items: [
-      {
-        name: 'МакНаггетс',
-        num: 3,
-        cost: 100,
-      },
-      {
-        name: 'МакНаггетс',
-        num: 1,
-        cost: 100,
-      },
-      {
-        name: 'МакНаггетс',
-        num: 1,
-        cost: 100,
-      },
-    ],
-    deliveryCost: 123,
-    status: true,
-    summaryCost: 500,
-  };
-
 /**
  * Profile view class
  */
@@ -60,11 +32,15 @@ export class OrderingView extends View {
   render(props = {}) {
     this.navbar.render();
 
-    let sumCost = store.getState().cartState.reduce((prev, item) => {
+    const cart = store.getState().cartState;
+    const restaurant = store.getState().cartRestaurantState;
+
+    let sumCost = 0;
+    sumCost = cart.reduce((prev, item) => {
       prev += item.cost * item.num;
       return prev;
     }, 0);
-    sumCost += store.getState().cartRestaurantState.dCost;
+    sumCost += restaurant.dCost;
 
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({
@@ -77,7 +53,28 @@ export class OrderingView extends View {
       rightMenu: Handlebars.templates['orderSummary.hbs']({
         sumCost: sumCost,
       })});
+
+    window.addEventListener('scroll', this.stickSummary);
+
     document.querySelector('.footer').style.marginTop = '0';
+    this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
+  }
+
+  stickSummary = () => {
+    const summary = document.querySelector('.cart-order-summary');
+    this.footY = Number(document.querySelector('.cart-order').offsetTop) + Number(document.querySelector('.cart-order').offsetHeight);
+    if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
+      summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
+      this.cartWidth = summary.offsetWidth;
+    } else if (window.pageYOffset + 75 >= this.sticky) {
+      summary.style.top = String(0) + 'px';
+      summary.classList.add('cart-order-summary-sticky');
+      summary.style.width = this.cartWidth + 'px';
+    } else {
+      summary.classList.remove('cart-order-summary-sticky');
+      summary.style.width = '';
+      this.cartWidth = summary.offsetWidth;
+    }
   }
 
   /**

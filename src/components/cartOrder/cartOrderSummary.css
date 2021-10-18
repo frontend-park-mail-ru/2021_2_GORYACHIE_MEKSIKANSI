@@ -1,9 +1,15 @@
 .cart-order-summary {
     margin-left: 100px;
     background-color: var(--color-white);
-    width: 100%;
+    width: 60%;
     border-radius: 32px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
+}
+
+.cart-order-summary-sticky {
+    position: fixed;
+    top: 0;
+    margin-top: 75px;
 }
 
 .cart-order-summary__payment-title {
