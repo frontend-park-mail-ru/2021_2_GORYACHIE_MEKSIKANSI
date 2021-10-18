@@ -28,8 +28,8 @@ export class OrderingController {
    */
   render() {
     if (store.getState().cartState.length === 0 || store.getState().cartRestaurantState === null) {
-      // this.routeTo(urls.home.url);
-      history.back();
+      this.routeTo(urls.home.url);
+      // history.back(); // TODO: разобраться с историей при первом заходе
     } else {
       this.orderingView.render();
     }

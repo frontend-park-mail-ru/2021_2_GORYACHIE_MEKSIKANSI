@@ -3,6 +3,8 @@ import {DishPopup} from '../../components/dishPopup/dishPopup.js';
 import {Cart} from '../../components/cart/cart.js';
 import {View} from '../baseView/View.js';
 import store from '../../modules/store.js';
+import EventBus from "../../modules/eventBus.js";
+import {RestaurantEvents} from "../../events/Restaurant.js";
 
 export class RestaurantView extends View {
   constructor({
@@ -27,7 +29,17 @@ export class RestaurantView extends View {
       parent: this.parent,
       routeTo: this.routeTo,
       controller: this.controller,
-    })
+    });
+
+    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refreshNavbar);
+    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error message
+    EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refreshNavbar);
+    EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refreshNavbar);
+  }
+
+  refreshNavbar = () => {
+    this.navbar.remove();
+    this.navbar.render();
   }
 
   render(props = {}) {

@@ -9,6 +9,13 @@ import store, {actions} from '../modules/store.js';
  * RestaurantModel
  * Model for calling api methods for Restaurant logic
  */
+const updateStorage = () => {
+  localStorage.removeItem('cart');
+  localStorage.setItem('cart', JSON.stringify(store.getState().cartState));
+  localStorage.removeItem('cartRestaurant');
+  localStorage.setItem('cartRestaurant', JSON.stringify(store.getState().cartRestaurantState));
+};
+
 class RestaurantModel {
   /**
    * Check user auth and then get restaurantList,
@@ -85,6 +92,7 @@ class RestaurantModel {
             });
           }
           eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
+          updateStorage();
         });
   }
 
@@ -118,6 +126,7 @@ class RestaurantModel {
             restaurant: null,
           });
           eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
+          updateStorage();
         });
   }
 
@@ -152,6 +161,7 @@ class RestaurantModel {
             });
           }
           eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
+          updateStorage();
         });
   }
 
@@ -178,6 +188,7 @@ class RestaurantModel {
             actionType: actions.storeCartDeleteAll,
           });
           this.addDishToCart(dishSettings);
+          updateStorage();
         });
   }
 }

@@ -25,7 +25,6 @@ export class Cart {
   }
 
   refresh = () => {
-    console.log('Refresh', store.getState().cartState);
     this.remove();
     this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: store.getState().cartState, restaurant: this.restaurant});
     this.refreshSummary();

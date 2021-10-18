@@ -125,6 +125,17 @@ function combineReducers(reducersMap) {
   };
 }
 
+let localCart = JSON.parse(localStorage.getItem('cart'));
+if (!localCart) {
+  localCart = [];
+}
+
+let localRestaurant = JSON.parse(localStorage.getItem('cartRestaurant'));
+if (!localCart || !localRestaurant) {
+  localCart = [];
+  localRestaurant = null;
+}
+
 const initialState = {
   userState: {
     auth: false,
@@ -132,8 +143,8 @@ const initialState = {
     phone: '',
     email: '',
   },
-  cartState: [],
-  cartRestaurantState: null,
+  cartState: localCart,
+  cartRestaurantState: localRestaurant,
 };
 
 const reducer = combineReducers({

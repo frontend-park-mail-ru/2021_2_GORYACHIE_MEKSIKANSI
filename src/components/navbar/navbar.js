@@ -24,8 +24,15 @@ export class Navbar {
    */
   render() {
     const template = Handlebars.templates['navbar.hbs'];
+
+
+    let itemNum = store.getState().cartState.reduce((prev, item) => {
+      prev += item.num;
+      return prev;
+    }, 0);
     this.parent.insertAdjacentHTML('afterbegin', template({
       user: store.getState().userState,
+      itemNum: itemNum,
     }));
 
     this.close();

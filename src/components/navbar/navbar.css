@@ -65,3 +65,14 @@
     from {left: -300px; opacity: 0}
     to {left: 0; opacity: 1}
 }
+
+.navbar__button-cart-number-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    margin-left: 5px;
+    padding: 1px 3px 1px 3px;
+    border-radius: 5px;
+}
