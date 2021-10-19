@@ -13,7 +13,7 @@ class ProfileModel {
    * emit HomeEvents.homeGetRestaurantsSuccess
    */
   checkAuth() {
-    profileGet({url: '/profile'})
+    profileGet({url: '/user'})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userLoggedIn, {});

@@ -5,7 +5,7 @@ import {AuthStatus} from '../events/Auth.js';
 
 /**
  * emitting events for user auth
- * @param {{status: int, parsedJSON: json}} response
+ * @param {{status: int, body: json}} response
  * @return {Object} response
  *
  */
@@ -13,7 +13,7 @@ export function auth(response) {
   if (response.status === ResponseEvents.OK) {
     store.dispatch({
       actionType: actions.storeUserLogin,
-      ...response.parsedJSON,
+      ...response.body,
     });
   }
   return response;
