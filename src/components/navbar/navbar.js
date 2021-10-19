@@ -43,7 +43,10 @@ export class Navbar {
   }
 
   updateCartButtonNumber = () => {
-    this.parent.querySelector('.navbar__button-cart-number-wrapper').innerHTML = String(this.getNumberOfItems());
+    const buttonCartNumber = this.parent.querySelector('.navbar__button-cart-number-wrapper');
+    if (buttonCartNumber) {
+      buttonCartNumber.innerHTML = String(this.getNumberOfItems());
+    }
   }
 
   settingUp() {
