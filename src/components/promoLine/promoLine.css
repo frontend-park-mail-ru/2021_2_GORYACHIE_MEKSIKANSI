@@ -1,4 +1,6 @@
 .promo-line-wrapper {
+    position: absolute;
+    left: 200px;
     display: flex;
 }
 
@@ -7,6 +9,8 @@
     flex-wrap: nowrap;
     width: 1000px;
     overflow: hidden;
+
+    box-sizing: border-box;
 }
 
 .promo-line-block {
