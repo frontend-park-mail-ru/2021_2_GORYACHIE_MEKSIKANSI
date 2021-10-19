@@ -11,7 +11,7 @@ const http = new Http();
  * @param {string} email
  * @param {string} phone
  * @param {object} password
- * @return {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{body: object, status: number}>}
  *
  */
 export function signupPost({
@@ -22,7 +22,7 @@ export function signupPost({
   password,
 }) {
   return http.ajaxPost({
-    url: '/signup',
+    url: 'user/signup',
     body: {
       type,
       name,
@@ -40,11 +40,11 @@ export function signupPost({
  * @param {string} email
  * @param {object} phone
  * @param {string} password
- * @return {Object<{parsedJSON: object, status: number}>}
+ * @return {Object<{body: object, status: number}>}
  */
 export function loginPost({type, email, phone, password}) {
   return http.ajaxPost({
-    url: '/login',
+    url: 'user/login',
     body: {type, email, phone, password},
   });
 }
@@ -53,9 +53,9 @@ export function loginPost({type, email, phone, password}) {
  * profile get server func
  *
  * @param {string} url
- * @return {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{body: object, status: number}>}
  */
-export function profileGet({url = '/profile'}) {
+export function profileGet({url = '/user'}) {
   return http.ajaxGet({url})
       .then(auth);
 }
@@ -64,7 +64,7 @@ export function profileGet({url = '/profile'}) {
  * restaurants get
  *
  * @param {string} url
- * @return {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{body: object, status: number}>}
  */
 export function restaurantsGet({url = '/'}) {
   return http.ajaxGet({url});
@@ -74,10 +74,10 @@ export function restaurantsGet({url = '/'}) {
  * logout request
  *
  * @param {string} url
- * @return {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{body: object, status: number}>}
  */
 export function logoutPost() {
-  return http.ajaxPost({url: '/logout', body: {}})
+  return http.ajaxPost({url: '/user/logout', body: {}})
       .then(logout);
 }
 
@@ -86,9 +86,9 @@ export function logoutPost() {
  * getting restaurant with dishes
  *
  * @param {string} url
- * @return {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{body: object, status: number}>}
  */
-export function restaurantGet({url = '/restaurants/0'}) {
+export function restaurantGet({url = '/restaurant/0'}) {
   return http.ajaxGet({url});
 }
 
@@ -96,7 +96,7 @@ export function restaurantGet({url = '/restaurants/0'}) {
  * getting dish of restaurant
  *
  * @param {string} url
- * @return {Promise<{parsedJSON: object, status: number}>}
+ * @return {Promise<{body: object, status: number}>}
  */
 export function dishGet({url = '/restaurants/0/dish/0'}) {
   return http.ajaxGet({url});
@@ -109,7 +109,7 @@ export function addDishPost(dishSettings = {}) {
       restId: dishSettings.restId,
       dishId: dishSettings.dishId,
       number: dishSettings.number,
-      dishRadios: dishSettings.dishRadios,
+      radios: dishSettings.radios,
       dishCheckboxes: dishSettings.dishCheckboxes,
     },
   });

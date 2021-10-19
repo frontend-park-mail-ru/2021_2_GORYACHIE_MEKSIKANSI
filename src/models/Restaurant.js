@@ -24,8 +24,8 @@ class RestaurantModel {
   getRestaurant(id) {
     restaurantGet({url: '/restaurant/' + id})
         .then((response) => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock());
-          // eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.parsedJSON);
+          // eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock()); // mock from mocks
+          eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.body);
         })
         .catch(() => { // TODO: добавить взаимодействие с серваком...
           eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock()); // TODO: toast на падение сервака/отсутствие связи
@@ -35,13 +35,15 @@ class RestaurantModel {
   getDish(restId, dishId) {
     dishGet({url: '/restaurant/' + restId + '/dish/' + dishId})
         .then((response) => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
+          // eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish()); // mock from mocks
+          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
         })
         .catch(() => {
           eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
         });
   }
 
+//////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////
 
   addDishToCart(dishSettings = {}) {
     addDishPost(dishSettings)

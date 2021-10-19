@@ -37,7 +37,7 @@ class SignUpModel {
 
 
   checkAuth() {
-    profileGet({url: '/profile'})
+    profileGet({url: '/user'})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);

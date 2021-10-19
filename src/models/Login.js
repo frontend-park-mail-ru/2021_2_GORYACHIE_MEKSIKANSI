@@ -36,7 +36,7 @@ class LoginModel {
   }
 
   checkAuth() {
-    profileGet({url: '/profile'})
+    profileGet({url: '/user'})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(LoginEvents.loginCheckDone, urls.home.url);

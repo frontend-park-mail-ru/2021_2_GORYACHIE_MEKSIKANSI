@@ -1,4 +1,4 @@
-window.serverAddress = 'http://127.0.0.1:5000/api';
+window.serverAddress = 'http://127.0.0.1:5000/api/v1';
 
 /**
  * Getting object data with info to fetch
@@ -39,7 +39,7 @@ function getData({
  * Fetching server
  *
  * @param {Object} params
- * @return {Object<{status: string, parsedJSON: object}>}
+ * @return {Object<{status: string, body: object}>}
  *
  */
 async function makeFetch({
@@ -70,7 +70,7 @@ export default class Http {
      * ajaxGet request
      *
      * @param {{url: string}} params
-     * @return {Object<{status: string, parsedJSON: object}>}
+     * @return {Object<{status: string, body: object}>}
      *
      */
   ajaxGet({
@@ -84,7 +84,7 @@ export default class Http {
      * ajaxPost request
      *
      * @param {{url: string, body: object}} params
-     * @return {Object<{status: number, parsedJSON: object}>}
+     * @return {Object<{status: number, body: object}>}
      *
      */
   async ajaxPost({
@@ -101,7 +101,7 @@ export default class Http {
    * ajaxDelete request
    *
    * @param {{url: string, body: object}} params
-   * @return {Object<{status: number, parsedJSON: object}>}
+   * @return {Object<{status: number, body: object}>}
    *
    */
   async ajaxDelete({
