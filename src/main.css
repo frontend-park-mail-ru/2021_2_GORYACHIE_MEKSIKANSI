@@ -26,6 +26,7 @@
 @import "components/cart/cart.css";
 @import "components/continuePopup/continuePopup.css";
 @import "components/confirmPopup/confirmPopup.css";
+@import "components/promoLine/promoLine.css";
 
 body {
     font-family: var(--raleway-font);
