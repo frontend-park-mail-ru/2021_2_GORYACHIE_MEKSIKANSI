@@ -6,12 +6,12 @@ export class DishPopup {
     parent: parent = document.body,
     routeTo: routeTo = () => {},
     controller: controller,
-    restaurantId: id,
+    restaurant: restaurant,
   }) {
     this.controller = controller;
     this.routeTo = routeTo;
     this.parent = parent;
-    this.restId = id;
+    this.restaurant = restaurant;
 
     eventBus.addEventListener(RestaurantEvents.restaurantPopGetSuccess, this.render.bind(this));
   }
@@ -42,19 +42,17 @@ export class DishPopup {
     const dishRadios = [];
     radios.forEach((item) => {
       item.querySelectorAll('input').forEach((input) => {
-        console.log(this.dish.dishRadios);
         if (input.checked) {
           dishRadios.push({
-            dishRadioId: item.id,
-            dishRadioChooseId: input.id,
-            dishRadioName: this.dish.dishRadios.find((item1) => {
-              return Number(item1.dishRadioId) === Number(item.id);
-            }).dishRadioRows.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
-              return Number(item.dishRadioId) === Number(input.id);
-            }).dishRadioName,
+            rId: item.id,
+            id: input.id,
+            name: this.dish.radios.find((item1) => {
+              return Number(item1.rId) === Number(item.id);
+            }).opt.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
+              return Number(item.id) === Number(input.id);
+            }).name,
           });
         }
-        console.log(dishRadios);
       });
     });
 
@@ -68,25 +66,29 @@ export class DishPopup {
       const input = item.querySelector('input');
       if (input.checked) {
         dishCheckboxes.push({
-          dishCheckboxId: item.id,
+          id: item.id,
         });
       }
     });
 
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
     this.controller.addDishToCart({
-      restId: this.restId,
-      id: this.dish.id,
-      number: Number(number),
-      dishRadios: dishRadios,
-      dishCheckboxes: dishCheckboxes});
+      restaurant: this.restaurant,
+      dish: {
+        ...this.dish,
+        id: this.dish.id,
+        num: Number(number),
+        radios: dishRadios,
+        checkboxes: dishCheckboxes,
+      },
+    });
     this.remove();
   }
 
   getDish = (e) => {
     const {target} = e;
     const dishId = Number(target.closest('.dish').getAttribute('id'));
-    this.controller.getDish(this.restId, dishId);
+    this.controller.getDish(this.restaurant.id, dishId);
   }
 
   settingUp() {
@@ -137,14 +139,13 @@ export class DishPopup {
   }
 
   refreshSummary = () => {
-    let cost = Number(this.dish.dishCost);
+    let cost = Number(this.dish.cost);
     const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
     checkboxes.forEach((DOMitem) => {
       if (DOMitem.querySelector('input').checked) {
-        cost += Number(this.dish.dishCheckboxesRows.find((item) => {
-          return Number(DOMitem.getAttribute('id')) === item.dishCheckBoxId;
-        }).dishCheckboxRowCost);
-
+        cost += Number(this.dish.checkboxes.find((item) => {
+          return Number(DOMitem.id) === item.id;
+        }).cost);
       }
     });
 

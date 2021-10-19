@@ -46,7 +46,7 @@ export class Router {
             window.history.pushState({}, '', pageUrl);
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);
           } else {
-            window.history.pushState({}, '', pageUrl);
+            window.history.pushState({}, '', url);
             this.routes.get(name).render();
           }
           this.currControllerName = name;
@@ -75,7 +75,12 @@ export class Router {
   }
 
   start() {
-    this.open(window.location.pathname);
+    const path = '/';
+    if (window.location.pathname === '/') {
+      this.open(window.location.pathname);
+    } else {
+      this.open(window.location.pathname.slice(0, window.location.pathname.length - 1)); // TODO: подумать
+    }
   }
 
   /**

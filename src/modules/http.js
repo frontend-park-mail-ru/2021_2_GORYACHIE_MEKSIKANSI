@@ -73,10 +73,10 @@ export default class Http {
      * @return {Object<{status: string, body: object}>}
      *
      */
-  async ajaxGet({
+  ajaxGet({
     url = '/',
   } = {}) {
-    return await makeFetch({url: url, method: 'GET'});
+    return makeFetch({url: url, method: 'GET'});
   }
 
 

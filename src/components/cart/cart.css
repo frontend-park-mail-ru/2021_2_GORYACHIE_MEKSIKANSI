@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 }
 
 .cart {
@@ -22,7 +23,6 @@
 
 .cart__sticky {
     position: fixed;
-    z-index: 1;
     top: 0;
     margin-top: 75px;
     /*width: 100%;*/

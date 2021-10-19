@@ -3,6 +3,8 @@ import {DishPopup} from '../../components/dishPopup/dishPopup.js';
 import {Cart} from '../../components/cart/cart.js';
 import {View} from '../baseView/View.js';
 import store from '../../modules/store.js';
+import EventBus from "../../modules/eventBus.js";
+import {RestaurantEvents} from "../../events/Restaurant.js";
 
 export class RestaurantView extends View {
   constructor({
@@ -27,7 +29,16 @@ export class RestaurantView extends View {
       parent: this.parent,
       routeTo: this.routeTo,
       controller: this.controller,
-    })
+    });
+
+    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refreshNavbar);
+    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error message
+    EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refreshNavbar);
+    EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refreshNavbar);
+  }
+
+  refreshNavbar = () => {
+    this.navbar.updateCartButtonNumber()
   }
 
   render(props = {}) {
@@ -45,7 +56,7 @@ export class RestaurantView extends View {
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render(this.restaurant);
 
-    this.popup.restId = props.id;
+    this.popup.restaurant = this.restaurant;
 
     this.settingUp();
   }
@@ -110,12 +121,42 @@ export class RestaurantView extends View {
     });
   }
 
+  continueOrdering = (newR, oldR) => {
+    this.popup.remove();
+    this.continueDiv = document.createElement('div');
+    this.continueDiv.classList.add('continue-popup-div');
+    this.continueDiv.innerHTML = Handlebars.templates['continuePopup.hbs']({new: newR, old: oldR});
+    this.parent.appendChild(this.continueDiv);
+    document.body.style.overflowY = 'hidden';
+
+    this.continueDiv.querySelector('.continue-popup-cancel').addEventListener('click', this.closeContinueOrdering);
+    this.continueDiv.querySelector('.continue-popup-continue').addEventListener('click', this.acceptContinueOrdering);
+  }
+
+  closeContinueOrdering = () => {
+    if (this.continueDiv) {
+      this.continueDiv.querySelector('.continue-popup-cancel').removeEventListener('click', this.closeContinueOrdering);
+      this.continueDiv.querySelector('.continue-popup-continue').removeEventListener('click', this.acceptContinueOrdering);
+      this.parent.removeChild(this.continueDiv);
+    }
+    document.body.style.overflowY = 'scroll';
+  }
+
+  acceptContinueOrdering = () => {
+    this.controller.continueAdding();
+    this.closeContinueOrdering();
+  }
+
   remove() {
     window.removeEventListener('scroll', this.stickNavbar);
     window.removeEventListener('scroll', this.navHighlight);
     this.anchors.forEach((anchor) => {
       anchor.removeEventListener('click', this.scrollingToMenu);
     });
+
+    if (this.continueDiv) {
+      this.closeContinueOrdering();
+    }
     this.navbar.remove();
     this.popup.remove();
     this.cart.remove();

@@ -5,6 +5,7 @@ import {HomeController} from './controllers/homeController.js';
 import {SignUpController} from './controllers/signUpController.js';
 import {ProfileController} from './controllers/profileController.js';
 import {RestaurantController} from './controllers/restaurantController.js';
+import {OrderingController} from './controllers/orderingController.js';
 import {urls} from './modules/urls.js';
 
 Handlebars.registerPartial('restaurant',
@@ -58,14 +59,20 @@ const profileController = new ProfileController({
 const restaurantController = new RestaurantController({
   parent: application,
   routeTo: routeTo});
+const orderingController = new OrderingController({
+  parent: application,
+  routeTo: routeTo});
 
 router.addRoute(urls.login.name, loginController);
 router.addRoute(urls.profile.name, profileController);
 router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
+router.addRoute(urls.checkout.name, orderingController);
 
 document.getElementById('foot').innerHTML = Handlebars.
     templates['footer.hbs']({});
+
+// orderingView.render();
 
 router.start();

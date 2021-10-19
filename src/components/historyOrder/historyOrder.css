@@ -28,7 +28,7 @@
 
 .history-order__restaurant-title {
     font-weight: var(--font_bold);
-    font-size: 24px;
+    font-size: 30px;
 }
 
 .history-order__date {
@@ -77,7 +77,7 @@
 }
 
 .history-order__item {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: var(--font_thin);
 
     display: flex;
@@ -110,7 +110,8 @@
     flex-direction: row;
     padding: 10px 0 10px;
 
-    font-size: 18px;
+    font-size: 24px;
+    font-weight: var(--font_medium);
 }
 
 .history-order__summary-cost {

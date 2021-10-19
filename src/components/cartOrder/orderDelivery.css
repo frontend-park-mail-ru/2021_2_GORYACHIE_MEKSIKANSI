@@ -20,15 +20,14 @@
 }
 
 .cart-order-delivery__undertitle {
-    font-size: 16px;
+    font-size: 26px;
     font-weight: var(--font_medium);
     margin-bottom: 5px;
 }
 
 .cart-order-delivery__time-title {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: var(--font_medium);
-
 }
 
 .cart-order-delivery__input-row {

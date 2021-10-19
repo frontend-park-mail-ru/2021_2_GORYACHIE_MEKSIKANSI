@@ -5,75 +5,75 @@ export function getRestaurantMock() {
     id: 1,
     name: 'МакДоналдс',
     cost: 300,
-    minDeliveryTime: 20,
-    maxDeliveryTime: 30,
-    rating: 4.7,
-    address: 'Россия, Москва, ул. Пушкина, дом 10к2, этаж 2',
+    minDTime: 20,
+    maxDTime: 30,
+    dCost: 300,
+    rate: 4.7,
+    addrs: 'Россия, Москва, ул. Пушкина, дом 10к2, этаж 2',
     tags: [
       {
-        tagName: '₽',
+        name: '₽',
       },
       {
-        tagName: 'ФастФуд',
+        name: 'ФастФуд',
       },
       {
-        tagName: 'Американская еда',
+        name: 'Американская еда',
       },
     ],
-    menuNavs: getMenuNavsMock(),
+    menu: getMenuNavsMock(),
   };
 }
 
 export function getDish() {
   return {
     id: '1',
-    dishTitle: 'ЧикенМакнаггетс',
-    dishCost: '100',
-    dishCcal: '420ккал',
-    dishRadiosWeight: '180',
-    dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
-    dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
-    dishRadios: [
+    name: 'ЧикенМакнаггетс',
+    cost: '100',
+    ccal: '420ккал',
+    weight: '180',
+    desc: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+    radios: [
       {
-        dishRadioTitle: 'Выберите соус(1/2)',
-        dishRadioId: 1,
-        dishRadioRows: [
+        name: 'Выберите соус(1/2)',
+        rId: 1,
+        opt: [
           {
-            dishRadioId: 1,
-            dishRadioName: 'Кисло-сладкий соус',
+            id: 1,
+            name: 'Кисло-сладкий соус',
           },
           {
-            dishRadioId: 2,
-            dishRadioName: 'Сырный соус',
+            id: 2,
+            name: 'Сырный соус',
           },
         ],
       },
       {
-        dishRadioTitle: 'Выберите соус(2/2)',
-        dishRadioId: 2,
-        dishRadioRows: [
+        name: 'Выберите соус(2/2)',
+        rId: 2,
+        opt: [
           {
-            dishRadioId: 1,
-            dishRadioName: 'Кисло-сладкий соус',
+            id: 1,
+            name: 'Кисло-сладкий соус',
           },
           {
-            dishRadioId: 2,
-            dishRadioName: 'Сырный соус',
+            id: 2,
+            name: 'Сырный соус',
           },
         ],
       },
     ],
-    dishCheckboxTitle: 'Хотите добавить котлетку?',
-    dishCheckboxesRows: [
+    checkboxes: [
       {
-        dishCheckBoxId: 1,
-        dishCheckboxRowTitle: 'Котлетка',
-        dishCheckboxRowCost: 30,
+        id: 1,
+        name: 'Котлетка',
+        cost: 30,
       },
       {
-        dishCheckBoxId: 2,
-        dishCheckboxRowTitle: 'Креветка',
-        dishCheckboxRowCost: 50,
+        id: 2,
+        name: 'Креветка',
+        cost: 50,
       },
     ],
   };
@@ -86,36 +86,35 @@ function getRandomInt(max) {
 const items = [
   {
     id: '1',
-    number: 1,
-    dishTitle: 'ЧикенМакнаггетс',
-    dishCost: 100,
-    dishCcal: '420',
-    dishWeight: '180',
-    dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
-    dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
-    dishRadios: [
+    num: 1,
+    name: 'ЧикенМакнаггетс',
+    cost: 100,
+    ccal: '420',
+    weight: '180',
+    desc: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+    radios: [
       {
-        dishRadioTitle: 'Выберите соус(1/2)',
-        dishRadioId: 1,
-        dishRadioChooseId: 1,
+        name: 'Выберите соус(1/2)',
+        rId: 1,
+        id: 1,
       },
       {
         dishRadioTitle: 'Выберите соус(2/2)',
-        dishRadioId: 2,
-        dishRadioChooseId: 1,
+        rId: 2,
+        id: 1,
       },
     ],
-    dishCheckboxTitle: 'Хотите добавить котлетку?',
-    dishCheckboxes: [
+    checkboxes: [
       {
-        dishCheckBoxId: 1,
-        dishCheckboxRowTitle: 'Котлетка',
-        dishCheckboxRowCost: 30,
+        id: 1,
+        name: 'Котлетка',
+        cost: 30,
       },
       {
-        dishCheckBoxId: 2,
-        dishCheckboxRowTitle: 'Креветка',
-        dishCheckboxRowCost: 50,
+        id: 2,
+        name: 'Креветка',
+        cost: 50,
       },
     ],
   },
@@ -131,11 +130,11 @@ function getDishesListMocks() {
     dishesList.push(
         {
           id: '1',
-          dishTitle: 'ЧикенМакнаггетс',
-          dishCost: '100',
-          dishCcal: '420ккал',
-          dishDescription: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
-          dishImg: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+          name: 'ЧикенМакнаггетс',
+          cost: '100',
+          ccal: '420ккал',
+          desc: 'Неподражаемые Чикен Макнаггетс – это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов',
+          img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
         });
   }
   return dishesList;
@@ -145,18 +144,18 @@ function getMenuNavsMock() {
   const dishesList = getDishesListMocks();
   const menuNavs = [
     {
-      menuId: 'Menu1',
-      menuTitle: 'Популярное',
+      id: 'Menu1',
+      name: 'Популярное',
       dishes: dishesList,
     },
     {
-      menuId: 'Menu2',
-      menuTitle: 'МакКомбо',
+      id: 'Menu2',
+      name: 'МакКомбо',
       dishes: dishesList,
     },
     {
-      menuId: 'Menu3',
-      menuTitle: 'Типа напитки',
+      id: 'Menu3',
+      name: 'Типа напитки',
       dishes: dishesList,
     },
   ];

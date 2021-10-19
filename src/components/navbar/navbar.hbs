@@ -46,7 +46,7 @@
                 <input class="search-input" placeholder="Что-то ищите?"/>
             </label>
 
-            <a href="/">
+            <a href="checkout">
                 <button class="right-box__spacer button button_shape_rounded button_color_black">
                 <div class="button__container">
                     <svg class="button__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -60,6 +60,9 @@
                               fill="white"/>
                     </svg>
                     Корзина
+                    {{#if itemNum}}
+                        <div class="navbar__button-cart-number-wrapper">{{itemNum}}</div>
+                    {{/if}}
                 </div>
             </button>
             </a>

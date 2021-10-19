@@ -24,6 +24,7 @@
 }
 
 .base-profile-page__right-box {
+    width: 40%;
     margin-right: auto;
     display: flex;
     flex-direction: column;

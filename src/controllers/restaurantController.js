@@ -2,7 +2,7 @@ import {RestaurantView} from '../views/restaurantView/restaurantView.js';
 import eventBus from '../modules/eventBus.js';
 import {RestaurantEvents} from '../events/Restaurant.js';
 import RestaurantModel from '../models/Restaurant.js';
-import store from '../modules/store.js';
+import store, {actions} from '../modules/store.js';
 
 export class RestaurantController { // TODO: добавить джсдок
   /**
@@ -35,15 +35,32 @@ export class RestaurantController { // TODO: добавить джсдок
     RestaurantModel.getDish(restId, dishId);
   }
 
-  addDishToCart(dishSettings = {}) {
-    RestaurantModel.addDishToCart(dishSettings);
+  continueAdding() {
+    if (this.stash) {
+      RestaurantModel.changeRestaurantAndAddDish(this.stash);
+    }
   }
-  increaseDishInCart(dishId) {
+
+  addDishToCart(dishSettings = {}) {
+    console.log(dishSettings.restaurant, store.getState().cartRestaurantState);
+    const cartRestaurant = store.getState().cartRestaurantState;
+    if (cartRestaurant === null || cartRestaurant.id === dishSettings.restaurant.id) {
+      RestaurantModel.addDishToCart(dishSettings);
+    } else {
+      this.stash = dishSettings;
+      this.restaurantView.continueOrdering(dishSettings.restaurant, cartRestaurant);
+    }
+  }
+
+  increaseDishInCart(dishSettings) {
     const dish = store.getState().cartState.find((item) => {
-      return Number(item.cartId) === Number(dishId);
+      return Number(item.cartId) === Number(dishSettings.dishId);
     });
     if (dish) {
-      RestaurantModel.addDishToCart(dish);
+      RestaurantModel.addDishToCart({
+        restId: dishSettings.restId,
+        dish: dish,
+      });
     }
   }
 

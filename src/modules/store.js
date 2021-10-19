@@ -6,6 +6,8 @@ export const actions = {
   storeCartDeleteAll: 'storeCartDeleteAll',
   storeCartIncreaseDishNumber: 'storeCartIncreaseDishNumber',
   storeCartDecreaseDishNumber: 'storeCartDecreaseDishNumber',
+  storeCartRestaurantSet: 'storeCartRestaurantSet',
+  storeCartRestaurantDelete: 'storeCartRestaurantDelete',
 };
 
 function createStore(reducer, initialState) {
@@ -52,18 +54,18 @@ function cartReducer(state, action) {
         })) {
           return state.map((item) => {
             if (item.cartId === action.dish.cartId) {
-              return {...item, number: Number(item.number) + 1};
+              return {...item, num: Number(item.num) + 1};
             }
             return item;
           });
         }
       } else {
         if (state.find((item) => {
-          return JSON.stringify({...item, number: 0, cartId: 0}) === JSON.stringify({...action.dish, number: 0, cartId: 0});
+          return JSON.stringify({...item, num: 0, cartId: 0}) === JSON.stringify({...action.dish, num: 0, cartId: 0});
         })) {
           return state.map((item) => {
-            if (JSON.stringify({...item, number: 0, cartId: 0}) === JSON.stringify({...action.dish, number: 0, cartId: 0})) {
-              return {...item, number: Number(item.number) + Number(action.dish.number)};
+            if (JSON.stringify({...item, num: 0, cartId: 0}) === JSON.stringify({...action.dish, num: 0, cartId: 0})) {
+              return {...item, num: Number(item.num) + Number(action.dish.num)};
             }
             return item;
           });
@@ -82,10 +84,10 @@ function cartReducer(state, action) {
       const dish = state.find((item) => {
         return Number(item.cartId) === Number(action.cartId);
       });
-      if (dish.number > 1) {
+      if (dish.num > 1) {
         return state.map((item) => {
           if (Number(item.cartId) === Number(action.cartId)) {
-            return {...item, number: item.number - 1};
+            return {...item, num: item.num - 1};
           }
           return item;
         });
@@ -101,6 +103,18 @@ function cartReducer(state, action) {
   }
 }
 
+function cartRestaurantReducer(state, action) {
+  switch (action.actionType) {
+    case actions.storeCartRestaurantSet: {
+      return action.restaurant;
+    }
+    case actions.storeCartRestaurantDelete: {
+      return null;
+    }
+    default: return state;
+  }
+}
+
 function combineReducers(reducersMap) {
   return function combinationReducers(state, action) {
     const nextState = {};
@@ -111,6 +125,17 @@ function combineReducers(reducersMap) {
   };
 }
 
+let localCart = JSON.parse(localStorage.getItem('cart'));
+if (!localCart) {
+  localCart = [];
+}
+
+let localRestaurant = JSON.parse(localStorage.getItem('cartRestaurant'));
+if (!localCart || !localRestaurant) {
+  localCart = [];
+  localRestaurant = null;
+}
+
 const initialState = {
   userState: {
     auth: false,
@@ -118,12 +143,14 @@ const initialState = {
     phone: '',
     email: '',
   },
-  cartState: [],
+  cartState: localCart,
+  cartRestaurantState: localRestaurant,
 };
 
 const reducer = combineReducers({
   userState: userReducer,
   cartState: cartReducer,
+  cartRestaurantState: cartRestaurantReducer,
 });
 
 const store = createStore(reducer, initialState);

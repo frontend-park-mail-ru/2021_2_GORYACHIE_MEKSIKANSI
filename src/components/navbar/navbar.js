@@ -1,4 +1,4 @@
-import {profileGet, logoutPost} from '../../modules/api.js';
+import {logoutPost, profileGet} from '../../modules/api.js';
 
 import store from '../../modules/store.js';
 
@@ -12,8 +12,11 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
+    this.profileRequested = false;
     profileGet({url: '/user'});
-    this.isGet = true;
+      .then(() => {
+        this.profileRequested = true;
+      });
   }
 
   /**
@@ -21,8 +24,10 @@ export class Navbar {
    */
   render() {
     const template = Handlebars.templates['navbar.hbs'];
+
     this.parent.insertAdjacentHTML('afterbegin', template({
       user: store.getState().userState,
+      itemNum: this.getNumberOfItems(),
     }));
 
     this.close();
@@ -30,7 +35,22 @@ export class Navbar {
     this.settingUp();
   }
 
+  getNumberOfItems = () => {
+    return store.getState().cartState.reduce((prev, item) => {
+      prev += item.num;
+      return prev;
+    }, 0);
+  }
+
+  updateCartButtonNumber = () => {
+    const buttonCartNumber = this.parent.querySelector('.navbar__button-cart-number-wrapper');
+    if (buttonCartNumber) {
+      buttonCartNumber.innerHTML = String(this.getNumberOfItems());
+    }
+  }
+
   settingUp() {
+    this.updateCartButtonNumber();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {
@@ -70,8 +90,8 @@ export class Navbar {
   open() {
     window.document.body.style.overflowY = 'hidden';
     this.parent.getElementsByClassName('navbar')[0].style.display = 'flex';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].
-        style.display = 'block';
+    this.parent.getElementsByClassName('navbar-wrapper')[0]
+      .style.display = 'block';
   }
 
   /**
@@ -80,8 +100,8 @@ export class Navbar {
   close() {
     window.document.body.style.overflowY = 'scroll';
     this.parent.getElementsByClassName('navbar')[0].style.display = 'none';
-    this.parent.getElementsByClassName('navbar-wrapper')[0].
-        style.display = 'none';
+    this.parent.getElementsByClassName('navbar-wrapper')[0]
+      .style.display = 'none';
   }
 
   /**
@@ -102,6 +122,7 @@ export class Navbar {
 
       document.querySelector('.navbar-wrapper').remove();
       document.querySelector('.header').remove();
+      window.document.body.style.overflowY = 'scroll';
     }
   }
 }

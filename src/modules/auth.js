@@ -16,6 +16,7 @@ export function auth(response) {
       ...response.body,
     });
   }
+  eventBus.emitEventListener(AuthStatus.userDataGot, {});
   return response;
 }
 

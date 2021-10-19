@@ -25,7 +25,6 @@ export class Cart {
   }
 
   refresh = () => {
-    console.log('Refresh', store.getState().cartState);
     this.remove();
     this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: store.getState().cartState, restaurant: this.restaurant});
     this.refreshSummary();
@@ -49,7 +48,10 @@ export class Cart {
   increaseNumber = (e) => {
     const {target} = e;
     const dishId = target.closest('.cart__order-row').id;
-    this.controller.increaseDishInCart(dishId);
+    this.controller.increaseDishInCart({
+      restId: this.restaurant.id,
+      dishId: dishId,
+    });
   }
 
   decreaseNumber = (e) => {
@@ -61,7 +63,8 @@ export class Cart {
   refreshSummary = () => {
     let value = 0;
     store.getState().cartState.forEach((item) => {
-      value +=  Number(item.dishCost) * item.number;
+      console.log(Number(item.cost), item.num);
+      value +=  Number(item.cost) * item.num;
     });
     this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
   }

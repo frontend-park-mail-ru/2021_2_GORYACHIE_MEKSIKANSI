@@ -1,7 +1,10 @@
 import {ProfileView} from '../views/profileViews/profileView/profileView.js';
-import ProfileModel from '../models/Profile.js';
 import eventBus from '../modules/eventBus.js';
 import {ProfileEvents} from '../events/Profile.js';
+import {AuthStatus} from '../events/Auth.js';
+
+import store from '../modules/store.js';
+import Navbar from '../components/navbar/navbar.js';
 
 /**
  *  Profile controller class
@@ -31,8 +34,20 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    this.profileView.render();
-    // ProfileModel.checkAuth();
+    if (Navbar.profileRequested) {
+      this.show();
+    } else {
+      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+    }
+  }
+
+  show = () => {
+    eventBus.unsubscribe(AuthStatus.userDataGot);
+    if (store.getState().userState.auth) {
+      this.profileView.render();
+    } else {
+      this.routeTo('/');
+    }
   }
 
   /**
