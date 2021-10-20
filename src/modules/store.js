@@ -29,6 +29,7 @@ function userReducer(state, action) {
         name: '',
         email: '',
         phone: '',
+        avatar: '',
       };
     case actions.storeUserLogin:
       return {
@@ -37,6 +38,7 @@ function userReducer(state, action) {
         name: action.name,
         email: action.email,
         phone: action.phone,
+        avatar: action.avatar,
       };
     default:
       return state;
@@ -142,6 +144,7 @@ const initialState = {
     name: '',
     phone: '',
     email: '',
+    avatar: '',
   },
   cartState: localCart,
   cartRestaurantState: localRestaurant,

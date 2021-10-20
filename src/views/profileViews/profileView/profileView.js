@@ -33,9 +33,10 @@ export class ProfileView extends View {
   render(props = {}) {
     this.navbar.render();
     const template = Handlebars.templates['baseProfilePage.hbs'];
+    console.log(store.getState().userState);
     this.parent.innerHTML += template({
       pageTitle: 'Личные данные',
-      content: Handlebars.templates['profilePage.hbs']({
+      content: Handlebars.templates['profilePage1.hbs']({
         user: store.getState().userState,
       }),
       rightMenu: Handlebars.templates['profileButtonsNav.hbs']});

@@ -14,7 +14,6 @@
 
 .profile-page__input-label {
     width: 100%;
-    padding-bottom: 30px;
     font-weight: 600;
     color: var(--color-gray);
 }
@@ -25,10 +24,9 @@
 }
 
 .profile-page__button {
-    margin-top: 40px;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 16px;
-    width: 100%;
+    width: var(--button-width-medium)
 }
 
 .profile-page__button_wrapper {
@@ -41,4 +39,60 @@
 .profile-page__button-color {
     background-color: #F6F6F6;
     margin-right: auto;
+}
+
+.profile-page__avatar-box {
+
+}
+
+.profile-avatar {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+}
+
+.profile-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-save-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-row__name {
+    font-size: 30px;
+    font-weight: var(--font_medium);
+    margin-left: 40px;
+}
+
+.profile-row__input-label-lm {
+    margin-left: 15px;
+}
+
+.profile-page__input-date-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.profile-page__input-ml {
+    margin-left: 15px;
+}
+
+.input__days {
+    flex-shrink: 2;
+}
+
+.input__months {
+    flex-shrink: 2;
+}
+
+.input__year {
+
 }
