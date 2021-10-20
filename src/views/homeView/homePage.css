@@ -56,7 +56,7 @@ h3 {
 
 .home-page__promo-line-blocks {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     width: 81%;
     margin-left: auto;
 }
