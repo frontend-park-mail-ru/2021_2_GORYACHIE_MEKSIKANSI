@@ -1,16 +1,25 @@
 .promo-line-wrapper {
-    position: absolute;
-    left: 200px;
     display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 5% 0 5%;
 }
 
 .promo-line {
     display: flex;
     flex-wrap: nowrap;
-    width: 1000px;
+    width: 1000%;
     overflow: hidden;
 
     box-sizing: border-box;
+}
+
+button {
+    visibility: hidden;
+}
+
+.promo-line-wrapper:hover button {
+    visibility: visible;
 }
 
 .promo-line-block {
