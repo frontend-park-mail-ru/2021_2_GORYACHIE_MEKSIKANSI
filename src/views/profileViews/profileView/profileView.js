@@ -43,9 +43,11 @@ export class ProfileView extends View {
     document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
     document.querySelector('.profile-avatar').addEventListener('click', () => {document.getElementById('avatar').click();});
     document.getElementById('avatar').onchange = this.checkImage;
-    document.getElementById('save-image-button').addEventListener('click', this.sendImage);
 
     document.querySelector('.footer').style.marginTop = '0';
+    const form = document.getElementById('save-button');
+    console.log(form);
+    form.addEventListener('click', this.submitListener.bind(this));
   }
 
   checkImage = () => {
@@ -78,15 +80,24 @@ export class ProfileView extends View {
 
   /**
    * Method calling by
-   * @param {string} event
+   * @param {Object} event
+   * @private
    */
-  submitListener(event) {}
+  submitListener(event) {
+    event.preventDefault();
+    const name = document.getElementById('name');
+    const password = document.getElementById('password');
+    const repeatPassword = document.getElementById('repeatPassword');
+    const mail = document.getElementById('mail');
+    const phone = document.getElementById('phone');
+    this.controller.dataChange(name.value, phone.value, mail.value, '', password.value,repeatPassword.value);
+  }
 
   /**
    * Method for setting up before rendering elements
    */
   settingUp() {
-    const form = document.getElementById('form_submit');
+    const form = document.getElementById('save-button');
     form.addEventListener('click', this.submitListener.bind(this));
   }
 

@@ -35,59 +35,71 @@ export class ProfileController {
 
   dataChange(name, phone, mail, avatar, password, repeatPassword) {
     const validation = {
-      email: {
+      cMail: {
         key: Validation.validateEmail(mail),
         value: mail,
       },
-      phone: {
+      cPhone: {
         key: Validation.validatePhoneNumber(phone),
         value: phone,
       },
-      name: {
+      cName: {
         key: Validation.validateName(name),
         value: name,
       },
-      password: {
+      cPassword: {
         key: Validation.validatePassword(password),
         value: password
       },
-      passwordRepeatValidation: Validation.validatePasswordRepeat(password,
-        repeatPassword),
+      cRepeatPassword: {
+        key: Validation.validatePasswordRepeat(password,
+            repeatPassword),
+        value: repeatPassword,
+      },
     }
 
+    const incorrectData = {
+      cName: '',
+      cPhone: '',
+      cMail: '',
+      cPassword: '',
+      cRepeatPassword: '',
+    }
     const correctData = {
-      name: '',
-      phone: '',
-      mail: '',
-      password: '',
+      cName: '',
+      cPhone: '',
+      cMail: '',
+      cPassword: '',
     }
 
     Object.entries(validation).forEach(([key, value]) => {
-        if (value.validationCode === ValidationLength.Incorrect) {
-
+        if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {
+          incorrectData[key] = value.key;
         } else {
-          if (value.validationCode !== ValidationLength.EmptyLine) {
-            correctData.key =
+          if (value.key.validationCode !== ValidationLength.EmptyLine && key in correctData) {
+            correctData[key] = value.value
           }
         }
     })
 
-    if (passwordValidation.validationResult &&
-      passwordRepeatValidation.validationResult &&
-      emailValidation.validationResult &&
-      phoneValidation.validationResult) {
-      SignUpModel.signUp({type, name, email, phone, password});
-      return {error: false};
-    }
+    Object.entries(correctData).forEach(([key, value]) => {
+      if (value === '') {
+        delete correctData[key];
+      }
+    })
 
-    return {
-      error: true,
-      emailValidation,
-      phoneValidation,
-      passwordValidation,
-      passwordRepeatValidation,
-      nameValidation,
-    };
+    Object.entries(incorrectData).forEach(([key, value]) => {
+      if (value === '') {
+        delete incorrectData[key];
+      }
+    })
+
+    if (incorrectData['cRepeatPassword'] !== '') {
+      delete correctData['cPassword'];
+    }
+    console.log(Object.entries(correctData));
+    console.log(Object.entries(incorrectData));
+
   }
 
   /**
