@@ -16,7 +16,7 @@
             <hr class="restaurant-nav__line">
             <div class="restaurant-nav__list">
                 {{#each menu}}
-                    <a href="#{{id}}" class="restaurant-underheader__a">
+                    <a href="#{{name}}" class="restaurant-underheader__a">
                         <div class="restaurant-nav__btn">
                             {{name}}
                         </div>
@@ -28,7 +28,7 @@
 
         <div class="restaurant-page__dishes">
             {{#each menu}}
-                <div id="{{id}}" class="restaurant-page__menu-title">
+                <div id="{{name}}" class="restaurant-page__menu-title">
                     {{name}}
                 </div>
                 {{#each dishes}}
