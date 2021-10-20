@@ -33,15 +33,48 @@ export class ProfileView extends View {
   render(props = {}) {
     this.navbar.render();
     const template = Handlebars.templates['baseProfilePage.hbs'];
-    console.log(store.getState().userState);
     this.parent.innerHTML += template({
       pageTitle: 'Личные данные',
       content: Handlebars.templates['profilePage1.hbs']({
         user: store.getState().userState,
       }),
       rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
+
+    document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
+    document.querySelector('.profile-avatar').addEventListener('click', () => {document.getElementById('avatar').click();});
+    document.getElementById('avatar').onchange = this.checkImage;
+    document.getElementById('save-image-button').addEventListener('click', this.sendImage);
+
     document.querySelector('.footer').style.marginTop = '0';
   }
+
+  checkImage = () => {
+    const [file] = document.getElementById('avatar').files
+    if (file) {
+      console.log('Image clicked!');
+        // this.controller.checkImage();
+    }
+  }
+
+  showImage = (file) => {
+    document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
+  }
+
+  deleteImage = () => {
+    console.log('Image size overflow');
+    document.getElementById('avatar').value = '';
+  }
+
+
+  sendImage = () => {
+    const [file] = document.getElementById('avatar').files;
+    if (file) {
+      // document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
+      console.log(file);
+      console.log(URL.createObjectURL(file));
+    }
+  }
+
 
   /**
    * Method calling by

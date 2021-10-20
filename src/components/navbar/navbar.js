@@ -30,6 +30,12 @@ export class Navbar {
       itemNum: this.getNumberOfItems(),
     }));
 
+    if (store.getState().userState.auth) {
+      if (store.getState().userState.avatar) {
+        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
+      }
+    }
+
     this.close();
 
     this.settingUp();

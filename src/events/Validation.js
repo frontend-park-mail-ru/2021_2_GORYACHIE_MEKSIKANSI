@@ -7,4 +7,6 @@ export const ValidationLength = {
   MinPasswordLength: 8,
   MaxNameLength: 20,
   MinNameLength: 2,
+  EmptyLine: 'Пустое поле',
+  Incorrect: 'Неверное поле',
 };

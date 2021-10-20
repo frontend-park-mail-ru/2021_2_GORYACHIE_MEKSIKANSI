@@ -23,7 +23,6 @@ Handlebars.registerPartial('dish', Handlebars.templates['dish.hbs']);
 Handlebars.registerPartial('order', Handlebars.templates['historyOrder.hbs']);
 
 const application = document.getElementById('app');
-
 const router = new Router(document.body);
 const routeTo = (url) => {
   router.open(url);

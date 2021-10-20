@@ -7,11 +7,13 @@ const phoneRegExpression = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-.
 
 const emptyResult = {
   validationResult: false,
+  validationCode: ValidationLength.EmptyLine,
   validationText: 'Необходимо заполнить поле',
 };
 
 const validResult = {
   validationResult: true,
+  validationCode: '',
   validationText: '',
 };
 
@@ -36,6 +38,7 @@ export class Validation {
       email.length < ValidationLength.MinEmailLength) {
       return {
         validationResult: false,
+        validationCode: ValidationLength.Incorrect,
         validationText: 'Введен неверный адрес электронной почты',
       };
     }
@@ -60,6 +63,7 @@ export class Validation {
       phone.length < ValidationLength.MinPhoneLength) {
       return {
         validationResult: false,
+        validationCode: ValidationLength.Incorrect,
         validationText: 'Введен неверный номер телефона',
       };
     }
@@ -83,6 +87,7 @@ export class Validation {
       password.length < ValidationLength.MinPasswordLength) {
       return {
         validationResult: false,
+        validationCode: ValidationLength.Incorrect,
         validationText: `Введите пароль от ${ValidationLength.MinPasswordLength}
          до ${ValidationLength.MaxPasswordLength} символов`,
       };
@@ -103,6 +108,7 @@ export class Validation {
     if (password !== repeatPassword) {
       return {
         validationResult: false,
+        validationCode: ValidationLength.Incorrect,
         validationText: 'Пароли не совпадают',
       };
     }

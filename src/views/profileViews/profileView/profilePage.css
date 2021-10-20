@@ -46,10 +46,30 @@
 }
 
 .profile-avatar {
-    object-fit: cover;
+    background-color: transparent;
+    background-size: cover;
     border-radius: 50%;
     width: 130px;
     height: 130px;
+    position: relative;
+    cursor: pointer;
+}
+
+.avatar-find-icon {
+    position: absolute;
+    left: calc(130px / 2 - 12px);
+    top: calc(130px / 2 - 12px);
+    visibility: hidden;
+    z-index: 1000;
+}
+
+
+.profile-avatar:hover .avatar-find-icon{
+    visibility: visible;
+}
+
+.profile-avatar:hover {
+    filter: opacity(50%);
 }
 
 .profile-row {
@@ -95,4 +115,8 @@
 
 .input__year {
 
+}
+
+.avatar-input {
+    display: none;
 }
