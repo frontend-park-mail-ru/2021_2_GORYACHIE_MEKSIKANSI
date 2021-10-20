@@ -13,7 +13,7 @@ export function auth(response) {
   if (response.status === ResponseEvents.OK) {
     store.dispatch({
       actionType: actions.storeUserLogin,
-      ...response.body,
+      ...response.body.profile,
     });
   }
   eventBus.emitEventListener(AuthStatus.userDataGot, {});

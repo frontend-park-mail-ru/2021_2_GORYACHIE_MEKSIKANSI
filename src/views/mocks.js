@@ -64,7 +64,7 @@ export function getDish() {
         ],
       },
     ],
-    checkboxes: [
+    ingredients: [
       {
         id: 1,
         name: 'Котлетка',
@@ -105,7 +105,7 @@ const items = [
         id: 1,
       },
     ],
-    checkboxes: [
+    ingredients: [
       {
         id: 1,
         name: 'Котлетка',

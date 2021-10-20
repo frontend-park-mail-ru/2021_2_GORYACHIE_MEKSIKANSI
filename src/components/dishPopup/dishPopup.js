@@ -17,7 +17,7 @@ export class DishPopup {
   }
 
   render(dish) {
-    this.dish = dish;
+    this.dish = dish.dishes;
     this.div = document.createElement('div');
     this.div.classList.add('dish-popup-div');
     this.div.innerHTML = Handlebars.templates['dishPopup.hbs'](this.dish);
@@ -79,7 +79,7 @@ export class DishPopup {
         id: this.dish.id,
         num: Number(number),
         radios: dishRadios,
-        checkboxes: dishCheckboxes,
+        ingredients: dishCheckboxes,
       },
     });
     this.remove();
@@ -143,7 +143,7 @@ export class DishPopup {
     const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
     checkboxes.forEach((DOMitem) => {
       if (DOMitem.querySelector('input').checked) {
-        cost += Number(this.dish.checkboxes.find((item) => {
+        cost += Number(this.dish.ingredients.find((item) => {
           return Number(DOMitem.id) === item.id;
         }).cost);
       }

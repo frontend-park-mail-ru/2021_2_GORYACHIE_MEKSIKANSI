@@ -22,7 +22,7 @@ export function signupPost({
   password,
 }) {
   return http.ajaxPost({
-    url: 'user/signup',
+    url: '/user/signup',
     body: {
       type,
       name,
@@ -44,7 +44,7 @@ export function signupPost({
  */
 export function loginPost({type, email, phone, password}) {
   return http.ajaxPost({
-    url: 'user/login',
+    url: '/user/login',
     body: {type, email, phone, password},
   });
 }
@@ -110,7 +110,7 @@ export function addDishPost(dishSettings = {}) {
       dishId: dishSettings.dishId,
       number: dishSettings.number,
       radios: dishSettings.radios,
-      dishCheckboxes: dishSettings.dishCheckboxes,
+      ingredients: dishSettings.ingredients,
     },
   });
 }

@@ -70,8 +70,8 @@ class RestaurantModel {
             // get dish mock
             const dishMock = getItemToCart(dishSettings.dish.id);
             // select needed checkboxes
-            const dishCheckboxes = dishMock.checkboxes.filter((item) => {
-              return dishSettings.dish.checkboxes.find((checkbox) => {
+            const dishCheckboxes = dishMock.ingredients.filter((item) => {
+              return dishSettings.dish.ingredients.find((checkbox) => {
                 return Number(checkbox.id) === Number(item.id);
               });
             });
@@ -83,7 +83,7 @@ class RestaurantModel {
             // create dish obj and calc summary cost
             const dish = {
               ...dishMock,
-              checkboxes: dishCheckboxes,
+              ingredients: dishCheckboxes,
               cost: cost,
               radios: dishSettings.dish.radios,
               num: dishSettings.dish.num,

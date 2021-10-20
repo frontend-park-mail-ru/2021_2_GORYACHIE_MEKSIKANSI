@@ -43,7 +43,7 @@ export class RestaurantView extends View {
 
   render(props = {}) {
   // TODO: Запрос ресторана из модели
-    this.restaurant = props;
+    this.restaurant = props.restaurant;
 
     this.navbar.render();
     const template = Handlebars.templates['page.hbs'];

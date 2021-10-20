@@ -33,7 +33,7 @@ export class HomeView extends View {
     this.parent.insertAdjacentHTML('afterbegin', template({
       content: Handlebars.templates['homePage.hbs']({
         promos: [1, 2, 3],
-        restaurantList: props,
+        restaurantList: props.restaurants,
       }),
     }));
     this.settingUp();
