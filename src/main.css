@@ -44,3 +44,7 @@ body {
     margin-bottom: 10px;
     color: red;
 }
+
+a {
+    text-decoration: none;
+}
