@@ -75,13 +75,13 @@
     display: flex;
     flex-direction: column;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 .restaurant-underheader__tags {
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
+    align-items: center;
 }
 
 .restaurant-underheader__tag {
@@ -92,7 +92,7 @@
 }
 
 .restaurant-nav {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .restaurant-nav__line {
