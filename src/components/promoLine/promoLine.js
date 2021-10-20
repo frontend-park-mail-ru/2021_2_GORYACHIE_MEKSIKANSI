@@ -1,88 +1,90 @@
-
-class PromoLine {
+export class PromoLine {
   constructor(props) {
 
   }
 
   render(parent) {
     this.parent = parent;
-    parent.innerHTML = Handlebars.templates['promoLine.hbs']({promos: [1, 2, 3, 4, 5]});
+    this.parent.innerHTML = Handlebars.templates['promoLine.hbs']({promos: [1, 2, 3, 4, 5, 6, 7]});
+
+    this.begin = 0;
+    this.promoLine = this.parent.querySelector('.promo-line');
+    this.blocks = this.parent.querySelectorAll('.promo-block');
+    this.leftButton = this.parent.querySelector('.promo-line__button-left');
+    this.rightButton = this.parent.querySelector('.promo-line__button-right');
+
+    this.leftButton.addEventListener('click', this.turnLeft);
+    this.rightButton.addEventListener('click', this.turnRight);
+
+    this.updateButtonVisibility();
+  }
+
+  getNextLeftScrollCoors = () => {
+    const blockWidth = this.promoLine.offsetWidth;
+    const firstBlock = [...this.blocks].find((block) => {
+      return block.offsetLeft + block.offsetWidth - block.parentNode.offsetLeft > this.begin - blockWidth;
+    });
+    if (firstBlock) {
+      this.begin = firstBlock.offsetLeft - firstBlock.parentNode.offsetLeft;
+
+      if (this.begin < blockWidth) {
+        this.begin = 0;
+      }
+    }
+    return this.begin;
+  };
+
+  getNextRightScrollCoors = () => {
+    const blockWidth = this.promoLine.offsetWidth;
+    const lastBlock = [...this.blocks].find((block) => {
+      return block.offsetLeft + block.offsetWidth - block.parentNode.offsetLeft > this.begin + blockWidth;
+    });
+    if (lastBlock) {
+      this.begin = lastBlock.offsetLeft - lastBlock.parentNode.offsetLeft;
+    }
+    return this.begin;
+  };
+
+  updateButtonVisibility = () => {
+    this.leftButton.style.visibility = 'visible';
+    this.rightButton.style.visibility = 'visible';
+    const summaryWidthOfBlocks = [...this.blocks].reduce((prev, item) => {
+      prev += item.offsetWidth;
+      return prev;
+    }, 0);
+
+    const blockWidth = this.promoLine.offsetWidth;
+    if (summaryWidthOfBlocks < blockWidth) {
+      this.leftButton.style.visibility = 'hidden';
+      this.rightButton.style.visibility = 'hidden';
+    } else {
+      if (this.begin + blockWidth > document.querySelector('.promo-line').scrollWidth) {
+        this.rightButton.style.visibility = 'hidden';
+      } else if (this.begin === 0) {
+        this.leftButton.style.visibility = 'hidden';
+      }
+    }
+  };
+
+  turnLeft = () => {
+    document.querySelector('.promo-line').scrollTo({
+      left: this.getNextLeftScrollCoors(),
+      behavior: 'smooth',
+    });
+    this.updateButtonVisibility();
+  };
+
+  turnRight = () => {
+    document.querySelector('.promo-line').scrollTo({
+      left: this.getNextRightScrollCoors(),
+      behavior: 'smooth',
+    });
+    this.updateButtonVisibility();
+  };
+
+  remove() {
+    this.leftButton.removeEventListener('click', this.turnLeft);
+    this.rightButton.removeEventListener('click', this.turnRight);
+    this.parent.innerHTML = '';
   }
 }
-
-let begin = 0;
-let blockWidth = document.querySelector('.promo-line').offsetWidth;
-
-const getNextRightScrollCoors = () => {
-  blockWidth = document.querySelector('.promo-line').offsetWidth;
-  const blocks = document.querySelectorAll('.promo-block');
-  const lastBlock = [...blocks].find((block) => {
-    return block.offsetLeft + block.offsetWidth - block.parentNode.offsetLeft > begin + blockWidth;
-  });
-  console.log(lastBlock);
-  if (lastBlock) {
-    begin = lastBlock.offsetLeft - lastBlock.parentNode.offsetLeft;
-  }
-  return begin;
-};
-
-const getNextLeftScrollCoors = () => {
-  blockWidth = document.querySelector('.promo-line').offsetWidth;
-  const blocks = document.querySelectorAll('.promo-block');
-  const firstBlock = [...blocks].find((block) => {
-    return block.offsetLeft + block.offsetWidth - block.parentNode.offsetLeft > begin;
-  });
-  if (firstBlock) {
-    begin = firstBlock.offsetLeft - firstBlock.parentNode.offsetLeft;
-  }
-  return begin;
-};
-
-const turnLeft = () => {
-  if (begin < blockWidth) {
-    begin = 0;
-  } else if (begin > blockWidth) {
-    begin -= blockWidth;
-  }
-  document.querySelector('.promo-line').scrollTo({
-    left: getNextLeftScrollCoors(),
-    behavior: 'smooth',
-  });
-  updateButtonVisiblity();
-};
-
-const updateButtonVisiblity = () => {
-  document.querySelector('.promo-line__button-left').style.visibility = 'visible';
-  document.querySelector('.promo-line__button-right').style.visibility = 'visible';
-
-  const blocks = document.querySelectorAll('.promo-line-block');
-  const summaryWidthOfBlocks = [...blocks].reduce((prev, item) => {
-    prev += item.offsetWidth;
-    return prev;
-  }, 0);
-  if (summaryWidthOfBlocks < blockWidth) {
-    document.querySelector('.promo-line__button-right').style.visibility = 'hidden';
-    document.querySelector('.promo-line__button-left').style.visibility = 'hidden';
-  } else {
-    if (begin + blockWidth > document.querySelector('.promo-line').scrollWidth) {
-      document.querySelector('.promo-line__button-right').style.visibility = 'hidden';
-    }
-
-    if (begin === 0) {
-      document.querySelector('.promo-line__button-left').style.visibility = 'hidden';
-    }
-  }
-};
-
-const turnRight = () => {
-  document.querySelector('.promo-line').scrollTo({
-    left: getNextRightScrollCoors(),
-    behavior: 'smooth',
-  });
-  updateButtonVisiblity();
-};
-
-document.querySelector('.promo-line__button-left').addEventListener('click', turnLeft);
-document.querySelector('.promo-line__button-right').addEventListener('click', turnRight);
-
-updateButtonVisiblity();
