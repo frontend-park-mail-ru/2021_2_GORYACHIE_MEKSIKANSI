@@ -1,8 +1,16 @@
 
+class PromoLine {
+  constructor(props) {
+
+  }
+
+  render(parent) {
+    this.parent = parent;
+    parent.innerHTML = Handlebars.templates['promoLine.hbs']({promos: [1, 2, 3, 4, 5]});
+  }
+}
+
 let begin = 0;
-
-// console.log(document.querySelector('.promo-line').offsetLeft);
-
 let blockWidth = document.querySelector('.promo-line').offsetWidth;
 
 const getNextRightScrollCoors = () => {
@@ -15,7 +23,6 @@ const getNextRightScrollCoors = () => {
   if (lastBlock) {
     begin = lastBlock.offsetLeft - lastBlock.parentNode.offsetLeft;
   }
-  console.log(begin);
   return begin;
 };
 
@@ -28,7 +35,6 @@ const getNextLeftScrollCoors = () => {
   if (firstBlock) {
     begin = firstBlock.offsetLeft - firstBlock.parentNode.offsetLeft;
   }
-  console.log(begin);
   return begin;
 };
 
@@ -42,6 +48,30 @@ const turnLeft = () => {
     left: getNextLeftScrollCoors(),
     behavior: 'smooth',
   });
+  updateButtonVisiblity();
+};
+
+const updateButtonVisiblity = () => {
+  document.querySelector('.promo-line__button-left').style.visibility = 'visible';
+  document.querySelector('.promo-line__button-right').style.visibility = 'visible';
+
+  const blocks = document.querySelectorAll('.promo-line-block');
+  const summaryWidthOfBlocks = [...blocks].reduce((prev, item) => {
+    prev += item.offsetWidth;
+    return prev;
+  }, 0);
+  if (summaryWidthOfBlocks < blockWidth) {
+    document.querySelector('.promo-line__button-right').style.visibility = 'hidden';
+    document.querySelector('.promo-line__button-left').style.visibility = 'hidden';
+  } else {
+    if (begin + blockWidth > document.querySelector('.promo-line').scrollWidth) {
+      document.querySelector('.promo-line__button-right').style.visibility = 'hidden';
+    }
+
+    if (begin === 0) {
+      document.querySelector('.promo-line__button-left').style.visibility = 'hidden';
+    }
+  }
 };
 
 const turnRight = () => {
@@ -49,7 +79,10 @@ const turnRight = () => {
     left: getNextRightScrollCoors(),
     behavior: 'smooth',
   });
+  updateButtonVisiblity();
 };
 
-document.querySelector('.left').addEventListener('click', turnLeft);
-document.querySelector('.right').addEventListener('click', turnRight);
+document.querySelector('.promo-line__button-left').addEventListener('click', turnLeft);
+document.querySelector('.promo-line__button-right').addEventListener('click', turnRight);
+
+updateButtonVisiblity();
