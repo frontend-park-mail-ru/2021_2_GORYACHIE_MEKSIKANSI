@@ -2,6 +2,8 @@ import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
 import store from '../../../modules/store.js';
 
+import {updateName} from '../../../modules/api.js';
+
 
 /**
  * Profile view class
@@ -31,7 +33,6 @@ export class ProfileView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
-    console.log(store.getState().userState);
     this.navbar.render();
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({

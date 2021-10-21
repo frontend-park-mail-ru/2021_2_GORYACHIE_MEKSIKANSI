@@ -130,3 +130,39 @@ export function clearDishFromCartDelete(dishId) {
     },
   });
 }
+
+export function updateName(name) {
+  return http.ajaxPut({
+    url: '/user/name',
+    body: {
+      name: name,
+    },
+  });
+}
+
+export function updateEmail(email) {
+  return http.ajaxPut({
+    url: '/user/email',
+    body: {
+      email: email,
+    },
+  });
+}
+
+export function updatePhone(phone) {
+  return http.ajaxPut({
+    url: '/user/phone',
+    body: {
+      phone: phone,
+    },
+  });
+}
+
+export function updatePassword(password) {
+  return http.ajaxPut({
+    url: '/user/password',
+    body: {
+      password: password,
+    },
+  });
+}

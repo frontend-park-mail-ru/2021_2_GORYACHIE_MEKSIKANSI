@@ -92,7 +92,19 @@ export default class Http {
     body = null,
   } = {}) {
     return makeFetch({
-      url: url, method: 'POST',
+      url: url,
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+  }
+
+  async ajaxPut({
+    url = '/',
+    body = null,
+  } = {}) {
+    return makeFetch({
+      url: url,
+      method: 'PUT',
       body: JSON.stringify(body),
     });
   }
