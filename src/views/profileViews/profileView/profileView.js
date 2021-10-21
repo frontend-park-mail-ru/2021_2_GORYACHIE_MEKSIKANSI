@@ -48,6 +48,29 @@ export class ProfileView extends View {
     const form = document.getElementById('save-button');
     console.log(form);
     form.addEventListener('click', this.submitListener.bind(this));
+
+    this.inputs = {
+      cName: {
+        input: document.getElementById('name'),
+        error: document.getElementById('name_error'),
+      },
+      cPhone: {
+        input: document.getElementById('phone'),
+        error: document.getElementById('phone_error'),
+      },
+      cMail: {
+        input: document.getElementById('email'),
+        error: document.getElementById('email_error'),
+      },
+      cPassword: {
+        input: document.getElementById('password'),
+        error: document.getElementById('password_error'),
+      },
+      cRepeatPassword: {
+        input: document.getElementById('repeat_password'),
+        error: document.getElementById('password_repeat_error'),
+      },
+    };
   }
 
   checkImage = () => {
@@ -85,12 +108,18 @@ export class ProfileView extends View {
    */
   submitListener(event) {
     event.preventDefault();
-    const name = document.getElementById('name');
-    const password = document.getElementById('password');
-    const repeatPassword = document.getElementById('repeatPassword');
-    const mail = document.getElementById('mail');
-    const phone = document.getElementById('phone');
-    this.controller.dataChange(name.value, phone.value, mail.value, '', password.value,repeatPassword.value);
+    this.controller.dataChange(...Object.values(this.inputs).map((obj) => {return obj.input.value}), '');
+  }
+
+  showErrors = (incorrectData = {}) => {
+    Object.entries(this.inputs).forEach(([key, value]) => {
+      value.input.style.borderColor = '#e2e2e2';
+      value.error.innerHTML = '';
+    })
+    Object.entries(incorrectData).forEach(([key, value]) => {
+      this.inputs[key].input.style.borderColor = 'red';
+      this.inputs[key].error.innerHTML = value.validationText;
+    });
   }
 
   /**

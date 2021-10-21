@@ -33,29 +33,52 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userNotAuth, this.routeTo);
   }
 
-  dataChange(name, phone, mail, avatar, password, repeatPassword) {
-    const validation = {
-      cMail: {
-        key: Validation.validateEmail(mail),
-        value: mail,
-      },
-      cPhone: {
-        key: Validation.validatePhoneNumber(phone),
-        value: phone,
-      },
-      cName: {
-        key: Validation.validateName(name),
-        value: name,
-      },
-      cPassword: {
-        key: Validation.validatePassword(password),
-        value: password
-      },
-      cRepeatPassword: {
-        key: Validation.validatePasswordRepeat(password,
+  dataChange(name, phone, mail, password, repeatPassword,  avatar) {
+    const currentUserData = store.getState().userState;
+    let validation = {};
+    if (currentUserData.name !== name) {
+      validation = {
+        ...validation,
+        cName: {
+          key: Validation.validateName(name),
+          value: name,
+        },
+      }
+    }
+
+    if (currentUserData.email !== mail) {
+      validation = {
+        ...validation,
+        cMail: {
+          key: Validation.validateEmail(mail),
+          value: mail,
+        },
+      }
+    }
+
+    if (currentUserData.phone !== phone) {
+      validation = {
+        ...validation,
+        cPhone: {
+          key: Validation.validatePhoneNumber(phone),
+          value: phone,
+        },
+      }
+    }
+
+    if (password !== '' || repeatPassword !== '') {
+      validation = {
+        ...validation,
+        cPassword: {
+          key: Validation.validatePassword(password),
+          value: password
+        },
+        cRepeatPassword: {
+          key: Validation.validatePasswordRepeat(password,
             repeatPassword),
-        value: repeatPassword,
-      },
+          value: repeatPassword,
+        },
+      }
     }
 
     const incorrectData = {
@@ -73,7 +96,7 @@ export class ProfileController {
     }
 
     Object.entries(validation).forEach(([key, value]) => {
-        if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {
+        if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {  // TODO: не считать пустые поля не корректными??
           incorrectData[key] = value.key;
         } else {
           if (value.key.validationCode !== ValidationLength.EmptyLine && key in correctData) {
@@ -97,9 +120,13 @@ export class ProfileController {
     if (incorrectData['cRepeatPassword'] !== '') {
       delete correctData['cPassword'];
     }
-    console.log(Object.entries(correctData));
-    console.log(Object.entries(incorrectData));
 
+    if (incorrectData.length !== 0) {
+      this.profileView.showErrors(incorrectData);
+    }
+
+    console.log('Correcto ', Object.entries(correctData));
+    console.log('Incorrecto ', Object.entries(incorrectData));
   }
 
   /**
