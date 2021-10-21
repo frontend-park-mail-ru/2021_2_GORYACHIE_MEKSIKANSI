@@ -1,6 +1,7 @@
 export const actions = {
   storeUserLogin: 'storeUserLogin',
   storeUserLogout: 'storeUserLogout',
+  storeUserDataUpdate: 'storeUserDataUpdate',
   storeCartAddDish: 'storeCartAdd',
   storeCartDeleteDish: 'storeCartDelete',
   storeCartDeleteAll: 'storeCartDeleteAll',
@@ -39,6 +40,11 @@ function userReducer(state, action) {
         email: action.email,
         phone: action.phone,
         avatar: action.avatar,
+      };
+    case actions.storeUserDataUpdate:
+      return {
+        ...state,
+        ...action.updated,
       };
     default:
       return state;

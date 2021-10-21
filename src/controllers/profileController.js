@@ -7,7 +7,7 @@ import {ValidationLength} from '../events/Validation.js';
 import store from '../modules/store.js';
 import Navbar from '../components/navbar/navbar.js';
 import {Validation} from '../modules/validation.js';
-import SignUpModel from "../models/SignUp.js";
+import ProfileModel from '../models/Profile.js';
 
 /**
  *  Profile controller class
@@ -31,6 +31,10 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userLoggedIn,
         this.profileView.render.bind(this.profileView));
     eventBus.addEventListener(ProfileEvents.userNotAuth, this.routeTo);
+    eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, () => {
+      this.remove();
+      this.render();
+    });
   }
 
   dataChange(name, phone, mail, password, repeatPassword,  avatar) {
@@ -96,37 +100,50 @@ export class ProfileController {
     }
 
     Object.entries(validation).forEach(([key, value]) => {
-        if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {  // TODO: не считать пустые поля не корректными??
+        if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {
           incorrectData[key] = value.key;
         } else {
           if (value.key.validationCode !== ValidationLength.EmptyLine && key in correctData) {
-            correctData[key] = value.value
+            correctData[key] = value.value;
           }
         }
-    })
+    });
 
     Object.entries(correctData).forEach(([key, value]) => {
       if (value === '') {
         delete correctData[key];
       }
-    })
+    });
 
     Object.entries(incorrectData).forEach(([key, value]) => {
       if (value === '') {
         delete incorrectData[key];
       }
-    })
+    });
 
-    if (incorrectData['cRepeatPassword'] !== '') {
+    if (incorrectData['cRepeatPassword'] !== undefined && incorrectData['cRepeatPassword'] !== '') {
       delete correctData['cPassword'];
     }
 
-    if (incorrectData.length !== 0) {
-      this.profileView.showErrors(incorrectData);
+    this.profileView.showErrors(incorrectData);
+    if (Object.keys(incorrectData).length !== 0) {
+      return;
     }
 
-    console.log('Correcto ', Object.entries(correctData));
-    console.log('Incorrecto ', Object.entries(incorrectData));
+    const updateModel = {
+      cName: ProfileModel.updateUserName,
+      cPhone: ProfileModel.updateUserPhone,
+      cMail: ProfileModel.updateUserEmail,
+      cPassword: ProfileModel.updateUserPassword,
+    };
+
+    console.log(correctData);
+
+    Object.entries(correctData).forEach(([key, value]) => {
+        updateModel[key](value);
+    });
+    // console.log('Correcto ', Object.entries(correctData));
+    // console.log('Incorrecto ', Object.entries(incorrectData));
   }
 
   /**
