@@ -31,6 +31,7 @@ export class ProfileView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    console.log(store.getState().userState);
     this.navbar.render();
     const template = Handlebars.templates['baseProfilePage.hbs'];
     this.parent.innerHTML += template({

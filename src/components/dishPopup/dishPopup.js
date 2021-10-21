@@ -47,7 +47,7 @@ export class DishPopup {
             rId: item.id,
             id: input.id,
             name: this.dish.radios.find((item1) => {
-              return Number(item1.rId) === Number(item.id);
+              return Number(item1.id) === Number(item.id);
             }).opt.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
               return Number(item.id) === Number(input.id);
             }).name,
