@@ -21,7 +21,7 @@ class SignUpModel {
   signUp({type, name, email, phone, password}) {
     signupPost({type, name, email, phone, password})
         .then((response) => {
-          if (response.status === ResponseEvents.CREATEDg) {
+          if (response.status === ResponseEvents.CREATED) {
             eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
                 urls.home.url);
             return;
