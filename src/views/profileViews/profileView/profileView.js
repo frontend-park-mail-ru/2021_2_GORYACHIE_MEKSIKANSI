@@ -117,11 +117,15 @@ export class ProfileView extends View {
     Object.entries(this.inputs).forEach(([key, value]) => {
       value.input.style.borderColor = '#e2e2e2';
       value.error.innerHTML = '';
-    })
+    });
     Object.entries(incorrectData).forEach(([key, value]) => {
       this.inputs[key].input.style.borderColor = 'red';
       this.inputs[key].error.innerHTML = value.validationText;
     });
+  }
+
+  showInfo = (infoText) => {
+    this.parent.querySelector('.info-label').innerText = infoText;
   }
 
   /**

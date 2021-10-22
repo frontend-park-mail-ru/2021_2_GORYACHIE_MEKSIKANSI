@@ -45,6 +45,13 @@ body {
     color: red;
 }
 
+
+.info-label {
+    font-weight: var(--font_medium);
+    font-size: 14px;
+    color: var(--color-green);
+}
+
 a {
     text-decoration: none;
 }

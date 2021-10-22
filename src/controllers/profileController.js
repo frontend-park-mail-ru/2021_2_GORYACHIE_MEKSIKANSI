@@ -34,6 +34,7 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, () => {
       this.remove();
       this.render();
+      this.profileView.showInfo('Профиль успешно обновлен!');
     });
   }
 
@@ -126,6 +127,7 @@ export class ProfileController {
     }
 
     this.profileView.showErrors(incorrectData);
+    this.profileView.showInfo('');
     if (Object.keys(incorrectData).length !== 0) {
       return;
     }
