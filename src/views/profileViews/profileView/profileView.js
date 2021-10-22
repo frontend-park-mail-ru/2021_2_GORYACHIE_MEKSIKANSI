@@ -128,6 +128,10 @@ export class ProfileView extends View {
     this.parent.querySelector('.info-label').innerText = infoText;
   }
 
+  showError = (errorText) => {
+    this.parent.querySelector('.main-error-label').innerText = errorText;
+  }
+
   /**
    * Method for setting up before rendering elements
    */

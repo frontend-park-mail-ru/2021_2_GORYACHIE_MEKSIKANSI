@@ -36,6 +36,9 @@ export class ProfileController {
       this.render();
       this.profileView.showInfo('Профиль успешно обновлен!');
     });
+    eventBus.addEventListener(ProfileEvents.userDataUpdateFailed, (errorText) => {
+      this.profileView.showError(errorText);
+    })
   }
 
   dataChange(name, phone, mail, password, repeatPassword,  avatar) {
@@ -128,6 +131,7 @@ export class ProfileController {
 
     this.profileView.showErrors(incorrectData);
     this.profileView.showInfo('');
+    this.profileView.showError('');
     if (Object.keys(incorrectData).length !== 0) {
       return;
     }

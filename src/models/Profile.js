@@ -35,7 +35,12 @@ class ProfileModel {
               },
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          } else {
+              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
+        })
+        .catch(() => {
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -50,7 +55,12 @@ class ProfileModel {
               },
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          } else {
+              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
+        })
+        .catch(() => {
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -65,7 +75,12 @@ class ProfileModel {
               },
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          } else {
+              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
+        })
+        .catch(() => {
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -74,7 +89,12 @@ class ProfileModel {
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          } else {
+              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
+        })
+        .catch(() => {
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 }
