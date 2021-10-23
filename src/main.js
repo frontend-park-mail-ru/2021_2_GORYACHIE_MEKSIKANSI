@@ -11,7 +11,7 @@ import footer from 'Components/footer/footer.hbs';
 import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
-import {MapPopup} from './components/mapPopup/mapPopup.js';
+import {MapPopup} from 'Сomponents/mapPopup/mapPopup.js';
 
 
 const application = document.getElementById('app');
@@ -62,6 +62,5 @@ router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 router.addRoute(urls.checkout.name, orderingController);
-
 document.getElementById('foot').innerHTML = footer({});
 router.start();
