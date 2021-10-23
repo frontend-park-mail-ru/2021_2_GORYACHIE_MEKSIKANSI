@@ -14,10 +14,7 @@ export class Navbar {
   constructor(parent = document.body) {
     this.parent = parent;
     this.profileRequested = false;
-    profileGet({url: '/user'})
-      .then(() => {
-        this.profileRequested = true;
-      });
+    profileGet({url: '/user'});
     this.yMap = new MapPopup({});
   }
 

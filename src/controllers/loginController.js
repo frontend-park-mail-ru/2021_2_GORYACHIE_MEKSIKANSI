@@ -6,6 +6,9 @@ import {LoginView} from 'Views/LoginView/loginView.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {ErrorsText} from 'Events/Errors.js';
 import {urls} from 'Modules/urls.js';
+import {userStatus} from "../modules/store";
+import store from 'Modules/store.js';
+import {AuthStatus} from 'Events/Auth.js';
 
 /**
  *  Login controller class
@@ -71,7 +74,22 @@ export class LoginController {
    * Rendering view
    */
   render() {
-    LoginModel.checkAuth();
+    if (store.getState().userState.status === userStatus.userUndefined) {
+      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+    } else if (store.getState().userState.status === userStatus.userAuth) {
+      this.routeTo('/');
+    } else {
+      this.loginView.render();
+    }
+  }
+
+  show = () => {
+    eventBus.unsubscribe(AuthStatus.userDataGot, this.show);
+    if (store.getState().userState.status === userStatus.userAuth) {
+      this.routeTo('/');
+    } else {
+      this.loginView.render();
+    }
   }
 
   /**

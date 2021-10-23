@@ -8,6 +8,7 @@ import store from 'Modules/store.js';
 import Navbar from 'Components/navbar/navbar.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
+import {userStatus} from "../modules/store";
 
 /**
  *  Profile controller class
@@ -148,24 +149,24 @@ export class ProfileController {
     Object.entries(correctData).forEach(([key, value]) => {
         updateModel[key](value);
     });
-    // console.log('Correcto ', Object.entries(correctData));
-    // console.log('Incorrecto ', Object.entries(incorrectData));
   }
 
   /**
    * Rendering view
    */
   render() {
-    if (Navbar.profileRequested) {
-      this.show();
-    } else {
+    if (store.getState().userState.status === userStatus.userUndefined) {
       eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+    } else if (store.getState().userState.status === userStatus.userAuth) {
+      this.profileView.render();
+    } else {
+      this.routeTo('/');
     }
   }
 
   show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataGot);
-    if (store.getState().userState.auth) {
+    eventBus.unsubscribe(AuthStatus.userDataGot, this.show);
+    if (store.getState().userState.status === userStatus.userAuth) {
       this.profileView.render();
     } else {
       this.routeTo('/');

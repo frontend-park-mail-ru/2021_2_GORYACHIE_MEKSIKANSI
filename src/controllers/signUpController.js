@@ -3,6 +3,9 @@ import {Validation} from 'Modules/validation.js';
 import SignUpModel from 'Models/SignUp.js';
 import eventBus from 'Modules/eventBus.js';
 import {SignUpEvents} from 'Events/SignUp.js';
+import {userStatus} from "../modules/store";
+import store from 'Modules/store.js';
+import {AuthStatus} from 'Events/Auth.js';
 
 /**
  * Signup page controller
@@ -38,7 +41,22 @@ export class SignUpController {
    * Rendering signup page
    */
   render() {
-    SignUpModel.checkAuth();
+    if (store.getState().userState.status === userStatus.userUndefined) {
+      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+    } else if (store.getState().userState.status === userStatus.userAuth) {
+      this.routeTo('/');
+    } else {
+      this.signUpView.render();
+    }
+  }
+
+  show = () => {
+    eventBus.unsubscribe(AuthStatus.userDataGot, this.show);
+    if (store.getState().userState.status === userStatus.userAuth) {
+      this.routeTo('/');
+    } else {
+      this.signUpView.render();
+    }
   }
 
   /**
