@@ -11,12 +11,6 @@ export const actions = {
   storeCartRestaurantDelete: 'storeCartRestaurantDelete',
 };
 
-export const userStatus = {
-  userUnAuth: 'userUnAuth',
-  userAuth: 'userAuth',
-  userUndefined: 'userUndefined',
-};
-
 function createStore(reducer, initialState) {
   let state = initialState;
   return {
@@ -152,7 +146,6 @@ if (!localCart || !localRestaurant) {
 
 const initialState = {
   userState: {
-    status: userStatus.userUndefined,
     auth: false,
     name: '',
     phone: '',

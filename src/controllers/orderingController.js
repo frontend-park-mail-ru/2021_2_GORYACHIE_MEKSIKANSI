@@ -3,7 +3,6 @@ import OrderingModel from 'Models/Ordering.js';
 import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
 import {urls} from 'Modules/urls.js';
 import store from 'Modules/store.js';
-import {userStatus} from "../modules/store";
 import {AuthStatus} from "../events/Auth";
 
 export class OrderingController {
@@ -34,30 +33,28 @@ export class OrderingController {
       // history.back(); // TODO: разобраться с историей при первом заходе
     }
 
-    if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
+    if (!store.getState().userState.auth) {
+      eventBus.addEventListener(AuthStatus.userLogin, this.show);
+      eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      this.statusRender();
-    }
-  }
-
-  unsubRender = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
-    this.statusRender();
-  }
-
-  statusRender = () => {
-    if (store.getState().userState.status === userStatus.userAuth) {
       this.orderingView.render();
-    } else {
-      this.routeTo(urls.login.url);
     }
+  }
+
+  show = () => {
+    this.orderingView.render();
+  }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
   }
 
   /**
    * Removing view
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.show);
+    eventBus.unsubscribe(AuthStatus.notAuth, this.redirect);
     this.orderingView.remove();
   }
 }

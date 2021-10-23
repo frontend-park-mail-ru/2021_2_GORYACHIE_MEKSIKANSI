@@ -23,7 +23,7 @@ export class Navbar {
    * Method rendering Navbar to the parent
    */
   render() {
-    eventBus.addEventListener(AuthStatus.userDataUpdate, this.refresh);
+    eventBus.addEventListener(AuthStatus.userLogin, this.refresh);
     this.parent.insertAdjacentHTML('afterbegin', navbar({
       user: store.getState().userState,
       itemNum: this.getNumberOfItems(),
@@ -143,7 +143,7 @@ export class Navbar {
       document.querySelector('.header').remove();
       window.document.body.style.overflowY = 'scroll';
     }
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.refresh);
+    eventBus.unsubscribe(AuthStatus.userLogin, this.refresh);
   }
 }
 

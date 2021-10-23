@@ -8,6 +8,7 @@ import store from 'Modules/store.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
 import {userStatus} from "../modules/store";
+import {urls} from "../modules/urls";
 
 /**
  *  Profile controller class

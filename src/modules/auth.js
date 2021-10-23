@@ -2,6 +2,7 @@ import {ResponseEvents} from 'Events/Responses.js';
 import store, {actions, userStatus} from './store.js';
 import eventBus from './eventBus.js';
 import {AuthStatus} from 'Events/Auth.js';
+import {urls} from "./urls";
 
 /**
  * emitting events for user auth
@@ -15,22 +16,10 @@ export function auth(response) {
       actionType: actions.storeUserLogin,
       ...response.body.user,
     });
-    store.dispatch({
-      actionType: actions.storeUserDataUpdate,
-      updated: {
-        status: userStatus.userAuth,
-      },
-    });
     eventBus.emitEventListener(AuthStatus.userLogin, {});
   } else {
-    store.dispatch({
-      actionType: actions.storeUserDataUpdate,
-      updated: {
-        status: userStatus.userUnAuth,
-      },
-    });
+    eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
-  eventBus.emitEventListener(AuthStatus.userDataUpdate, {});
   return response;
 }
 
@@ -38,11 +27,5 @@ export function logout() {
   store.dispatch({
     actionType: actions.storeUserLogout,
   });
-  store.dispatch({
-    actionType: actions.storeUserDataUpdate,
-    updated: {
-      status: userStatus.userUnAuth,
-    },
-  });
-  eventBus.emitEventListener(AuthStatus.userLogout, '/');
+  eventBus.emitEventListener(AuthStatus.userLogout, urls.home.url);
 }

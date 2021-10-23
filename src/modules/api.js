@@ -35,7 +35,7 @@ export function signupPost({
   })
       .then(auth)
       .catch(() => {
-        eventBus.emitEventListener(AuthStatus.userDataCanNotGet, {});
+        eventBus.emitEventListener(AuthStatus.notAuth, {});
       });
 }
 
@@ -64,7 +64,7 @@ export function profileGet({url = '/user'}) {
   return http.ajaxGet({url})
       .then(auth)
       .catch(() => {
-        eventBus.emitEventListener(AuthStatus.userDataCanNotGet, {});
+        eventBus.emitEventListener(AuthStatus.notAuth, {});
       });
 }
 
