@@ -4,6 +4,9 @@ import {AuthStatus} from 'Events/Auth.js';
 import {urls} from "./urls";
 import {userActions} from "./reducers/userStore";
 import userStore from "./reducers/userStore";
+import cartStore from "./reducers/cartStore";
+import {cartActions} from "./reducers/cartStore";
+import {cartGet} from './api.js';
 
 /**
  * emitting events for user auth
@@ -17,6 +20,27 @@ export function auth(response) {
       actionType: userActions.storeUserLogin,
       ...response.body.user,
     });
+
+    if (cartStore.getState().cart.length > 0) {
+      updateCartPut(cartStore.getState())  // TODO: чекнуть код ответа на удаление корзины
+          .then ((setCartResp) => {
+            if (setCartResp.status !== ResponseEvents.OK) {
+              cartStore.dispatch({
+                actionType: cartActions.storeCartDeleteAll,
+              })
+            }
+          });
+    } else {
+      cartGet()
+          .then((cartResponse) => {
+            if (response.status === ResponseEvents.OK) {
+              cartStore.dispatch({
+                actionType: cartActions.storeCartGot,
+                state: response.body,
+              });
+            }
+          })
+    }
     eventBus.emitEventListener(AuthStatus.userLogin, {});
   } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});

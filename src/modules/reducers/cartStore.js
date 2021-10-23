@@ -4,7 +4,7 @@ import eventBus from '../eventBus.js';
 import {RestaurantEvents} from '../../events/Restaurant.js';
 import {ResponseEvents} from '../../events/Responses.js';
 
-const cartActions = {
+export const cartActions = {
   storeCartAddDish: 'storeCartAdd',
   storeCartDeleteDish: 'storeCartDelete',
   storeCartDecreaseDishCount: 'storeCartDecreaseDishCount',
@@ -13,6 +13,7 @@ const cartActions = {
   cartRollback: 'storeCartRollback',
   storeCartRestaurantSet: 'storeCartRestaurantSet',
   storeCartRestaurantDelete: 'storeCartRestaurantDelete',
+  storeCartGot: 'storeCartGot',
 };
 
 const updateStorage = () => {
@@ -93,6 +94,11 @@ export function cartReducer(state, action) {
           id: null,
           name: '',
         },
+      };
+    }
+    case cartActions.storeCartGot: {
+      return {
+        ...action.state,
       };
     }
     default:
