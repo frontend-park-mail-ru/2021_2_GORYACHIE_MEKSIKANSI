@@ -5,7 +5,7 @@ import Address from '../../modules/lsAddress.js';
 import eventBus from "../../modules/eventBus";
 import {AuthStatus} from "../../events/Auth";
 import userStore from "../../modules/reducers/userStore";
-import cartStore from "../../modules/reducers/cartStore";
+import cartStore from "../../modules/reducers/cartStore.js";
 
 /**
  * Left navigation bar class
@@ -16,7 +16,7 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    profileGet({url: '/user'});
+    profileGet({});
     this.yMap = new MapPopup({});
   }
 

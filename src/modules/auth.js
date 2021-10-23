@@ -5,8 +5,8 @@ import {urls} from "./urls";
 import {userActions} from "./reducers/userStore";
 import userStore from "./reducers/userStore";
 import cartStore from "./reducers/cartStore";
-import {cartActions} from "./reducers/cartStore";
-import {cartGet} from './api.js';
+import {cartActions, updateStorage} from "./reducers/cartStore";
+import {cartGet, updateCartPut} from './api.js';
 
 /**
  * emitting events for user auth
@@ -23,7 +23,8 @@ export function auth(response) {
 
     if (cartStore.getState().cart.length > 0) {
       updateCartPut(cartStore.getState())  // TODO: чекнуть код ответа на удаление корзины
-          .then ((setCartResp) => {
+          .then((setCartResp) => {
+            console.log('1', cartStore.getState())
             if (setCartResp.status !== ResponseEvents.OK) {
               cartStore.dispatch({
                 actionType: cartActions.storeCartDeleteAll,
@@ -33,11 +34,13 @@ export function auth(response) {
     } else {
       cartGet()
           .then((cartResponse) => {
-            if (response.status === ResponseEvents.OK) {
+            if (cartResponse.status === ResponseEvents.OK) {
               cartStore.dispatch({
                 actionType: cartActions.storeCartGot,
-                state: response.body,
+                state: cartResponse.body,
               });
+              updateStorage();
+                console.log('3', cartStore.getState(), cartResponse.status)
             }
           })
     }

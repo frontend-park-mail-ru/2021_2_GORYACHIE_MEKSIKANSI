@@ -10,7 +10,7 @@ class HomeModel {
    * Get restaurantList, emit HomeEvents.homeGetRestaurantsSuccess
    */
   getRestaurants() {
-    restaurantsGet({url: '/restaurant'})
+    restaurantsGet({url: '/restaurant/'})
         .then((response) => {
           eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess,
               response.body);
@@ -25,7 +25,7 @@ class HomeModel {
    * emit HomeEvents.homeGetRestaurantsSuccess
    */
   async checkAuthAndGetRestaurants() {
-    await profileGet({url: '/user'})
+    await profileGet({})
         .catch(() => {}); // TODO: Выводить, тоаст или ошибочную страницу по поводу коннекта с сервером
     this.getRestaurants();
   }

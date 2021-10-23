@@ -16,7 +16,7 @@ export const cartActions = {
   storeCartGot: 'storeCartGot',
 };
 
-const updateStorage = () => {
+export const updateStorage = () => {
   localStorage.removeItem('cart');
   localStorage.setItem('cart', JSON.stringify(cartStore.getState()));
 };
@@ -234,4 +234,5 @@ if (localCart) {
 }
 
 const cartStore = createStoreWithMiddleware(cartReducer, cart);
+console.log(cartStore.getState());
 export default cartStore;
