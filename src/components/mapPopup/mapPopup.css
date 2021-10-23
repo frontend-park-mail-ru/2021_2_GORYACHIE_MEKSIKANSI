@@ -47,6 +47,9 @@
 }
 
 .map-popup__button {
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 auto;
     border: var(--color-green);
     color: var(--color-white);
@@ -56,9 +59,12 @@
     border-radius: 4px;
 }
 
-.input {
-    height: 30px;
+.map__input {
+    height: 35px;
     display: flex;
+    padding-left: 10px;
+    box-sizing: border-box;
+    width: 100%;
     font-size: 14px;
     align-items: center;
     font-weight: var(--font_medium);

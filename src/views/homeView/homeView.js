@@ -29,6 +29,7 @@ export class HomeView extends View {
    * @param {Object} props
    */
   render(props = {}) {
+    console.log(props);
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage({
