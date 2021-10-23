@@ -1,9 +1,4 @@
-// import {userReducer, initialUserState} from "./reducers/userReducer";
-// import {addDishToCart, cartReducer, initialCartState} from "./reducers/cartReducer";
-
-import {initialUserState, userReducer} from "./reducers/userReducer";
-
-function createStore(reducer, initialState) {
+export function createStore(reducer, initialState) {
   let state = initialState;
   return {
     dispatch: (action) => {
@@ -33,7 +28,7 @@ function applyMiddleware(middleware) {
   };
 }
 
-function combineReducers(reducersMap) {
+export function combineReducers(reducersMap) {
   return function combinationReducers(state, action) {
     const nextState = {};
     Object.entries(reducersMap).forEach(([key, reducer]) => {
@@ -43,13 +38,4 @@ function combineReducers(reducersMap) {
   };
 }
 
-// const initialState = {
-//   userState: initialUserState,
-//   cartState: initialCartState,
-// };
-
-//
 export const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-export const store = createStoreWithMiddleware(userReducer, initialUserState);
-//
-export default store;

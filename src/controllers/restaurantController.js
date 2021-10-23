@@ -2,8 +2,7 @@ import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
-import store from 'Modules/store.js';
-
+import {cartStore} from "../modules/reducers/cartStore";
 export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller
@@ -42,8 +41,8 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
   addDishToCart(dishSettings = {}) {
-    console.log(dishSettings.restaurant, store.getState().cartRestaurantState);
-    const cartRestaurant = store.getState().cartRestaurantState;
+    console.log(dishSettings.restaurant, cartStore.getState().restaurant);
+    const cartRestaurant = cartStore.getState().restaurant;
     if (cartRestaurant === null || cartRestaurant.id === dishSettings.restaurant.id) {
       RestaurantModel.addDishToCart(dishSettings);
     } else {
@@ -53,8 +52,8 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
   increaseDishInCart(dishSettings) {
-    const dish = store.getState().cartState.find((item) => {
-      return Number(item.cartId) === Number(dishSettings.dishId);
+    const dish = cartStore.getState().cart.find((item) => {
+      return Number(item.cId) === Number(dishSettings.dishId);
     });
     if (dish) {
       RestaurantModel.addDishToCart({

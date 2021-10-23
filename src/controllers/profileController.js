@@ -8,6 +8,7 @@ import store from 'Modules/store.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
 import {urls} from "../modules/urls";
+import {userStore} from "../modules/reducers/userReducer";
 
 /**
  *  Profile controller class
@@ -42,7 +43,7 @@ export class ProfileController {
   }
 
   dataChange(name, phone, mail, password, repeatPassword,  avatar) {
-    const currentUserData = store.getState().userState;
+    const currentUserData = userStore.getState();
     let validation = {};
     if (currentUserData.name !== name) {
       validation = {
@@ -154,7 +155,7 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    if (!store.getState().userState.auth) {
+    if (!userStore/getState().userState.auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {

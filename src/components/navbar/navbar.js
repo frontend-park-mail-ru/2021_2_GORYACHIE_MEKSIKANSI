@@ -5,6 +5,7 @@ import {MapPopup} from '../mapPopup/mapPopup.js';
 import Address from '../../modules/lsAddress.js';
 import eventBus from "../../modules/eventBus";
 import {AuthStatus} from "../../events/Auth";
+import {userStore} from "../../modules/reducers/userReducer";
 
 /**
  * Left navigation bar class
@@ -25,14 +26,14 @@ export class Navbar {
   render() {
     eventBus.addEventListener(AuthStatus.userLogin, this.refresh);
     this.parent.insertAdjacentHTML('afterbegin', navbar({
-      // user: store.getState().userState,
+      user: userStore.getState(),
       itemNum: this.getNumberOfItems(),
       address: {addr: Address.getAddress().name},
     }));
 
-    if (store.getState().userState.auth) {
-      if (store.getState().userState.avatar) {
-        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
+    if (userStore.getState().auth) {
+      if (userStore.getState().avatar) {
+        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
       }
     }
 

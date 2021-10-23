@@ -2,6 +2,7 @@ import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
 import cart from './cart.hbs'
+import {cartStore} from "../../modules/reducers/cartStore";
 
 
 export class Cart {
@@ -27,7 +28,7 @@ export class Cart {
 
   refresh = () => {
     this.remove();
-    this.parent.innerHTML = cart({items: store.getState().cartState, restaurant: this.restaurant});
+    this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: this.restaurant});
     this.refreshSummary();
 
     this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;
@@ -63,7 +64,7 @@ export class Cart {
 
   refreshSummary = () => {
     let value = 0;
-    store.getState().cartState.forEach((item) => {
+    cartStore.getState().cart.forEach((item) => {
       console.log(Number(item.cost), item.num);
       value +=  Number(item.cost) * item.num;
     });

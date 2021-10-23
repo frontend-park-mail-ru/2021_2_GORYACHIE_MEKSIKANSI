@@ -1,11 +1,12 @@
 import {View} from '../../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
-import store from 'Modules/store.js';
 import {urls} from 'Modules/urls.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
 import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
+import {userStore} from "../../../modules/reducers/userReducer";
+import {cartStore} from "../../../modules/reducers/cartStore";
 
 /**
  * Profile view class
@@ -37,8 +38,8 @@ export class OrderingView extends View {
   render(props = {}) {
     this.navbar.render();
 
-    const cart = store.getState().cartState;
-    const restaurant = store.getState().cartRestaurantState;
+    const cart = cartStore.getState().cart;
+    const restaurant = cartStore.getState().restaurant;
 
     this.sumCost = 0;
     this.sumCost = cart.reduce((prev, item) => {
@@ -51,8 +52,8 @@ export class OrderingView extends View {
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
       content: orderDelivery({
-        restaurant: store.getState().cartRestaurantState,
-        items: store.getState().cartState,
+        restaurant: this.restaurant,
+        items: cartStore.getState().cart,
         sumCost: this.sumCost,
       }),
       rightMenu: orderSummary({
@@ -90,7 +91,7 @@ export class OrderingView extends View {
   }
 
   confirm = () => {
-    if (store.getState().userState.auth) {
+    if (userStore.getState().auth) {
       // confirm
     } else {
       this.routeTo(urls.login.url);

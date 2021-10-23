@@ -3,7 +3,7 @@ import {ProfileEvents} from 'Events/Profile.js';
 import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from 'Modules/api.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from 'Modules/urls.js';
-import store, {actions} from 'Modules/store.js';
+import {userActions, userStore} from "../modules/reducers/userReducer";
 
 /**
  * Class Profile Model
@@ -13,8 +13,8 @@ class ProfileModel {
     updateName(name)
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            store.dispatch({
-              actionType: actions.storeUserDataUpdate,
+            userStore.dispatch({
+              actionType: userActions.storeUserDataUpdate,
               updated: {
                 name: name,
               },
@@ -33,8 +33,8 @@ class ProfileModel {
     updateEmail(email)
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            store.dispatch({
-              actionType: actions.storeUserDataUpdate,
+            userStore.dispatch({
+              actionType: userActions.storeUserDataUpdate,
               updated: {
                 email: email,
               },
@@ -53,8 +53,8 @@ class ProfileModel {
     updatePhone(phone)
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            store.dispatch({
-              actionType: actions.storeUserDataUpdate,
+            userStore.dispatch({
+              actionType: userActions.storeUserDataUpdate,
               updated: {
                 phone: phone,
               },

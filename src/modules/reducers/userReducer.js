@@ -1,4 +1,6 @@
-const userActions = {
+import {createStore} from "../store";
+
+export const userActions = {
   storeUserLogin: 'storeUserLogin',
   storeUserLogout: 'storeUserLogout',
   storeUserDataUpdate: 'storeUserDataUpdate',
@@ -46,3 +48,5 @@ export const initialUserState = {
     aName: 'Москва',
   },
 };
+
+export const userStore = createStore(userReducer, initialUserState);

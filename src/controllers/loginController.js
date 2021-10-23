@@ -68,7 +68,7 @@ export class LoginController {
    * Rendering view
    */
   render() {
-    if (store.getState().userState.auth) {
+    if (userStore.getState().auth) {
       this.routeTo(urls.home.url);
     } else {
       eventBus.addEventListener(AuthStatus.userLogin, this.redirect);

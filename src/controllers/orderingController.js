@@ -4,6 +4,8 @@ import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
 import {urls} from 'Modules/urls.js';
 import store from 'Modules/store.js';
 import {AuthStatus} from "../events/Auth";
+import {cartStore} from "../modules/reducers/cartStore";
+import {userStore} from "../modules/reducers/userReducer";
 
 export class OrderingController {
   /**
@@ -28,12 +30,12 @@ export class OrderingController {
    * Rendering view
    */
   render() {
-    if (store.getState().cartState.length === 0 || store.getState().cartRestaurantState === null) {
+    if (cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
       this.routeTo(urls.home.url);
       // history.back(); // TODO: разобраться с историей при первом заходе
     }
 
-    if (!store.getState().userState.auth) {
+    if (!userStore.getState().auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {

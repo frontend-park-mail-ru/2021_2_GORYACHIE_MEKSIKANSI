@@ -96,7 +96,6 @@ export const addDishToCart = (dish, restaurant) => {
   return (dispatch, getState) => {
     const rollbackState = getState();
     if (rollbackState.cart.length === 0 || rollbackState.restaurant.id === null) {
-      console.log('HERE');
       dispatch({
         actionType: cartActions.storeCartRestaurantSet,
         restaurant: restaurant,
@@ -216,6 +215,3 @@ if (localCart) {
 }
 
 export const cartStore = createStoreWithMiddleware(cartReducer, cart);
-
-export const initialCartState = cart;
-

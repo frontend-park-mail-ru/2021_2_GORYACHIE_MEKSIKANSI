@@ -1,6 +1,6 @@
 import eventBus from './eventBus.js';
 import { AuthStatus } from 'Events/Auth.js';
-import store, { actions } from './store.js';
+import {userStore, userActions} from "./reducers/userReducer";
 
 class Address {
     constructor () {
@@ -20,11 +20,11 @@ class Address {
 
     setAddress ({ longitude, latitude, name }) {
         localStorage.address = JSON.stringify({ longitude, latitude, name });
-        if (store.getState().userState.auth) {
+        if (userStore.getState().auth) {
             if ((String(longitude) !== String(this.longitude) || String(latitude) !== String(this.latitude) || name !== this.name) &&
                 longitude && latitude && name) {
-                store.dispatch({
-                    actionType: actions.storeUserDataUpdate,
+                userStore.dispatch({
+                    actionType: userActions.storeUserDataUpdate,
                     updated: {
                         address: {
                             aLongitude: longitude,
@@ -33,7 +33,7 @@ class Address {
                         }
                     }
                 })
-                console.log(store.getState().userState.address);
+                console.log(userStore.getState().address);
                 // postAddress({ longitude: String(longitude), latitude: String(latitude), name })
                 //     .then((res) => {
                 //         if (res.status === 200) {
