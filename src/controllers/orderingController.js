@@ -44,7 +44,7 @@ export class OrderingController {
     }
 
     if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+      eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
     } else if (store.getState().userState.status === userStatus.userAuth) {
       this.orderingView.render();
     } else {
@@ -53,7 +53,7 @@ export class OrderingController {
   }
 
   show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataGot, this.show);
+    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
     if (store.getState().userState.status === userStatus.userAuth) {
       this.orderingView.render();
     } else {

@@ -29,13 +29,19 @@ export function auth(response) {
       },
     });
   }
-  eventBus.emitEventListener(AuthStatus.userDataGot, {});
+  eventBus.emitEventListener(AuthStatus.userDataUpdate, {});
   return response;
 }
 
 export function logout() {
   store.dispatch({
     actionType: actions.storeUserLogout,
+  });
+  store.dispatch({
+    actionType: actions.storeUserDataUpdate,
+    updated: {
+      status: userStatus.userUnAuth,
+    },
   });
   eventBus.emitEventListener(AuthStatus.userLogout, '/');
 }

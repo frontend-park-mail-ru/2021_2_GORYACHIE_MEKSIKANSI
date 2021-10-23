@@ -2,6 +2,6 @@ export const AuthStatus = {
   userLogin: 'userLogin',
   userLogout: 'userLogout',
   notAuth: 'notAuth',
-  userDataGot: 'userDataGot',
-  changeAddress: 'changeAddress'
+  userDataUpdate: 'userDataUpdate',
+  changeAddress: 'changeAddress',
 };

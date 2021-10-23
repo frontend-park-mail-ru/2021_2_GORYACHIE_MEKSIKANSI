@@ -5,7 +5,6 @@ import {AuthStatus} from 'Events/Auth.js';
 import {ValidationLength} from 'Events/Validation.js';
 
 import store from 'Modules/store.js';
-import Navbar from 'Components/navbar/navbar.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
 import {userStatus} from "../modules/store";
@@ -156,7 +155,7 @@ export class ProfileController {
    */
   render() {
     if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+      eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
     } else if (store.getState().userState.status === userStatus.userAuth) {
       this.profileView.render();
     } else {
@@ -165,7 +164,7 @@ export class ProfileController {
   }
 
   show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataGot, this.show);
+    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
     if (store.getState().userState.status === userStatus.userAuth) {
       this.profileView.render();
     } else {

@@ -75,7 +75,7 @@ export class LoginController {
    */
   render() {
     if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+      eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
     } else if (store.getState().userState.status === userStatus.userAuth) {
       this.routeTo('/');
     } else {
@@ -84,7 +84,7 @@ export class LoginController {
   }
 
   show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataGot, this.show);
+    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
     if (store.getState().userState.status === userStatus.userAuth) {
       this.routeTo('/');
     } else {
