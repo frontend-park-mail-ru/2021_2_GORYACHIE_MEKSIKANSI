@@ -1,4 +1,4 @@
-import eventBus from '../../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import dishPopup from './dishPopup.hbs';
 

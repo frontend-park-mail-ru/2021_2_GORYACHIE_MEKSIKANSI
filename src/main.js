@@ -1,12 +1,12 @@
 'use strict';
-import {Router} from './modules/router.js';
+import {Router} from 'Modules/router.js';
 import {LoginController} from 'Controllers/loginController.js';
 import {HomeController} from 'Controllers/homeController.js';
 import {SignUpController} from 'Controllers/signUpController.js';
 import {ProfileController} from 'Controllers/profileController.js';
 import {RestaurantController} from 'Controllers/restaurantController.js';
 import {OrderingController} from 'Controllers/orderingController.js';
-import {urls} from './modules/urls.js';
+import {urls} from 'Modules/urls.js';
 import footer from 'Components/footer/footer.hbs';
 import './main.css';
 import 'Components/variables/colors.css';

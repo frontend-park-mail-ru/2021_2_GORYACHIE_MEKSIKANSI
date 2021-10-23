@@ -1,8 +1,8 @@
 import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
-import eventBus from '../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
-import store, {actions} from '../modules/store.js';
+import store, {actions} from 'Modules/store.js';
 
 export class RestaurantController { // TODO: добавить джсдок
   /**

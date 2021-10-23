@@ -1,7 +1,7 @@
 import {SignUpView} from 'Views/SignUpPage/signUpView.js';
-import {Validation} from '../modules/validation.js';
+import {Validation} from 'Modules/validation.js';
 import SignUpModel from 'Models/SignUp.js';
-import eventBus from '../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import {SignUpEvents} from 'Events/SignUp.js';
 
 /**

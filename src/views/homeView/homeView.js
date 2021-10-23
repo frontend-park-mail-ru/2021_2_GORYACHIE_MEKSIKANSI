@@ -2,7 +2,6 @@ import {View} from '../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
 import homePage from './homePage.hbs';
 import page from '../baseView/page.hbs';
-
 /**
  * Home view class
  */

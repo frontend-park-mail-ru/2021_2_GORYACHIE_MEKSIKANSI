@@ -1,6 +1,6 @@
 import {RestaurantEvents} from 'Events/Restaurant.js';
-import EventBus from '../../modules/eventBus.js';
-import store from '../../modules/store.js';
+import EventBus from 'Modules/eventBus.js';
+import store from 'Modules/store.js';
 import cart from './cart.hbs'
 
 
