@@ -1,11 +1,10 @@
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs'
-import store from 'Modules/store.js';
 import {MapPopup} from '../mapPopup/mapPopup.js';
 import Address from '../../modules/lsAddress.js';
 import eventBus from "../../modules/eventBus";
 import {AuthStatus} from "../../events/Auth";
-import {userStore} from "../../modules/reducers/userReducer";
+import userStore from "../../modules/reducers/userStore";
 
 /**
  * Left navigation bar class

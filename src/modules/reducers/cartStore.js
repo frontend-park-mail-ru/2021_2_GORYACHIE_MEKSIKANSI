@@ -214,4 +214,5 @@ if (localCart) {
   cart = localCart;
 }
 
-export const cartStore = createStoreWithMiddleware(cartReducer, cart);
+const cartStore = createStoreWithMiddleware(cartReducer, cart);
+export default cartStore;

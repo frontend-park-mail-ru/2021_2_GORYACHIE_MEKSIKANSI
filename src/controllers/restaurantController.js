@@ -2,7 +2,7 @@ import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
-import {cartStore} from "../modules/reducers/cartStore";
+import cartStore from "../modules/reducers/cartStore";
 export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller

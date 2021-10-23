@@ -3,7 +3,7 @@ import {ProfileEvents} from 'Events/Profile.js';
 import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from 'Modules/api.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from 'Modules/urls.js';
-import {userActions, userStore} from "../modules/reducers/userReducer";
+import {userActions, userStore} from "../modules/reducers/userStore";
 
 /**
  * Class Profile Model

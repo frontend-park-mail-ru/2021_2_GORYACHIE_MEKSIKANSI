@@ -49,4 +49,5 @@ export const initialUserState = {
   },
 };
 
-export const userStore = createStore(userReducer, initialUserState);
+const userStore = createStore(userReducer, initialUserState);
+export default userStore;

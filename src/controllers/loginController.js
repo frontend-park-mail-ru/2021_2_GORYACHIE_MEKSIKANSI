@@ -7,8 +7,8 @@ import {ResponseEvents} from 'Events/Responses.js';
 import {ErrorsText} from 'Events/Errors.js';
 import {urls} from 'Modules/urls.js';
 import {userStatus} from "../modules/store";
-import store from 'Modules/store.js';
 import {AuthStatus} from 'Events/Auth.js';
+import userStore from "../modules/reducers/userStore";
 
 /**
  *  Login controller class

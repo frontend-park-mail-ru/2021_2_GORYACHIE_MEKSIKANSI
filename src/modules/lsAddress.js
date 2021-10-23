@@ -1,6 +1,6 @@
 import eventBus from './eventBus.js';
 import { AuthStatus } from 'Events/Auth.js';
-import {userStore, userActions} from "./reducers/userReducer";
+import {userStore, userActions} from "./reducers/userStore";
 
 class Address {
     constructor () {

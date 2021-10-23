@@ -7,7 +7,7 @@ import {userStatus} from "../modules/store";
 import store from 'Modules/store.js';
 import {AuthStatus} from 'Events/Auth.js';
 import {urls} from "../modules/urls";
-import {userStore} from "../modules/reducers/userReducer";
+import userStore from "../modules/reducers/userStore";
 
 /**
  * Signup page controller

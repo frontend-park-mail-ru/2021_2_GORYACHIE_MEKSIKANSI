@@ -2,7 +2,7 @@ import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
 import cart from './cart.hbs'
-import {cartStore} from "../../modules/reducers/cartStore";
+import cartStore from "../../modules/reducers/cartStore";
 
 
 export class Cart {

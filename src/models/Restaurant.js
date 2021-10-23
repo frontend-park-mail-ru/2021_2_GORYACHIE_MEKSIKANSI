@@ -3,7 +3,8 @@ import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import {getRestaurantMock, getDish, getItemToCart} from 'Views/mocks.js';
 import store, {actions} from 'Modules/store.js';
-import {cartStore} from "../modules/reducers/cartStore";
+import cartStore, {addDishToCart, clearCart, deleteDishFromCart} from "../modules/reducers/cartStore";
+import {dishGet, restaurantGet} from "../modules/api";
 
 /**
  * RestaurantModel
@@ -44,57 +45,8 @@ class RestaurantModel {
 //////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////
 
   addDishToCart(dishSettings = {}) {
-    addDishPost(dishSettings)
-        .then((response) => {
-          // store.dispatch({
-          //   actionType: actions.storeCartAddDish,
-          //   dish: getItemToCart(dishSettings.dish.id),
-          // });
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
-        })
-        .catch(() => {
-          //   if ('cartId' in dishSettings.dish) {
-          //     store.dispatch({
-          //       actionType: actions.storeCartAddDish,
-          //       dish: dishSettings.dish,
-          //     });
-          //   } else {
-          //     if (store.getState().cartRestaurantState === null) {
-          //       store.dispatch({
-          //         actionType: actions.storeCartRestaurantSet,
-          //         restaurant: dishSettings.restaurant,
-          //       });
-          //     }
-          //     // get dish mock
-          //     const dishMock = getItemToCart(dishSettings.dish.id);
-          //     // select needed checkboxes
-          //     const dishCheckboxes = dishMock.ingredients.filter((item) => {
-          //       return dishSettings.dish.ingredients.find((checkbox) => {
-          //         return Number(checkbox.id) === Number(item.id);
-          //       });
-          //     });
-          //     // calc cost of dish with options
-          //     const cost = dishCheckboxes.reduce((prev, item) => {
-          //       prev += item.cost;
-          //       return prev;
-          //     }, dishMock.cost);
-          //     // create dish obj and calc summary cost
-          //     const dish = {
-          //       ...dishMock,
-          //       ingredients: dishCheckboxes,
-          //       cost: cost,
-          //       radios: dishSettings.dish.radios,
-          //       num: dishSettings.dish.num,
-          //     };
-          //     store.dispatch({
-          //       actionType: actions.storeCartAddDish,
-          //       dish: dish,
-          //     });
-          //   }
-          //   eventBus.emitEventListener(RestaurantEvents.restaurantCartAdd, {});
-          //   updateStorage();
-          // });
-        });
+    console.log(dishSettings);
+    cartStore.dispatch(addDishToCart(dishSettings, {}));
   }
 
   /**
@@ -103,94 +55,11 @@ class RestaurantModel {
    * with a response result emit clearCartSuccess or clearCartFailed
    */
   clearCart() {
-    clearCartDelete()
-        .then((response) => {
-          // if (response.status === ResponseEvents.OK) {
-          //   store.dispatch({
-          //     actionType: actions.storeCartDeleteAll,
-          //   });
-          //   store.dispatch({
-          //     actionType: actions.storeCartRestaurantSet,
-          //     restaurant: null,
-          //   });
-          //   eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
-          //   return;
-          // }
-          // eventBus.emitEventListener(RestaurantEvents.clearCartFailed, {});
-        })
-        .catch(() => { // TODO: server falls to catch
-          // store.dispatch({
-          //   actionType: actions.storeCartDeleteAll,
-          // });
-          // store.dispatch({
-          //   actionType: actions.storeCartRestaurantSet,
-          //   restaurant: null,
-          // });
-          // eventBus.emitEventListener(RestaurantEvents.clearCartSuccess, {});
-          // updateStorage();
-        });
+    cartStore.dispatch(clearCart());
   }
 
-  clearDishFromCart(dishId) {
-    clearDishFromCartDelete(dishId)
-        .then((response) => {
-          // if (response.status === ResponseEvents.OK) {
-          //   store.dispatch({
-          //     actionType: actions.storeCartDeleteDish,
-          //     cartId: dishId,
-          //   });
-          //   if (store.getState().cartState.cart.length === 0) {
-          //     store.dispatch({
-          //       actionType: actions.storeCartRestaurantSet,
-          //       restaurant: null,
-          //     });
-          //   }
-          //   eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
-          //   return;
-          // }
-          // eventBus.emitEventListener(RestaurantEvents.clearDishFailed, {});
-        })
-        .catch(() => { // TODO: server falls to catch
-          // store.dispatch({
-          //   actionType: actions.storeCartDeleteDish,
-          //   cartId: dishId,
-          // });
-          // if (store.getState().cartState.length === 0) {
-          //   store.dispatch({
-          //     actionType: actions.storeCartRestaurantSet,
-          //     restaurant: null,
-          //   });
-          // }
-          // eventBus.emitEventListener(RestaurantEvents.clearDishSuccess, {});
-          // updateStorage();
-        });
-  }
-
-  changeRestaurantAndAddDish(dishSettings = {}) {
-    clearCartDelete()
-        .then(() => {
-          // change restaurant
-          // store.dispatch({
-          //   actionType: actions.storeCartRestaurantSet,
-          //   restaurant: dishSettings.restaurant,
-          // });
-          // store.dispatch({
-          //   actionType: actions.storeCartDeleteAll,
-          // });
-          // this.addDishToCart(dishSettings);
-        })
-        .catch(() => {
-          // change restaurant
-          // store.dispatch({
-          //   actionType: actions.storeCartRestaurantSet,
-          //   restaurant: dishSettings.restaurant,
-          // });
-          // store.dispatch({
-          //   actionType: actions.storeCartDeleteAll,
-          // });
-          // this.addDishToCart(dishSettings);
-          // updateStorage();
-        });
+  deleteDishFromCart(cId) {
+    cartStore.dispatch(deleteDishFromCart(cId));
   }
 }
 

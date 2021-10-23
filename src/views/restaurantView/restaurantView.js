@@ -8,7 +8,7 @@ import page from '../baseView/page.hbs';
 import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
 import continuePopup from 'Components/continuePopup/continuePopup.hbs'
-import {userStore} from "../../modules/reducers/userReducer";
+import userStore from "../../modules/reducers/userStore";
 
 export class RestaurantView extends View {
   constructor({
