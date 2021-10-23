@@ -12,6 +12,7 @@ import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
 
+
 const application = document.getElementById('app');
 const router = new Router(document.body);
 const routeTo = (url) => {
@@ -60,9 +61,5 @@ router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 router.addRoute(urls.checkout.name, orderingController);
-
 document.getElementById('foot').innerHTML = footer({});
-
-// orderingView.render();
-
 router.start();

@@ -1,7 +1,8 @@
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs'
 import store from 'Modules/store.js';
-
+import {MapPopup} from '../mapPopup/mapPopup.js';
+import Address from '../../modules/lsAddress.js';
 
 /**
  * Left navigation bar class
@@ -17,6 +18,7 @@ export class Navbar {
       .then(() => {
         this.profileRequested = true;
       });
+    this.yMap = new MapPopup({});
   }
 
   /**
@@ -26,6 +28,7 @@ export class Navbar {
     this.parent.insertAdjacentHTML('afterbegin', navbar({
       user: store.getState().userState,
       itemNum: this.getNumberOfItems(),
+      address: {addr: Address.getAddress().name},
     }));
 
     if (store.getState().userState.auth) {
@@ -46,6 +49,13 @@ export class Navbar {
     }, 0);
   }
 
+  /**
+   * Updating address in header
+   */
+  updateAddressName = (name) => {
+    this.parent.querySelector('.map-popup__address').innerHTML = String(name);
+  }
+
   updateCartButtonNumber = () => {
     const buttonCartNumber = this.parent.querySelector('.navbar__button-cart-number-wrapper');
     if (buttonCartNumber) {
@@ -55,6 +65,7 @@ export class Navbar {
 
   settingUp() {
     this.updateCartButtonNumber();
+    this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {

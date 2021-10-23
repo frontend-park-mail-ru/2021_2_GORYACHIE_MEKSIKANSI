@@ -3,4 +3,5 @@ export const AuthStatus = {
   userLogout: 'userLogout',
   notAuth: 'notAuth',
   userDataGot: 'userDataGot',
+  changeAddress: 'changeAddress'
 };
