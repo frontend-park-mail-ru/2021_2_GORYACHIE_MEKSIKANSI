@@ -20,12 +20,13 @@
 @import "Views/restaurantView/restaurantPage.css";
 @import "Views/baseView/page.css";
 @import "Components/dishPopup/dishPopup.css";
-@import "components/historyOrder/historyOrder.css";
-@import "components/cartOrder/cartOrderSummary.css";
-@import "components/cartOrder/orderDelivery.css";
-@import "components/cart/cart.css";
-@import "components/continuePopup/continuePopup.css";
-@import "components/confirmPopup/confirmPopup.css";
+@import "Components/historyOrder/historyOrder.css";
+@import "Components/cartOrder/cartOrderSummary.css";
+@import "Components/cartOrder/orderDelivery.css";
+@import "Components/cart/cart.css";
+@import "Components/continuePopup/continuePopup.css";
+@import "Components/confirmPopup/confirmPopup.css";
+@import "Components/mapPopup/mapPopup.css";
 
 body {
     font-family: var(--raleway-font);

@@ -151,6 +151,11 @@ const initialState = {
     phone: '',
     email: '',
     avatar: '',
+    address: {
+      aLatitude: 55.751574,
+      aLongitude: 37.57385,
+      aName: 'Москва',
+    }
   },
   cartState: localCart,
   cartRestaurantState: localRestaurant,
