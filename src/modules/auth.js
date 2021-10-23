@@ -2,7 +2,8 @@ import {ResponseEvents} from 'Events/Responses.js';
 import eventBus from './eventBus.js';
 import {AuthStatus} from 'Events/Auth.js';
 import {urls} from "./urls";
-import {userActions, userStore} from "./reducers/userStore";
+import {userActions} from "./reducers/userStore";
+import userStore from "./reducers/userStore";
 
 /**
  * emitting events for user auth

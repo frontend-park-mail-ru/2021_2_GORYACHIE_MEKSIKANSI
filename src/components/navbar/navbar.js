@@ -5,6 +5,7 @@ import Address from '../../modules/lsAddress.js';
 import eventBus from "../../modules/eventBus";
 import {AuthStatus} from "../../events/Auth";
 import userStore from "../../modules/reducers/userStore";
+import cartStore from "../../modules/reducers/cartStore";
 
 /**
  * Left navigation bar class
@@ -47,10 +48,10 @@ export class Navbar {
   }
 
   getNumberOfItems = () => {
-    // return store.getState().cartState.reduce((prev, item) => {
-    //   prev += item.num;
-    //   return prev;
-    // }, 0);
+    return cartStore.getState().cart.reduce((prev, item) => {
+      prev += item.count;
+      return prev;
+    }, 0);
   }
 
   /**

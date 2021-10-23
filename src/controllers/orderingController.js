@@ -32,6 +32,7 @@ export class OrderingController {
   render() {
     if (cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
       this.routeTo(urls.home.url);
+      return;
       // history.back(); // TODO: разобраться с историей при первом заходе
     }
 

@@ -49,7 +49,7 @@ export class DishPopup {
             id: input.id,
             name: this.dish.radios.find((item1) => {
               return Number(item1.id) === Number(item.id);
-            }).opt.find((item) => {  // TODO: Ну здесь без комменатриев, пусть потом с этим сервак разбирается
+            }).opt.find((item) => {
               return Number(item.id) === Number(input.id);
             }).name,
           });
@@ -78,7 +78,7 @@ export class DishPopup {
       dish: {
         ...this.dish,
         id: this.dish.id,
-        num: Number(number),
+        count: Number(number),
         radios: dishRadios,
         ingredients: dishCheckboxes,
       },

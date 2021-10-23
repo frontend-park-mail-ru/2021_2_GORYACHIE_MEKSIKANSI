@@ -34,11 +34,8 @@ export class RestaurantView extends View {
       routeTo: this.routeTo,
       controller: this.controller,
     });
-
-    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refreshNavbar);
-    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error message
-    EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refreshNavbar);
-    EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refreshNavbar);
+    
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshNavbar);
   }
 
   refreshNavbar = () => {

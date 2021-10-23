@@ -43,16 +43,15 @@ export class OrderingView extends View {
 
     this.sumCost = 0;
     this.sumCost = cart.reduce((prev, item) => {
-      prev += Number(item.cost) * Number(item.num);
+      prev += Number(item.cost) * Number(item.count);
       return prev;
     }, 0);
     this.sumCost += Number(restaurant.costFFD);
 
-
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
       content: orderDelivery({
-        restaurant: this.restaurant,
+        restaurant: restaurant,
         items: cartStore.getState().cart,
         sumCost: this.sumCost,
       }),

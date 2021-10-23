@@ -6,15 +6,6 @@ import store, {actions} from 'Modules/store.js';
 import cartStore, {addDishToCart, clearCart, deleteDishFromCart} from "../modules/reducers/cartStore";
 import {dishGet, restaurantGet} from "../modules/api";
 
-/**
- * RestaurantModel
- * Model for calling api methods for Restaurant logic
- */
-const updateStorage = () => {
-  localStorage.removeItem('cart');
-  localStorage.setItem('cart', JSON.stringify(cartStore.getState()));
-};
-
 class RestaurantModel {
   /**
    * Check user auth and then get restaurantList,
@@ -46,7 +37,7 @@ class RestaurantModel {
 
   addDishToCart(dishSettings = {}) {
     console.log(dishSettings);
-    cartStore.dispatch(addDishToCart(dishSettings, {}));
+    cartStore.dispatch(addDishToCart(dishSettings.dish, dishSettings.restaurant));
   }
 
   /**

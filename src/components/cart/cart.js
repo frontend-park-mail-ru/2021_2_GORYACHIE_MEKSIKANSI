@@ -15,10 +15,8 @@ export class Cart {
     this.routeTo = routeTo;
     this.parent = parent;
 
-    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error explain
-    EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {}); // add the error explain
   }
 
   render(restaurant) {
@@ -27,6 +25,7 @@ export class Cart {
   }
 
   refresh = () => {
+    console.log(cartStore.getState());
     this.remove();
     this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: this.restaurant});
     this.refreshSummary();
@@ -49,24 +48,24 @@ export class Cart {
 
   increaseNumber = (e) => {
     const {target} = e;
-    const dishId = target.closest('.cart__order-row').id;
+    const cId = target.closest('.cart__order-row').id;
     this.controller.increaseDishInCart({
       restId: this.restaurant.id,
-      dishId: dishId,
+      cId: Number(cId),
     });
   }
 
   decreaseNumber = (e) => {
     const {target} = e;
-    const dishId = target.closest('.cart__order-row').id;
-    this.controller.deleteDishFromCart(dishId);
+    const cId = target.closest('.cart__order-row').id;
+    this.controller.deleteDishFromCart(Number(cId));
   }
 
   refreshSummary = () => {
     let value = 0;
     cartStore.getState().cart.forEach((item) => {
-      console.log(Number(item.cost), item.num);
-      value +=  Number(item.cost) * item.num;
+      console.log(Number(item.cost), item.count);
+      value +=  Number(item.cost) * item.count;
     });
     this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
   }

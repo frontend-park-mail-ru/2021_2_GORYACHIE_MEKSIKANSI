@@ -1,6 +1,7 @@
 import {updateCartPut} from "../api";
 import {createStoreWithMiddleware} from "../store";
 import eventBus from "../eventBus";
+import {RestaurantEvents} from "../../events/Restaurant";
 
 const cartActions = {
   storeCartAddDish: 'storeCartAdd',
@@ -11,6 +12,11 @@ const cartActions = {
   cartRollback: 'storeCartRollback',
   storeCartRestaurantSet: 'storeCartRestaurantSet',
   storeCartRestaurantDelete: 'storeCartRestaurantDelete',
+};
+
+const updateStorage = () => {
+  localStorage.removeItem('cart');
+  localStorage.setItem('cart', JSON.stringify(cartStore.getState()));
 };
 
 let cId = 0;
@@ -73,6 +79,7 @@ export function cartReducer(state, action) {
       return {
         ...state,
         restaurant: {
+          ...action.restaurant,
           id: action.restaurant.id,
           name: action.restaurant.name,
         },
@@ -105,8 +112,8 @@ export const addDishToCart = (dish, restaurant) => {
       dispatch({
         actionType: cartActions.storeCartAddDish,
         dish: {
-          cId: cId++,
           ...dish,
+          cId: cId++,
         },
       });
     } else {
@@ -185,7 +192,8 @@ const updateCartOrRollback = (dispatch, updateState, cartRollbackState) => {
         //   actionType: cartActions.cartRollback,
         //   state: cartRollbackState,
         // });
-        eventBus.emitEventListener('EVENT', {});
+        eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
+        updateStorage();
       });
 };
 
@@ -197,13 +205,15 @@ const updateCartOrRollback = (dispatch, updateState, cartRollbackState) => {
  */
 const isItNewDish = (dish, cart) => {
   return cart.find((item) => {
-    return JSON.stringify({...item, count: 0, cId: 0}) === JSON.stringify({cId: 0, ...dish, count: 0});
+    return item.id === dish.id &&
+      item.radios.toString() === dish.radios.toString() &&
+      item.ingredients.toString() === dish.ingredients.toString();
   });
 };
 
 let cart = {
   restaurant: {
-    id: -1,
+    id: null,
     name: '',
   },
   cart: [],
