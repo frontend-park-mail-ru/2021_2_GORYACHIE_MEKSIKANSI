@@ -29,9 +29,7 @@ self.addEventListener('activate', (event) => {
         caches.keys()
             .then((cacheNames) => {
             return Promise.all(
-                cacheNames.filter(() => {
-                    return true;
-                }).map((cacheName) => {
+                Array.from(cacheNames).map((cacheName) => {
                     return caches.delete(cacheName);
                 })
             );
@@ -51,6 +49,7 @@ self.addEventListener('fetch', event => {
                 if (navigator.onLine) {
                     if (!url.href.includes(':5000')) {
                         const response = await fetch(request);
+                        console.log(1);
                         const respCopy = response.clone();
                         caches
                             .open(CACHE)

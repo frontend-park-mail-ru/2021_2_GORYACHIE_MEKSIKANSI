@@ -1,5 +1,6 @@
 import {View} from '../baseView/View.js';
 import {SignUpController} from '../../controllers/signUpController.js';
+import signUpPage from './signUpPage.hbs';
 
 /**
  * SignUp View Class
@@ -29,8 +30,7 @@ export class SignUpView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
-    const template = Handlebars.templates['signUpPage.hbs'];
-    this.parent.innerHTML = template({});
+    this.parent.innerHTML = signUpPage({});
 
     this.settingUp();
   }

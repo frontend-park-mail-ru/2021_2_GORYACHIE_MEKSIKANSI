@@ -1,9 +1,10 @@
 import {View} from '../../baseView/View.js';
 import Navbar from '../../../components/navbar/navbar.js';
 import store from '../../../modules/store.js';
-
 import {updateName} from '../../../modules/api.js';
-
+import baseProfilePage from '../baseProfilePage.hbs';
+import profilePage from './profilePage1.hbs';
+import profileButtonsNav from '../../../components/profileButtonsNav/profileButtonsNav.hbs';
 
 /**
  * Profile view class
@@ -34,13 +35,12 @@ export class ProfileView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['baseProfilePage.hbs'];
-    this.parent.innerHTML += template({
+    this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Личные данные',
-      content: Handlebars.templates['profilePage1.hbs']({
+      content: profilePage({
         user: store.getState().userState,
       }),
-      rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
+      rightMenu: profileButtonsNav});
 
     document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
     document.querySelector('.profile-avatar').addEventListener('click', () => {document.getElementById('avatar').click();});

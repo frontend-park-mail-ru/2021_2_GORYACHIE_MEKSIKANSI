@@ -5,6 +5,9 @@ import {View} from '../baseView/View.js';
 import store from '../../modules/store.js';
 import EventBus from "../../modules/eventBus.js";
 import {RestaurantEvents} from "../../events/Restaurant.js";
+import page from '../baseView/page.hbs';
+import restaurantHeader from '../../components/restaurantHeader/restaurantHeader.hbs';
+import restaurantPage from './restaurantPage.hbs';
 
 export class RestaurantView extends View {
   constructor({
@@ -46,11 +49,10 @@ export class RestaurantView extends View {
     this.restaurant = props.restaurant;
 
     this.navbar.render();
-    const template = Handlebars.templates['page.hbs'];
-    this.parent.insertAdjacentHTML('afterbegin', template({
+    this.parent.insertAdjacentHTML('afterbegin', page({
       auth: store.getState().userState.auth,
-      head: Handlebars.templates['restaurantHeader.hbs'](this.restaurant),
-      content: Handlebars.templates['restaurantPage.hbs'](this.restaurant),
+      head: restaurantHeader(this.restaurant),
+      content: restaurantPage(this.restaurant),
     }));
 
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');

@@ -1,5 +1,6 @@
 import eventBus from '../../modules/eventBus.js';
 import {RestaurantEvents} from '../../events/Restaurant.js';
+import dishPopup from './dishPopup.hbs';
 
 export class DishPopup {
   constructor({
@@ -20,7 +21,7 @@ export class DishPopup {
     this.dish = dish.dishes;
     this.div = document.createElement('div');
     this.div.classList.add('dish-popup-div');
-    this.div.innerHTML = Handlebars.templates['dishPopup.hbs'](this.dish);
+    this.div.innerHTML = dishPopup(this.dish);
     this.parent.appendChild(this.div);
     document.body.style.overflowY = 'hidden';
 

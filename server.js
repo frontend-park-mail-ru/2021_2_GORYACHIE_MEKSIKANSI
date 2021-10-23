@@ -1,21 +1,22 @@
+'use strict';
+
 const express = require('express');
+const body = require('body-parser');
 const path = require('path');
 
 const app = express();
+app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use(body.json());
+app.get('serviceWorker.js', function (req, res) {
+  res.sendFile(path.resolve(__dirname, 'dist', 'serviceWorker.js'));
+})
 
-app.use(express.static('src/'));
-app.use('/profile', express.static(path.resolve(__dirname, '', 'src/')));
-app.use('/login', express.static(path.resolve(__dirname, '', 'src/')));
-app.use('/signup', express.static(path.resolve(__dirname, '', 'src/')));
-app.use('/checkout', express.static(path.resolve(__dirname, '', 'src/')));
-app.use('/restaurant/1', express.static(path.resolve(__dirname, '', 'src/')));
-
-app.all('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '', 'src/')); // TODO: придумать что-то с отдачей статики, поднять nginx
+app.all('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist/index.html'));
 });
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+app.listen(port, function () {
   console.log(`Server listening port ${port}`);
 });
