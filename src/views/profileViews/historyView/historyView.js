@@ -1,8 +1,8 @@
 import {View} from '../../baseView/View.js';
-import Navbar from '../../../components/navbar/navbar.js';
+import Navbar from 'Components/navbar/navbar.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import historyPage from './historyPage.hbs';
-import profileButtonsNav from '../../../components/profileButtonsNav/profileButtonsNav.hbs';
+import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 
 const orders = [
   {

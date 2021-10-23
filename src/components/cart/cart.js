@@ -1,4 +1,4 @@
-import {RestaurantEvents} from '../../events/Restaurant.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from '../../modules/eventBus.js';
 import store from '../../modules/store.js';
 import cart from './cart.hbs'

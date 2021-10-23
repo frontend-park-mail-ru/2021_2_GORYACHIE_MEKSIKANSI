@@ -1,5 +1,5 @@
 import {View} from '../baseView/View.js';
-import {SignUpController} from '../../controllers/signUpController.js';
+import {SignUpController} from 'Controllers/signUpController.js';
 import signUpPage from './signUpPage.hbs';
 
 /**

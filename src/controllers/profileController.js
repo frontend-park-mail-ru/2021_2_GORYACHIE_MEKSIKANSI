@@ -1,13 +1,13 @@
-import {ProfileView} from '../views/profileViews/profileView/profileView.js';
+import {ProfileView} from 'Views/profileViews/profileView/profileView.js';
 import eventBus from '../modules/eventBus.js';
-import {ProfileEvents} from '../events/Profile.js';
-import {AuthStatus} from '../events/Auth.js';
-import {ValidationLength} from '../events/Validation.js';
+import {ProfileEvents} from 'Events/Profile.js';
+import {AuthStatus} from 'Events/Auth.js';
+import {ValidationLength} from 'Events/Validation.js';
 
 import store from '../modules/store.js';
-import Navbar from '../components/navbar/navbar.js';
+import Navbar from 'Components/navbar/navbar.js';
 import {Validation} from '../modules/validation.js';
-import ProfileModel from '../models/Profile.js';
+import ProfileModel from 'Models/Profile.js';
 
 /**
  *  Profile controller class

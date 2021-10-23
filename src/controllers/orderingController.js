@@ -1,6 +1,6 @@
 import eventBus from '../modules/eventBus.js';
-import OrderingModel from '../models/Ordering.js';
-import {OrderingView} from '../views/profileViews/orderingView/orderingView.js';
+import OrderingModel from 'Models/Ordering.js';
+import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
 import {urls} from '../modules/urls.js';
 import store from '../modules/store.js';
 

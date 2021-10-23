@@ -1,13 +1,14 @@
-import Navbar from '../../components/navbar/navbar.js';
-import {DishPopup} from '../../components/dishPopup/dishPopup.js';
-import {Cart} from '../../components/cart/cart.js';
+import Navbar from 'Components/navbar/navbar.js';
+import {DishPopup} from 'Components/dishPopup/dishPopup.js';
+import {Cart} from 'Components/cart/cart.js';
 import {View} from '../baseView/View.js';
 import store from '../../modules/store.js';
 import EventBus from "../../modules/eventBus.js";
 import {RestaurantEvents} from "../../events/Restaurant.js";
 import page from '../baseView/page.hbs';
-import restaurantHeader from '../../components/restaurantHeader/restaurantHeader.hbs';
+import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
+import continuePopup from 'Components/continuePopup/continuePopup.hbs'
 
 export class RestaurantView extends View {
   constructor({
@@ -127,7 +128,7 @@ export class RestaurantView extends View {
     this.popup.remove();
     this.continueDiv = document.createElement('div');
     this.continueDiv.classList.add('continue-popup-div');
-    this.continueDiv.innerHTML = Handlebars.templates['continuePopup.hbs']({new: newR, old: oldR});
+    this.continueDiv.innerHTML = continuePopup({new: newR, old: oldR});
     this.parent.appendChild(this.continueDiv);
     document.body.style.overflowY = 'hidden';
 

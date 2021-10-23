@@ -1,5 +1,5 @@
 import {View} from '../baseView/View.js';
-import {LoginController} from '../../controllers/loginController.js';
+import {LoginController} from 'Controllers/loginController.js';
 import loginPage from './loginPage.hbs'
 
 /**

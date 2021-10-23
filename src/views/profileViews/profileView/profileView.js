@@ -1,10 +1,10 @@
 import {View} from '../../baseView/View.js';
-import Navbar from '../../../components/navbar/navbar.js';
+import Navbar from 'Components/navbar/navbar.js';
 import store from '../../../modules/store.js';
 import {updateName} from '../../../modules/api.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
-import profileButtonsNav from '../../../components/profileButtonsNav/profileButtonsNav.hbs';
+import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 
 /**
  * Profile view class

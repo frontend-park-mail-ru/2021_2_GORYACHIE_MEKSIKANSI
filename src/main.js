@@ -1,16 +1,16 @@
 'use strict';
 import {Router} from './modules/router.js';
-import {LoginController} from './controllers/loginController.js';
-import {HomeController} from './controllers/homeController.js';
-import {SignUpController} from './controllers/signUpController.js';
-import {ProfileController} from './controllers/profileController.js';
-import {RestaurantController} from './controllers/restaurantController.js';
-import {OrderingController} from './controllers/orderingController.js';
+import {LoginController} from 'Controllers/loginController.js';
+import {HomeController} from 'Controllers/homeController.js';
+import {SignUpController} from 'Controllers/signUpController.js';
+import {ProfileController} from 'Controllers/profileController.js';
+import {RestaurantController} from 'Controllers/restaurantController.js';
+import {OrderingController} from 'Controllers/orderingController.js';
 import {urls} from './modules/urls.js';
-import footer from './components/footer/footer.hbs';
+import footer from 'Components/footer/footer.hbs';
 import './main.css';
-import './components/variables/colors.css';
-import './components/variables/fonts.css';
+import 'Components/variables/colors.css';
+import 'Components/variables/fonts.css';
 
 const application = document.getElementById('app');
 const router = new Router(document.body);

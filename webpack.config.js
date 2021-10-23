@@ -13,6 +13,18 @@ const PATHS = {
 }
 
 module.exports = {
+    resolve: {
+        alias: {
+            Assets: path.resolve('src/assets'),
+            Components: path.resolve('src/components'),
+            Controllers: path.resolve('src/controllers'),
+            Events: path.resolve('src/events'),
+            Models: path.resolve('src/models'),
+            Modules: path.resolve('src/modules'),
+            Views: path.resolve('src/views'),
+        },
+        extensions: ['.js'],
+    },
     mode: debug ? 'development' : 'production',
     entry: path.resolve('./src/main.js'),
     output: {

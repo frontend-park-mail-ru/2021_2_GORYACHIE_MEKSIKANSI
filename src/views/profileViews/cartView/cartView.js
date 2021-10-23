@@ -1,7 +1,7 @@
 import {View} from '../../baseView/View.js';
-import Navbar from '../../../components/navbar/navbar.js';
-import orderDelivery from '../../../components/cartOrder/orderDelivery.hbs'
-import orderSummary from '../../../components/cartOrder/orderSummary.hbs'
+import Navbar from 'Components/navbar/navbar.js';
+import orderDelivery from 'Components/cartOrder/orderDelivery.hbs'
+import orderSummary from 'Components/cartOrder/orderSummary.hbs'
 import baseProfilePage from '../baseProfilePage.hbs'
 
 const orders =

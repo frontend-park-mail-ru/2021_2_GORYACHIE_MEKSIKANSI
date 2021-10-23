@@ -1,4 +1,4 @@
-import {ValidationLength} from '../events/Validation.js';
+import {ValidationLength} from 'Events/Validation.js';
 
 // eslint-disable-next-line max-len
 const emailRegExpression = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

@@ -1,9 +1,9 @@
 import {loginPost, profileGet} from '../modules/api.js';
 import eventBus from '../modules/eventBus.js';
-import {LoginEvents} from '../events/Login.js';
-import {ResponseEvents} from '../events/Responses.js';
+import {LoginEvents} from 'Events/Login.js';
+import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from '../modules/urls.js';
-import {ErrorsText} from '../events/Errors.js';
+import {ErrorsText} from 'Events/Errors.js';
 
 /**
  * class login model

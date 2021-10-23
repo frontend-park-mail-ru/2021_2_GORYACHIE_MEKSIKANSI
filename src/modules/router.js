@@ -46,7 +46,7 @@ export class Router {
         }
         if (this.routes.get(name)) {
           if (pageUrl.match(regUrl)) { // TODO: инкастыляция
-            window.history.pushState({}, '', url);
+            window.history.pushState({}, '', pageUrl);
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);
           } else {
             window.history.pushState({}, '', url);

@@ -1,10 +1,10 @@
-import LoginModel from '../models/Login.js';
+import LoginModel from 'Models/Login.js';
 import {Validation} from '../modules/validation.js';
 import eventBus from '../modules/eventBus.js';
-import {LoginEvents} from '../events/Login.js';
-import {LoginView} from '../views/LoginView/loginView.js';
-import {ResponseEvents} from '../events/Responses.js';
-import {ErrorsText} from '../events/Errors.js';
+import {LoginEvents} from 'Events/Login.js';
+import {LoginView} from 'Views/LoginView/loginView.js';
+import {ResponseEvents} from 'Events/Responses.js';
+import {ErrorsText} from 'Events/Errors.js';
 import {urls} from '../modules/urls.js';
 
 /**

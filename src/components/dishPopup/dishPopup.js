@@ -1,5 +1,5 @@
 import eventBus from '../../modules/eventBus.js';
-import {RestaurantEvents} from '../../events/Restaurant.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
 import dishPopup from './dishPopup.hbs';
 
 export class DishPopup {
