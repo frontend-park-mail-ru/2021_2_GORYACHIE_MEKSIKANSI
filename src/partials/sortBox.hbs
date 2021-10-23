@@ -1,0 +1,172 @@
+<div class="sort-box">
+    <div class="sort-box__text-container">
+        <h1 class="sort-box__text">Все магазины</h1>
+    </div>
+    <div class="sort-box__sort-container">
+        <button class="sort-box__expand-button">
+            <div class="sort-box__text-block">
+                Сортировка
+                <div class="sort-box__expand-svg">
+                    <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true" focusable="false">
+                        <path d="M17 11.7494V14.916L12 11.0827L7 14.916V11.7494L12 7.91602L17 11.7494Z"
+                              fill="#000000"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+        <div class="h3" style="height:18px"></div>
+        <label class="sort-box__radio-container">Cамые популярные
+            <input type="radio" checked="checked" name="radio">
+            <span class="sort-box__checkmark"></span>
+        </label>
+        <label class="sort-box__radio-container">Рейтинг
+            <input type="radio" name="radio">
+            <span class="sort-box__checkmark"></span>
+        </label>
+        <label class="sort-box__radio-container">Время доставки
+            <input type="radio" name="radio">
+            <span class="sort-box__checkmark"></span>
+        </label>
+    </div>
+
+    <div class="h3" style="height:18px"></div>
+
+    <div class="sort-box__price-range-container">
+        <button class="sort-box__expand-button">
+            <div class="sort-box__text-block">
+                Диапазон стоимости
+                <div class="sort-box__expand-svg">
+                    <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true" focusable="false">
+                        <path d="M17 11.7494V14.916L12 11.0827L7 14.916V11.7494L12 7.91602L17 11.7494Z"
+                              fill="#000000"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input" checked=""/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+         ₽
+      </span>
+            </div>
+        </article>
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input"/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+        ₽₽
+      </span>
+            </div>
+        </article>
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input"/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+       ₽₽₽
+      </span>
+            </div>
+        </article>
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input"/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+        ₽₽₽₽
+      </span>
+            </div>
+        </article>
+    </div>
+
+    <div class="h3" style="height:50px"></div>
+
+    <div class="sort-box__free-delivery-range-picker">
+        <button class="sort-box__expand-button">
+            <div class="sort-box__text-block">
+                Бесплатная доставка от
+                <div class="sort-box__expand-svg">
+                    <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true" focusable="false">
+                        <path d="M17 11.7494V14.916L12 11.0827L7 14.916V11.7494L12 7.91602L17 11.7494Z"
+                              fill="#000000"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+        <div class="h3" style="height:18px"></div>
+
+        <div class="sort-box__slider-container">
+            <input type="range" min="0" max="1000" value="50" class="sort-box__slider" id="myRange" step="250">
+            <p>₽: <span id="demo"></span></p>
+        </div>
+
+        <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }
+        </script>
+    </div>
+
+    <div class="sort-box__price-range-container">
+        <button class="sort-box__expand-button">
+            <div class="sort-box__text-block">
+                Диета
+                <div class="sort-box__expand-svg">
+                    <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true" focusable="false">
+                        <path d="M17 11.7494V14.916L12 11.0827L7 14.916V11.7494L12 7.91602L17 11.7494Z"
+                              fill="#000000"></path>
+                    </svg>
+                </div>
+            </div>
+        </button>
+
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input" checked=""/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+        Вегетарианская
+      </span>
+            </div>
+        </article>
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input"/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+        Веган
+      </span>
+            </div>
+        </article>
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input"/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+       Без глютена
+      </span>
+            </div>
+        </article>
+
+        <article class="sort-box__checkbox">
+            <input type="checkbox" class="sort-box__checkbox_input"/>
+            <div class="sort-box__checkbox_text-container">
+      <span>
+        Гипоаллергенная
+      </span>
+            </div>
+        </article>
+    </div>
+</div>

@@ -1,7 +1,11 @@
 import {View} from '../../baseView/View.js';
-import Navbar from '../../../components/navbar/navbar.js';
+import Navbar from 'Components/navbar/navbar.js';
 import store from '../../../modules/store.js';
 import {urls} from '../../../modules/urls.js';
+import baseProfilePage from '../baseProfilePage.hbs';
+import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
+import orderSummary from 'Components/cartOrder/orderSummary.hbs';
+import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
 
 /**
  * Profile view class
@@ -43,15 +47,14 @@ export class OrderingView extends View {
     }, 0);
     this.sumCost += restaurant.dCost;
 
-    const template = Handlebars.templates['baseProfilePage.hbs'];
-    this.parent.innerHTML += template({
+    this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
-      content: Handlebars.templates['orderDelivery.hbs']({
+      content: orderDelivery({
         restaurant: store.getState().cartRestaurantState,
         items: store.getState().cartState,
         sumCost: this.sumCost,
       }),
-      rightMenu: Handlebars.templates['orderSummary.hbs']({
+      rightMenu: orderSummary({
         sumCost: this.sumCost,
       })});
 
@@ -96,7 +99,7 @@ export class OrderingView extends View {
   showConfirm = () => {
     if (this.parent.querySelector('.card').checked) {
       this.confirmDiv = document.createElement('div');
-      this.confirmDiv.innerHTML = Handlebars.templates['confirmPopup.hbs']({sumCost: this.sumCost});
+      this.confirmDiv.innerHTML = confirmPopup({sumCost: this.sumCost});
       this.parent.appendChild(this.confirmDiv);
       document.body.style.overflowY = 'hidden';
       this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);

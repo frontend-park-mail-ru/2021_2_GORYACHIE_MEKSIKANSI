@@ -37,7 +37,10 @@ export class Router {
    */
   open(pageUrl) {
     Object.entries(urls).forEach(([name, {url, regUrl}]) => {
-      if (pageUrl === name || pageUrl === url || pageUrl.match(regUrl)) {
+      if (pageUrl === '/') {
+        pageUrl = 'home';
+      }
+      if (pageUrl.includes(name) || pageUrl.match(regUrl)) {
         if (this.currControllerName) {
           this.routes.get(this.currControllerName).remove();
         }
@@ -75,12 +78,7 @@ export class Router {
   }
 
   start() {
-    const path = '/';
-    if (window.location.pathname === '/') {
       this.open(window.location.pathname);
-    } else {
-      this.open(window.location.pathname.slice(0, window.location.pathname.length - 1)); // TODO: подумать
-    }
   }
 
   /**

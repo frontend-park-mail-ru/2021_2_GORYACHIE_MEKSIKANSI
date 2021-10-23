@@ -1,8 +1,8 @@
-import {SignUpView} from '../views/SignUpPage/signUpView.js';
+import {SignUpView} from 'Views/SignUpPage/signUpView.js';
 import {Validation} from '../modules/validation.js';
-import SignUpModel from '../models/SignUp.js';
+import SignUpModel from 'Models/SignUp.js';
 import eventBus from '../modules/eventBus.js';
-import {SignUpEvents} from '../events/SignUp.js';
+import {SignUpEvents} from 'Events/SignUp.js';
 
 /**
  * Signup page controller

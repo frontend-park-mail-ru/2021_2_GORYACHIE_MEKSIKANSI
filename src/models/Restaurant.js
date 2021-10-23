@@ -1,8 +1,8 @@
-import {ResponseEvents} from '../events/Responses.js';
+import {ResponseEvents} from 'Events/Responses.js';
 import eventBus from '../modules/eventBus.js';
-import {RestaurantEvents} from '../events/Restaurant.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
 import {restaurantGet, dishGet, addDishPost, clearCartDelete, clearDishFromCartDelete} from '../modules/api.js';
-import {getRestaurantMock, getDish, getItemToCart} from '../views/mocks.js';
+import {getRestaurantMock, getDish, getItemToCart} from 'Views/mocks.js';
 import store, {actions} from '../modules/store.js';
 
 /**

@@ -1,5 +1,7 @@
 import {View} from '../baseView/View.js';
-import Navbar from '../../components/navbar/navbar.js';
+import Navbar from 'Components/navbar/navbar.js';
+import homePage from './homePage.hbs';
+import page from '../baseView/page.hbs';
 
 /**
  * Home view class
@@ -29,9 +31,8 @@ export class HomeView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['page.hbs'];
-    this.parent.insertAdjacentHTML('afterbegin', template({
-      content: Handlebars.templates['homePage.hbs']({
+    this.parent.insertAdjacentHTML('afterbegin', page({
+      content: homePage({
         promos: [1, 2, 3],
         restaurantList: props.restaurants,
       }),

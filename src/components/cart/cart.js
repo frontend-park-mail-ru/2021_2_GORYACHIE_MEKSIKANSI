@@ -1,6 +1,7 @@
-import {RestaurantEvents} from '../../events/Restaurant.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from '../../modules/eventBus.js';
 import store from '../../modules/store.js';
+import cart from './cart.hbs'
 
 
 export class Cart {
@@ -26,7 +27,7 @@ export class Cart {
 
   refresh = () => {
     this.remove();
-    this.parent.innerHTML = Handlebars.templates['cart.hbs']({items: store.getState().cartState, restaurant: this.restaurant});
+    this.parent.innerHTML = cart({items: store.getState().cartState, restaurant: this.restaurant});
     this.refreshSummary();
 
     this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;

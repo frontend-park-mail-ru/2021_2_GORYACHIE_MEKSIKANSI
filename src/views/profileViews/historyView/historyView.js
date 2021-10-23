@@ -1,6 +1,8 @@
 import {View} from '../../baseView/View.js';
-import Navbar from '../../../components/navbar/navbar.js';
-
+import Navbar from 'Components/navbar/navbar.js';
+import baseProfilePage from '../baseProfilePage.hbs';
+import historyPage from './historyPage.hbs';
+import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 
 const orders = [
   {
@@ -84,13 +86,12 @@ export class HistoryView extends View {
    */
   render(props = {}) {
     this.navbar.render();
-    const template = Handlebars.templates['baseProfilePage.hbs'];
-    this.parent.innerHTML += template({
+    this.parent.innerHTML += baseProfilePage({
       pageTitle: 'История заказов',
-      content: Handlebars.templates['historyPage.hbs']({
+      content: historyPage({
         orders: orders,
       }),
-      rightMenu: Handlebars.templates['profileButtonsNav.hbs']});
+      rightMenu: profileButtonsNav});
     document.querySelector('.footer').style.marginTop = '0';
   }
   /**

@@ -4,9 +4,12 @@
   "description": "Delivery club reimagined",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile_hbs": "globstar -- npx handlebars src/**/*.hbs -f src/assets/js/handlebars.precompiled.js",
-    "start": "nodemon server.js"
+    "build": "webpack --mode development",
+    "debug": "DEBUG=true webpack serve",
+    "start": "webpack-dev-server --config ./webpack.config.js",
+    "test": "npm run serve",
+    "start:dev": "webpack serve",
+    "compile_hbs": "globstar -- npx handlebars src/**/*.hbs -f src/assets/js/handlebars.precompiled.js"
   },
   "repository": {
     "type": "git",
@@ -20,20 +23,34 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2021_2_GORYACHIE_MEKSIKANSI#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.4.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
     "globstar": "^1.0.0",
     "handlebars": "^4.7.7",
+    "handlebars-loader": "^1.7.1",
     "hbs": "^4.1.2",
+    "http": "^0.0.1-security",
+    "node-static": "^0.7.11",
     "nodemon": "^2.0.12",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "style-loader": "^3.3.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-promise": "^5.1.0",
-    "globstar": "^1.0.0"
+    "globstar": "^1.0.0",
+    "html-webpack-plugin": "^5.4.0",
+    "mini-css-extract-plugin": "^2.4.2",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }

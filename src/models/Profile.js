@@ -1,7 +1,7 @@
 import eventBus from '../modules/eventBus.js';
-import {ProfileEvents} from '../events/Profile.js';
+import {ProfileEvents} from 'Events/Profile.js';
 import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from '../modules/api.js';
-import {ResponseEvents} from '../events/Responses.js';
+import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from '../modules/urls.js';
 import store, {actions} from '../modules/store.js';
 

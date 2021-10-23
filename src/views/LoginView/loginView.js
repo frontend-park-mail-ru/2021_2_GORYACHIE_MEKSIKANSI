@@ -1,5 +1,6 @@
 import {View} from '../baseView/View.js';
-import {LoginController} from '../../controllers/loginController.js';
+import {LoginController} from 'Controllers/loginController.js';
+import loginPage from './loginPage.hbs'
 
 /**
  * View for Login Page
@@ -29,8 +30,7 @@ export class LoginView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
-    const template = Handlebars.templates['loginPage.hbs'];
-    this.parent.innerHTML = template({});
+    this.parent.innerHTML = loginPage({});
 
     this.settingUp();
   }

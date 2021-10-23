@@ -1,5 +1,5 @@
 import eventBus from '../modules/eventBus.js';
-import {HomeEvents} from '../events/Home.js';
+import {HomeEvents} from 'Events/Home.js';
 import {profileGet, restaurantsGet} from '../modules/api.js';
 
 /**

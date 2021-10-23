@@ -1,8 +1,8 @@
 import {profileGet, signupPost} from '../modules/api.js';
-import {SignUpEvents} from '../events/SignUp.js';
+import {SignUpEvents} from 'Events/SignUp.js';
 import eventBus from '../modules/eventBus.js';
-import {ResponseEvents} from '../events/Responses.js';
-import {ErrorsText} from '../events/Errors.js';
+import {ResponseEvents} from 'Events/Responses.js';
+import {ErrorsText} from 'Events/Errors.js';
 import {urls} from '../modules/urls.js';
 
 /**
