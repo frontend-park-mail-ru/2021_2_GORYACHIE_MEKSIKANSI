@@ -1,5 +1,5 @@
 import {HomeView} from 'Views/homeView/homeView.js';
-import eventBus from '../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import {HomeEvents} from 'Events/Home.js';
 import HomeModel from 'Models/Home.js';
 import {AuthStatus} from 'Events/Auth.js';

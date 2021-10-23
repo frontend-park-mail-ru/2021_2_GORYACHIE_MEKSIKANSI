@@ -2,7 +2,7 @@ import Navbar from 'Components/navbar/navbar.js';
 import {DishPopup} from 'Components/dishPopup/dishPopup.js';
 import {Cart} from 'Components/cart/cart.js';
 import {View} from '../baseView/View.js';
-import store from '../../modules/store.js';
+import store from 'Modules/store.js';
 import EventBus from "../../modules/eventBus.js";
 import {RestaurantEvents} from "../../events/Restaurant.js";
 import page from '../baseView/page.hbs';

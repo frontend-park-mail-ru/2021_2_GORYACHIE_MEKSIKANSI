@@ -1,8 +1,8 @@
-import eventBus from '../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import OrderingModel from 'Models/Ordering.js';
 import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
-import {urls} from '../modules/urls.js';
-import store from '../modules/store.js';
+import {urls} from 'Modules/urls.js';
+import store from 'Modules/store.js';
 
 export class OrderingController {
   /**

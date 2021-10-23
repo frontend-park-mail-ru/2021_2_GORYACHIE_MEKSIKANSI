@@ -1,6 +1,6 @@
-import {profileGet, logoutPost} from '../../modules/api.js';
+import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs'
-import store from '../../modules/store.js';
+import store from 'Modules/store.js';
 
 
 /**

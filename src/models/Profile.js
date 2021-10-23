@@ -1,9 +1,9 @@
-import eventBus from '../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import {ProfileEvents} from 'Events/Profile.js';
-import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from '../modules/api.js';
+import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from 'Modules/api.js';
 import {ResponseEvents} from 'Events/Responses.js';
-import {urls} from '../modules/urls.js';
-import store, {actions} from '../modules/store.js';
+import {urls} from 'Modules/urls.js';
+import store, {actions} from 'Modules/store.js';
 
 /**
  * Class Profile Model

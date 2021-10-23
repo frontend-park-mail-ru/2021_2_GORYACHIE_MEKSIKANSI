@@ -1,9 +1,9 @@
 import {ResponseEvents} from 'Events/Responses.js';
-import eventBus from '../modules/eventBus.js';
+import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
-import {restaurantGet, dishGet, addDishPost, clearCartDelete, clearDishFromCartDelete} from '../modules/api.js';
+import {restaurantGet, dishGet, addDishPost, clearCartDelete, clearDishFromCartDelete} from 'Modules/api.js';
 import {getRestaurantMock, getDish, getItemToCart} from 'Views/mocks.js';
-import store, {actions} from '../modules/store.js';
+import store, {actions} from 'Modules/store.js';
 
 /**
  * RestaurantModel

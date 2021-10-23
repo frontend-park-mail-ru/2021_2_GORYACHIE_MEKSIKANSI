@@ -1,11 +1,11 @@
 import LoginModel from 'Models/Login.js';
-import {Validation} from '../modules/validation.js';
-import eventBus from '../modules/eventBus.js';
+import {Validation} from 'Modules/validation.js';
+import eventBus from 'Modules/eventBus.js';
 import {LoginEvents} from 'Events/Login.js';
 import {LoginView} from 'Views/LoginView/loginView.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {ErrorsText} from 'Events/Errors.js';
-import {urls} from '../modules/urls.js';
+import {urls} from 'Modules/urls.js';
 
 /**
  *  Login controller class
