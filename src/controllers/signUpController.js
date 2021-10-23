@@ -3,6 +3,10 @@ import {Validation} from 'Modules/validation.js';
 import SignUpModel from 'Models/SignUp.js';
 import eventBus from 'Modules/eventBus.js';
 import {SignUpEvents} from 'Events/SignUp.js';
+import {userStatus} from "../modules/store";
+import store from 'Modules/store.js';
+import {AuthStatus} from 'Events/Auth.js';
+import {urls} from "../modules/urls";
 
 /**
  * Signup page controller
@@ -24,21 +28,24 @@ export class SignUpController {
       routeTo: this.routeTo,
       controller: this});
 
-    eventBus.addEventListener(SignUpEvents.userSignUpSuccess,
-        this.routeTo);
     eventBus.addEventListener(SignUpEvents.userSignUpFailed,
         this.signUpView.showErrorFromController.bind(this.signUpView));
-    eventBus.addEventListener(SignUpEvents.userCheckFailed,
-        this.signUpView.render.bind(this.signUpView));
-    eventBus.addEventListener(SignUpEvents.userCheckDone,
-        this.routeTo);
   }
 
   /**
    * Rendering signup page
    */
   render() {
-    SignUpModel.checkAuth();
+    if (store.getState().userState.auth) {
+      this.routeTo(urls.home.url);
+    } else {
+      eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
+      this.signUpView.render();
+    }
+  }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
   }
 
   /**
@@ -82,6 +89,7 @@ export class SignUpController {
    * Removing listeners from signup page
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.redirect);
     this.signUpView.remove();
   }
 }

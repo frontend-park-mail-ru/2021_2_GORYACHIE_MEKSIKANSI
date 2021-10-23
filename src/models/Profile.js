@@ -9,21 +9,6 @@ import store, {actions} from 'Modules/store.js';
  * Class Profile Model
  */
 class ProfileModel {
-  /**
-   * Check user auth and then get restaurantList,
-   * emit HomeEvents.homeGetRestaurantsSuccess
-   */
-  checkAuth() {
-    profileGet({url: '/user'})
-        .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userLoggedIn, {});
-            return;
-          }
-          eventBus.emitEventListener(ProfileEvents.userNotAuth, urls.login.url);
-        });
-  }
-
   updateUserName(name) {
     updateName(name)
         .then((response) => {

@@ -6,6 +6,9 @@ import {LoginView} from 'Views/LoginView/loginView.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {ErrorsText} from 'Events/Errors.js';
 import {urls} from 'Modules/urls.js';
+import {userStatus} from "../modules/store";
+import store from 'Modules/store.js';
+import {AuthStatus} from 'Events/Auth.js';
 
 /**
  *  Login controller class
@@ -29,12 +32,6 @@ export class LoginController {
 
     eventBus.addEventListener(LoginEvents.loginFailed,
         this.loginView.showError.bind(this.loginView));
-    eventBus.addEventListener(LoginEvents.loginDone,
-        this.routeTo);
-    eventBus.addEventListener(LoginEvents.loginCheckDone,
-        this.routeTo);
-    eventBus.addEventListener(LoginEvents.loginCheckFailed,
-        this.loginView.render.bind(this.loginView));
   }
 
   /**
@@ -71,13 +68,24 @@ export class LoginController {
    * Rendering view
    */
   render() {
-    LoginModel.checkAuth();
+    if (store.getState().userState.auth) {
+      this.routeTo(urls.home.url);
+    } else {
+      eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
+      this.loginView.render();
+    }
   }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
+  }
+
 
   /**
    * Removing view
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.redirect);
     this.loginView.remove();
   }
 }

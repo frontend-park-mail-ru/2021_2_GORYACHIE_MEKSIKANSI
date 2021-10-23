@@ -3,6 +3,8 @@ import navbar from './navbar.hbs'
 import store from 'Modules/store.js';
 import {MapPopup} from '../mapPopup/mapPopup.js';
 import Address from '../../modules/lsAddress.js';
+import eventBus from "../../modules/eventBus";
+import {AuthStatus} from "../../events/Auth";
 
 /**
  * Left navigation bar class
@@ -13,11 +15,7 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    this.profileRequested = false;
-    profileGet({url: '/user'})
-      .then(() => {
-        this.profileRequested = true;
-      });
+    profileGet({url: '/user'});
     this.yMap = new MapPopup({});
   }
 
@@ -25,6 +23,7 @@ export class Navbar {
    * Method rendering Navbar to the parent
    */
   render() {
+    eventBus.addEventListener(AuthStatus.userLogin, this.refresh);
     this.parent.insertAdjacentHTML('afterbegin', navbar({
       user: store.getState().userState,
       itemNum: this.getNumberOfItems(),
@@ -40,6 +39,11 @@ export class Navbar {
     this.close();
 
     this.settingUp();
+  }
+
+  refresh = () => {
+    this.remove();
+    this.render();
   }
 
   getNumberOfItems = () => {
@@ -139,6 +143,7 @@ export class Navbar {
       document.querySelector('.header').remove();
       window.document.body.style.overflowY = 'scroll';
     }
+    eventBus.unsubscribe(AuthStatus.userLogin, this.refresh);
   }
 }
 

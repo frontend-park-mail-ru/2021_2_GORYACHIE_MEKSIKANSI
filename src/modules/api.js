@@ -1,5 +1,7 @@
 import Http from './http.js';
 import {auth, logout} from './auth.js';
+import eventBus from "./eventBus";
+import {AuthStatus} from "../events/Auth";
 
 const http = new Http();
 
@@ -31,7 +33,10 @@ export function signupPost({
       password,
     },
   })
-      .then(auth);
+      .then(auth)
+      .catch(() => {
+        eventBus.emitEventListener(AuthStatus.notAuth, {});
+      });
 }
 
 /**
@@ -57,7 +62,10 @@ export function loginPost({type, email, phone, password}) {
  */
 export function profileGet({url = '/user'}) {
   return http.ajaxGet({url})
-      .then(auth);
+      .then(auth)
+      .catch(() => {
+        eventBus.emitEventListener(AuthStatus.notAuth, {});
+      });
 }
 
 /**

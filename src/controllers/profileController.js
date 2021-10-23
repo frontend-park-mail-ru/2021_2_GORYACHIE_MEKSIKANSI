@@ -5,9 +5,10 @@ import {AuthStatus} from 'Events/Auth.js';
 import {ValidationLength} from 'Events/Validation.js';
 
 import store from 'Modules/store.js';
-import Navbar from 'Components/navbar/navbar.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
+import {userStatus} from "../modules/store";
+import {urls} from "../modules/urls";
 
 /**
  *  Profile controller class
@@ -148,34 +149,34 @@ export class ProfileController {
     Object.entries(correctData).forEach(([key, value]) => {
         updateModel[key](value);
     });
-    // console.log('Correcto ', Object.entries(correctData));
-    // console.log('Incorrecto ', Object.entries(incorrectData));
   }
 
   /**
    * Rendering view
    */
   render() {
-    if (Navbar.profileRequested) {
-      this.show();
+    if (!store.getState().userState.auth) {
+      eventBus.addEventListener(AuthStatus.userLogin, this.show);
+      eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      eventBus.addEventListener(AuthStatus.userDataGot, this.show);
+      this.profileView.render();
     }
   }
 
   show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataGot);
-    if (store.getState().userState.auth) {
-      this.profileView.render();
-    } else {
-      this.routeTo('/');
-    }
+    this.profileView.render();
+  }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
   }
 
   /**
    * Removing view
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.show);
+    eventBus.unsubscribe(AuthStatus.notAuth, this.redirect);
     this.profileView.remove();
   }
 }

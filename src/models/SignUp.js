@@ -22,8 +22,7 @@ class SignUpModel {
     signupPost({type, name, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.CREATED) {
-            eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
-                urls.home.url);
+            this.getProfile();
             return;
           }
           eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
@@ -35,16 +34,12 @@ class SignUpModel {
         });
   }
 
-
-  checkAuth() {
+  getProfile() {
     profileGet({url: '/user'})
         .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);
-            return;
+          if (response.status !== ResponseEvents.OK) {
+            eventBus.emitEventListener(SignUpEvents.signUpGetProfileFailed, {}); // TODO: add toast...
           }
-
-          eventBus.emitEventListener(SignUpEvents.userCheckFailed, {});
         });
   }
 }

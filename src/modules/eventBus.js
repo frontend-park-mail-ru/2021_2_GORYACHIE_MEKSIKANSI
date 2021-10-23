@@ -26,16 +26,18 @@ class EventBus {
   /**
    * delete listener from event bus
    * @param {string} eventName
-   * @param {Function} listener
+   * @param {Function} callback
    * @return {Object}
    */
-  unsubscribe(eventName) {
+  unsubscribe(eventName, callback) {
     if (!this.eventTopics[eventName] ||
         this.eventTopics[eventName].length < 1) {
       return undefined;
     }
 
-    delete this.eventTopics[eventName];
+    this.eventTopics[eventName] = this.eventTopics[eventName].filter((listener) => {
+      return listener !== callback;
+    });
   }
 
   /**
