@@ -23,7 +23,7 @@ class LoginModel {
     loginPost({type, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            this.checkAuth();
+            this.getProfile();
             return;
           }
           eventBus.emitEventListener(LoginEvents.loginFailed,
@@ -35,15 +35,15 @@ class LoginModel {
         });
   }
 
-  checkAuth() {
+  getProfile() {
     profileGet({url: '/user'})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(LoginEvents.loginCheckDone, urls.home.url);
+            eventBus.emitEventListener(LoginEvents.loginGetProfileSuccess, urls.home.url);
             return;
           }
 
-          eventBus.emitEventListener(LoginEvents.loginCheckFailed, {});
+          eventBus.emitEventListener(LoginEvents.loginGetProfileFailed, {});
         });
   }
 }

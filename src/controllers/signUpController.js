@@ -42,14 +42,14 @@ export class SignUpController {
    */
   render() {
     if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
+      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
     } else {
       this.statusRender();
     }
   }
 
-  show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
+  unsubRender = () => {
+    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
     this.statusRender();
   }
 

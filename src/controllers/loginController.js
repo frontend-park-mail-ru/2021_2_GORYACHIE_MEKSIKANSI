@@ -34,9 +34,9 @@ export class LoginController {
         this.loginView.showError.bind(this.loginView));
     eventBus.addEventListener(LoginEvents.loginDone,
         this.routeTo);
-    eventBus.addEventListener(LoginEvents.loginCheckDone,
+    eventBus.addEventListener(LoginEvents.loginGetProfileSuccess,
         this.routeTo);
-    eventBus.addEventListener(LoginEvents.loginCheckFailed,
+    eventBus.addEventListener(LoginEvents.loginGetProfileFailed,
         this.loginView.render.bind(this.loginView));
   }
 

@@ -34,19 +34,6 @@ class SignUpModel {
               ErrorsText.FailedToFetch);
         });
   }
-
-
-  checkAuth() {
-    profileGet({url: '/user'})
-        .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(SignUpEvents.userCheckDone, urls.home.url);
-            return;
-          }
-
-          eventBus.emitEventListener(SignUpEvents.userCheckFailed, {});
-        });
-  }
 }
 
 export default new SignUpModel();
