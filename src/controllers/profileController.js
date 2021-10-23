@@ -155,16 +155,18 @@ export class ProfileController {
    */
   render() {
     if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
-    } else if (store.getState().userState.status === userStatus.userAuth) {
-      this.profileView.render();
+      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
     } else {
-      this.routeTo('/');
+      this.statusRender();
     }
   }
 
-  show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
+  unsubRender = () => {
+    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
+    this.statusRender();
+  }
+
+  statusRender = () => {
     if (store.getState().userState.status === userStatus.userAuth) {
       this.profileView.render();
     } else {

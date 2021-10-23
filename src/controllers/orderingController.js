@@ -32,28 +32,21 @@ export class OrderingController {
     if (store.getState().cartState.length === 0 || store.getState().cartRestaurantState === null) {
       this.routeTo(urls.home.url);
       // history.back(); // TODO: разобраться с историей при первом заходе
-    } else {
-      this.orderingView.render();
-    }
-  }
-
-  render() {
-    if (store.getState().cartState.length === 0 || store.getState().cartRestaurantState === null) {
-      this.routeTo(urls.home.url);
-      // history.back(); // TODO: разобраться с историей при первом заходе
     }
 
     if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
-    } else if (store.getState().userState.status === userStatus.userAuth) {
-      this.orderingView.render();
+      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
     } else {
-      this.routeTo(urls.login.url);
+      this.statusRender();
     }
   }
 
-  show = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
+  unsubRender = () => {
+    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
+    this.statusRender();
+  }
+
+  statusRender = () => {
     if (store.getState().userState.status === userStatus.userAuth) {
       this.orderingView.render();
     } else {

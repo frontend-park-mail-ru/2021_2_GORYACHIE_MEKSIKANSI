@@ -43,15 +43,17 @@ export class SignUpController {
   render() {
     if (store.getState().userState.status === userStatus.userUndefined) {
       eventBus.addEventListener(AuthStatus.userDataUpdate, this.show);
-    } else if (store.getState().userState.status === userStatus.userAuth) {
-      this.routeTo('/');
     } else {
-      this.signUpView.render();
+      this.statusRender();
     }
   }
 
   show = () => {
     eventBus.unsubscribe(AuthStatus.userDataUpdate, this.show);
+    this.statusRender();
+  }
+
+  statusRender = () => {
     if (store.getState().userState.status === userStatus.userAuth) {
       this.routeTo('/');
     } else {
