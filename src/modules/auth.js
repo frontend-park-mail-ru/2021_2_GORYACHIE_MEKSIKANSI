@@ -1,5 +1,5 @@
 import {ResponseEvents} from 'Events/Responses.js';
-import store, {actions, userStatus} from './store.js';
+import store from './store.js';
 import eventBus from './eventBus.js';
 import {AuthStatus} from 'Events/Auth.js';
 import {urls} from "./urls";

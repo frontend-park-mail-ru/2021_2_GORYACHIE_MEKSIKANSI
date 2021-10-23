@@ -1,15 +1,5 @@
-export const actions = {
-  storeUserLogin: 'storeUserLogin',
-  storeUserLogout: 'storeUserLogout',
-  storeUserDataUpdate: 'storeUserDataUpdate',
-  storeCartAddDish: 'storeCartAdd',
-  storeCartDeleteDish: 'storeCartDelete',
-  storeCartDeleteAll: 'storeCartDeleteAll',
-  storeCartIncreaseDishNumber: 'storeCartIncreaseDishNumber',
-  storeCartDecreaseDishNumber: 'storeCartDecreaseDishNumber',
-  storeCartRestaurantSet: 'storeCartRestaurantSet',
-  storeCartRestaurantDelete: 'storeCartRestaurantDelete',
-};
+import {userReducer, initialUserState} from "./reducers/userReducer";
+import {cartReducer, initialCartState} from "./reducers/cartReducer";
 
 function createStore(reducer, initialState) {
   let state = initialState;
@@ -21,106 +11,24 @@ function createStore(reducer, initialState) {
   };
 }
 
-function userReducer(state, action) {
-  switch (action.actionType) {
-    case actions.storeUserLogout:
-      return {
-        ...state,
-        auth: false,
-        name: '',
-        email: '',
-        phone: '',
-        avatar: '',
-      };
-    case actions.storeUserLogin:
-      return {
-        ...state,
-        auth: true,
-        name: action.name,
-        email: action.email,
-        phone: action.phone,
-        avatar: action.avatar,
-      };
-    case actions.storeUserDataUpdate:
-      return {
-        ...state,
-        ...action.updated,
-      };
-    default:
-      return state;
+const thunk = (store) => (dispatch) => (action) => {
+  if (typeof action === 'function') {
+    return action(store.dispatch, store.getState);
   }
-}
+  return dispatch(action);
+};
 
-let cartId = 0;
+function applyMiddleware(middleware) {
+  return function createStoreWithMiddleware(createStore) {
+    return (reducer, state) => {
+      const store = createStore(reducer, state);
 
-function cartReducer(state, action) {
-  switch (action.actionType) {
-    case actions.storeCartAddDish: {
-      if ('cartId' in action.dish) {
-        if (state.find((item) => {
-          return item.cartId === action.dish.cartId;
-        })) {
-          return state.map((item) => {
-            if (item.cartId === action.dish.cartId) {
-              return {...item, num: Number(item.num) + 1};
-            }
-            return item;
-          });
-        }
-      } else {
-        if (state.find((item) => {
-          return JSON.stringify({...item, num: 0, cartId: 0}) === JSON.stringify({...action.dish, num: 0, cartId: 0});
-        })) {
-          return state.map((item) => {
-            if (JSON.stringify({...item, num: 0, cartId: 0}) === JSON.stringify({...action.dish, num: 0, cartId: 0})) {
-              return {...item, num: Number(item.num) + Number(action.dish.num)};
-            }
-            return item;
-          });
-        }
-      }
-
-      return [
-        ...state,
-        {
-          ...action.dish,
-          cartId: cartId++,
-        },
-      ];
-    }
-    case actions.storeCartDeleteDish: {
-      const dish = state.find((item) => {
-        return Number(item.cartId) === Number(action.cartId);
-      });
-      if (dish.num > 1) {
-        return state.map((item) => {
-          if (Number(item.cartId) === Number(action.cartId)) {
-            return {...item, num: item.num - 1};
-          }
-          return item;
-        });
-      }
-      return state.filter((item) => {
-        return Number(item.cartId) !== Number(action.cartId);
-      });
-    }
-    case actions.storeCartDeleteAll:
-      return [];
-    default:
-      return state;
-  }
-}
-
-function cartRestaurantReducer(state, action) {
-  switch (action.actionType) {
-    case actions.storeCartRestaurantSet: {
-      return action.restaurant;
-    }
-    case actions.storeCartRestaurantDelete: {
-      return null;
-    }
-    default: return state;
-  }
+      return {
+        dispatch: (action) => middleware(store)(store.dispatch)(action),
+        getState: store.getState,
+      };
+    };
+  };
 }
 
 function combineReducers(reducersMap) {
@@ -133,40 +41,17 @@ function combineReducers(reducersMap) {
   };
 }
 
-let localCart = JSON.parse(localStorage.getItem('cart'));
-if (!localCart) {
-  localCart = [];
-}
-
-let localRestaurant = JSON.parse(localStorage.getItem('cartRestaurant'));
-if (!localCart || !localRestaurant) {
-  localCart = [];
-  localRestaurant = null;
-}
-
 const initialState = {
-  userState: {
-    auth: false,
-    name: '',
-    phone: '',
-    email: '',
-    avatar: '',
-    address: {
-      aLatitude: 55.751574,
-      aLongitude: 37.57385,
-      aName: 'Москва',
-    },
-  },
-  cartState: localCart,
-  cartRestaurantState: localRestaurant,
+  userState: initialUserState,
+  cartState: initialCartState,
 };
 
 const reducer = combineReducers({
   userState: userReducer,
   cartState: cartReducer,
-  cartRestaurantState: cartRestaurantReducer,
 });
 
-const store = createStore(reducer, initialState);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(reducer, initialState);
 
 export default store;
