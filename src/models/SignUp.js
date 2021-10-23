@@ -22,8 +22,7 @@ class SignUpModel {
     signupPost({type, name, email, phone, password})
         .then((response) => {
           if (response.status === ResponseEvents.CREATED) {
-            eventBus.emitEventListener(SignUpEvents.userSignUpSuccess,
-                urls.home.url);
+            this.getProfile();
             return;
           }
           eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
@@ -32,6 +31,15 @@ class SignUpModel {
         .catch(() => {
           eventBus.emitEventListener(SignUpEvents.userSignUpFailed,
               ErrorsText.FailedToFetch);
+        });
+  }
+
+  getProfile() {
+    profileGet({url: '/user'})
+        .then((response) => {
+          if (response.status !== ResponseEvents.OK) {
+            eventBus.emitEventListener(SignUpEvents.signUpGetProfileFailed, {}); // TODO: add toast...
+          }
         });
   }
 }

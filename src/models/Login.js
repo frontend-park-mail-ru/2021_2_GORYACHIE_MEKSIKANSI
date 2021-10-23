@@ -38,12 +38,9 @@ class LoginModel {
   getProfile() {
     profileGet({url: '/user'})
         .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(LoginEvents.loginGetProfileSuccess, urls.home.url);
-            return;
+          if (response.status !== ResponseEvents.OK) {
+            eventBus.emitEventListener(LoginEvents.loginGetProfileFailed, {});
           }
-
-          eventBus.emitEventListener(LoginEvents.loginGetProfileFailed, {});
         });
   }
 }

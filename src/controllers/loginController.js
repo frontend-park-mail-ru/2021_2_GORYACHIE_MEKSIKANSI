@@ -32,12 +32,6 @@ export class LoginController {
 
     eventBus.addEventListener(LoginEvents.loginFailed,
         this.loginView.showError.bind(this.loginView));
-    eventBus.addEventListener(LoginEvents.loginDone,
-        this.routeTo);
-    eventBus.addEventListener(LoginEvents.loginGetProfileSuccess,
-        this.routeTo);
-    eventBus.addEventListener(LoginEvents.loginGetProfileFailed,
-        this.loginView.render.bind(this.loginView));
   }
 
   /**
@@ -74,30 +68,24 @@ export class LoginController {
    * Rendering view
    */
   render() {
-    if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
+    if (store.getState().userState.auth) {
+      this.routeTo(urls.home.url);
     } else {
-      this.statusRender();
-    }
-  }
-
-  unsubRender = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
-    this.statusRender();
-  }
-
-  statusRender = () => {
-    if (store.getState().userState.status === userStatus.userAuth) {
-      this.routeTo('/');
-    } else {
+      eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
       this.loginView.render();
     }
   }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
+  }
+
 
   /**
    * Removing view
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.redirect);
     this.loginView.remove();
   }
 }

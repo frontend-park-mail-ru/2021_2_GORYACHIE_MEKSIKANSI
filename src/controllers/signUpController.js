@@ -6,6 +6,7 @@ import {SignUpEvents} from 'Events/SignUp.js';
 import {userStatus} from "../modules/store";
 import store from 'Modules/store.js';
 import {AuthStatus} from 'Events/Auth.js';
+import {urls} from "../modules/urls";
 
 /**
  * Signup page controller
@@ -27,38 +28,24 @@ export class SignUpController {
       routeTo: this.routeTo,
       controller: this});
 
-    eventBus.addEventListener(SignUpEvents.userSignUpSuccess,
-        this.routeTo);
     eventBus.addEventListener(SignUpEvents.userSignUpFailed,
         this.signUpView.showErrorFromController.bind(this.signUpView));
-    eventBus.addEventListener(SignUpEvents.userCheckFailed,
-        this.signUpView.render.bind(this.signUpView));
-    eventBus.addEventListener(SignUpEvents.userCheckDone,
-        this.routeTo);
   }
 
   /**
    * Rendering signup page
    */
   render() {
-    if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
+    if (store.getState().userState.auth) {
+      this.routeTo(urls.home.url);
     } else {
-      this.statusRender();
-    }
-  }
-
-  unsubRender = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
-    this.statusRender();
-  }
-
-  statusRender = () => {
-    if (store.getState().userState.status === userStatus.userAuth) {
-      this.routeTo('/');
-    } else {
+      eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
       this.signUpView.render();
     }
+  }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
   }
 
   /**
@@ -102,6 +89,7 @@ export class SignUpController {
    * Removing listeners from signup page
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.redirect);
     this.signUpView.remove();
   }
 }

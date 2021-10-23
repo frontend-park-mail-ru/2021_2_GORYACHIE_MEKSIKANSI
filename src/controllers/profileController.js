@@ -154,30 +154,28 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    if (store.getState().userState.status === userStatus.userUndefined) {
-      eventBus.addEventListener(AuthStatus.userDataUpdate, this.unsubRender);
+    if (!store.getState().userState.auth) {
+      eventBus.addEventListener(AuthStatus.userLogin, this.show);
+      eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      this.statusRender();
-    }
-  }
-
-  unsubRender = () => {
-    eventBus.unsubscribe(AuthStatus.userDataUpdate, this.unsubRender);
-    this.statusRender();
-  }
-
-  statusRender = () => {
-    if (store.getState().userState.status === userStatus.userAuth) {
       this.profileView.render();
-    } else {
-      this.routeTo('/');
     }
+  }
+
+  show = () => {
+    this.profileView.render();
+  }
+
+  redirect = () => {
+    this.routeTo(urls.home.url);
   }
 
   /**
    * Removing view
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.show);
+    eventBus.unsubscribe(AuthStatus.notAuth, this.redirect);
     this.profileView.remove();
   }
 }

@@ -21,6 +21,7 @@ export function auth(response) {
         status: userStatus.userAuth,
       },
     });
+    eventBus.emitEventListener(AuthStatus.userLogin, {});
   } else {
     store.dispatch({
       actionType: actions.storeUserDataUpdate,
