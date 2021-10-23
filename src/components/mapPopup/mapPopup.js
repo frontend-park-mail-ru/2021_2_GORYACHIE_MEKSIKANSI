@@ -3,6 +3,7 @@ import address from '../../modules/lsAddress.js';
 import eventBus from '../../modules/eventBus.js';
 import {AuthStatus} from '../../events/Auth.js';
 import navbar from '../navbar/navbar.js';
+import mapPopup from './mapPopup.hbs';
 
 export class MapPopup {
     constructor({
@@ -19,7 +20,7 @@ export class MapPopup {
     render() {
         const div = document.createElement('div');
         div.classList.add('map-popup-div');
-        div.innerHTML = Handlebars.templates['mapPopup.hbs']({});
+        div.innerHTML = mapPopup({});
         document.body.appendChild(div);
         this.mapPopupCloseIcon = document.querySelectorAll('.close-popup');
         this.mapPopupLinks = document.querySelectorAll('.map-popup__link');
@@ -65,8 +66,8 @@ export class MapPopup {
     }
 
     eventPopupOpen = (e) => {
-        const mapPopupName = e.target.getAttribute('href').replace('#', '');
-        const mapCurrentPopup = document.getElementById(mapPopupName);
+        // const mapPopupName = e.target.getAttribute('href').replace('#', '');
+        const mapCurrentPopup = document.getElementById(e.target.getAttribute('href'));
         this.mapPopupOpen(mapCurrentPopup);
         e.preventDefault();
     }

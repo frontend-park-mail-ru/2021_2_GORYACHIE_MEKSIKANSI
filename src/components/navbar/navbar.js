@@ -28,6 +28,7 @@ export class Navbar {
     this.parent.insertAdjacentHTML('afterbegin', navbar({
       user: store.getState().userState,
       itemNum: this.getNumberOfItems(),
+      address: {addr: Address.getAddress().name},
     }));
 
     if (store.getState().userState.auth) {
@@ -46,6 +47,13 @@ export class Navbar {
       prev += item.num;
       return prev;
     }, 0);
+  }
+
+  /**
+   * Updating address in header
+   */
+  updateAddressName = (name) => {
+    this.parent.querySelector('.map-popup__address').innerHTML = String(name);
   }
 
   updateCartButtonNumber = () => {

@@ -11,7 +11,6 @@ import footer from 'Components/footer/footer.hbs';
 import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
-import {MapPopup} from 'Сomponents/mapPopup/mapPopup.js';
 
 
 const application = document.getElementById('app');
@@ -36,7 +35,7 @@ if ('serviceWorker' in navigator) {
 
       });
 }
-const popup = new MapPopup({});
+
 const loginController = new LoginController({
   parent: application,
   routeTo: routeTo});
