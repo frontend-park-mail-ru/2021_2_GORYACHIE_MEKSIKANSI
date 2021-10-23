@@ -25,7 +25,6 @@ export class Cart {
   }
 
   refresh = () => {
-    console.log(cartStore.getState());
     this.remove();
     this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: this.restaurant});
     this.refreshSummary();
@@ -48,23 +47,22 @@ export class Cart {
 
   increaseNumber = (e) => {
     const {target} = e;
-    const cId = target.closest('.cart__order-row').id;
+    const itNum = target.closest('.cart__order-row').id;
     this.controller.increaseDishInCart({
       restId: this.restaurant.id,
-      cId: Number(cId),
+      itNum: Number(itNum),
     });
   }
 
   decreaseNumber = (e) => {
     const {target} = e;
-    const cId = target.closest('.cart__order-row').id;
-    this.controller.deleteDishFromCart(Number(cId));
+    const itNum = target.closest('.cart__order-row').id;
+    this.controller.deleteDishFromCart(Number(itNum));
   }
 
   refreshSummary = () => {
     let value = 0;
     cartStore.getState().cart.forEach((item) => {
-      console.log(Number(item.cost), item.count);
       value +=  Number(item.cost) * item.count;
     });
     this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);

@@ -1,6 +1,7 @@
 import eventBus from './eventBus.js';
 import { AuthStatus } from 'Events/Auth.js';
-import {userStore, userActions} from "./reducers/userStore";
+import {userActions} from  './reducers/userStore.js';
+import userStore from './reducers/userStore.js';
 
 class Address {
     constructor () {
@@ -33,7 +34,6 @@ class Address {
                         }
                     }
                 })
-                console.log(userStore.getState().address);
                 // postAddress({ longitude: String(longitude), latitude: String(latitude), name })
                 //     .then((res) => {
                 //         if (res.status === 200) {

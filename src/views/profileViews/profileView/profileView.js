@@ -48,7 +48,6 @@ export class ProfileView extends View {
 
     document.querySelector('.footer').style.marginTop = '0';
     const form = document.getElementById('save-button');
-    console.log(form);
     form.addEventListener('click', this.submitListener.bind(this));
 
     this.inputs = {
@@ -78,7 +77,6 @@ export class ProfileView extends View {
   checkImage = () => {
     const [file] = document.getElementById('avatar').files
     if (file) {
-      console.log('Image clicked!');
         // this.controller.checkImage();
     }
   }
@@ -88,7 +86,6 @@ export class ProfileView extends View {
   }
 
   deleteImage = () => {
-    console.log('Image size overflow');
     document.getElementById('avatar').value = '';
   }
 
@@ -97,8 +94,6 @@ export class ProfileView extends View {
     const [file] = document.getElementById('avatar').files;
     if (file) {
       // document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
-      console.log(file);
-      console.log(URL.createObjectURL(file));
     }
   }
 

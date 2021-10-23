@@ -45,8 +45,8 @@ export class DishPopup {
       item.querySelectorAll('input').forEach((input) => {
         if (input.checked) {
           dishRadios.push({
-            rId: item.id,
-            id: input.id,
+            rId: Number(item.id),
+            id: Number(input.id),
             name: this.dish.radios.find((item1) => {
               return Number(item1.id) === Number(item.id);
             }).opt.find((item) => {

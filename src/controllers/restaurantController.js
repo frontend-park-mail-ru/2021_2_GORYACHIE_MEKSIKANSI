@@ -41,7 +41,6 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
   addDishToCart(dishSettings = {}) {
-    console.log(dishSettings.restaurant, cartStore.getState().restaurant);
     const cartRestaurant = cartStore.getState().restaurant;
     if (cartRestaurant.id === null || cartRestaurant.id === dishSettings.restaurant.id) {
       RestaurantModel.addDishToCart(dishSettings);
@@ -53,7 +52,7 @@ export class RestaurantController { // TODO: добавить джсдок
 
   increaseDishInCart(dishSettings) {
     const dish = cartStore.getState().cart.find((item) => {
-      return Number(item.cId) === Number(dishSettings.cId);
+      return Number(item.itNum) === Number(dishSettings.itNum);
     });
     if (dish) {
       RestaurantModel.addDishToCart({
@@ -70,8 +69,8 @@ export class RestaurantController { // TODO: добавить джсдок
     RestaurantModel.clearCart();
   }
 
-  deleteDishFromCart(cId) {
-    RestaurantModel.deleteDishFromCart(cId);
+  deleteDishFromCart(itNum) {
+    RestaurantModel.deleteDishFromCart(itNum);
   }
 
   /**

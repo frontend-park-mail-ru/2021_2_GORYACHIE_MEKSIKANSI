@@ -36,7 +36,6 @@ class RestaurantModel {
 //////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////
 
   addDishToCart(dishSettings = {}) {
-    console.log(dishSettings);
     cartStore.dispatch(addDishToCart(dishSettings.dish, dishSettings.restaurant));
   }
 
@@ -49,8 +48,8 @@ class RestaurantModel {
     cartStore.dispatch(clearCart());
   }
 
-  deleteDishFromCart(cId) {
-    cartStore.dispatch(deleteDishFromCart(cId));
+  deleteDishFromCart(itNum) {
+    cartStore.dispatch(deleteDishFromCart(itNum));
   }
 }
 

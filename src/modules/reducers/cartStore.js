@@ -1,7 +1,8 @@
-import {updateCartPut} from "../api";
-import {createStoreWithMiddleware} from "../store";
-import eventBus from "../eventBus";
-import {RestaurantEvents} from "../../events/Restaurant";
+import {updateCartPut} from '../api.js';
+import {createStoreWithMiddleware} from '../store.js';
+import eventBus from '../eventBus.js';
+import {RestaurantEvents} from '../../events/Restaurant.js';
+import {ResponseEvents} from '../../events/Responses.js';
 
 const cartActions = {
   storeCartAddDish: 'storeCartAdd',
@@ -19,7 +20,7 @@ const updateStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cartStore.getState()));
 };
 
-let cId = 0;
+let itNum = 0;
 
 export function cartReducer(state, action) {
   switch (action.actionType) {
@@ -36,7 +37,7 @@ export function cartReducer(state, action) {
       return {
         ...state,
         cart: state.cart.map((item) => {
-          if (item.cId === action.cId) {
+          if (item.itNum === action.itNum) {
             return {...item, count: item.count + action.count};
           }
           return item;
@@ -47,7 +48,7 @@ export function cartReducer(state, action) {
       return {
         ...state,
         cart: state.cart.filter((item) => {
-          return item.cId !== action.cId;
+          return item.itNum !== action.itNum;
         }),
       };
     }
@@ -55,7 +56,7 @@ export function cartReducer(state, action) {
       return {
         ...state,
         cart: state.cart.map((item) => {
-          if (item.cId === action.cId) {
+          if (item.itNum === action.itNum) {
             return {...item, count: item.count - 1};
           }
           return item;
@@ -113,13 +114,13 @@ export const addDishToCart = (dish, restaurant) => {
         actionType: cartActions.storeCartAddDish,
         dish: {
           ...dish,
-          cId: cId++,
+          itNum: itNum++,
         },
       });
     } else {
       dispatch({
         actionType: cartActions.storeCartIncreaseDishCount,
-        cId: isItNewDish(dish, getState().cart).cId,
+        itNum: isItNewDish(dish, getState().cart).itNum,
         count: dish.count,
       });
     }
@@ -131,14 +132,13 @@ export const addDishToCart = (dish, restaurant) => {
   };
 };
 
-export const deleteDishFromCart = (cId) => {
+export const deleteDishFromCart = (itNum) => {
   return (dispatch, getState) => {
     // find dish
     const foundDish = getState().cart.find((item) => {
-      return item.cId === cId;
+      return item.itNum === itNum;
     });
     if (!foundDish) {
-      console.log('Dish not found in cart');
       // emit error, dish not found
       return;
     }
@@ -147,12 +147,12 @@ export const deleteDishFromCart = (cId) => {
     if (foundDish.count > 1) {
       dispatch({
         actionType: cartActions.storeCartDecreaseDishCount,
-        cId: cId,
+        itNum: itNum,
       });
     } else {
       dispatch({
         actionType: cartActions.storeCartDeleteDish,
-        cId: cId,
+        itNum: itNum,
       });
       if (getState().cart.length === 0) {
         dispatch({
@@ -176,10 +176,14 @@ export const clearCart = () => {
 };
 
 const updateCartOrRollback = (dispatch, updateState, cartRollbackState) => {
-  updateCartPut(updateState)
+  updateCartPut({
+    restaurant: updateState.restaurant,
+    dishes: updateState.cart,
+  })
       .then((response) => {
-        if (response === ResponseEvents.OK) {
-          // emit smth
+        if (response.status === ResponseEvents.OK) {
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {})
+          updateStorage();
         } else {
           dispatch({
             actionType: cartActions.cartRollback,
@@ -188,12 +192,11 @@ const updateCartOrRollback = (dispatch, updateState, cartRollbackState) => {
         }
       })
       .catch(() => {
-        // dispatch({
-        //   actionType: cartActions.cartRollback,
-        //   state: cartRollbackState,
-        // });
-        eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
-        updateStorage();
+        dispatch({
+          actionType: cartActions.cartRollback,
+          state: cartRollbackState,
+        });
+        eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
       });
 };
 

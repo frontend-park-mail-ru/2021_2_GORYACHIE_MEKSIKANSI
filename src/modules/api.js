@@ -115,7 +115,7 @@ export function cartGet() {
 }
 
 export function updateCartPut(cartState) {
-  return http.ajaxPut({url: '/cart', body: cartState});
+  return http.ajaxPut({url: '/user/cart/', body: cartState});
 }
 
 export function updateName(name) {

@@ -144,8 +144,6 @@ export class ProfileController {
       cPassword: ProfileModel.updateUserPassword,
     };
 
-    console.log(correctData);
-
     Object.entries(correctData).forEach(([key, value]) => {
         updateModel[key](value);
     });
