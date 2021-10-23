@@ -1,5 +1,7 @@
-import {userReducer, initialUserState} from "./reducers/userReducer";
-import {cartReducer, initialCartState} from "./reducers/cartReducer";
+// import {userReducer, initialUserState} from "./reducers/userReducer";
+// import {addDishToCart, cartReducer, initialCartState} from "./reducers/cartReducer";
+
+import {initialUserState, userReducer} from "./reducers/userReducer";
 
 function createStore(reducer, initialState) {
   let state = initialState;
@@ -41,17 +43,13 @@ function combineReducers(reducersMap) {
   };
 }
 
-const initialState = {
-  userState: initialUserState,
-  cartState: initialCartState,
-};
+// const initialState = {
+//   userState: initialUserState,
+//   cartState: initialCartState,
+// };
 
-const reducer = combineReducers({
-  userState: userReducer,
-  cartState: cartReducer,
-});
-
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(reducer, initialState);
-
+//
+export const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+export const store = createStoreWithMiddleware(userReducer, initialUserState);
+//
 export default store;

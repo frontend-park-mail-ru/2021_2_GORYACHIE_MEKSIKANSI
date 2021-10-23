@@ -25,7 +25,7 @@ export class Navbar {
   render() {
     eventBus.addEventListener(AuthStatus.userLogin, this.refresh);
     this.parent.insertAdjacentHTML('afterbegin', navbar({
-      user: store.getState().userState,
+      // user: store.getState().userState,
       itemNum: this.getNumberOfItems(),
       address: {addr: Address.getAddress().name},
     }));
@@ -47,10 +47,10 @@ export class Navbar {
   }
 
   getNumberOfItems = () => {
-    return store.getState().cartState.reduce((prev, item) => {
-      prev += item.num;
-      return prev;
-    }, 0);
+    // return store.getState().cartState.reduce((prev, item) => {
+    //   prev += item.num;
+    //   return prev;
+    // }, 0);
   }
 
   /**

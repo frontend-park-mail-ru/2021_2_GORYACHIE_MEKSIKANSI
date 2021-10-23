@@ -110,33 +110,12 @@ export function dishGet({url = '/restaurants/0/dish/0'}) {
   return http.ajaxGet({url});
 }
 
-export function addDishPost(dishSettings = {}) {
-  return http.ajaxPost({
-    url: '/cart',
-    body: {
-      restId: dishSettings.restId,
-      dishId: dishSettings.dishId,
-      number: dishSettings.number,
-      radios: dishSettings.radios,
-      ingredients: dishSettings.ingredients,
-    },
-  });
+export function cartGet() {
+  return http.ajaxGet({url: '/cart'});
 }
 
-export function clearCartDelete() {
-  return http.ajaxDelete({
-    url: '/cart',
-    body: {},
-  });
-}
-
-export function clearDishFromCartDelete(dishId) {
-  return http.ajaxDelete({
-    url: '/cart',
-    body: {
-      dishId: dishId,
-    },
-  });
+export function updateCartPut(cartState) {
+  return http.ajaxPut({url: '/cart', body: cartState});
 }
 
 export function updateName(name) {

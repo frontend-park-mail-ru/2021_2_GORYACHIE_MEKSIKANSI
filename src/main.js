@@ -12,7 +12,6 @@ import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
 
-
 const application = document.getElementById('app');
 const router = new Router(document.body);
 const routeTo = (url) => {
