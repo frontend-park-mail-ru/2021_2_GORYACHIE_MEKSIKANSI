@@ -34,17 +34,9 @@ export class HomeView extends View {
   render(props = {}) {
     console.log(props);
     this.navbar.render();
-<<<<<<< HEAD
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage({
-        promos: [1, 2, 3],
         restaurantList: props.restaurants,
-=======
-    const template = Handlebars.templates['page.hbs'];
-    this.parent.insertAdjacentHTML('afterbegin', template({
-      content: Handlebars.templates['homePage.hbs']({
-        restaurantList: props,
->>>>>>> Made promo line class
       }),
     }));
     this.promo.render(this.parent.querySelector('.home-page__promo-line-blocks'));
