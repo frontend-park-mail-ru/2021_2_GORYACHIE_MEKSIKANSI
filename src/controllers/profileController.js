@@ -7,8 +7,8 @@ import {ValidationLength} from 'Events/Validation.js';
 import store from 'Modules/store.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
-import {userStatus} from "../modules/store";
 import {urls} from "../modules/urls";
+import userStore from "../modules/reducers/userStore";
 
 /**
  *  Profile controller class
@@ -43,7 +43,7 @@ export class ProfileController {
   }
 
   dataChange(name, phone, mail, password, repeatPassword,  avatar) {
-    const currentUserData = store.getState().userState;
+    const currentUserData = userStore.getState();
     let validation = {};
     if (currentUserData.name !== name) {
       validation = {
@@ -144,8 +144,6 @@ export class ProfileController {
       cPassword: ProfileModel.updateUserPassword,
     };
 
-    console.log(correctData);
-
     Object.entries(correctData).forEach(([key, value]) => {
         updateModel[key](value);
     });
@@ -155,7 +153,7 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    if (!store.getState().userState.auth) {
+    if (!userStore.getState().auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {

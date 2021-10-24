@@ -35,7 +35,7 @@ class SignUpModel {
   }
 
   getProfile() {
-    profileGet({url: '/user'})
+    profileGet({})
         .then((response) => {
           if (response.status !== ResponseEvents.OK) {
             eventBus.emitEventListener(SignUpEvents.signUpGetProfileFailed, {}); // TODO: add toast...

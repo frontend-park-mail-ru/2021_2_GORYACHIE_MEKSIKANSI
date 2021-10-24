@@ -1,10 +1,11 @@
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs'
-import store from 'Modules/store.js';
 import {MapPopup} from '../mapPopup/mapPopup.js';
 import Address from '../../modules/lsAddress.js';
 import eventBus from "../../modules/eventBus";
 import {AuthStatus} from "../../events/Auth";
+import userStore from "../../modules/reducers/userStore";
+import cartStore from "../../modules/reducers/cartStore.js";
 
 /**
  * Left navigation bar class
@@ -15,7 +16,7 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    profileGet({url: '/user'});
+    profileGet({});
     this.yMap = new MapPopup({});
   }
 
@@ -25,14 +26,14 @@ export class Navbar {
   render() {
     eventBus.addEventListener(AuthStatus.userLogin, this.refresh);
     this.parent.insertAdjacentHTML('afterbegin', navbar({
-      user: store.getState().userState,
+      user: userStore.getState(),
       itemNum: this.getNumberOfItems(),
       address: {addr: Address.getAddress().name},
     }));
 
-    if (store.getState().userState.auth) {
-      if (store.getState().userState.avatar) {
-        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
+    if (userStore.getState().auth) {
+      if (userStore.getState().avatar) {
+        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
       }
     }
 
@@ -47,10 +48,13 @@ export class Navbar {
   }
 
   getNumberOfItems = () => {
-    return store.getState().cartState.reduce((prev, item) => {
-      prev += item.num;
-      return prev;
-    }, 0);
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
+      return cartStore.getState().cart.reduce((prev, item) => {
+        prev += item.count;
+        return prev;
+      }, 0);
+    }
+    return 0;
   }
 
   /**

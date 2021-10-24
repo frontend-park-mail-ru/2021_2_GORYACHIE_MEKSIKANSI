@@ -36,7 +36,7 @@ class LoginModel {
   }
 
   getProfile() {
-    profileGet({url: '/user'})
+    profileGet({})
         .then((response) => {
           if (response.status !== ResponseEvents.OK) {
             eventBus.emitEventListener(LoginEvents.loginGetProfileFailed, {});

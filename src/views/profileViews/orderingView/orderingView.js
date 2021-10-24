@@ -1,11 +1,12 @@
 import {View} from '../../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
-import store from 'Modules/store.js';
 import {urls} from 'Modules/urls.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
 import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
+import userStore from "../../../modules/reducers/userStore";
+import cartStore from "../../../modules/reducers/cartStore";
 
 /**
  * Profile view class
@@ -37,26 +38,15 @@ export class OrderingView extends View {
   render(props = {}) {
     this.navbar.render();
 
-    const cart = store.getState().cartState;
-    const restaurant = store.getState().cartRestaurantState;
-
-    this.sumCost = 0;
-    this.sumCost = cart.reduce((prev, item) => {
-      prev += Number(item.cost) * Number(item.num);
-      return prev;
-    }, 0);
-    this.sumCost += Number(restaurant.costFFD);
-
-
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
       content: orderDelivery({
-        restaurant: store.getState().cartRestaurantState,
-        items: store.getState().cartState,
-        sumCost: this.sumCost,
+        restaurant: cartStore.getState().restaurant,
+        items: cartStore.getState().cart,
+        sumCost: cartStore.getState().cost.sumCost,
       }),
       rightMenu: orderSummary({
-        sumCost: this.sumCost,
+        sumCost: cartStore.getState().cost.sumCost,
       })});
 
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
@@ -90,7 +80,7 @@ export class OrderingView extends View {
   }
 
   confirm = () => {
-    if (store.getState().userState.auth) {
+    if (userStore.getState().auth) {
       // confirm
     } else {
       this.routeTo(urls.login.url);
@@ -100,7 +90,7 @@ export class OrderingView extends View {
   showConfirm = () => {
     if (this.parent.querySelector('.card').checked) {
       this.confirmDiv = document.createElement('div');
-      this.confirmDiv.innerHTML = confirmPopup({sumCost: this.sumCost});
+      this.confirmDiv.innerHTML = confirmPopup({sumCost: cartStore.getState().cost.sumCost});
       this.parent.appendChild(this.confirmDiv);
       document.body.style.overflowY = 'hidden';
       this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);

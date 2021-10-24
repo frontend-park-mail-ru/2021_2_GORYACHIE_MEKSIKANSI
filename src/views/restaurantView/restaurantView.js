@@ -2,13 +2,13 @@ import Navbar from 'Components/navbar/navbar.js';
 import {DishPopup} from 'Components/dishPopup/dishPopup.js';
 import {Cart} from 'Components/cart/cart.js';
 import {View} from '../baseView/View.js';
-import store from 'Modules/store.js';
 import EventBus from "../../modules/eventBus.js";
 import {RestaurantEvents} from "../../events/Restaurant.js";
 import page from '../baseView/page.hbs';
 import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
 import continuePopup from 'Components/continuePopup/continuePopup.hbs'
+import userStore from "../../modules/reducers/userStore";
 
 export class RestaurantView extends View {
   constructor({
@@ -34,11 +34,8 @@ export class RestaurantView extends View {
       routeTo: this.routeTo,
       controller: this.controller,
     });
-
-    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refreshNavbar);
-    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error message
-    EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refreshNavbar);
-    EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refreshNavbar);
+    
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshNavbar);
   }
 
   refreshNavbar = () => {
@@ -51,13 +48,13 @@ export class RestaurantView extends View {
 
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
-      auth: store.getState().userState.auth,
+      auth: userStore.getState().auth,
       head: restaurantHeader(this.restaurant),
       content: restaurantPage(this.restaurant),
     }));
 
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
-    this.cart.render(this.restaurant);
+    this.cart.render();
 
     this.popup.restaurant = this.restaurant;
 
@@ -140,7 +137,7 @@ export class RestaurantView extends View {
     if (this.continueDiv) {
       this.continueDiv.querySelector('.continue-popup-cancel').removeEventListener('click', this.closeContinueOrdering);
       this.continueDiv.querySelector('.continue-popup-continue').removeEventListener('click', this.acceptContinueOrdering);
-      this.parent.removeChild(this.continueDiv);
+      this.continueDiv.remove();
     }
     document.body.style.overflowY = 'scroll';
   }

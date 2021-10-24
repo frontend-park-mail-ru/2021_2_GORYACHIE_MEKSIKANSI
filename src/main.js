@@ -11,7 +11,7 @@ import footer from 'Components/footer/footer.hbs';
 import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
-
+import {updateCartPut} from './modules/api.js';
 
 const application = document.getElementById('app');
 const router = new Router(document.body);

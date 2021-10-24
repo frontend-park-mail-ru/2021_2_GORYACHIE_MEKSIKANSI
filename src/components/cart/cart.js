@@ -1,7 +1,8 @@
-import {RestaurantEvents} from 'Events/Restaurant.js';
+ import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
 import cart from './cart.hbs'
+import cartStore from "../../modules/reducers/cartStore";
 
 
 export class Cart {
@@ -14,20 +15,18 @@ export class Cart {
     this.routeTo = routeTo;
     this.parent = parent;
 
-    EventBus.addEventListener(RestaurantEvents.restaurantCartAdd, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.clearCartFailed, () => {}); // add the error explain
-    EventBus.addEventListener(RestaurantEvents.clearCartSuccess, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.clearDishSuccess, this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {}); // add the error explain
   }
 
-  render(restaurant) {
-    this.restaurant = restaurant;
+  render() {
     this.refresh();
   }
 
   refresh = () => {
     this.remove();
-    this.parent.innerHTML = cart({items: store.getState().cartState, restaurant: this.restaurant});
+
+    this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: cartStore.getState().restaurant});
     this.refreshSummary();
 
     this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;
@@ -48,26 +47,20 @@ export class Cart {
 
   increaseNumber = (e) => {
     const {target} = e;
-    const dishId = target.closest('.cart__order-row').id;
-    this.controller.increaseDishInCart({
-      restId: this.restaurant.id,
-      dishId: dishId,
-    });
+    const itNum = target.closest('.cart__order-row').id;
+    this.controller.increaseDishInCart(Number(itNum));
   }
 
   decreaseNumber = (e) => {
     const {target} = e;
-    const dishId = target.closest('.cart__order-row').id;
-    this.controller.deleteDishFromCart(dishId);
+    const itNum = target.closest('.cart__order-row').id;
+    this.controller.deleteDishFromCart(Number(itNum));
   }
 
   refreshSummary = () => {
-    let value = 0;
-    store.getState().cartState.forEach((item) => {
-      console.log(Number(item.cost), item.num);
-      value +=  Number(item.cost) * item.num;
-    });
-    this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
+      this.parent.querySelector('.cart__summary-cost').innerHTML = String(cartStore.getState().cost.sumCost);
+    }
   }
 
   settingUp() {

@@ -1,8 +1,12 @@
 import {ResponseEvents} from 'Events/Responses.js';
-import store, {actions, userStatus} from './store.js';
 import eventBus from './eventBus.js';
 import {AuthStatus} from 'Events/Auth.js';
 import {urls} from "./urls";
+import {userActions} from "./reducers/userStore";
+import userStore from "./reducers/userStore";
+import cartStore, {clearCart} from "./reducers/cartStore";
+import {cartActions, updateStorage, setCart} from "./reducers/cartStore";
+import {cartGet, updateCartPut} from './api.js';
 
 /**
  * emitting events for user auth
@@ -12,10 +16,28 @@ import {urls} from "./urls";
  */
 export function auth(response) {
   if (response.status === ResponseEvents.OK) {
-    store.dispatch({
-      actionType: actions.storeUserLogin,
+    userStore.dispatch({
+      actionType: userActions.storeUserLogin,
       ...response.body.user,
     });
+
+    if (cartStore.getState().cart.length > 0) {
+      updateCartPut(cartStore.getState())  // TODO: чекнуть код ответа на удаление корзины
+          .then((setCartResp) => {
+            if (setCartResp.status === ResponseEvents.OK) {
+              setCart(setCartResp.body);
+            } else {
+              cartStore.dispatch(clearCart());
+            }
+          });
+    } else {
+      cartGet()
+          .then((cartResponse) => {
+            if (cartResponse.status === ResponseEvents.OK) {
+              setCart(cartResponse.body);
+            }
+          })
+    }
     eventBus.emitEventListener(AuthStatus.userLogin, {});
   } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
@@ -24,8 +46,8 @@ export function auth(response) {
 }
 
 export function logout() {
-  store.dispatch({
-    actionType: actions.storeUserLogout,
+  userStore.dispatch({
+    actionType: userActions.storeUserLogout,
   });
   eventBus.emitEventListener(AuthStatus.userLogout, urls.home.url);
 }

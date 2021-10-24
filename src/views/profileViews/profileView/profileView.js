@@ -1,10 +1,10 @@
 import {View} from '../../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
-import store from 'Modules/store.js';
 import {updateName} from 'Modules/api.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
+import userStore from "../../../modules/reducers/userStore";
 
 /**
  * Profile view class
@@ -38,17 +38,16 @@ export class ProfileView extends View {
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Личные данные',
       content: profilePage({
-        user: store.getState().userState,
+        user: userStore.getState(),
       }),
       rightMenu: profileButtonsNav});
 
-    document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + store.getState().userState.avatar + ')';
+    document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
     document.querySelector('.profile-avatar').addEventListener('click', () => {document.getElementById('avatar').click();});
     document.getElementById('avatar').onchange = this.checkImage;
 
     document.querySelector('.footer').style.marginTop = '0';
     const form = document.getElementById('save-button');
-    console.log(form);
     form.addEventListener('click', this.submitListener.bind(this));
 
     this.inputs = {
@@ -78,7 +77,6 @@ export class ProfileView extends View {
   checkImage = () => {
     const [file] = document.getElementById('avatar').files
     if (file) {
-      console.log('Image clicked!');
         // this.controller.checkImage();
     }
   }
@@ -88,7 +86,6 @@ export class ProfileView extends View {
   }
 
   deleteImage = () => {
-    console.log('Image size overflow');
     document.getElementById('avatar').value = '';
   }
 
@@ -97,8 +94,6 @@ export class ProfileView extends View {
     const [file] = document.getElementById('avatar').files;
     if (file) {
       // document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
-      console.log(file);
-      console.log(URL.createObjectURL(file));
     }
   }
 

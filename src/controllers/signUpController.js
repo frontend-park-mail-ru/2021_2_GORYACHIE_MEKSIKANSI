@@ -7,6 +7,7 @@ import {userStatus} from "../modules/store";
 import store from 'Modules/store.js';
 import {AuthStatus} from 'Events/Auth.js';
 import {urls} from "../modules/urls";
+import userStore from "../modules/reducers/userStore";
 
 /**
  * Signup page controller
@@ -36,7 +37,7 @@ export class SignUpController {
    * Rendering signup page
    */
   render() {
-    if (store.getState().userState.auth) {
+    if (userStore.getState().auth) {
       this.routeTo(urls.home.url);
     } else {
       eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
