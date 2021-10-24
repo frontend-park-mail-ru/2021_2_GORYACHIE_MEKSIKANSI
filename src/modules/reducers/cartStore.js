@@ -1,4 +1,4 @@
-import {updateCartPut} from '../api.js';
+import {dishGet, updateCartPut} from '../api.js';
 import {createStoreWithMiddleware} from '../store.js';
 import eventBus from '../eventBus.js';
 import {RestaurantEvents} from '../../events/Restaurant.js';
@@ -180,6 +180,13 @@ export const clearCart = () => {
     updateCartOrRollback(dispatch, getState(), rollbackState);
   };
 };
+
+export const clearCartChangeRestaurantAddDish = (dish, restaurant) => {
+  return (dispatch, getState) => {
+    dispatch(clearCart());
+    dispatch(addDishToCart(dish, restaurant));
+  }
+}
 
 const updateCartOrRollback = (dispatch, updateState, cartRollbackState) => {
   updateCartPut({

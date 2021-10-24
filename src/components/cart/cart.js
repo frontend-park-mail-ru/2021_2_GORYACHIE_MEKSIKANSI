@@ -26,7 +26,22 @@ export class Cart {
 
   refresh = () => {
     this.remove();
-    this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: this.restaurant});
+
+    let cartBuffer = [];
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
+      cartBuffer = cartStore.getState().cart.map((item) => {
+        const ingredientsCost = item.ingredients.reduce((prev, checkbox) => {
+          prev += checkbox.cost;
+          return prev;
+        }, 0);
+        let newItem = JSON.stringify(item);
+        newItem = JSON.parse(newItem);
+        newItem.cost = Number(item.cost) + ingredientsCost;
+        return newItem;
+      });
+    }
+
+    this.parent.innerHTML = cart({items: cartBuffer, restaurant: this.restaurant});
     this.refreshSummary();
 
     this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;
@@ -62,10 +77,16 @@ export class Cart {
 
   refreshSummary = () => {
     let value = 0;
-    cartStore.getState().cart.forEach((item) => {
-      value +=  Number(item.cost) * item.count;
-    });
-    this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
+      cartStore.getState().cart.forEach((item) => {
+        const ingredientsCost = item.ingredients.reduce((prev, checkbox) => {
+          prev += checkbox.cost;
+          return prev;
+        }, 0)
+        value +=  (Number(item.cost) + ingredientsCost) * item.count;
+      });
+      this.parent.querySelector('.cart__summary-cost').innerHTML = String(value);
+    }
   }
 
   settingUp() {

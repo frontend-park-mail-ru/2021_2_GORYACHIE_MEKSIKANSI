@@ -3,7 +3,12 @@ import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import {getRestaurantMock, getDish, getItemToCart} from 'Views/mocks.js';
 import store, {actions} from 'Modules/store.js';
-import cartStore, {addDishToCart, clearCart, deleteDishFromCart} from "../modules/reducers/cartStore";
+import cartStore, {
+    addDishToCart,
+    clearCart,
+    clearCartChangeRestaurantAddDish,
+    deleteDishFromCart
+} from "../modules/reducers/cartStore";
 import {dishGet, restaurantGet} from "../modules/api";
 
 class RestaurantModel {
@@ -50,6 +55,12 @@ class RestaurantModel {
 
   deleteDishFromCart(itNum) {
     cartStore.dispatch(deleteDishFromCart(itNum));
+  }
+
+  changeRestaurantAndAddDish(dishSettings = {}) {
+    // cartStore.dispatch(clearCartChangeRestaurantAddDish(dishSettings.dish, dishSettings.restaurant));
+    this.clearCart();
+    this.addDishToCart(dishSettings);
   }
 }
 

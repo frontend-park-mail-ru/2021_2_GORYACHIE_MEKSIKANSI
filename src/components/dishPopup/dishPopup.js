@@ -62,7 +62,7 @@ export class DishPopup {
       return;
     }
 
-    const dishCheckboxes = [];
+    let dishCheckboxes = [];
     this.div.querySelectorAll('.dish-popup__checkbox-row').forEach((item) => {
       const input = item.querySelector('input');
       if (input.checked) {
@@ -70,6 +70,13 @@ export class DishPopup {
           id: item.id,
         });
       }
+    });
+
+    dishCheckboxes = this.dish.ingredients.filter((item) => {
+      const checkbox = dishCheckboxes.find((innerCheckbox) => {
+        return Number(innerCheckbox.id) === item.id;
+      })
+      return !!checkbox;
     });
 
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
@@ -83,6 +90,7 @@ export class DishPopup {
         ingredients: dishCheckboxes,
       },
     });
+    console.log(dishCheckboxes)
     this.remove();
   }
 

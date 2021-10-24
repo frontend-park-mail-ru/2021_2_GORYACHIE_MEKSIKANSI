@@ -153,7 +153,7 @@ export class ProfileController {
    * Rendering view
    */
   render() {
-    if (!userStore/getState().userState.auth) {
+    if (!userStore.getState().auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {

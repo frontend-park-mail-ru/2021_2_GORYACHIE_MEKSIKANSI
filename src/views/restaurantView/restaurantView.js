@@ -137,7 +137,7 @@ export class RestaurantView extends View {
     if (this.continueDiv) {
       this.continueDiv.querySelector('.continue-popup-cancel').removeEventListener('click', this.closeContinueOrdering);
       this.continueDiv.querySelector('.continue-popup-continue').removeEventListener('click', this.acceptContinueOrdering);
-      this.parent.removeChild(this.continueDiv);
+      this.continueDiv.remove();
     }
     document.body.style.overflowY = 'scroll';
   }

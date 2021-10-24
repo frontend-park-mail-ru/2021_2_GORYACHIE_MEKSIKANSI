@@ -30,11 +30,13 @@ export class OrderingController {
    * Rendering view
    */
   render() {
-    if (cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
+    if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
       this.routeTo(urls.home.url);
       return;
       // history.back(); // TODO: разобраться с историей при первом заходе
+      // return;
     }
+
 
     if (!userStore.getState().auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);

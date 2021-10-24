@@ -48,10 +48,13 @@ export class Navbar {
   }
 
   getNumberOfItems = () => {
-    return cartStore.getState().cart.reduce((prev, item) => {
-      prev += item.count;
-      return prev;
-    }, 0);
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
+      return cartStore.getState().cart.reduce((prev, item) => {
+        prev += item.count;
+        return prev;
+      }, 0);
+    }
+    return 0;
   }
 
   /**
