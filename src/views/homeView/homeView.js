@@ -2,6 +2,8 @@ import {View} from '../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
 import homePage from './homePage.hbs';
 import page from '../baseView/page.hbs';
+import {PromoLine} from '../../components/promoLine/promoLine.js';
+
 /**
  * Home view class
  */
@@ -22,6 +24,7 @@ export class HomeView extends View {
       routeTo: routeTo,
       controller: controller,
     });
+    this.promo = new PromoLine();
     this.navbar = Navbar;
   }
   /**
@@ -32,10 +35,10 @@ export class HomeView extends View {
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage({
-        promos: [1, 2, 3],
         restaurantList: props.restaurants,
       }),
     }));
+    this.promo.render(this.parent.querySelector('.home-page__promo-line-blocks'));
     this.settingUp();
   }
 
@@ -50,6 +53,7 @@ export class HomeView extends View {
    */
   remove() {
     this.navbar.remove();
+    this.promo.remove();
     this.parent.innerHTML = '';
   }
 }
