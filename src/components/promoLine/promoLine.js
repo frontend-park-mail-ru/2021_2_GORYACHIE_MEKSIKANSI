@@ -1,3 +1,5 @@
+import promoLine from './promoLine.hbs'
+
 export class PromoLine {
   constructor(props) {
 
@@ -5,7 +7,7 @@ export class PromoLine {
 
   render(parent) {
     this.parent = parent;
-    this.parent.innerHTML = Handlebars.templates['promoLine.hbs']({promos: [1, 2, 3, 4, 5, 6, 7]});
+    this.parent.innerHTML = promoLine({promos: [1, 2, 3, 4, 5, 6, 7]});
 
     this.begin = 0;
     this.promoLine = this.parent.querySelector('.promo-line');
