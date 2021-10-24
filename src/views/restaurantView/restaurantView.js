@@ -54,7 +54,7 @@ export class RestaurantView extends View {
     }));
 
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
-    this.cart.render(this.restaurant);
+    this.cart.render();
 
     this.popup.restaurant = this.restaurant;
 

@@ -38,25 +38,15 @@ export class OrderingView extends View {
   render(props = {}) {
     this.navbar.render();
 
-    const cart = cartStore.getState().cart;
-    const restaurant = cartStore.getState().restaurant;
-
-    this.sumCost = 0;
-    this.sumCost = cart.reduce((prev, item) => {
-      prev += Number(item.cost) * Number(item.count);
-      return prev;
-    }, 0);
-    this.sumCost += Number(restaurant.costFFD);
-
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
       content: orderDelivery({
-        restaurant: restaurant,
+        restaurant: cartStore.getState().restaurant,
         items: cartStore.getState().cart,
-        sumCost: this.sumCost,
+        sumCost: cartStore.getState().cost.sumCost,
       }),
       rightMenu: orderSummary({
-        sumCost: this.sumCost,
+        sumCost: cartStore.getState().cost.sumCost,
       })});
 
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
@@ -100,7 +90,7 @@ export class OrderingView extends View {
   showConfirm = () => {
     if (this.parent.querySelector('.card').checked) {
       this.confirmDiv = document.createElement('div');
-      this.confirmDiv.innerHTML = confirmPopup({sumCost: this.sumCost});
+      this.confirmDiv.innerHTML = confirmPopup({sumCost: cartStore.getState().cost.sumCost});
       this.parent.appendChild(this.confirmDiv);
       document.body.style.overflowY = 'hidden';
       this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
