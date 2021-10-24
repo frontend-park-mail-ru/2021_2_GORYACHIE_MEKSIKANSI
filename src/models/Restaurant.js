@@ -6,8 +6,8 @@ import store, {actions} from 'Modules/store.js';
 import cartStore, {
     addDishToCart,
     clearCart,
-    clearCartChangeRestaurantAddDish,
-    deleteDishFromCart
+    deleteDishFromCart,
+    increaseDishInCart
 } from "../modules/reducers/cartStore";
 import {dishGet, restaurantGet} from "../modules/api";
 
@@ -61,6 +61,10 @@ class RestaurantModel {
     // cartStore.dispatch(clearCartChangeRestaurantAddDish(dishSettings.dish, dishSettings.restaurant));
     this.clearCart();
     this.addDishToCart(dishSettings);
+  }
+
+  increaseDishInCart(itNum) {
+    cartStore.dispatch(increaseDishInCart(itNum));
   }
 }
 

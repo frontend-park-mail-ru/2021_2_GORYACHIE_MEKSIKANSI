@@ -1,4 +1,4 @@
-import {RestaurantEvents} from 'Events/Restaurant.js';
+ import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
 import cart from './cart.hbs'
@@ -63,10 +63,7 @@ export class Cart {
   increaseNumber = (e) => {
     const {target} = e;
     const itNum = target.closest('.cart__order-row').id;
-    this.controller.increaseDishInCart({
-      restId: this.restaurant.id,
-      itNum: Number(itNum),
-    });
+    this.controller.increaseDishInCart(Number(itNum));
   }
 
   decreaseNumber = (e) => {

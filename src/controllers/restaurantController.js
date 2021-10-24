@@ -50,18 +50,12 @@ export class RestaurantController { // TODO: добавить джсдок
     }
   }
 
-  increaseDishInCart(dishSettings) {
+  increaseDishInCart(itNum) {
     const dish = cartStore.getState().cart.find((item) => {
-      return Number(item.itNum) === Number(dishSettings.itNum);
+      return Number(item.itNum) === Number(itNum);
     });
     if (dish) {
-      RestaurantModel.addDishToCart({
-        restaurant: dishSettings.restId,
-        dish: {
-          ...dish,
-          count: 1,
-        },
-      });
+      RestaurantModel.increaseDishInCart(itNum);
     }
   }
 

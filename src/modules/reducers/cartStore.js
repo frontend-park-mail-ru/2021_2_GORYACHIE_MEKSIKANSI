@@ -1,19 +1,11 @@
-import {dishGet, updateCartPut} from '../api.js';
+import {updateCartPut} from '../api.js';
 import {createStoreWithMiddleware} from '../store.js';
 import eventBus from '../eventBus.js';
 import {RestaurantEvents} from '../../events/Restaurant.js';
 import {ResponseEvents} from '../../events/Responses.js';
 
 export const cartActions = {
-  storeCartAddDish: 'storeCartAdd',
-  storeCartDeleteDish: 'storeCartDelete',
-  storeCartDecreaseDishCount: 'storeCartDecreaseDishCount',
-  storeCartDeleteAll: 'storeCartDeleteAll',
-  storeCartIncreaseDishCount: 'storeCartIncreaseDishCount',
-  cartRollback: 'storeCartRollback',
-  storeCartRestaurantSet: 'storeCartRestaurantSet',
-  storeCartRestaurantDelete: 'storeCartRestaurantDelete',
-  storeCartGot: 'storeCartGot',
+  update: 'update',
 };
 
 export const updateStorage = () => {
@@ -25,78 +17,7 @@ let itNum = 0;
 
 export function cartReducer(state, action) {
   switch (action.actionType) {
-    case cartActions.storeCartAddDish: {
-      return {
-        ...state,
-        cart: [
-          ...state.cart,
-          action.dish,
-        ],
-      };
-    }
-    case cartActions.storeCartIncreaseDishCount: {
-      return {
-        ...state,
-        cart: state.cart.map((item) => {
-          if (item.itNum === action.itNum) {
-            return {...item, count: item.count + action.count};
-          }
-          return item;
-        }),
-      };
-    }
-    case cartActions.storeCartDeleteDish: {
-      return {
-        ...state,
-        cart: state.cart.filter((item) => {
-          return item.itNum !== action.itNum;
-        }),
-      };
-    }
-    case cartActions.storeCartDecreaseDishCount: {
-      return {
-        ...state,
-        cart: state.cart.map((item) => {
-          if (item.itNum === action.itNum) {
-            return {...item, count: item.count - 1};
-          }
-          return item;
-        }),
-      };
-    }
-    case cartActions.cartRollback: {
-      return {
-        ...action.state,
-      };
-    }
-    case cartActions.storeCartDeleteAll:
-      return {
-        restaurant: {
-          id: null,
-          name: '',
-        },
-        cart: [],
-      };
-    case cartActions.storeCartRestaurantSet: {
-      return {
-        ...state,
-        restaurant: {
-          ...action.restaurant,
-          id: action.restaurant.id,
-          name: action.restaurant.name,
-        },
-      };
-    }
-    case cartActions.storeCartRestaurantDelete: {
-      return {
-        ...state,
-        restaurant: {
-          id: null,
-          name: '',
-        },
-      };
-    }
-    case cartActions.storeCartGot: {
+    case cartActions.update: {
       return {
         ...action.state,
       };
@@ -106,125 +27,132 @@ export function cartReducer(state, action) {
   }
 }
 
-export const addDishToCart = (dish, restaurant) => {
-  return (dispatch, getState) => {
-    const rollbackState = getState();
-    if (rollbackState.cart.length === 0 || rollbackState.restaurant.id === null) {
-      dispatch({
-        actionType: cartActions.storeCartRestaurantSet,
-        restaurant: restaurant,
-      });
-    }
-    if (!isItNewDish(dish, getState().cart)) {
-      dispatch({
-        actionType: cartActions.storeCartAddDish,
-        dish: {
-          ...dish,
-          itNum: itNum++,
-        },
-      });
-    } else {
-      dispatch({
-        actionType: cartActions.storeCartIncreaseDishCount,
-        itNum: isItNewDish(dish, getState().cart).itNum,
+const getDishBuffer = (cart) => {
+  let cartBuffer = [];
+  if (cart !== undefined && cart !== null && cart.length > 0) {
+    cart.forEach((dish) => {
+      cartBuffer.push({
+        itNum: dish.itNum,
+        id: dish.id,
         count: dish.count,
+        radios: dish.radios,
+        ingredients: dish.ingredients,
+      });
+    });
+  }
+  return cartBuffer;
+}
+
+export const increaseDishInCart = (aItNum) => {
+  return (dispatch, getState) => {
+    let cartBuffer = getDishBuffer(getState().cart);
+
+    const fDish = cartBuffer.find((dish) => {
+      return dish.itNum === aItNum;
+    });
+
+    if (fDish) {
+      fDish.count += 1;
+    }
+
+    updateCart(dispatch, { restaurant: getState().restaurant.id, dishes: cartBuffer });
+  }
+}
+
+export const addDishToCart = (aDish, restaurant) => {  // find and add count
+  return (dispatch, getState) =>  {
+    let cartBuffer = getDishBuffer(getState().cart);
+
+    // see desc of function
+    if (isNewDish(aDish, cartBuffer)) {
+      cartBuffer.push({
+        ...aDish,
+        itNum: itNum++,
       });
     }
 
-    // make fetch
-    // if ok -> emit success
-    // if not ok -> make rollback and emit fail
-    updateCartOrRollback(dispatch, getState(), rollbackState);
+    updateCart(dispatch, { restaurant: restaurant.id, dishes: cartBuffer });
   };
 };
 
+export const setCart = (gotCart) => {
+  cartStore.dispatch({
+    actionType: cartActions.update,
+    state: gotCart,
+  });
+  updateStorage();
+}
+
 export const deleteDishFromCart = (itNum) => {
   return (dispatch, getState) => {
+    let cartBuffer = getDishBuffer(getState().cart);
+
     // find dish
-    const foundDish = getState().cart.find((item) => {
-      return item.itNum === itNum;
+    const foundDish = cartBuffer.find((dish) => {
+      return dish.itNum === itNum;
     });
     if (!foundDish) {
       // emit error, dish not found
       return;
     }
 
-    const rollbackState = getState().cart;
     if (foundDish.count > 1) {
-      dispatch({
-        actionType: cartActions.storeCartDecreaseDishCount,
-        itNum: itNum,
-      });
+      foundDish.count -= 1;
     } else {
-      dispatch({
-        actionType: cartActions.storeCartDeleteDish,
-        itNum: itNum,
+      cartBuffer.filter((dish) => {
+        return dish.itNum !== itNum;
       });
-      if (getState().cart.length === 0) {
-        dispatch({
-          actionType: cartActions.storeCartRestaurantDelete,
-        });
-      }
     }
 
-    updateCartOrRollback(dispatch, getState(), rollbackState);
+    updateCart(dispatch, {restaurant: getState().restaurant.id, dishes: cartBuffer});
   };
 };
 
 export const clearCart = () => {
   return (dispatch, getState) => {
-    const rollbackState = getState();
-    dispatch({
-      actionType: cartActions.storeCartDeleteAll,
-    });
-    updateCartOrRollback(dispatch, getState(), rollbackState);
+    updateCart(dispatch, {restaurant: null, dishes: []});
   };
 };
 
-export const clearCartChangeRestaurantAddDish = (dish, restaurant) => {
-  return (dispatch, getState) => {
-    dispatch(clearCart());
-    dispatch(addDishToCart(dish, restaurant));
-  }
-}
-
-const updateCartOrRollback = (dispatch, updateState, cartRollbackState) => {
-  updateCartPut({
-    restaurant: updateState.restaurant,
-    dishes: updateState.cart,
-  })
+const updateCart = (dispatch, bufferToUpdate) => {
+  updateCartPut(bufferToUpdate)
       .then((response) => {
         if (response.status === ResponseEvents.OK) {
+          const action = {
+            actionType: cartActions.update,
+            state: response.body,
+          }
+          dispatch(action);
           eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {})
           updateStorage();
         } else {
-          dispatch({
-            actionType: cartActions.cartRollback,
-            state: cartRollbackState,
-          });
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
         }
       })
       .catch(() => {
-        dispatch({
-          actionType: cartActions.cartRollback,
-          state: cartRollbackState,
-        });
         eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
       });
 };
 
 /**
- * If dish is new return undef else return dish in cart
+ * If dish is new return true
+ * If dish not new increment count and return false
  * @param dish
  * @param cart
  * @return {*}
  */
-const isItNewDish = (dish, cart) => {
-  return cart.find((item) => {
+const isNewDish = (dish, cart) => {
+  const fDish = cart.find((item) => {
     return item.id === dish.id &&
-      item.radios.toString() === dish.radios.toString() &&
-      item.ingredients.toString() === dish.ingredients.toString();
+        item.radios.toString() === dish.radios.toString() &&
+        item.ingredients.toString() === dish.ingredients.toString();
   });
+  if (fDish) {
+    fDish.count += dish.count;
+    return false;
+  }
+
+  return true;
 };
 
 let cart = {
@@ -241,5 +169,4 @@ if (localCart) {
 }
 
 const cartStore = createStoreWithMiddleware(cartReducer, cart);
-console.log(cartStore.getState());
 export default cartStore;

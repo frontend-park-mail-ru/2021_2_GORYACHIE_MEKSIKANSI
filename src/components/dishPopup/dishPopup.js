@@ -47,11 +47,6 @@ export class DishPopup {
           dishRadios.push({
             rId: Number(item.id),
             id: Number(input.id),
-            name: this.dish.radios.find((item1) => {
-              return Number(item1.id) === Number(item.id);
-            }).opt.find((item) => {
-              return Number(item.id) === Number(input.id);
-            }).name,
           });
         }
       });
@@ -72,25 +67,16 @@ export class DishPopup {
       }
     });
 
-    dishCheckboxes = this.dish.ingredients.filter((item) => {
-      const checkbox = dishCheckboxes.find((innerCheckbox) => {
-        return Number(innerCheckbox.id) === item.id;
-      })
-      return !!checkbox;
-    });
-
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
     this.controller.addDishToCart({
-      restaurant: this.restaurant,
+      restaurant: this.restaurant.id,
       dish: {
-        ...this.dish,
         id: this.dish.id,
         count: Number(number),
         radios: dishRadios,
         ingredients: dishCheckboxes,
       },
     });
-    console.log(dishCheckboxes)
     this.remove();
   }
 
