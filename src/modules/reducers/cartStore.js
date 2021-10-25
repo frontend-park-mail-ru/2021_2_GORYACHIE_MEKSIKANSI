@@ -35,8 +35,8 @@ const getDishBuffer = (cart) => {
         itNum: dish.itNum,
         id: dish.id,
         count: dish.count,
-        radios: dish.radios,
-        ingredients: dish.ingredients,
+        radios: dish.radios ? dish.radios : [],
+        ingredients: dish.ingredients ? dish.ingredients : [],
       });
     });
   }
@@ -55,7 +55,7 @@ export const increaseDishInCart = (aItNum) => {
       fDish.count += 1;
     }
 
-    updateCart(dispatch, { restaurant: getState().restaurant.id, dishes: cartBuffer });
+    updateCart(dispatch, { restaurant: {id: getState().restaurant.id}, dishes: cartBuffer });
   }
 }
 
@@ -70,8 +70,7 @@ export const addDishToCart = (aDish, restaurant) => {  // find and add count
         itNum: itNum++,
       });
     }
-
-    updateCart(dispatch, { restaurant: restaurant.id, dishes: cartBuffer });
+    updateCart(dispatch, { restaurant: {id: restaurant.id}, dishes: cartBuffer });
   };
 };
 
@@ -81,6 +80,7 @@ export const setCart = (gotCart) => {
     state: gotCart,
   });
   updateStorage();
+  eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
 }
 
 export const deleteDishFromCart = (itNum) => {
@@ -91,33 +91,57 @@ export const deleteDishFromCart = (itNum) => {
     const foundDish = cartBuffer.find((dish) => {
       return dish.itNum === itNum;
     });
+
     if (!foundDish) {
       // emit error, dish not found
       return;
     }
-
     if (foundDish.count > 1) {
       foundDish.count -= 1;
     } else {
-      cartBuffer.filter((dish) => {
+      cartBuffer = cartBuffer.filter((dish) => {
         return dish.itNum !== itNum;
       });
     }
 
-    updateCart(dispatch, {restaurant: getState().restaurant.id, dishes: cartBuffer});
+    updateCart(dispatch, {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer});
   };
 };
 
 export const clearCart = () => {
   return (dispatch, getState) => {
-    updateCart(dispatch, {restaurant: null, dishes: []});
+    updateCart(dispatch, {restaurant: {id: -1}, dishes: []})
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            const action = {
+              actionType: cartActions.update,
+              state: {
+                restaurant: {
+                  id: null,
+                  name: '',
+                },
+                cart: [],
+              },
+            }
+            dispatch(action);
+          }
+          updateStorage();
+        });
+
   };
 };
 
 const updateCart = (dispatch, bufferToUpdate) => {
-  updateCartPut(bufferToUpdate)
+  return updateCartPut(bufferToUpdate)
       .then((response) => {
         if (response.status === ResponseEvents.OK) {
+          // clear cart if body null
+          // if (response.body === null) {
+          //   response.body = {
+          //     restaurant: null,
+          //     cart: [],
+          //   }
+          // }
           const action = {
             actionType: cartActions.update,
             state: response.body,
@@ -125,6 +149,7 @@ const updateCart = (dispatch, bufferToUpdate) => {
           dispatch(action);
           eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {})
           updateStorage();
+          return response;
         } else {
           eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
         }
@@ -132,6 +157,31 @@ const updateCart = (dispatch, bufferToUpdate) => {
       .catch(() => {
         eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
       });
+};
+
+
+const compareRadios = (radios1, radios2) => {
+  if (radios1.length !== radios2.length) {
+    return false;
+  }
+  radios1.sort((a, b) => {return Number(a.rId) < Number(b.rId);});
+  radios2.sort((a, b) => {return Number(a.rId) < Number(b.rId);});
+
+  return radios1.every((item, index) => {
+    return item.id === radios2[index].id;
+  })
+};
+
+const compareCheckboxes = (checkboxes1, checkboxes2) => {
+  if (checkboxes1.length !== checkboxes2.length) {
+    return false;
+  }
+  checkboxes1.sort((a, b) => {return Number(a.id) < Number(b.id);});
+  checkboxes2.sort((a, b) => {return Number(a.id) < Number(b.id);});
+
+  return checkboxes1.every((item, index) => {
+    return item.id === checkboxes2[index].id;
+  })
 };
 
 /**
@@ -144,9 +194,12 @@ const updateCart = (dispatch, bufferToUpdate) => {
 const isNewDish = (dish, cart) => {
   const fDish = cart.find((item) => {
     return item.id === dish.id &&
-        item.radios.toString() === dish.radios.toString() &&
-        item.ingredients.toString() === dish.ingredients.toString();
+        compareRadios(item.radios, dish.radios) &&
+        compareCheckboxes(item.ingredients, dish.ingredients);
+        // item.radios + '' === dish.radios + '' &&
+        // item.ingredients + '' === dish.ingredients + '';
   });
+
   if (fDish) {
     fDish.count += dish.count;
     return false;

@@ -61,15 +61,19 @@ export class DishPopup {
     this.div.querySelectorAll('.dish-popup__checkbox-row').forEach((item) => {
       const input = item.querySelector('input');
       if (input.checked) {
+        console.log('ID', item.id);
         dishCheckboxes.push({
-          id: item.id,
+          id: Number(item.id),
         });
       }
     });
 
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
+    console.log(1, this.restaurant.id)
     this.controller.addDishToCart({
-      restaurant: this.restaurant.id,
+      restaurant: {
+        id: this.restaurant.id
+      },
       dish: {
         id: this.dish.id,
         count: Number(number),
@@ -86,7 +90,8 @@ export class DishPopup {
     this.controller.getDish(this.restaurant.id, dishId);
   }
 
-  settingUp() {
+  settingUp(restaurant) {
+    this.restaurant = restaurant;
     this.dishes = document.querySelectorAll('.dish');
     this.dishes.forEach((item) => {
       item.addEventListener('click', this.getDish);
@@ -100,7 +105,7 @@ export class DishPopup {
 
       document.body.querySelector('.plus').removeEventListener('click', this.increaseNumber);
       document.body.querySelector('.minus').removeEventListener('click', this.decreaseNumber);
-      document.body.querySelector('.dish-popup__buy-button').addEventListener('click', this.addDishToCart);
+      document.body.querySelector('.dish-popup__buy-button').removeEventListener('click', this.addDishToCart);
 
       document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
         item.removeEventListener('input', this.refreshSummary);

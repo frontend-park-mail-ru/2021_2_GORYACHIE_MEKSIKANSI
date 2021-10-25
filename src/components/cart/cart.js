@@ -25,7 +25,6 @@ export class Cart {
 
   refresh = () => {
     this.remove();
-
     this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: cartStore.getState().restaurant});
     this.refreshSummary();
 
@@ -58,7 +57,8 @@ export class Cart {
   }
 
   refreshSummary = () => {
-    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined && cartStore.getState().cart.length > 0) {
+      console.log(cartStore.getState().cart)
       this.parent.querySelector('.cart__summary-cost').innerHTML = String(cartStore.getState().cost.sumCost);
     }
   }

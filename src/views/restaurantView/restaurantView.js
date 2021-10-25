@@ -56,13 +56,11 @@ export class RestaurantView extends View {
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render();
 
-    this.popup.restaurant = this.restaurant;
-
     this.settingUp();
   }
 
   settingUp() {
-    this.popup.settingUp();
+    this.popup.settingUp(this.restaurant);
 
     this.anchors = document.querySelectorAll('a[href*="#"]');
     this.menuNavsTitles = document.querySelectorAll('.restaurant-page__menu-title');

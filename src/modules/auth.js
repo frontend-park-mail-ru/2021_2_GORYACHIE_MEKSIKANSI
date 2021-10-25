@@ -21,8 +21,8 @@ export function auth(response) {
       ...response.body.user,
     });
 
-    if (cartStore.getState().cart.length > 0) {
-      updateCartPut(cartStore.getState())  // TODO: чекнуть код ответа на удаление корзины
+    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined && cartStore.getState().cart.length > 0) {
+      updateCartPut({restaurant: {id: cartStore.getState().restaurant.id}, dishes: cartStore.getState().cart})  // TODO: чекнуть код ответа на удаление корзины
           .then((setCartResp) => {
             if (setCartResp.status === ResponseEvents.OK) {
               setCart(setCartResp.body);
@@ -36,7 +36,7 @@ export function auth(response) {
             if (cartResponse.status === ResponseEvents.OK) {
               setCart(cartResponse.body);
             }
-          })
+          });
     }
     eventBus.emitEventListener(AuthStatus.userLogin, {});
   } else {

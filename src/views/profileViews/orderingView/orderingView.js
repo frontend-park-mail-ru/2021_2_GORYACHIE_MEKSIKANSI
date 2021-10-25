@@ -44,6 +44,7 @@ export class OrderingView extends View {
         restaurant: cartStore.getState().restaurant,
         items: cartStore.getState().cart,
         sumCost: cartStore.getState().cost.sumCost,
+        dCost: cartStore.getState().cost.dCost,
       }),
       rightMenu: orderSummary({
         sumCost: cartStore.getState().cost.sumCost,
