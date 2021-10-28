@@ -46,8 +46,6 @@ class RestaurantModel {
 
   /**
    * clearCart function
-   * call api clearCartDelete for DELETE method req to server
-   * with a response result emit clearCartSuccess or clearCartFailed
    */
   clearCart() {
     cartStore.dispatch(clearCart());

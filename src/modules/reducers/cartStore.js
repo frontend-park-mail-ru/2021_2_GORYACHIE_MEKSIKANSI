@@ -55,7 +55,7 @@ export const increaseDishInCart = (aItNum) => {
       fDish.count += 1;
     }
 
-    updateCart(dispatch, { restaurant: {id: getState().restaurant.id}, dishes: cartBuffer });
+    updateCart(dispatch, {cart: { restaurant: {id: getState().restaurant.id}, dishes: cartBuffer }});
   }
 }
 
@@ -70,14 +70,19 @@ export const addDishToCart = (aDish, restaurant) => {  // find and add count
         itNum: itNum++,
       });
     }
-    updateCart(dispatch, { restaurant: {id: restaurant.id}, dishes: cartBuffer });
+    updateCart(dispatch, {cart: { restaurant: {id: restaurant.id}, dishes: cartBuffer }});
   };
 };
 
-export const setCart = (gotCart) => {
+export const setCart = (response) => {
+  const wrapperStruct = {
+    cart: response.body.cart.dishes,
+    restaurant: response.body.cart.restaurant,
+    cost: response.body.cart.cost,
+  };
   cartStore.dispatch({
     actionType: cartActions.update,
-    state: gotCart,
+    state: wrapperStruct,
   });
   updateStorage();
   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
@@ -91,7 +96,6 @@ export const deleteDishFromCart = (itNum) => {
     const foundDish = cartBuffer.find((dish) => {
       return dish.itNum === itNum;
     });
-
     if (!foundDish) {
       // emit error, dish not found
       return;
@@ -104,47 +108,56 @@ export const deleteDishFromCart = (itNum) => {
       });
     }
 
-    updateCart(dispatch, {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer});
+    updateCart(dispatch, {cart: {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer}});
   };
 };
 
 export const clearCart = () => {
   return (dispatch, getState) => {
-    updateCart(dispatch, {restaurant: {id: -1}, dishes: []})
-        .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            const action = {
-              actionType: cartActions.update,
-              state: {
-                restaurant: {
-                  id: null,
-                  name: '',
-                },
-                cart: [],
-              },
-            }
-            dispatch(action);
-          }
-          updateStorage();
-        });
-
+    updateClearCart(dispatch);
   };
 };
 
-const updateCart = (dispatch, bufferToUpdate) => {
-  return updateCartPut(bufferToUpdate)
+const updateClearCart = (dispatch) => {
+  return updateCartPut({cart :{restaurant: {id: -1}, dishes: []}})
       .then((response) => {
         if (response.status === ResponseEvents.OK) {
-          // clear cart if body null
-          // if (response.body === null) {
-          //   response.body = {
-          //     restaurant: null,
-          //     cart: [],
-          //   }
-          // }
           const action = {
             actionType: cartActions.update,
-            state: response.body,
+            state: {
+              restaurant: {
+                id: null,
+                name: '',
+              },
+              dishes: [],
+            },
+          }
+          dispatch(action);
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {})
+          updateStorage();
+          return response;
+        } else {
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
+        }
+      })
+      .catch(() => {
+        eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
+      });
+}
+
+const updateCart = (dispatch, bufferToUpdate) => {
+  updateCartPut(bufferToUpdate)
+      .then((response) => {
+        if (response.status === ResponseEvents.OK) {
+          const wrapperStruct = {
+            cart: response.body.cart.dishes,
+            restaurant: response.body.cart.restaurant,
+            cost: response.body.cart.cost,
+          };
+
+          const action = {
+            actionType: cartActions.update,
+            state: wrapperStruct,
           }
           dispatch(action);
           eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {})
