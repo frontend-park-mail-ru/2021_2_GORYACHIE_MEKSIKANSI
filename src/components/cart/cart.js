@@ -15,16 +15,13 @@ export class Cart {
     this.routeTo = routeTo;
     this.parent = parent;
 
-    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {}); // add the error explain
+    // EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
+    // EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {}); // add the error explain
   }
 
   render() {
-    this.refresh();
-  }
-
-  refresh = () => {
-    this.remove();
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {});
     this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: cartStore.getState().restaurant});
     this.refreshSummary();
 
@@ -42,6 +39,11 @@ export class Cart {
 
     this.settingUp();
     this.stickCart();
+  }
+
+  refresh = () => {
+    this.remove();
+    this.render();
   }
 
   increaseNumber = (e) => {
@@ -85,6 +87,8 @@ export class Cart {
   }
 
   remove() {
+    EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
+    EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateFailed, () => {});
     const cart = this.parent.querySelector('.cart-wrapper');
     if (cart) {
       window.removeEventListener('scroll', this.stickCart);

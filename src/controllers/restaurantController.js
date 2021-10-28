@@ -42,7 +42,7 @@ export class RestaurantController { // TODO: добавить джсдок
 
   addDishToCart(dishSettings = {}) {
     const cartRestaurant = cartStore.getState().restaurant;
-    if (cartRestaurant.id === null || cartRestaurant.id === dishSettings.restaurant.id) {
+    if (cartRestaurant.id === -1 || cartRestaurant.id === dishSettings.restaurant.id) {
       RestaurantModel.addDishToCart(dishSettings);
     } else {
       this.stash = dishSettings;

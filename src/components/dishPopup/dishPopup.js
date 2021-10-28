@@ -72,7 +72,8 @@ export class DishPopup {
     console.log(1, this.restaurant.id)
     this.controller.addDishToCart({
       restaurant: {
-        id: this.restaurant.id
+        id: this.restaurant.id,
+        name: this.restaurant.name,
       },
       dish: {
         id: this.dish.id,
