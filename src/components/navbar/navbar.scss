@@ -1,15 +1,82 @@
-.navbar-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 100;
+:root {
+    --hamburgerWidth: 300px;
+    --hamburgerPadding: 20px;
+    --hamburgerButtonsVertMargin: 5px;
+
+    --navbarHeight: 96px;
+    --logoMarginLeft: 30px;
+    --navbarButtonSpacer: 30px; // margin between buttons and inputs in navbar
 }
 
 .navbar {
-    width: 272px;
+    width: 100%;
+    height: var(--navbarHeight);
+
+    display: flex;
+    align-items: center;
+
+    background-color: white;
+
+    &__content {
+        width: 100vw;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: var(--contentPadding);
+        padding-right: var(--contentPadding);
+    }
+
+    &__logo {
+        margin-left: var(--logoMarginLeft);
+        cursor: pointer;
+    }
+
+    &__left-box {
+        display: flex;
+        align-items: center;
+    }
+
+    &__right-box {
+        margin-left: auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__right-box-spacer {
+        margin-left: var(--navbarButtonSpacer);
+    }
+
+    &__button-cart-number-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-white);
+        color: var(--color-black);
+        margin-left: 5px;
+        padding: 1px 3px 1px 3px;
+        border-radius: 5px;
+    }
+
+    &__button-cart-number-wrapper {
+        display:inline-block;
+        font-size: 15px;
+    }
+}
+
+.hamburger {
+    &-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        z-index: 100;
+    }
+
+    width: var(--hamburgerWidth);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -20,38 +87,38 @@
     top: 0;
     left: 0;
 
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+    padding: var(--hamburgerPadding);
+    box-sizing: border-box;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
     background-color: white;
 
     animation-name: animateleft;
     animation-duration: 0.4s;
-}
 
-.navbar__gray-button {
-    color: rgba(0, 0, 0, 0.6);
-}
+    &__button {
+        margin-top: var(--hamburgerButtonsVertMargin);
+        margin-bottom: var(--hamburgerButtonsVertMargin);
+    }
 
-.navbar__button {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+    &__gray-button {
+        color: rgba(0, 0, 0, 0.6);
+    }
 
-.hamburger__a {
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
+    &__button_align-text_center {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
 
-.navbar__button_align-text_center {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
+    &__line {
+        border: none;
+        background-color: var(--color-primary);
+        width: 100%;
+        height: 2px;
+    }
 }
 
 .map-popup__link {
@@ -59,30 +126,7 @@
     color: inherit;
 }
 
-.navbar__button-cart-number-wrapper {
-    display:inline-block;
-    font-size: 15px;
-}
-
-.navbar__line {
-    border: none;
-    background-color: var(--color-primary);
-    width: 272px;
-    height: 2px;
-}
-
 @keyframes animateleft {
     from {left: -300px; opacity: 0}
     to {left: 0; opacity: 1}
-}
-
-.navbar__button-cart-number-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-white);
-    color: var(--color-black);
-    margin-left: 5px;
-    padding: 1px 3px 1px 3px;
-    border-radius: 5px;
 }

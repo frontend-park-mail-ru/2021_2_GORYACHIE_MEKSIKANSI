@@ -45,7 +45,8 @@
     flex-wrap: nowrap;
     align-items: center;
 
-    margin-bottom: 5px; //
+    box-sizing: border-box;
+    color: black;
 
 
     &:hover {
@@ -78,6 +79,11 @@
     }
 
     &_transparent {
+        background-color: rgba(0, 0, 0, 0);
+        border: 0;
+    }
+
+    &_transparent:hover {
         background-color: rgba(0, 0, 0, 0);
         border: 0;
     }

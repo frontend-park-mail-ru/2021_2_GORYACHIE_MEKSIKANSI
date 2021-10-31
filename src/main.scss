@@ -26,7 +26,6 @@
 @import "Views/homeView/homePage.scss";
 
 @import "Components/button/button.scss";
-@import "Components/header/header.scss";
 @import "Components/navbar/navbar.scss";
 @import "Components/footer/footer.scss";
 @import "Components/sortUnderheader/sortUnderheader.scss";
@@ -34,7 +33,9 @@
 @import "Components/cart/cart.scss";
 @import "Components/sortBox/sortBox.scss";
 
-
+:root {
+    --contentPadding: 3%;
+}
 
 body {
     font-family: var(--raleway-font);
