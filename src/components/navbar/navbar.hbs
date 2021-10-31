@@ -15,7 +15,7 @@
         </div>
 
         <div class="navbar__right-box">
-                <button class="navbar__right-box-spacer button button_shape_rounded">
+                <a href="#popup" class="map-popup__link map-popup__address navbar__right-box-spacer button button_shape_rounded">
                     <svg class="button__icon_left" width="11" height="14" viewBox="0 0 11 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.46851 6.25C3.46851 5.12817 4.37793 4.21875 5.49976 4.21875C6.62158 4.21875 7.53101 5.12817 7.53101 6.25C7.53101 7.37183 6.62158 8.28125 5.49976 8.28125C4.37793 8.28125 3.46851 7.37183 3.46851 6.25Z"
@@ -24,23 +24,21 @@
                               d="M0.35822 5.54837C0.572994 2.94278 2.75036 0.9375 5.36479 0.9375H5.63475C8.24918 0.9375 10.4265 2.94278 10.6413 5.54837C10.757 6.95124 10.3236 8.34424 9.43258 9.43395L6.43692 13.0976C5.95256 13.6899 5.04698 13.6899 4.56262 13.0976L1.56696 9.43395C0.675922 8.34424 0.242584 6.95124 0.35822 5.54837ZM5.49976 3.28125C3.86016 3.28125 2.53101 4.6104 2.53101 6.25C2.53101 7.8896 3.86016 9.21875 5.49976 9.21875C7.13935 9.21875 8.46851 7.8896 8.46851 6.25C8.46851 4.6104 7.13935 3.28125 5.49976 3.28125Z"
                               fill="black"/>
                     </svg>
-                    <a href="#popup" class="map-popup__address map-popup__link">
                     {{#if address.addr}}
                         {{address.addr}}
                     {{else}}
-                       Кликни на меня, чтобы найти свой дом!
+                        Кликни на меня, чтобы найти свой дом!
                     {{/if}}
-                    </a>
-                </button>
+                </a>
 
-            <label class="navbar__right-box-spacer search-input__label search-input__label_size_m">
-                <svg class="search-label__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <label class="navbar__right-box-spacer navbar__search-label input-label input-label_border-raduis_high">
+                <svg class="input-label__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                           d="M14.3854 15.4458C11.7351 17.5685 7.85569 17.4014 5.3989 14.9446C2.76287 12.3086 2.76287 8.0347 5.3989 5.39866C8.03494 2.76262 12.3088 2.76262 14.9448 5.39866C17.4016 7.85544 17.5687 11.7349 15.446 14.3851L20.6017 19.5408C20.8946 19.8337 20.8946 20.3085 20.6017 20.6014C20.3088 20.8943 19.8339 20.8943 19.541 20.6014L14.3854 15.4458ZM6.45956 13.8839C4.40931 11.8337 4.40931 8.50957 6.45956 6.45932C8.50982 4.40907 11.8339 4.40907 13.8842 6.45932C15.9329 8.50807 15.9344 11.8288 13.8887 13.8794C13.8872 13.8809 13.8857 13.8824 13.8842 13.8839C13.8827 13.8854 13.8812 13.8869 13.8797 13.8884C11.8291 15.9342 8.50831 15.9327 6.45956 13.8839Z"
                           fill="black"/>
                 </svg>
-                <input class="search-input" placeholder="Что-то ищите?"/>
+                <input class="input navbar__search-input" placeholder="Что-то ищите?">
             </label>
 
                 <a href="checkout" class="navbar__right-box-spacer button button_shape_rounded button_color_black">

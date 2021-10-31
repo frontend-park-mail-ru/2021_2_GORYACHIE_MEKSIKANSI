@@ -65,6 +65,15 @@
         display:inline-block;
         font-size: 15px;
     }
+
+    &__search-label {
+        width: 442px;
+        background-color:  #F6F6F6;
+    }
+
+    &__search-input {
+        font-weight: var(--font_bold);
+    }
 }
 
 .hamburger {

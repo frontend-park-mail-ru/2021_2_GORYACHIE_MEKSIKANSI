@@ -1,12 +1,73 @@
+:root {
+    --inputHeight: 48px;
+
+    --inputPaddingHor: 15px;
+
+    --inputFontSizeStd: 16px;
+
+    --inputBorder: 1px solid;
+    --inputBorderColor: #e2e2e2;
+
+    --inputBorderRadius: 2px;
+    --inputBorderRadiusMedium: 10px;
+    --inputBorderRadiusHigh: 16px;
+
+    --inputLabelPadding: 10px;
+}
+
 .input {
     width: 100%;
-    display: inline-block;
-    border: 1px solid #ccc;
+    display: flex;
     box-sizing: border-box;
-    height: 48px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 14px;
+    height: var(--inputHeight);
+    padding-left: var(--inputPaddingHor);
+    padding-right: var(--inputPaddingHor);
+    font-size: var(--inputFontSizeStd);
+
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+
+    &_border {
+        border-radius: var(--inputBorderRadius);
+        border: var(--inputBorder);
+        border-color: var(--inputBorderColor);
+    }
+
+    &-label {
+        width: 100%;
+        box-sizing: border-box;
+
+        border-radius: var(--inputBorderRadius);
+        border: var(--inputBorder);
+        border-color: var(--inputBorderColor);
+
+        padding-left: var(--inputLabelPadding);
+        padding-right: var(--inputLabelPadding);
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    &-label-without-border {
+        border: 0;
+        border-bottom: var(--inputBorder);
+        border-color: var(--inputBorderColor);
+    }
+
+    &-label_border-raduis_medium {
+        border-radius: var(--inputBorderRadiusHigh);
+    }
+
+    &-label_border-raduis_high {
+        border-radius: var(--inputBorderRadiusHigh);
+    }
+
+    &-label__icon {
+        margin-left: 7px;
+        margin-right: 5px;
+    }
 }
 
 input:focus {
