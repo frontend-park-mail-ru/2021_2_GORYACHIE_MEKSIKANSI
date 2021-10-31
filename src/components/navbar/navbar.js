@@ -33,7 +33,7 @@ export class Navbar {
 
     if (userStore.getState().auth) {
       if (userStore.getState().avatar) {
-        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
+        this.parent.querySelector('.hamburger__profile-img').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
       }
     }
 
