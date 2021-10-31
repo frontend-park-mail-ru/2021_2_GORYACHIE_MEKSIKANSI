@@ -33,7 +33,7 @@ export class Navbar {
 
     if (userStore.getState().auth) {
       if (userStore.getState().avatar) {
-        this.parent.querySelector('.nav-profile__img').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
+        this.parent.querySelector('.hamburger__profile-img').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
       }
     }
 
@@ -76,7 +76,7 @@ export class Navbar {
     this.updateCartButtonNumber();
     this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
-    this.parent.querySelector('.navbar-wrapper').addEventListener('click', this.closeListener);
+    this.parent.querySelector('.hamburger-wrapper').addEventListener('click', this.closeListener);
     this.parent.querySelectorAll('a').forEach((item) => {
       if (item.hasAttribute('href')) {
         if (item.getAttribute('href') === 'logout') {
@@ -95,7 +95,7 @@ export class Navbar {
     event.preventDefault();
     const {target} = event;
 
-    const navbar = this.parent.querySelector('.navbar');
+    const navbar = this.parent.querySelector('.hamburger');
 
 
     if (navbar && !navbar.contains(target)) {
@@ -113,8 +113,8 @@ export class Navbar {
    */
   open() {
     window.document.body.style.overflowY = 'hidden';
-    this.parent.getElementsByClassName('navbar')[0].style.display = 'flex';
-    this.parent.getElementsByClassName('navbar-wrapper')[0]
+    this.parent.getElementsByClassName('hamburger')[0].style.display = 'flex';
+    this.parent.getElementsByClassName('hamburger-wrapper')[0]
       .style.display = 'block';
   }
 
@@ -123,8 +123,8 @@ export class Navbar {
    */
   close() {
     window.document.body.style.overflowY = 'scroll';
-    this.parent.getElementsByClassName('navbar')[0].style.display = 'none';
-    this.parent.getElementsByClassName('navbar-wrapper')[0]
+    this.parent.getElementsByClassName('hamburger')[0].style.display = 'none';
+    this.parent.getElementsByClassName('hamburger-wrapper')[0]
       .style.display = 'none';
   }
 
@@ -132,10 +132,10 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
-    if (document.querySelector('.navbar-wrapper') &&
-      document.querySelector('.header')) {
+    if (document.querySelector('.hamburger-wrapper') &&
+      document.querySelector('.navbar')) {
       this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);
-      this.parent.querySelector('.navbar-wrapper').removeEventListener('click', this.closeListener);
+      this.parent.querySelector('.hamburger-wrapper').removeEventListener('click', this.closeListener);
       this.parent.querySelectorAll('a').forEach((item) => {
         if (item.hasAttribute('href')) {
           if (item.getAttribute('href') === 'logout') {
@@ -144,8 +144,8 @@ export class Navbar {
         }
       });
 
-      document.querySelector('.navbar-wrapper').remove();
-      document.querySelector('.header').remove();
+      document.querySelector('.hamburger-wrapper').remove();
+      document.querySelector('.navbar').remove();
       window.document.body.style.overflowY = 'scroll';
     }
     eventBus.unsubscribe(AuthStatus.userLogin, this.refresh);

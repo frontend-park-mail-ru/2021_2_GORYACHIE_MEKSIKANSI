@@ -1,48 +1,46 @@
-@import "../variables/colors.css";
-@import "../variables/fonts.css";
+@import "../variables/colors.scss";
+@import "../variables/fonts.scss";
 
 .login-page {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     font-family: var(--raleway-font);
-    padding-bottom: 10%;
 }
 
-.login-page__logo-container {
+.register-page__logo-container {
     display:flex;
     justify-content: center;
 }
 
-.login-page__logo {
+.register-page__logo {
     min-width: 20vw;
     max-height: 20vw;
     cursor: pointer;
     margin: 50px 0 40px;
 }
 
-.login-page__login-container {
+.register-page__login-container {
     display: flex;
-    flex-flow: row wrap;
     justify-content: center;
 }
 
-.login-page__login_welcome-back-text {
+.register-page__login_welcome-back-text {
     font-weight: 300;
 }
 
-.login-page__login-form {
+.register-page__register-form {
     display: flex;
     flex-flow: column nowrap;
     min-width: 30%;
 }
 
-.login-page__login_input {
+.register-page__login_input {
     padding: 12px 20px;
     margin: 8px 0;
 }
 
-.login-page__submit-button {
+.register-page__submit-button {
     background-color: var(--color-green);
     color: var(--color-white);
     padding: 14px 20px;
@@ -54,20 +52,20 @@
     font-size: 20px;
 }
 
-.login-page__submit-button:hover {
+.register-page__submit-button:hover {
     opacity: 0.8;
 }
 
-.login-page__register-container_span {
+.register-page__register-container_span {
     float: right;
     padding-top: 16px;
 }
 
-.login-page__register-container {
+.register-page__register-container {
     display: flex;
     justify-content: center;
 }
 
-.login-page__register-container_register {
+.register-page__register-container_register {
     color: var(--color-green);
 }

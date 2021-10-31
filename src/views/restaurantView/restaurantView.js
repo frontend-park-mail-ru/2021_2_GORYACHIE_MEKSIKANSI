@@ -99,7 +99,7 @@ export class RestaurantView extends View {
     // find the needed title
     let title;
     this.menuNavsTitles.forEach((item, i) => {
-      if (item.offsetTop <= window.pageYOffset) {
+      if (item.offsetTop - 5 <= window.pageYOffset) {
         title = this.menuNavsButtons[i];
       }
     });

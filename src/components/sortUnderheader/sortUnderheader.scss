@@ -1,0 +1,26 @@
+:root {
+    --sortUnderheaderHeight: 100px;
+    --sortUnderheaderMarginBottom: 5px;
+}
+
+.sort-underheader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: var(--sortUnderheaderHeight);
+
+    margin-bottom: var(--sortUnderheaderMarginBottom);
+
+    &__button {
+
+    }
+
+    &__button-icon {
+
+    }
+
+    &__button:hover &__button-icon {
+        border-radius: 50%;
+        background-color: var(--color-light-gray);
+    }
+}

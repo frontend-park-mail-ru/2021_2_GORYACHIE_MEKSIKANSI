@@ -1,0 +1,47 @@
+:root {
+    --continuePopupBorderRadius: 32px;
+    --continuePopupOuterPadding: 32px;
+
+    --continuePopupTitleFontSize: 24px;
+    --continuePopupInfoFontSize: 16px;
+}
+
+.continue-popup {
+    &-wrapper {
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+
+    border-radius: var(--continuePopupBorderRadius);
+    margin: auto;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    padding: var(--continuePopupOuterPadding);
+
+    &__title {
+        font-size: var(--continuePopupTitleFontSize);
+        font-weight: var(--font_bold);
+    }
+
+    &__info {
+        margin-top: 15px;
+        font-size: var(--continuePopupInfoFontSize);
+    }
+
+    &__button-wrapper {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__button-m {
+        margin-left: 10px;
+    }
+}

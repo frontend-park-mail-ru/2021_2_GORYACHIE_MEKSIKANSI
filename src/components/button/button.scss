@@ -1,0 +1,187 @@
+:root {
+    --buttonHeightSmall: 26px;
+    --buttonHeightMedium: 36px;
+    --buttonHeightBig: 48px;
+
+    --buttonIconVHeight: 60px;
+    --buttonIconVIconSize: 50px;
+    --buttonIconVBottomMargin: 5px; // margin bottom between icon and text
+
+    --buttonFontSize: 16px;
+
+    --button__icon-size: 14px;
+    --button__icon-nav-size: 24px;
+
+    --buttonPaddingHor: 20px; // x paddings inside button
+    --buttonIconPadding: 10px; // padding around in icon button
+    --buttonIconVPaddingHor: 10px; // x paddings inside vertical icon button
+
+    --buttonBorderRadiusStd: 2px; // std radius
+    --buttonBorderRadiusMedium: 10px; // medium radius
+    --buttonBorderRadiusHigh: 16px; // high radius
+
+    --buttonIconMarginInside: 10px; // margin between text and icon in button
+
+    --buttonBorder: solid 1px;
+    --buttonBorderColor: rgba(0, 0, 0, 0.12);
+}
+
+.button {
+    font-size: var(--buttonFontSize);
+    font-weight: var(--font_bold);
+    background-color: var(--color-primary);
+    height: var(--buttonHeightMedium);
+    border-radius: var(--buttonBorderRadiusStd);
+    border: var(--buttonBorder);
+    border-color: var(--buttonBorderColor);
+
+
+    padding-left: var(--buttonPaddingHor);
+    padding-right: var(--buttonPaddingHor);
+
+    cursor: pointer;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    box-sizing: border-box;
+    color: black;
+
+
+    &:hover {
+        background-color: var(--color-light-gray);
+    }
+
+    &_color_black {
+        border: 0;
+        background-color: black;
+        color: white;
+    }
+
+    &_color_black:hover {
+        background-color: rgb(26, 26, 26);
+        color: white;
+    }
+
+    &_color_green {
+        border: 0;
+        background-color: var(--color-green);
+        color: white;
+    }
+
+    &_color_green:hover {
+        background-color: #057f16;
+    }
+
+    &_color_white {
+        background-color: var(--color-white);
+    }
+
+    &_transparent {
+        background-color: rgba(0, 0, 0, 0);
+        border: 0;
+    }
+
+    &_transparent:hover {
+        background-color: rgba(0, 0, 0, 0);
+        border: 0;
+    }
+
+    &_shape_rounded {
+        border-radius: var(--buttonBorderRadiusHigh);
+    }
+
+    &_shape_rounded_medium {
+        border-radius: var(--buttonBorderRadiusMedium);
+    }
+
+    &__icon_left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: var(--buttonIconMarginInside);
+    }
+
+    &__icon_right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: var(--buttonIconMarginInside);
+    }
+
+    &_height_s {
+        height: var(--buttonHeightSmall);
+    }
+
+    &_height_m {
+        height: var(--buttonHeightMedium);
+    }
+
+    &_height_b {
+        height: var(--buttonHeightBig);
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        margin: auto;
+    }
+}
+
+.button-icon {
+    display: flex;
+    height: var(--buttonHeightBig);
+    width: var(--buttonHeightBig);
+
+    border: 0;
+    border-radius: var(--buttonBorderRadiusStd);
+    padding: var(--buttonIconPadding);
+    box-sizing: border-box;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+
+    &_color_gray {
+        border: solid 1px rgba(0, 0, 0, 0.12);
+    }
+
+    &_color_gray:hover {
+        background-color: var(--color-light-gray);
+    }
+}
+
+.button-icon-v {
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    padding-left: var(--buttonIconVPaddingHor);
+    padding-right: var(--buttonIconVPaddingHor);
+
+    height: var(--buttonIconVHeight);
+    cursor: pointer;
+
+    &__text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-weight: var(--font_bold);
+    }
+
+    &__icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__icon {
+        height: var(--buttonIconVIconSize);
+        width: var(--buttonIconVIconSize);
+        margin-bottom: var(--buttonIconVBottomMargin);
+    }
+}
