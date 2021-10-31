@@ -1,70 +1,79 @@
+:root {
+    --restaurantHeaderHeight: 240px;
+
+    --restaurantHeaderTitleFontSize: 40px;
+    --restaurantHeaderInfoFontSize: 16px;
+    --restaurantNavButtonFontSize: 16px;
+}
+
 .restaurant-header {
     width: 100%;
-    height: 240px;
+    height: var(--restaurantHeaderHeight);
     position: relative;
+
+    &__image {
+        width: 100%;
+        height: var(--restaurantHeaderHeight);
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    &__gradient  {
+        display: flex;
+        position: absolute;
+        top: 0;
+        margin-top: 100px;
+        height: 140px;
+        width: 100%;
+        background: linear-gradient( 0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
+    }
+
+    &__text {
+        margin-top: auto;
+        padding: 30px 20px 20px 3%;
+        color: white;
+    }
+
+    &__title {
+        font-weight: var(--font_bold);
+        font-size: var(--restaurantHeaderTitleFontSize);
+    }
+
+    &__info {
+        padding-top: 10px;
+        font-weight: var(--font_thin);
+        font-size: var(--restaurantHeaderInfoFontSize);
+    }
+
+    &__right-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: auto;
+        margin-left: auto;
+        padding-right: 3%;
+        padding-bottom: 20px;
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+    }
+
+    &__button-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    &__love-icon {
+        margin-left: 16px;
+        width: 26px;
+        height: 26px;
+    }
 }
 
-.restaurant-header__image {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.restaurant-header__gradient  {
-    display: flex;
-    position: absolute;
-    top: 0;
-    margin-top: 100px;
-    height: 140px;
-    width: 100%;
-    background: linear-gradient( 0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 100%);
-    z-index: 1;
-}
-
-.restaurant-header__text {
-    margin-top: auto;
-    padding: 30px 20px 20px 3%;
-    color: white;
-}
-
-.restaurant-header__title {
-    font-weight: var(--font_bold);
-    font-size: 40px;
-}
-
-.restaurant-header__info {
-    padding-top: 10px;
-    font-weight: var(--font_thin);
-    font-size: 18px;
-}
-
-.restaurant-header__right-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: auto;
-    margin-left: auto;
-    padding-right: 3%;
-    padding-bottom: 20px;
-}
-
-.restaurant-header__button {
-    display: flex;
-    align-items: center;
-}
-
-.restaurant-header__button-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.restaurant-header__love-icon {
-    margin-left: 16px;
-    width: 26px;
-    height: 26px;
-}
 
 .love-color {
     fill: white;
@@ -76,43 +85,53 @@
     flex-direction: column;
     padding-top: 30px;
     padding-bottom: 15px;
-}
 
-.restaurant-underheader__tags {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+    &__tags {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
-.restaurant-underheader__tag {
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid var(--color-gray);
-    margin-right: 10px;
+    &__tag {
+        padding: 10px;
+        border-radius: 20px;
+        border: 1px solid var(--color-gray);
+        margin-right: 10px;
+    }
+
+    &__a {
+        text-decoration: none;
+        color: black;
+    }
 }
 
 .restaurant-nav {
     padding-bottom: 10px;
-}
 
-.restaurant-nav__line {
-    width: 100%;
-    color: #e2e2e2;
-}
+    &__line {
+        width: 100%;
+        color: #e2e2e2;
+    }
 
-.restaurant-nav__list {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
+    &__list {
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
-.restaurant-nav__btn {
-    font-weight: var(--font_bold);
-    font-size: 16px;
-    padding: 10px;
-    cursor: pointer;
+    &__btn {
+        font-weight: var(--font_bold);
+        font-size: var(--restaurantNavButtonFontSize);
+        padding: 10px;
+        cursor: pointer;
+        border-radius: var(--buttonBorderRadiusStd)
+    }
+
+    &__btn:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
 }
 
 .sticky {
@@ -120,9 +139,4 @@
     z-index: 1000;
     top: 0;
     width: 100%;
-}
-
-.restaurant-underheader__a {
-    text-decoration: none;
-    color: black;
 }

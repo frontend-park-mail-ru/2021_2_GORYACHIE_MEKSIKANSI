@@ -15,6 +15,7 @@
 .map-popup.open {
     opacity: 1;
     visibility: visible;
+    z-index: 1000;
 }
 
 .map-popup.open .map-popup__content {
@@ -57,6 +58,7 @@
     font-weight: bold;
     margin-left: 10px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .map__input {
@@ -98,6 +100,7 @@
     font-size: 20px;
     color: var(--color-black);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .map-popup:target {
