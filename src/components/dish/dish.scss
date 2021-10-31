@@ -1,62 +1,69 @@
+:root {
+    --dishHeight: 160px;
+    --dishBorderRadius: 16px;
+    --dishTextBoxPadding: 16px;
+
+    --dishTitleFontSize: 16px;
+}
+
 .dish {
     display: flex;
     flex-direction: row;
-    height: 158px;
+    height: var(--dishHeight);
 
-    border-radius: 16px;
+    border-radius: var(--dishBorderRadius);
 
     border: 1px solid #e2e2e2;
     cursor: pointer;
 
     transition-property: border-color;
     transition-duration: 200ms;
-}
+
+    &:hover {
+        border-color: black;
+    }
+
+    &__text {
+        padding: var(--dishTextBoxPadding);
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+    }
 
 
-.dish:hover {
-    border-color: black;
-}
+    &__title {
+        font-weight: var(--font_bold);
+        font-size: var(--dishTitleFontSize);
+    }
 
-.dish__text {
-    padding: 16px 16px;
-    width: 100%;
+    &__info {
+        margin-top: auto;
+        font-weight: var(--font_thin);
+    }
 
-    display: flex;
-    flex-direction: column;
-}
+    &__image-box {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+    }
 
+    &__image {
+        flex-shrink: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        border-top-right-radius: var(--dishBorderRadius);
+        border-bottom-right-radius: var(--dishBorderRadius);
+    }
 
-.dish__title {
-    font-weight: var(--font_bold);
-    font-size: 18px;
-}
-
-.dish__info {
-    margin-top: auto;
-    font-weight: var(--font_thin);
-}
-
-.dish__image-box {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    width: 100%;
-}
-
-.dish__image {
-    flex-shrink: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-}
-
-.dish-wrapper {
-    width: 100%;
-    display: flex;
+    &-wrapper {
+        width: 100%;
+        display: flex;
+    }
 }
