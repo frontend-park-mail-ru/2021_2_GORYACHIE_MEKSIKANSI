@@ -51,7 +51,7 @@ export class Navbar {
 
   getNumberOfItems = () => {
     if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
-      console.log(cartStore.getState().cart)
+
       return cartStore.getState().cart.reduce((prev, item) => {
         prev += item.count;
         return prev;

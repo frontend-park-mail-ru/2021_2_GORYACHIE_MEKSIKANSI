@@ -2,10 +2,12 @@
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
 import cart from './cart.hbs'
-import cartStore from "../../modules/reducers/cartStore";
+import cartStore from "Modules/reducers/cartStore.js";
+import {SnackBar} from "Components/snackBar/snackBar.js";
+ import {ResponseEvents} from "../../events/Responses";
 
 
-export class Cart {
+ export class Cart {
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
@@ -18,7 +20,7 @@ export class Cart {
 
   render() {
     EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {});
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, this.failedToIncrease);
     this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: cartStore.getState().restaurant});
     this.refreshSummary();
 
@@ -57,7 +59,6 @@ export class Cart {
 
   refreshSummary = () => {
     if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined && cartStore.getState().cart.length > 0) {
-      console.log(cartStore.getState().cart)
       this.parent.querySelector('.cart__summary-cost').innerHTML = String(cartStore.getState().cost.sumCost);
     }
   }
@@ -85,11 +86,41 @@ export class Cart {
 
   remove() {
     EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
-    EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateFailed, () => {});
+    EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateFailed, this.failedToIncrease);
     const cart = this.parent.querySelector('.cart-wrapper');
     if (cart) {
       window.removeEventListener('scroll', this.stickCart);
     }
     this.parent.innerHTML = '';
   }
+
+ failedToIncrease = (response) => {
+     let snack;
+     if (response.status === ResponseEvents.CookiesNotFound) {
+     snack = new SnackBar({
+         message: "Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!",
+         status: "warn",
+         position: "tr",
+         width: "500px",
+         fixed: true,
+     })
+     snack.settingUp();
+     snack.Open();
+ } else {
+     if ('dishesErrs' in response.body.cart) {
+         response.body.cart.dishesErrs.forEach((item) => {
+             snack = new SnackBar({
+                 message: item.nameDish + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
+                 status: "warning",
+                 position: "tr",
+                 width: "500px",
+                 fixed: true,
+             })
+             snack.settingUp();
+             snack.Open();
+         })
+     }
+ }
+
+ }
 }
