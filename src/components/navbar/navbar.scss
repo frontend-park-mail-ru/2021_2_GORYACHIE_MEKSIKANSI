@@ -9,6 +9,9 @@
     --logoMarginLeft: 30px;
     --navbarButtonSpacer: 30px; // margin between buttons and inputs in navbar
 
+    --navbarProfileTextBoxFontSize: 18px;
+    --navbarProfileProfileLinkFontSize: 13px;
+
     --navbarSearchInputMinWidth: 100px;
     --navbarSearchInputMaxWidth: 442px;
 }
@@ -32,8 +35,11 @@
         padding-right: var(--contentPadding);
     }
 
+    &__logo-wrapper {
+        margin-left: var(--logoMarginLeft)
+    }
+
     &__logo {
-        margin-left: var(--logoMarginLeft);
         cursor: pointer;
     }
 
@@ -164,13 +170,13 @@
     &__profile-text-box {
         padding-left: var(--hamburgerProfileTextBoxPaddingLeft);
         display: block;
-        font-size: 18px;
+        font-size: var(--navbarProfileTextBoxFontSize);
         font-weight: normal;
     }
 
     &__profile-link {
         color: var(--color-green);
-        font-size: 13px;
+        font-size: var(--navbarProfileProfileLinkFontSize);
         text-decoration: none;
     }
 }

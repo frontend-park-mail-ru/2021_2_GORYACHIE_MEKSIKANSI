@@ -2,19 +2,19 @@
     <div class="cart-order-delivery__wrapper">
         <div class="cart-order-delivery__title">Условия доставки</div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Введите адрес" required class="input cart-order-delivery__input profile-page__input">
+            <input placeholder="Введите адрес" required class="input input_border input_radius-border_medium cart-order-delivery__input profile-page__input">
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Подъезд" required class="input cart-order-delivery__input cart-order-delivery__input-mw profile-page__input">
-            <input placeholder="Домофон" required class="input cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
-            <input placeholder="Этаж" required class="input cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
-            <input placeholder="Квартира" required class="input cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
+            <input placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw profile-page__input">
+            <input placeholder="Домофон" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
+            <input placeholder="Этаж" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
+            <input placeholder="Квартира" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
         </div>
         <div class="cart-order-delivery__undertitle">
             Комментарий
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Напишите, как вас найти или пожелания к заказу..." required class="input cart-order-delivery__input cart-order-delivery__input_sq cart-order-delivery__input_margin-left profile-page__input">
+            <input placeholder="Напишите, как вас найти или пожелания к заказу..." required class="input input_border input_border-color_black cart-order-delivery__input cart-order-delivery__input_sq profile-page__input">
         </div>
         <div class="cart-order-delivery__time-title">
             Время доставки составит ~ {{restaurant.minDTime}}-{{restaurant.maxDTime}} мин
@@ -22,23 +22,23 @@
     </div>
 </div>
 
-<div class="history-order cart-order">
-    <div class="history-order__main-info">
-        <div class="history-order__main-info-text">
-            <div class="history-order__restaurant-title history-order__row-margin">
+<div class="order cart-order">
+    <div class="order__main-info">
+        <div class="order__main-info-text">
+            <div class="order__restaurant-title order__row-margin">
                 {{restaurant.name}}
             </div>
-            <div class="history-order__address history-order__row-margin">
+            <div class="order__address order__row-margin">
                 {{restaurant.addrs}}
             </div>
         </div>
-        <div class="history-order__image-wrapper">
-            <img class="history-order__main-info-img" src="http://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/96672465571661.5afc10a864fc2.jpg" alt="rest image">
+        <div class="order__image-wrapper">
+            <img class="order__main-info-img" src="http://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/96672465571661.5afc10a864fc2.jpg" alt="rest image">
         </div>
     </div>
-    <div class="history-order__info">
+    <div class="order__info">
         {{#each items}}
-            <div class="history-order__item">
+            <div class="order__item">
                 <div class="order__item-wrapper">
                     <div class="order__item-title">
                         {{ name }}
@@ -57,30 +57,30 @@
                 </div>
 
 
-                <div class="history-order__item-num">
+                <div class="order__item-num">
                     {{ count }} шт
                 </div>
 
-                <div class="history-order__item-cost">
+                <div class="order__item-cost">
                     {{ cost }} ₽
                 </div>
             </div>
         {{/each}}
-        <div class="history-order__item">
-            <div class="history-order__delivery-title">
+        <div class="order__item">
+            <div class="order__delivery-title">
                 Доставка
             </div>
 
-            <div class="history-order__delivery-cost">
+            <div class="order__delivery-cost">
                 {{ dCost }} ₽
             </div>
         </div>
-        <div class="history-order__summary">
+        <div class="order__summary">
             <div class="order__summary-title">
                 Итого
             </div>
 
-            <div class="history-order__summary-cost">
+            <div class="order__summary-cost">
                 {{ sumCost }} ₽
             </div>
         </div>

@@ -33,6 +33,22 @@
         border-color: var(--inputBorderColor);
     }
 
+    &_radius-border_high {
+        border-radius: var(--inputBorderRadiusHigh);
+    }
+
+    &_radius-border_medium {
+        border-radius: var(--inputBorderRadiusMedium);
+    }
+
+    &_border-color_black {
+        border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &_radius-border_std {
+        border-radius: var(--inputBorderRadius);
+    }
+
     &-label {
         width: 100%;
         box-sizing: border-box;
