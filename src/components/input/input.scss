@@ -33,6 +33,13 @@
         border-color: var(--inputBorderColor);
     }
 
+    &_bottom-border {
+        border: 0;
+        border-bottom: var(--inputBorder);
+        border-color: var(--inputBorderColor);
+        border-radius: 0;
+    }
+
     &_radius-border_high {
         border-radius: var(--inputBorderRadiusHigh);
     }

@@ -92,6 +92,10 @@
         border-radius: var(--buttonBorderRadiusHigh);
     }
 
+    &_shape_rounded_medium {
+        border-radius: var(--buttonBorderRadiusMedium);
+    }
+
     &__icon_left {
         display: flex;
         justify-content: center;
