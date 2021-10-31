@@ -1,153 +1,173 @@
-.cart-wrapper {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-}
+:root {
+    --cartWrapperHeight: 80vh;
 
-.cart__buy-button {
-    margin-top: 15px;
-    height: 60px;
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
+    --cartBuyButtonFontSize: 25px;
+    --cartBuyButtonHeight: 60px;
+
+    --cartStickyMarginTop: 75px;
+
+    --cartTitleFontSize: 30px;
+    --cartSummaryFontSize: 40px;
+    --cartSummaryTitleFontSize: 20px;
+
+    --cartOrderRowFontSize: 20px;
+    --cartOrderRowInfoFontSize: 15px;
+
+    --cartBorderRadius: 2px;
 }
 
 .cart {
+    &-wrapper {
+        height: var(--cartWrapperHeight);
+        display: flex;
+        flex-direction: column;
+    }
+
     height: 100%;
     background-color: var(--color-light-gray);
     display: flex;
     flex-direction: column;
-}
+    border-radius: var(--cartBorderRadius);
 
-.cart__sticky {
-    position: fixed;
-    top: 0;
-    margin-top: 75px;
-    /*width: 100%;*/
-}
+    &__buy-button {
+        margin-top: 15px;
+        height: var(--cartBuyButtonHeight);
+        font-size: var(--cartBuyButtonFontSize);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
 
-.cart__header {
-    padding: 20px 20px 10px 20px;
+    &__sticky {
+        position: fixed;
+        top: 0;
+        margin-top: var(--cartStickyMarginTop);
+    }
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
+    &__header {
+        padding: 20px 20px 10px 20px;
 
-    margin-bottom: 15px;
-    border-bottom: solid 1px darkgrey;
-}
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
 
-.cart__title {
-    font-weight: var(--font_bold);
-    font-size: 30px;
-}
+        margin-bottom: 15px;
+        border-bottom: solid 1px darkgrey;
+    }
 
-.cart__clear-button {
-    cursor: pointer;
-    margin-left: auto;
-}
-.cart__summary {
-    padding: 10px 20px 20px 20px;
-    border-top: solid 2px darkgrey;
-    display: flex;
-    margin-top: auto;
-}
+    &__title {
+        font-weight: var(--font_bold);
+        font-size: var(--cartTitleFontSize);
+    }
 
-.cart__cost-summary-box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1 1 auto;
-}
+    &__clear-button {
+        cursor: pointer;
+        margin-left: auto;
+    }
 
-.cart__summary-val {
-    font-size: 40px;
-    font-weight: var(--font_thin);
-}
+    &__summary {
+        padding: 10px 20px 20px 20px;
+        border-top: solid 2px darkgrey;
+        display: flex;
+        margin-top: auto;
+    }
 
-.cart__summary-title {
-    font-size: 20px;
-    font-weight: var(--font_thin);
-    color: var(--color-gray);
-}
+    &__cost-summary-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1 auto;
+    }
 
-.cart__summary-val-cost {
-    display: flex;
-    flex-direction: row;
-}
+    &__summary-val {
+        font-size: var(--cartSummaryFontSize);
+        font-weight: var(--font_thin);
+    }
 
-.cart__summary-cost {
-    font-size: 40px;
-    font-weight: var(--font_thin);
-}
+    &__summary-title {
+        font-size: var(--cartSummaryTitleFontSize);
+        font-weight: var(--font_thin);
+        color: var(--color-gray);
+    }
 
-.cart__P {
-    font-size: 40px;
-    font-weight: var(--font_thin);
-}
+    &__summary-val-cost {
+        display: flex;
+        flex-direction: row;
+    }
 
-.cart__time-summary-box {
-    margin-right: 20px;
-    width: 100%;
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    justify-content: center;
-}
+    &__summary-cost {
+        font-size: var(--cartSummaryFontSize);
+        font-weight: var(--font_thin);
+    }
 
-.cart__orders-body {
-    display: flex;
-    flex-direction: column;
-    padding: 0 20px 0 20px;
+    &__P {
+        font-size: var(--cartSummaryFontSize);
+        font-weight: var(--font_thin);
+    }
 
-    overflow: auto;
-}
+    &__time-summary-box {
+        margin-right: 20px;
+        width: 100%;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.cart__order-row {
-    flex-wrap: wrap;
-    padding: 20px 0 20px 0;
-    border-bottom: solid 1px darkgrey;
+    &__orders-body {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px 0 20px;
 
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
+        overflow: auto;
+    }
 
-.cart__order-row-additional {
-    margin-top: 5px;
-    width: 100%;
-    color: var(--color-gray);
-}
+    &__order-row {
+        flex-wrap: wrap;
+        padding: 20px 0 20px 0;
+        border-bottom: solid 1px darkgrey;
 
-.cart__order-row-right-box {
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: auto;
-}
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
 
-.cart__order-row-selector {
-    margin-right: 25px;
-}
+    &__order-row-additional {
+        margin-top: 5px;
+        width: 100%;
+        color: var(--color-gray);
+    }
 
-.cart__order-row-title {
-    font-size: 20px;
-    font-weight: var(--font_medium);
-}
+    &__order-row-right-box {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-left: auto;
+    }
 
-.cart__order-row-info {
-    font-size: 15px;
-    font-weight: var(--font_thin);
-}
+    &__order-row-selector {
+        margin-right: 25px;
+    }
 
-.cart__order-row-cost {
-    font-size: 20px;
-    font-weight: var(--font_thin);
-}
+    &__order-row-title {
+        font-size: var(--cartOrderRowFontSize);
+        font-weight: var(--font_medium);
+    }
 
-.cart__required {
-    font-weight: var(--font_thin);
+    &__order-row-info {
+        font-size: var(--cartOrderRowInfoFontSize);
+        font-weight: var(--font_thin);
+    }
+
+    &__order-row-cost {
+        font-size: var(--cartOrderRowFontSize);
+        font-weight: var(--font_thin);
+        margin: auto;
+    }
+
+    &__required {
+        font-weight: var(--font_thin);
+    }
 }
