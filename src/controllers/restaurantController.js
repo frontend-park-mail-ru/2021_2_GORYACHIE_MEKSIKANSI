@@ -3,6 +3,9 @@ import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
 import cartStore from "../modules/reducers/cartStore";
+import userStore from "../modules/reducers/userStore";
+import {urls} from "../modules/urls";
+
 export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller
@@ -41,6 +44,10 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
   addDishToCart(dishSettings = {}) {
+    if (!userStore.getState().auth) {
+      this.routeTo(urls.login.url);
+    }
+
     const cartRestaurant = cartStore.getState().restaurant;
     if (cartRestaurant.id === -1 || cartRestaurant.id === dishSettings.restaurant.id) {
       RestaurantModel.addDishToCart(dishSettings);
