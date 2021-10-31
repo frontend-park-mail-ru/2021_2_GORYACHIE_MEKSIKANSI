@@ -61,7 +61,6 @@ export class DishPopup {
     this.div.querySelectorAll('.dish-popup__checkbox-row').forEach((item) => {
       const input = item.querySelector('input');
       if (input.checked) {
-        console.log('ID', item.id);
         dishCheckboxes.push({
           id: Number(item.id),
         });
@@ -69,7 +68,6 @@ export class DishPopup {
     });
 
     const number = this.div.querySelector('.dish-popup__number').innerHTML;
-    console.log(1, this.restaurant.id)
     this.controller.addDishToCart({
       restaurant: {
         id: this.restaurant.id,

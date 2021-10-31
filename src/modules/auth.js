@@ -25,7 +25,6 @@ export function auth(response) {
       updateCartPut({cart: {restaurant: {id: cartStore.getState().restaurant.id}, dishes: cartStore.getState().cart}})  // TODO: чекнуть код ответа на удаление корзины
           .then((setCartResp) => {
             if (setCartResp.status === ResponseEvents.OK) {
-                console.log(setCartResp)
               setCart(setCartResp);
             } else {
               cartStore.dispatch(clearCart());
@@ -35,7 +34,6 @@ export function auth(response) {
       cartGet()
           .then((cartResponse) => {
             if (cartResponse.status === ResponseEvents.OK) {
-                console.log(cartResponse.body)
               setCart(cartResponse.body.cart);
             }
           });

@@ -27,7 +27,8 @@
 @import "Components/continuePopup/continuePopup.css";
 @import "Components/confirmPopup/confirmPopup.css";
 @import "Components/mapPopup/mapPopup.css";
-@import "components/promoLine/promoLine.css";
+@import "Components/promoLine/promoLine.css";
+@import "Components/snackBar/snackBar.css";
 
 body {
     font-family: var(--raleway-font);
