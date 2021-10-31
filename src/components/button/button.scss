@@ -1,27 +1,43 @@
 :root {
-    --button-height-small: 26px;
+    --buttonHeightSmall: 26px;
+    --buttonHeightMedium: 36px;
+    --buttonHeightBig: 48px;
 
-    --button-height-medium: 36px;
+    --buttonIconVHeight: 60px;
+    --buttonIconVIconSize: 50px;
+    --buttonIconVBottomMargin: 5px; // margin bottom between icon and text
 
-    --button-height-big: 48px;
-
-    --button-height: 48px;
-    --button-font-size: 16px;
+    --buttonFontSize: 16px;
 
     --button__icon-size: 14px;
     --button__icon-nav-size: 24px;
+
+    --buttonPaddingHor: 20px; // x paddings inside button
+    --buttonIconPadding: 10px; // padding around in icon button
+    --buttonIconVPaddingHor: 10px; // x paddings inside vertical icon button
+
+    --buttonBorderRadiusStd: 2px; // std radius
+    --buttonBorderRadiusMedium: 10px; // medium radius
+    --buttonBorderRadiusHigh: 16px; // high radius
+
+    --buttonIconMarginInside: 10px; // margin between text and icon in button
+
+    --buttonBorder: solid 1px;
+    --buttonBorderColor: rgba(0, 0, 0, 0.12);
 }
 
 .button {
-    font-size: var(--button-font-size);
+    font-size: var(--buttonFontSize);
     font-weight: var(--font_bold);
     background-color: var(--color-primary);
-    height: var(--button-height-medium);
-    border-radius: 2px;
-    border: solid 1px  rgba(0,0,0,0.12);
+    height: var(--buttonHeightMedium);
+    border-radius: var(--buttonBorderRadiusStd);
+    border: var(--buttonBorder);
+    border-color: var(--buttonBorderColor);
 
-    padding-left: 20px;
-    padding-right: 20px;
+
+    padding-left: var(--buttonPaddingHor);
+    padding-right: var(--buttonPaddingHor);
 
     cursor: pointer;
 
@@ -29,7 +45,7 @@
     flex-wrap: nowrap;
     align-items: center;
 
-    margin-bottom: 5px;
+    margin-bottom: 5px; //
 
 
     &:hover {
@@ -67,26 +83,33 @@
     }
 
     &_shape_rounded {
-        border-radius: 16px;
+        border-radius: var(--buttonBorderRadiusHigh);
     }
 
-    &__icon {
+    &__icon_left {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 10px;
+        margin-right: var(--buttonIconMarginInside);
+    }
+
+    &__icon_right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: var(--buttonIconMarginInside);
     }
 
     &_height_s {
-        height: var(--button-height-small);
+        height: var(--buttonHeightSmall);
     }
 
     &_height_m {
-        height: var(--button-height-medium);
+        height: var(--buttonHeightMedium);
     }
 
     &_height_b {
-        height: var(--button-height-big);
+        height: var(--buttonHeightBig);
     }
 
     &__container {
@@ -98,12 +121,12 @@
 
 .button-icon {
     display: flex;
-    height: var(--button-height-big);
-    width: var(--button-height-big);
+    height: var(--buttonHeightBig);
+    width: var(--buttonHeightBig);
 
     border: 0;
-    border-radius: 2px;
-    padding: 10px;
+    border-radius: var(--buttonBorderRadiusStd);
+    padding: var(--buttonIconPadding);
 
     align-items: center;
     justify-content: center;
@@ -112,7 +135,7 @@
     cursor: pointer;
 
     &_color_gray {
-        border: solid 1px  rgba(0,0,0,0.12);
+        border: solid 1px rgba(0, 0, 0, 0.12);
     }
 
     &_color_gray:hover {
@@ -120,32 +143,34 @@
     }
 }
 
-.button_sort-type {
+.button-icon-v {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 60px;
+    border: 0;
+    padding-left: var(--buttonIconVPaddingHor);
+    padding-right: var(--buttonIconVPaddingHor);
+
+    height: var(--buttonIconVHeight);
+    cursor: pointer;
+
+    &__text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-weight: var(--font_bold);
+    }
+
+    &__icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__icon {
+        height: var(--buttonIconVIconSize);
+        width: var(--buttonIconVIconSize);
+        margin-bottom: var(--buttonIconVBottomMargin);
+    }
 }
-
-.button_sort-type:hover {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-}
-
-.button__icon-sort {
-    height: 50px;
-    width: 50px;
-    margin-bottom: 5px;
-}
-
-//.nav-button {
-//    padding: 0;
-//    width: var(--button__icon-nav-size);
-//    height: var(--button__icon-nav-size);
-//}
-
-//.nav-button:hover {
-//    background-color: var(--color-white);
-//}

@@ -61,5 +61,5 @@ router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 router.addRoute(urls.checkout.name, orderingController);
 document.getElementById('foot').innerHTML = footer({});
-// router.start();
+router.start();
 
