@@ -8,6 +8,9 @@
     --navbarHeight: 96px;
     --logoMarginLeft: 30px;
     --navbarButtonSpacer: 30px; // margin between buttons and inputs in navbar
+
+    --navbarSearchInputMinWidth: 100px;
+    --navbarSearchInputMaxWidth: 442px;
 }
 
 .navbar {
@@ -40,6 +43,7 @@
     }
 
     &__right-box {
+        width: 100%;
         margin-left: auto;
         display: flex;
         justify-content: flex-end;
@@ -67,7 +71,9 @@
     }
 
     &__search-label {
-        width: 442px;
+        min-width: var(--navbarSearchInputMinWidth);
+        max-width: var(--navbarSearchInputMaxWidth);
+        width: 100%;
         background-color:  #F6F6F6;
     }
 
@@ -172,6 +178,8 @@
 .map-popup__link {
     text-decoration: none;
     color: inherit;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
 @keyframes animateleft {
