@@ -133,6 +133,7 @@
     border: 0;
     border-radius: var(--buttonBorderRadiusStd);
     padding: var(--buttonIconPadding);
+    box-sizing: border-box;
 
     align-items: center;
     justify-content: center;

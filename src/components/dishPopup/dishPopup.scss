@@ -123,72 +123,6 @@
     font-size: 18px;
 }
 
-.container {
-    display: flex;
-    position: relative;
-    cursor: pointer;
-    font-size: 18px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    align-items: center;
-    margin-right: 15px;
-}
-
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 16px;
-    width: 0;
-}
-
-.checkmark {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    background-color: #eee;
-
-    border: 1px solid gray;
-}
-
-.checkmark-radius {
-    border-radius: 15px;
-}
-
-.container:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-
-.container input:checked ~ .checkmark {
-    background-color: black;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.container input:checked ~ .checkmark:after {
-    display: block;
-}
-
-.container .checkmark:after {
-    left: 5px;
-    top: 1px;
-    width: 3px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
 .dish-popup__selector-buy-button-box {
     display: flex;
     flex-direction: row;
@@ -204,8 +138,8 @@
 
 .dish-popup__number {
     font-size: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 16px;
+    margin-left: 16px;
 }
 
 .dish-popup__selector-button {
