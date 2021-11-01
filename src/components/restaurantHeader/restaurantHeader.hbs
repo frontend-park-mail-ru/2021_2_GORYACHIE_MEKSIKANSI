@@ -4,7 +4,11 @@
     <div class="restaurant-header__gradient">
         <div class="restaurant-header__text">
             <div class="restaurant-header__title">{{name}}</div>
-            <div class="restaurant-header__info">Бесплатная доставка от {{cost}}₽   •   {{ minDTime }}-{{ maxDTime }} Мин   •
+            {{#if costFFD}}
+            <div class="restaurant-header__info">Бесплатная доставка от {{costFFD}}₽   •   {{ minDTime }}-{{ maxDTime }} Мин   •
+                {{else}}
+            <div class="restaurant-header__info">Бесплатная доставка!   •   {{ minDTime }}-{{ maxDTime }} Мин   •
+            {{/if}}
                 {{rating}}</div>
         </div>
         <div class="restaurant-header__right-box">
