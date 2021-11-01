@@ -14,9 +14,6 @@ export class Cart {
     this.controller = controller;
     this.routeTo = routeTo;
     this.parent = parent;
-
-    // EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
-    // EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, () => {}); // add the error explain
   }
 
   render() {
