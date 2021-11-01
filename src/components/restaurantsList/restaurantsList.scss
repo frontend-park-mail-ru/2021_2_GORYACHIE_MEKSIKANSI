@@ -81,8 +81,9 @@
     }
 
     @media (min-width: 0px) and (max-width: 1000px) {
-        &__restaurants-list {
+        &__list {
             width: 100%;
+            margin-left: 0;
         }
 
         &__sort {

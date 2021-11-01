@@ -25,6 +25,17 @@
         margin-left: auto;
     }
 
+    @media (min-width: 0px) and (max-width: 860px) {
+        &__promo-line-title {
+            width: 0;
+            display: none;
+        }
+
+        &__promo-line-blocks {
+            width: 100%;
+        }
+    }
+
     &__promo-block {
         margin-bottom: 20px;
         margin-right: 10px;

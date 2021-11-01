@@ -54,6 +54,14 @@
     margin: 20px;
 }
 
+@media (min-width: 0px) and (max-width: 860px) {
+    .restaurant-page__cart {
+        width: 0;
+        margin: 0;
+        visibility: hidden;
+    }
+}
+
 .restaurant-page {
     width: 100%;
     display: flex;
