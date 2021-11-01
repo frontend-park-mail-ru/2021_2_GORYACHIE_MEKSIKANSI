@@ -1,7 +1,10 @@
 import {View} from '../../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
 import {urls} from 'Modules/urls.js';
+import EventBus from 'Modules/eventBus.js';
+import {OrderingEvents} from "Events/Ordering.js";
 import baseProfilePage from '../baseProfilePage.hbs';
+import Address from 'Modules/lsAddress.js';
 import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
 import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
@@ -36,6 +39,7 @@ export class OrderingView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    EventBus.addEventListener(OrderingEvents.addressRefreshed, this.refresh);
     this.navbar.render();
 
     this.parent.innerHTML += baseProfilePage({
@@ -45,11 +49,11 @@ export class OrderingView extends View {
         items: cartStore.getState().cart,
         sumCost: cartStore.getState().cost.sumCost,
         dCost: cartStore.getState().cost.dCost,
+        address: userStore.getState().address.name
       }),
       rightMenu: orderSummary({
         sumCost: cartStore.getState().cost.sumCost,
       })});
-
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
     window.addEventListener('scroll', this.stickSummary);
     this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.confirm);
@@ -59,8 +63,11 @@ export class OrderingView extends View {
     document.querySelector('.footer').style.marginTop = '0';
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
     this.stickSummary();
+  }
 
-
+  refresh = () => {
+    this.remove();
+    this.render();
   }
 
   stickSummary = () => {

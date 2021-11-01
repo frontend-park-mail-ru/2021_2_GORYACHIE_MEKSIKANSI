@@ -43,9 +43,9 @@ export const initialUserState = {
   email: '',
   avatar: '',
   address: {
-    aLatitude: 55.751574,
-    aLongitude: 37.57385,
-    aName: 'Москва',
+    latitude:  55.751574,
+    longitude: 37.57385,
+    name: 'Москва',
   },
 };
 

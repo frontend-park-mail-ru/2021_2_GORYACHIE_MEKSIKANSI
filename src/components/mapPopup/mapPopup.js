@@ -149,7 +149,7 @@ export class MapPopup {
                         this.mapPopupClose(document.querySelector('.map-popup'));
                         navbar.updateAddressName(address)
                     } else {
-                        // TODO нужно сделть ошибку...
+                        // TODO нужно сделать ошибку...
                     }
                 }
             })

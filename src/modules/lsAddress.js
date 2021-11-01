@@ -12,6 +12,7 @@ class Address {
             this.longitude = address.longitude;
             this.latitude = address.latitude;
             this.name = address.name;
+            this.setStoreAddress(address);
         } else {
             this.longitude = '';
             this.latitude = '';
@@ -25,15 +26,10 @@ class Address {
         if (userStore.getState().auth) {
             if ((String(longitude) !== String(this.longitude) || String(latitude) !== String(this.latitude) || name !== this.name) &&
                 longitude && latitude && name) {
-                userStore.dispatch({
-                    actionType: userActions.storeUserDataUpdate,
-                    updated: {
-                        address: {
-                            aLongitude: longitude,
-                            aLatitude: latitude,
-                            aName: name,
-                        }
-                    }
+                this.setStoreAddress({
+                    aLongitude: longitude,
+                    aLatitude: latitude,
+                    aName: name,
                 })
                 postAddress({ longitude: longitude, latitude: latitude, name: name })
                     .then((res) => {
@@ -48,6 +44,15 @@ class Address {
         this.longitude = longitude;
         this.latitude = latitude;
         this.name = name;
+    }
+
+    setStoreAddress(cAddress) {
+        userStore.dispatch({
+            actionType: userActions.storeUserDataUpdate,
+            updated: {
+                address: cAddress
+            }
+        })
     }
 
     getAddress () {

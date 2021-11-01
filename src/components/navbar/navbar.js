@@ -29,7 +29,7 @@ export class Navbar {
     this.parent.insertAdjacentHTML('afterbegin', navbar({
       user: userStore.getState(),
       itemNum: this.getNumberOfItems(),
-      address: {addr: Address.getAddress().name},
+      address: {addr: userStore.getState().address.name},
     }));
 
     if (userStore.getState().auth) {
