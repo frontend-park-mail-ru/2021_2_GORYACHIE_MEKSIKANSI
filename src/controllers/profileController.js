@@ -7,8 +7,8 @@ import {ValidationLength} from 'Events/Validation.js';
 import store from 'Modules/store.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
-import {urls} from "../modules/urls";
-import userStore from "../modules/reducers/userStore";
+import {urls} from "Modules/urls";
+import userStore from "Modules/reducers/userStore";
 
 /**
  *  Profile controller class

@@ -1,7 +1,7 @@
 import Http from './http.js';
 import {auth, logout} from './auth.js';
 import eventBus from "./eventBus";
-import {AuthStatus} from "../events/Auth";
+import {AuthStatus} from "Events/Auth";
 
 const http = new Http();
 
@@ -150,6 +150,22 @@ export function updatePassword(password) {
     url: '/user/password/',
     body: {
       password: password,
+    },
+  });
+}
+
+export function postAddress(address) {
+  return http.ajaxPut({
+    url: '/user/address',
+    body: {
+      address: {
+        coordinates: {
+         latitude: address.latitude,
+         longitude: address.longitude,
+        },
+        city: address.name,
+        alias: address.name,
+      }
     },
   });
 }

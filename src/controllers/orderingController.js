@@ -3,9 +3,9 @@ import OrderingModel from 'Models/Ordering.js';
 import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
 import {urls} from 'Modules/urls.js';
 import store from 'Modules/store.js';
-import {AuthStatus} from "../events/Auth";
-import cartStore from "../modules/reducers/cartStore";
-import userStore from "../modules/reducers/userStore";
+import {AuthStatus} from "Events/Auth";
+import cartStore from "Modules/reducers/cartStore";
+import userStore from "Modules/reducers/userStore";
 
 export class OrderingController {
   /**

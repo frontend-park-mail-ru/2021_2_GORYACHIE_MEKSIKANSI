@@ -4,7 +4,8 @@ import {updateName} from 'Modules/api.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
-import userStore from "../../../modules/reducers/userStore";
+import userStore from 'Modules/reducers/userStore.js';
+import {AddressPopup} from '../addressView/addressView.js';
 
 /**
  * Profile view class

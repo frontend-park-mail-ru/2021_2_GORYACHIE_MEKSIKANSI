@@ -6,9 +6,9 @@ import {LoginView} from 'Views/LoginView/loginView.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {ErrorsText} from 'Events/Errors.js';
 import {urls} from 'Modules/urls.js';
-import {userStatus} from "../modules/store";
+import {userStatus} from "Modules/store";
 import {AuthStatus} from 'Events/Auth.js';
-import userStore from "../modules/reducers/userStore";
+import userStore from "Modules/reducers/userStore";
 
 /**
  *  Login controller class

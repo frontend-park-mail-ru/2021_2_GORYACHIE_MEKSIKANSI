@@ -1,7 +1,7 @@
-import {YandexMap} from '../../modules/yMaps.js';
-import address from '../../modules/lsAddress.js';
-import eventBus from '../../modules/eventBus.js';
-import {AuthStatus} from '../../events/Auth.js';
+import {YandexMap} from 'Modules/yMaps.js';
+import address from 'Modules/lsAddress.js';
+import eventBus from 'Modules/eventBus.js';
+import {AuthStatus} from 'Events/Auth.js';
 import navbar from '../navbar/navbar.js';
 import mapPopup from './mapPopup.hbs';
 

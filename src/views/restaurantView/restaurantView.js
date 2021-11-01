@@ -2,13 +2,17 @@ import Navbar from 'Components/navbar/navbar.js';
 import {DishPopup} from 'Components/dishPopup/dishPopup.js';
 import {Cart} from 'Components/cart/cart.js';
 import {View} from '../baseView/View.js';
-import EventBus from "../../modules/eventBus.js";
-import {RestaurantEvents} from "../../events/Restaurant.js";
+import EventBus from "Modules/eventBus.js";
+import {RestaurantEvents} from "Events/Restaurant.js";
 import page from '../baseView/page.hbs';
 import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
 import continuePopup from 'Components/continuePopup/continuePopup.hbs'
+<<<<<<< Updated upstream
 import {DishesList} from '../../components/dishesList/dishesList';
+=======
+import userStore from "Modules/reducers/userStore";
+>>>>>>> Stashed changes
 
 export class RestaurantView extends View {
   constructor({

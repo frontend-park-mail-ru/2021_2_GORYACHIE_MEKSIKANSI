@@ -1,8 +1,8 @@
 import {updateCartPut} from '../api.js';
 import {createStoreWithMiddleware} from '../store.js';
 import eventBus from '../eventBus.js';
-import {RestaurantEvents} from '../../events/Restaurant.js';
-import {ResponseEvents} from '../../events/Responses.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
+import {ResponseEvents} from 'Events/Responses.js';
 
 export const cartActions = {
   update: 'update',

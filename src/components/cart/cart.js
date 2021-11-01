@@ -2,9 +2,13 @@
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
 import cart from './cart.hbs'
+<<<<<<< Updated upstream
 import cartStore from "Modules/reducers/cartStore.js";
 import {SnackBar} from "Components/snackBar/snackBar.js";
  import {ResponseEvents} from "../../events/Responses";
+=======
+import cartStore from "Modules/reducers/cartStore";
+>>>>>>> Stashed changes
 
 
  export class Cart {

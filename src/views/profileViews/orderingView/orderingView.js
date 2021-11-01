@@ -5,8 +5,8 @@ import baseProfilePage from '../baseProfilePage.hbs';
 import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
 import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
-import userStore from "../../../modules/reducers/userStore";
-import cartStore from "../../../modules/reducers/cartStore";
+import userStore from "Modules/reducers/userStore";
+import cartStore from "Modules/reducers/cartStore";
 
 /**
  * Profile view class
