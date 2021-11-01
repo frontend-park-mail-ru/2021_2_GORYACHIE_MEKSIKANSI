@@ -110,7 +110,7 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
      if ('dishesErrs' in response.body.cart) {
          response.body.cart.dishesErrs.forEach((item) => {
              snack = new SnackBar({
-                 message: item.nameDish + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
+                 message: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
                  status: "warning",
                  position: "tr",
                  width: "500px",
