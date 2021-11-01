@@ -2,12 +2,8 @@ import {View} from '../baseView/View.js';
 import Navbar from 'Components/navbar/navbar';
 import homePage from './homePage.hbs';
 import page from '../baseView/page.hbs';
-<<<<<<< Updated upstream
-import {PromoLine} from '../../components/promoLine/promoLine.js';
 import {RestaurantsList} from 'Components/restaurantsList/restaurantLists';
-=======
 import {PromoLine} from 'Components/promoLine/promoLine.js';
->>>>>>> Stashed changes
 
 /**
  * Home view class

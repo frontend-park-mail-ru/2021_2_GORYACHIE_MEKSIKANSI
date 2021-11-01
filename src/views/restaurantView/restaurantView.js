@@ -8,11 +8,8 @@ import page from '../baseView/page.hbs';
 import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
 import continuePopup from 'Components/continuePopup/continuePopup.hbs'
-<<<<<<< Updated upstream
 import {DishesList} from '../../components/dishesList/dishesList';
-=======
 import userStore from "Modules/reducers/userStore";
->>>>>>> Stashed changes
 
 export class RestaurantView extends View {
   constructor({

@@ -8,16 +8,14 @@ import {RestaurantController} from 'Controllers/restaurantController.js';
 import {OrderingController} from 'Controllers/orderingController.js';
 import {urls} from 'Modules/urls.js';
 import footer from 'Components/footer/footer.hbs';
-<<<<<<< Updated upstream
 import './main.scss';
 import 'Components/variables/colors.scss';
 import 'Components/variables/fonts.scss';
-=======
 import './main.css';
 import 'Components/variables/colors.css';
 import 'Components/variables/fonts.css';
 import {updateCartPut} from 'Modules/api.js';
->>>>>>> Stashed changes
+
 
 const application = document.getElementById('app');
 const router = new Router(document.body);

@@ -1,21 +1,12 @@
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs'
 import {MapPopup} from '../mapPopup/mapPopup.js';
-<<<<<<< Updated upstream
-import Address from '../../modules/lsAddress.js';
-import eventBus from "../../modules/eventBus";
-import {AuthStatus} from "../../events/Auth";
-import userStore from "../../modules/reducers/userStore";
-import cartStore from "../../modules/reducers/cartStore.js";
-import EventBus from "../../modules/eventBus";
 import {RestaurantEvents} from "../../events/Restaurant";
-=======
 import Address from 'Modules/lsAddress.js';
 import eventBus from "Modules/eventBus.js";
 import {AuthStatus} from "Events/Auth.js";
 import userStore from "Modules/reducers/userStore.js";
 import cartStore from "Modules/reducers/cartStore.js";
->>>>>>> Stashed changes
 
 /**
  * Left navigation bar class

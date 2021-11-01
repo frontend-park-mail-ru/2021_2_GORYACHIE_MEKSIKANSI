@@ -2,21 +2,12 @@ import {ResponseEvents} from 'Events/Responses.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import cartStore, {
-<<<<<<< Updated upstream
   addDishToCart,
   clearCart, clearCartAndAddDish,
   deleteDishFromCart,
   increaseDishInCart
-} from "../modules/reducers/cartStore";
-import {dishGet, restaurantGet} from "../modules/api";
-=======
-    addDishToCart,
-    clearCart,
-    deleteDishFromCart,
-    increaseDishInCart
 } from "Modules/reducers/cartStore";
 import {dishGet, restaurantGet} from "Modules/api";
->>>>>>> Stashed changes
 
 class RestaurantModel {
   /**

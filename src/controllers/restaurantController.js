@@ -2,14 +2,11 @@ import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
-<<<<<<< Updated upstream
-import cartStore from "../modules/reducers/cartStore";
 import userStore from "../modules/reducers/userStore";
 import {urls} from "../modules/urls";
-
-=======
 import cartStore from "Modules/reducers/cartStore";
->>>>>>> Stashed changes
+
+
 export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller
