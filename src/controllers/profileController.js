@@ -9,6 +9,7 @@ import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
 import {urls} from "Modules/urls";
 import userStore from "Modules/reducers/userStore";
+import {SnackBar} from "../components/snackBar/snackBar";
 
 /**
  *  Profile controller class
@@ -42,7 +43,26 @@ export class ProfileController {
     })
   }
 
-  dataChange(name, phone, mail, password, repeatPassword,  avatar) {
+  checkImage(file) {
+    if (file.size > 7000000) {
+      const snack = new SnackBar({
+        message: "Картинка слишком большого размера! Допустимый размер 7мб",
+        status: "red",
+        position: "tr",
+        width: "500px",
+        fixed: true,
+      })
+      snack.settingUp();
+      snack.Open();
+    } else {
+      const payload = new FormData();
+      payload.append('avatar', file);
+      ProfileModel.updateUserAvatar(payload);
+      this.profileView.showImage(file);
+    }
+  }
+
+  dataChange(name, phone, mail, password, repeatPassword) {
     const currentUserData = userStore.getState();
     let validation = {};
     if (currentUserData.name !== name) {

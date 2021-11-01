@@ -5,6 +5,8 @@ import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from 'Modules/reducers/userStore.js';
+import {updateAvatar} from "../modules/api";
+import {SnackBar} from "../components/snackBar/snackBar";
 
 /**
  * Class Profile Model
@@ -81,6 +83,32 @@ class ProfileModel {
         })
         .catch(() => {
             eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+        });
+  }
+
+  updateUserAvatar(avatar) {
+    updateAvatar(avatar)
+        .then((response) => {
+          const snack = new SnackBar({
+            message: "Картинка обновлена!",
+            status: "warn",
+            position: "tr",
+            width: "500px",
+            fixed: true,
+          });
+          snack.settingUp();
+          snack.Open();
+        })
+        .catch(() => {
+          const snack = new SnackBar({
+            message: "Произошла какая то ошибка!",
+            status: "red",
+            position: "tr",
+            width: "500px",
+            fixed: true,
+          });
+          snack.settingUp();
+          snack.Open();
         });
   }
 }

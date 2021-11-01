@@ -154,6 +154,13 @@ export function updatePassword(password) {
   });
 }
 
+export function updateAvatar(avatar) {
+  return http.ajaxPutNoStringify({
+    url: '/user/avatar/',
+    body: avatar,
+  });
+}
+
 export function postAddress(address) {
   return http.ajaxPut({
     url: '/user/address',
