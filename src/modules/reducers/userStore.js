@@ -46,6 +46,9 @@ export const initialUserState = {
     latitude:  55.751574,
     longitude: 37.57385,
     name: 'Москва',
+    street: 'ул. Пушкин',
+    city: 'Москва',
+    fullAddress: 'дом Колотушкина',
   },
 };
 

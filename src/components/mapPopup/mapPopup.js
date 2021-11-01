@@ -144,10 +144,20 @@ export class MapPopup {
                         eventBus.emitEventListener(AuthStatus.changeAddress, {
                             longitude: this.longitude,
                             latitude: this.latitude,
-                            name: isCorrect.properties._data.name
+                            name: isCorrect.properties._data.name,
+                            city: isCorrect.properties._data.metaDataProperty.GeocoderMetaData.Address.Components.find((element) => {
+                                if (element.kind === 'province' && isCorrect.properties._data.text.includes(String(element.name))) {
+                                    return true;
+                                }
+                            }).name,
+                            fullAddress: isCorrect.properties._data.text,
                         });
                         this.mapPopupClose(document.querySelector('.map-popup'));
                         navbar.updateAddressName(address)
+                        console.log(this.parent.querySelector('.js-address'))
+                        if (this.parent.querySelector('.js-address')) {
+                            this.parent.querySelector('.js-address').value = String(isCorrect.properties._data.text);
+                        }
                     } else {
                         // TODO нужно сделать ошибку...
                     }

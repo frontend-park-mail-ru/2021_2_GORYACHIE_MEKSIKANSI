@@ -49,7 +49,7 @@ export class OrderingView extends View {
         items: cartStore.getState().cart,
         sumCost: cartStore.getState().cost.sumCost,
         dCost: cartStore.getState().cost.dCost,
-        address: userStore.getState().address.name
+        address: userStore.getState().address.fullAddress
       }),
       rightMenu: orderSummary({
         sumCost: cartStore.getState().cost.sumCost,

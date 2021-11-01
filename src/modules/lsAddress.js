@@ -12,26 +12,33 @@ class Address {
             this.longitude = address.longitude;
             this.latitude = address.latitude;
             this.name = address.name;
+            this.city = address.city;
+            this.fullAddress = address.fullAddress;
             this.setStoreAddress(address);
         } else {
             this.longitude = '';
             this.latitude = '';
             this.name = '';
+            this.street = '';
+            this.city = '';
+            this.fullAddress = '';
         }
         eventBus.addEventListener(AuthStatus.changeAddress, this.setAddress);
     }
 
-    setAddress = ({ longitude, latitude, name }) => {
-        localStorage.address = JSON.stringify({ longitude, latitude, name });
+    setAddress = (address) => {
+        localStorage.address = JSON.stringify(address);
         if (userStore.getState().auth) {
-            if ((String(longitude) !== String(this.longitude) || String(latitude) !== String(this.latitude) || name !== this.name) &&
-                longitude && latitude && name) {
+            if ((String(address.longitude) !== String(this.longitude) || String(address.latitude) !== String(this.latitude) || address.name !== this.name) &&
+                address.longitude && address.latitude && address.name) {
                 this.setStoreAddress({
-                    aLongitude: longitude,
-                    aLatitude: latitude,
-                    aName: name,
+                    longitude: address.longitude,
+                    latitude: address.latitude,
+                    name: address.name,
+                    city: address.city,
+                    fullAddress: address.fullAddress,
                 })
-                postAddress({ longitude: longitude, latitude: latitude, name: name })
+                postAddress({ longitude: address.longitude, latitude: address.latitude, name: address.name })
                     .then((res) => {
                         if (res.status === 200) {
                             console.log('address set!!!!');
@@ -41,9 +48,11 @@ class Address {
                     });
             }
         }
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.name = name;
+        this.longitude = address.longitude;
+        this.latitude = address.latitude;
+        this.name = address.name;
+        this.city = address.city;
+        this.fullAddress = address.fullAddress;
     }
 
     setStoreAddress(cAddress) {
@@ -56,7 +65,13 @@ class Address {
     }
 
     getAddress () {
-        return { longitude: this.longitude, latitude: this.latitude, name: this.name }
+        return { longitude: this.longitude,
+            latitude: this.latitude,
+            name: this.name,
+            street: this.street,
+            city: this.city,
+            fullAddress: this.fullAddress,
+        };
     }
 }
 

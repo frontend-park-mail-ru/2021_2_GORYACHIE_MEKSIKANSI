@@ -163,7 +163,7 @@ export function postAddress(address) {
          latitude: address.latitude,
          longitude: address.longitude,
         },
-        city: address.name,
+        city: address.city,
         alias: address.name,
       }
     },

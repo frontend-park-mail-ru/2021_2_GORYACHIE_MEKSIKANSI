@@ -67,6 +67,12 @@ export class YandexMap {
         this.callback(address, isRenew);
     }
 
+    getUserPositionAddress (properties) {
+        const prop = properties.get('metaDataProperty').GeocoderMetaData.AddressDetails.Country;
+        console.log(prop.AddressLine);
+        return prop.AddressLine;
+    }
+
     setCenter (pos, zoom) {
         this.map.setCenter(this.refactorToArray(pos), zoom);
     }
@@ -155,11 +161,6 @@ export class YandexMap {
 
     refactorToArray (pos) {
         return [pos.latitude, pos.longitude];
-    }
-
-    getUserPositionAddress (properties) {
-        const prop = properties.get('metaDataProperty').GeocoderMetaData.AddressDetails.Country;
-        return prop.AddressLine;
     }
 
     static async isAddressCorrect (address) {
