@@ -1,0 +1,25 @@
+<div class="restaurant-nav">
+    <hr class="restaurant-nav__line">
+    <div class="restaurant-nav__list">
+        {{#each menu}}
+            <a href="#{{name}}" class="restaurant-underheader__a">
+                <div class="restaurant-nav__btn">
+                    {{name}}
+                </div>
+            </a>
+        {{/each}}
+    </div>
+</div>
+
+<div class="dishes-list__dishes">
+    {{#each menu}}
+        <div id="{{name}}" class="dishes-list__menu-title">
+            {{name}}
+        </div>
+        {{#each dishes}}
+            <div class="dishes-list__dish">
+                {{>dish this }}
+            </div>
+        {{/each}}
+    {{/each}}
+</div>

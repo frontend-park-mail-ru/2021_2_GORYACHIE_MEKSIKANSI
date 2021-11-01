@@ -74,6 +74,12 @@ export const addDishToCart = (aDish, restaurant) => {  // find and add count
   };
 };
 
+export const clearCartAndAddDish = (aDish, restaurant) => {
+  return (dispatch, getState) => {
+    updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: [aDish]}});
+  }
+}
+
 export const setCart = (response) => {
   const wrapperStruct = {
     cart: response.body.cart.dishes,

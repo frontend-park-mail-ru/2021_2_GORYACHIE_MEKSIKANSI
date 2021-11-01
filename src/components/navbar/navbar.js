@@ -6,6 +6,8 @@ import eventBus from "../../modules/eventBus";
 import {AuthStatus} from "../../events/Auth";
 import userStore from "../../modules/reducers/userStore";
 import cartStore from "../../modules/reducers/cartStore.js";
+import EventBus from "../../modules/eventBus";
+import {RestaurantEvents} from "../../events/Restaurant";
 
 /**
  * Left navigation bar class

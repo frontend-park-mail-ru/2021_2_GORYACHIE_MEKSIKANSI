@@ -8,7 +8,7 @@ import page from '../baseView/page.hbs';
 import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
 import continuePopup from 'Components/continuePopup/continuePopup.hbs'
-import userStore from "../../modules/reducers/userStore";
+import {DishesList} from '../../components/dishesList/dishesList';
 
 export class RestaurantView extends View {
   constructor({
@@ -34,7 +34,13 @@ export class RestaurantView extends View {
       routeTo: this.routeTo,
       controller: this.controller,
     });
-    
+
+    this.dishesList = new DishesList({
+      parent: this.parent,
+      routeTo: this.routeTo,
+      controller: this.controller,
+    })
+
     EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshNavbar);
   }
 
@@ -43,80 +49,22 @@ export class RestaurantView extends View {
   }
 
   render(props = {}) {
-  // TODO: Запрос ресторана из модели
     this.restaurant = props.restaurant;
+    this.popup.restaurant = this.restaurant;
 
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
-      auth: userStore.getState().auth,
       head: restaurantHeader(this.restaurant),
       content: restaurantPage(this.restaurant),
     }));
 
+    this.dishesList.render({
+      parent: this.parent.querySelector('.restaurant-page__dishes-list'),
+      restaurant: this.restaurant,
+    });
+
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render();
-
-    this.settingUp();
-  }
-
-  settingUp() {
-    this.popup.settingUp(this.restaurant);
-
-    this.anchors = document.querySelectorAll('a[href*="#"]');
-    this.menuNavsTitles = document.querySelectorAll('.restaurant-page__menu-title');
-    this.menuNavsButtons = document.querySelectorAll('.restaurant-nav__btn');
-
-    for (const anchor of this.anchors) {
-      anchor.addEventListener('click', this.scrollingToMenu);
-    }
-
-    window.addEventListener('scroll', this.stickNavbar);
-    window.addEventListener('scroll', this.navHighlight);
-
-    this.sticky = document.querySelector('.restaurant-nav__list').offsetTop;
-  }
-
-  stickNavbar = () => {
-    const menuNavbar = document.querySelector('.restaurant-nav__list');
-    if (window.pageYOffset >= this.sticky) {
-      menuNavbar.classList.add('sticky');
-      menuNavbar.style.left = '0';
-      menuNavbar.style.borderBottom = 'solid 1px #e2e2e2';
-      menuNavbar.style.paddingLeft = '3%';
-    } else {
-      menuNavbar.classList.remove('sticky');
-      menuNavbar.style.borderBottom = '';
-      menuNavbar.style.paddingLeft = '0';
-    }
-  };
-
-  navHighlight = () => {
-    // turn off highlight
-    this.menuNavsButtons.forEach((item) => {
-      item.style.borderBottom = '';
-    })
-
-    // find the needed title
-    let title;
-    this.menuNavsTitles.forEach((item, i) => {
-      if (item.offsetTop - 5 <= window.pageYOffset) {
-        title = this.menuNavsButtons[i];
-      }
-    });
-    // if it is not undef highlight it
-    if (title) {
-      title.style.borderBottom = 'solid 1px black';
-    }
-  }
-
-  scrollingToMenu = (e) => {
-    e.preventDefault();
-    const blockID = e.target.closest('a').getAttribute('href').substr(1);
-
-    document.getElementById(blockID).scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
   }
 
   continueOrdering = (newR, oldR) => {
@@ -146,12 +94,6 @@ export class RestaurantView extends View {
   }
 
   remove() {
-    window.removeEventListener('scroll', this.stickNavbar);
-    window.removeEventListener('scroll', this.navHighlight);
-    this.anchors.forEach((anchor) => {
-      anchor.removeEventListener('click', this.scrollingToMenu);
-    });
-
     if (this.continueDiv) {
       this.closeContinueOrdering();
     }
@@ -161,4 +103,3 @@ export class RestaurantView extends View {
     this.parent.innerHTML = '';
   }
 }
-
