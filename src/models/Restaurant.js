@@ -1,13 +1,11 @@
 import {ResponseEvents} from 'Events/Responses.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
-import {getRestaurantMock, getDish, getItemToCart} from 'Views/mocks.js';
-import store, {actions} from 'Modules/store.js';
 import cartStore, {
-    addDishToCart,
-    clearCart,
-    deleteDishFromCart,
-    increaseDishInCart
+  addDishToCart,
+  clearCart, clearCartAndAddDish,
+  deleteDishFromCart,
+  increaseDishInCart
 } from "../modules/reducers/cartStore";
 import {dishGet, restaurantGet} from "../modules/api";
 
@@ -30,11 +28,10 @@ class RestaurantModel {
   getDish(restId, dishId) {
     dishGet({url: '/restaurant/' + restId + '/dish/' + dishId})
         .then((response) => {
-          // eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish()); // mock from mocks
           eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
         })
         .catch(() => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
+          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, {}); // TODO: snack
         });
   }
 
@@ -56,9 +53,7 @@ class RestaurantModel {
   }
 
   changeRestaurantAndAddDish(dishSettings = {}) {
-    // cartStore.dispatch(clearCartChangeRestaurantAddDish(dishSettings.dish, dishSettings.restaurant));
-    this.clearCart();
-    this.addDishToCart(dishSettings);
+    cartStore.dispatch(clearCartAndAddDish(dishSettings.dish, dishSettings.restaurant));
   }
 
   increaseDishInCart(itNum) {

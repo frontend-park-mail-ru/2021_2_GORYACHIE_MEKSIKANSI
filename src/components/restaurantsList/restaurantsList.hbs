@@ -1,0 +1,17 @@
+<div class="restaurants-list__line">
+    <div class="restaurants-list__sort">
+        {{>sortBox }}
+    </div>
+
+    <div class="restaurants-list__list">
+        {{>sortUnderheader }}
+        <div class="restaurants-list__restaurant-block-title">
+            Рестораны
+        </div>
+        {{#each restaurantList}}
+            <div class="restaurants-list__restaurant-block home-page__restaurant-block-media">
+                {{>restaurant this }}
+            </div>
+        {{/each }}
+    </div>
+</div>

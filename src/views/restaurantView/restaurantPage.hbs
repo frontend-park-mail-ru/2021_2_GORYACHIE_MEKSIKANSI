@@ -12,32 +12,9 @@
                 {{ addrs }}
             </div>
         </div>
-        <div class="restaurant-nav">
-            <hr class="restaurant-nav__line">
-            <div class="restaurant-nav__list">
-                {{#each menu}}
-                    <a href="#{{name}}" class="restaurant-underheader__a">
-                        <div class="restaurant-nav__btn">
-                            {{name}}
-                        </div>
-                    </a>
-                {{/each}}
-            </div>
-
-        </div>
-
-        <div class="restaurant-page__dishes">
-            {{#each menu}}
-                <div id="{{name}}" class="restaurant-page__menu-title">
-                    {{name}}
-                </div>
-                {{#each dishes}}
-                    <div class="restaurant-page__dish restaurant-page__dish-media">
-                        {{>dish this }}
-                    </div>
-                {{/each}}
-            {{/each}}
-        </div>
+    <div class="restaurant-page__dishes-list">
+<!--    space for dishes list   -->
+    </div>
     </div>
     <div class="restaurant-page__cart">
 <!--   space for cart     -->

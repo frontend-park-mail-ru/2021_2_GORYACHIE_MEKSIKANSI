@@ -2,8 +2,7 @@
     --dishPopupWidth: 700px;
     --dishPopupRadius: 30px;
 
-    --dishPopupImageHeight: 200px;
-    --dishPopupImageMaxWidth: 400px;
+    --dishPopupImageHeight: 250px;
 
     --dishPopupDishTitleFontSize: 30px;
     --dishPopupDishDescFontSize: 18px;
@@ -71,13 +70,13 @@
     }
 
     &__image {
-        max-width: var(--dishPopupImageMaxWidth);
-        height: var(--dishPopupImageHeight);
-
         object-fit: cover;
 
         margin-right: auto;
         margin-left: auto;
+
+        width: 100%;
+        height: var(--dishPopupImageHeight);
     }
 
     &__dish-title {

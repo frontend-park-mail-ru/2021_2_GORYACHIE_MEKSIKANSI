@@ -1,5 +1,6 @@
 :root {
     --cartWrapperHeight: 80vh;
+    --cartMinWidth: 300px;
 
     --cartBuyButtonFontSize: 25px;
     --cartBuyButtonHeight: 60px;
@@ -19,6 +20,7 @@
 .cart {
     &-wrapper {
         height: var(--cartWrapperHeight);
+        min-width: var(--cartMinWidth);
         display: flex;
         flex-direction: column;
     }
