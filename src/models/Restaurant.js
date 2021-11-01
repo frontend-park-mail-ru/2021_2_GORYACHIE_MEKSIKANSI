@@ -28,11 +28,10 @@ class RestaurantModel {
   getDish(restId, dishId) {
     dishGet({url: '/restaurant/' + restId + '/dish/' + dishId})
         .then((response) => {
-          // eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish()); // mock from mocks
           eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
         })
         .catch(() => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, getDish());
+          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, {}); // TODO: snack
         });
   }
 

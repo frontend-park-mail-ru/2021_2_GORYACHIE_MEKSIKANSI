@@ -43,15 +43,7 @@ export class HomeView extends View {
       parent: this.parent.querySelector('.home-page__restaurants-list'),
       restaurantsList: props.restaurants,
     });
-    this.settingUp();
   }
-
-  /**
-   * Method for setting up before rendering elements
-   */
-  settingUp() {
-  }
-
   /**
    * Method for removing setted up listeners and other data
    */
