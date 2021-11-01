@@ -77,26 +77,13 @@ export class ProfileView extends View {
   checkImage = () => {
     const [file] = document.getElementById('avatar').files
     if (file) {
-        // this.controller.checkImage();
+        this.controller.checkImage(file);
     }
   }
 
   showImage = (file) => {
     document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
   }
-
-  deleteImage = () => {
-    document.getElementById('avatar').value = '';
-  }
-
-
-  sendImage = () => {
-    const [file] = document.getElementById('avatar').files;
-    if (file) {
-      // document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
-    }
-  }
-
 
   /**
    * Method calling by
@@ -105,7 +92,7 @@ export class ProfileView extends View {
    */
   submitListener(event) {
     event.preventDefault();
-    this.controller.dataChange(...Object.values(this.inputs).map((obj) => {return obj.input.value}), '');
+    this.controller.dataChange(...Object.values(this.inputs).map((obj) => {return obj.input.value}));
   }
 
   showErrors = (incorrectData = {}) => {

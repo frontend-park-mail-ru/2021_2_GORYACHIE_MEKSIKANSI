@@ -109,6 +109,18 @@ export default class Http {
     });
   }
 
+  async ajaxPutNoStringify({
+    url = '/',
+    body = null,
+  } = {}) {
+    return makeFetch({
+      url: url,
+      method: 'PUT',
+      body: body,
+      type: 'image/jpeg',
+    });
+  }
+
   /**
    * ajaxDelete request
    *
