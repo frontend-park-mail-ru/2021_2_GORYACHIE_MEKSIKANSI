@@ -131,7 +131,7 @@ export const clearCart = () => {
 const updateCart = (dispatch, bufferToUpdate) => {
   updateCartPut(bufferToUpdate)
       .then((response) => {
-        if (response.status === ResponseEvents.OK) {
+        if (response.status === ResponseEvents.OK && !('dishesErrs' in response.body.cart)) {
           const wrapperStruct = {
             cart: response.body.cart.dishes,
             restaurant: response.body.cart.restaurant,
@@ -147,12 +147,12 @@ const updateCart = (dispatch, bufferToUpdate) => {
           updateStorage();
           return response;
         } else {
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, response);
         }
       })
-      .catch(() => {
-        eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
-      });
+      // .catch((response) => {
+      //   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
+      // });
 };
 
 
