@@ -11,9 +11,6 @@ import footer from 'Components/footer/footer.hbs';
 import './main.scss';
 import 'Components/variables/colors.scss';
 import 'Components/variables/fonts.scss';
-import './main.css';
-import 'Components/variables/colors.css';
-import 'Components/variables/fonts.css';
 import {updateCartPut} from 'Modules/api.js';
 
 
