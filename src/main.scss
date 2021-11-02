@@ -36,7 +36,8 @@
 @import "Components/snackBar/snackBar.scss";
 
 :root {
-    --contentPadding: 3%;
+    --contentPadding: 3%;  // Hor paddings
+    --contentBottomPadding: 150px;
 }
 
 body {

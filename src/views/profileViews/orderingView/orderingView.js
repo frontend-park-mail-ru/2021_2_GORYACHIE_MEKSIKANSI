@@ -10,11 +10,12 @@ import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
 import userStore from "Modules/reducers/userStore";
 import cartStore from "Modules/reducers/cartStore";
+import {BaseProfileView} from "../baseProfileView";
 
 /**
  * Profile view class
  */
-export class OrderingView extends View {
+export class OrderingView extends BaseProfileView {
   /**
    *
    * @param {HTMLElement} parent
@@ -39,6 +40,7 @@ export class OrderingView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    super.render();
     EventBus.addEventListener(OrderingEvents.addressRefreshed, this.refresh);
     this.navbar.render();
 
@@ -60,7 +62,6 @@ export class OrderingView extends View {
 
     this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
 
-    document.querySelector('.footer').style.marginTop = '0';
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
     this.stickSummary();
   }
@@ -73,6 +74,7 @@ export class OrderingView extends View {
   stickSummary = () => {
     const summary = document.querySelector('.cart-order-summary');
     this.footY = Number(document.querySelector('.cart-order').offsetTop) + Number(document.querySelector('.cart-order').offsetHeight);
+    console.log(summary.offsetWidth, this.summaryWidth);
     if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
       summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
       this.summaryWidth = summary.offsetWidth;
@@ -83,7 +85,7 @@ export class OrderingView extends View {
     } else {
       summary.classList.remove('cart-order-summary-sticky');
       summary.style.width = '';
-      this.cartWidth = summary.offsetWidth;
+      this.summaryWidth = summary.offsetWidth;
     }
   }
 
@@ -117,6 +119,7 @@ export class OrderingView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
+    super.remove();
     this.navbar.remove();
 
     this.removeConfirm();
