@@ -10,11 +10,12 @@ import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
 import userStore from "Modules/reducers/userStore";
 import cartStore from "Modules/reducers/cartStore";
+import {BaseProfileView} from "../baseProfileView";
 
 /**
  * Profile view class
  */
-export class OrderingView extends View {
+export class OrderingView extends BaseProfileView {
   /**
    *
    * @param {HTMLElement} parent
@@ -39,6 +40,7 @@ export class OrderingView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    super.render();
     EventBus.addEventListener(OrderingEvents.addressRefreshed, this.refresh);
     this.navbar.render();
 
@@ -56,11 +58,8 @@ export class OrderingView extends View {
       })});
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
     window.addEventListener('scroll', this.stickSummary);
-    this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.confirm);
-
     this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
 
-    document.querySelector('.footer').style.marginTop = '0';
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
     this.stickSummary();
   }
@@ -83,15 +82,7 @@ export class OrderingView extends View {
     } else {
       summary.classList.remove('cart-order-summary-sticky');
       summary.style.width = '';
-      this.cartWidth = summary.offsetWidth;
-    }
-  }
-
-  confirm = () => {
-    if (userStore.getState().auth) {
-      // confirm
-    } else {
-      this.routeTo(urls.login.url);
+      this.summaryWidth = summary.offsetWidth;
     }
   }
 
@@ -102,6 +93,9 @@ export class OrderingView extends View {
       this.parent.appendChild(this.confirmDiv);
       document.body.style.overflowY = 'hidden';
       this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
+      this.confirmDiv.querySelector('.confirm-popup__pay-button').addEventListener('click', this.controller.makePay);
+    } else {
+      this.routeTo(urls.order.url);
     }
   }
 
@@ -117,7 +111,9 @@ export class OrderingView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
+    super.remove();
     this.navbar.remove();
+    window.removeEventListener('scroll', this.stickSummary);
 
     this.removeConfirm();
     this.parent.innerHTML = '';

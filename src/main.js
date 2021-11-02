@@ -12,6 +12,8 @@ import './main.scss';
 import 'Components/variables/colors.scss';
 import 'Components/variables/fonts.scss';
 import {updateCartPut} from 'Modules/api.js';
+import {OrderProcessView} from "./views/profileViews/orderProcess/orderProcessView";
+import {OrderProcessController} from "./controllers/orderProcessController";
 
 
 const application = document.getElementById('app');
@@ -55,6 +57,10 @@ const restaurantController = new RestaurantController({
 const orderingController = new OrderingController({
   parent: application,
   routeTo: routeTo});
+const orderProcessController = new OrderProcessController({
+  parent: application,
+  routeTo: routeTo});
+
 
 router.addRoute(urls.login.name, loginController);
 router.addRoute(urls.profile.name, profileController);
@@ -62,6 +68,7 @@ router.addRoute(urls.home.name, homeController);
 router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 router.addRoute(urls.checkout.name, orderingController);
+router.addRoute(urls.order.name, orderProcessController);
 document.getElementById('foot').innerHTML = footer({});
 router.start();
 

@@ -3,6 +3,7 @@ import Navbar from 'Components/navbar/navbar.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import historyPage from './historyPage.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
+import {BaseProfileView} from "../baseProfileView";
 
 const orders = [
   {
@@ -60,7 +61,7 @@ const orders = [
 /**
  * Profile view class
  */
-export class HistoryView extends View {
+export class HistoryView extends BaseProfileView {
   /**
    *
    * @param {HTMLElement} parent
@@ -85,6 +86,7 @@ export class HistoryView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    super.render();
     this.navbar.render();
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'История заказов',
@@ -92,7 +94,6 @@ export class HistoryView extends View {
         orders: orders,
       }),
       rightMenu: profileButtonsNav});
-    document.querySelector('.footer').style.marginTop = '0';
   }
   /**
    * Method for setting up before rendering elements
@@ -104,6 +105,7 @@ export class HistoryView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
+    super.remove();
     this.navbar.remove();
     this.parent.innerHTML = '';
   }

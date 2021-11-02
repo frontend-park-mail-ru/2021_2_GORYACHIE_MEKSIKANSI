@@ -99,6 +99,7 @@ export class RestaurantView extends View {
       this.closeContinueOrdering();
     }
     this.navbar.remove();
+    this.dishesList.remove();
     this.popup.remove();
     this.cart.remove();
     this.parent.innerHTML = '';

@@ -5,11 +5,12 @@ import baseProfilePage from '../baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import userStore from 'Modules/reducers/userStore.js';
+import {BaseProfileView} from "../baseProfileView";
 
 /**
  * Profile view class
  */
-export class ProfileView extends View {
+export class ProfileView extends BaseProfileView {
   /**
    *
    * @param {HTMLElement} parent
@@ -34,6 +35,7 @@ export class ProfileView extends View {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    super.render();
     this.navbar.render();
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Личные данные',
@@ -46,7 +48,6 @@ export class ProfileView extends View {
     document.querySelector('.profile-avatar').addEventListener('click', () => {document.getElementById('avatar').click();});
     document.getElementById('avatar').onchange = this.checkImage;
 
-    document.querySelector('.footer').style.marginTop = '0';
     const form = document.getElementById('save-button');
     form.addEventListener('click', this.submitListener.bind(this));
 
@@ -126,6 +127,7 @@ export class ProfileView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
+    super.remove();
     if (this.navbar) {
       this.navbar.remove();
     }
