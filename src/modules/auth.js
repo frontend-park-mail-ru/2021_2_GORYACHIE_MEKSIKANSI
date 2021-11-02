@@ -33,6 +33,7 @@ export function auth(response) {
         .catch(() => {
           // TODO: user login but without cart
         });
+  } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
   return response;

@@ -29,4 +29,9 @@ export const urls = {
     regUrl: /\/restaurants\/(\d+)/,
     name: null,
   },
+  order: {
+    url: '/order',
+    regUrl: null,
+    name: 'order',
+  },
 };
