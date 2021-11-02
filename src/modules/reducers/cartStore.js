@@ -81,16 +81,16 @@ export const clearCartAndAddDish = (aDish, restaurant) => {
 }
 
 export const setCart = (response) => {
+  console.log(response.dishes);
   const wrapperStruct = {
-    cart: response.body.cart.dishes,
-    restaurant: response.body.cart.restaurant,
-    cost: response.body.cart.cost,
+    cart: response.dishes,
+    restaurant: response.restaurant,
+    cost: response.cost,
   };
   cartStore.dispatch({
     actionType: cartActions.update,
     state: wrapperStruct,
   });
-  updateStorage();
   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
 }
 
@@ -143,16 +143,15 @@ const updateCart = (dispatch, bufferToUpdate) => {
             state: wrapperStruct,
           }
           dispatch(action);
-          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {})
-          updateStorage();
+          eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
           return response;
         } else {
           eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, response);
         }
       })
-      // .catch((response) => {
-      //   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
-      // });
+      .catch(() => {
+        eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateFailed, {});
+      });
 };
 
 
@@ -192,8 +191,6 @@ const isNewDish = (dish, cart) => {
     return item.id === dish.id &&
         compareRadios(item.radios, dish.radios) &&
         compareCheckboxes(item.ingredients, dish.ingredients);
-        // item.radios + '' === dish.radios + '' &&
-        // item.ingredients + '' === dish.ingredients + '';
   });
 
   if (fDish) {

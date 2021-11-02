@@ -21,25 +21,18 @@ export function auth(response) {
       ...response.body.user,
     });
 
-    if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined && cartStore.getState().cart.length > 0) {
-      updateCartPut({cart: {restaurant: {id: cartStore.getState().restaurant.id}, dishes: cartStore.getState().cart}})  // TODO: чекнуть код ответа на удаление корзины
-          .then((setCartResp) => {
-            if (setCartResp.status === ResponseEvents.OK) {
-              setCart(setCartResp);
-            } else {
-              cartStore.dispatch(clearCart());
-            }
-          });
-    } else {
-      cartGet()
-          .then((cartResponse) => {
-            if (cartResponse.status === ResponseEvents.OK) {
-              setCart(cartResponse.body.cart);
-            }
-          });
-    }
-    eventBus.emitEventListener(AuthStatus.userLogin, {});
-  } else {
+    cartGet()
+        .then((cartResponse) => {
+          if (cartResponse.status === ResponseEvents.OK) {
+            setCart(cartResponse.body.cart);
+          }
+        })
+        .then((cartResponse) => {
+          eventBus.emitEventListener(AuthStatus.userLogin, {});
+        })
+        .catch(() => {
+          // TODO: user login but without cart
+        });
     eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
   return response;
@@ -48,6 +41,16 @@ export function auth(response) {
 export function logout() {
   userStore.dispatch({
     actionType: userActions.storeUserLogout,
+  });
+  cartStore.dispatch({
+    actionType: cartActions.update,
+    state: {
+      restaurant: {
+        id: -1,
+        name: '',
+      },
+      cart: [],
+    },
   });
   eventBus.emitEventListener(AuthStatus.userLogout, urls.home.url);
 }

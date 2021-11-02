@@ -74,7 +74,6 @@ export class OrderingView extends BaseProfileView {
   stickSummary = () => {
     const summary = document.querySelector('.cart-order-summary');
     this.footY = Number(document.querySelector('.cart-order').offsetTop) + Number(document.querySelector('.cart-order').offsetHeight);
-    console.log(summary.offsetWidth, this.summaryWidth);
     if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
       summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
       this.summaryWidth = summary.offsetWidth;
@@ -121,6 +120,7 @@ export class OrderingView extends BaseProfileView {
   remove() {
     super.remove();
     this.navbar.remove();
+    window.removeEventListener('scroll', this.stickSummary);
 
     this.removeConfirm();
     this.parent.innerHTML = '';
