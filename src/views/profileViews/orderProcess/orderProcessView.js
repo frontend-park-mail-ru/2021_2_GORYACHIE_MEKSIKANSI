@@ -45,7 +45,7 @@ export class OrderProcessView extends BaseProfileView {
         items: cartStore.getState().cart,
         sumCost: cartStore.getState().cost.sumCost,
         dCost: cartStore.getState().cost.dCost,
-        dTime: 50,
+        dTime: '20:50',
       }),
       rightMenu: profileButtonsNav});
   }

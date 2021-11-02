@@ -177,3 +177,10 @@ export function postAddress(address) {
   });
 }
 
+export function postPay() {
+  return http.ajaxPost({
+    url: '/user/pay',
+    body: {},
+  });
+}
+

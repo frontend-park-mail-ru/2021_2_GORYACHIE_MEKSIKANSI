@@ -6,6 +6,7 @@ import store from 'Modules/store.js';
 import {AuthStatus} from "Events/Auth";
 import cartStore from "Modules/reducers/cartStore";
 import userStore from "Modules/reducers/userStore";
+import {OrderingEvents} from "../events/Ordering";
 
 export class OrderingController {
   /**
@@ -24,6 +25,7 @@ export class OrderingController {
       routeTo: this.routeTo,
       controller: this,
     });
+    eventBus.addEventListener(OrderingEvents.paymentSuccess, this.routeTo);
   }
 
   /**
@@ -52,6 +54,10 @@ export class OrderingController {
 
   redirect = () => {
     this.routeTo(urls.home.url);
+  }
+
+  makePay = () => {
+    OrderingModel.requestPay();
   }
 
   /**

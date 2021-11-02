@@ -58,8 +58,6 @@ export class OrderingView extends BaseProfileView {
       })});
     this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
     window.addEventListener('scroll', this.stickSummary);
-    this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.confirm);
-
     this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
 
     this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
@@ -88,14 +86,6 @@ export class OrderingView extends BaseProfileView {
     }
   }
 
-  confirm = () => {
-    if (userStore.getState().auth) {
-      // confirm
-    } else {
-      this.routeTo(urls.login.url);
-    }
-  }
-
   showConfirm = () => {
     if (this.parent.querySelector('.card').checked) {
       this.confirmDiv = document.createElement('div');
@@ -103,6 +93,9 @@ export class OrderingView extends BaseProfileView {
       this.parent.appendChild(this.confirmDiv);
       document.body.style.overflowY = 'hidden';
       this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
+      this.confirmDiv.querySelector('.confirm-popup__pay-button').addEventListener('click', this.controller.makePay);
+    } else {
+      this.routeTo(urls.order.url);
     }
   }
 
