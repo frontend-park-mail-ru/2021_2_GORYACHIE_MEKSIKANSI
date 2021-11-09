@@ -7,10 +7,11 @@ import baseProfilePage from '../baseProfilePage.hbs';
 import Address from 'Modules/lsAddress.js';
 import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
 import orderSummary from 'Components/cartOrder/orderSummary.hbs';
-import confirmPopup from 'Components/confirmPopup/confirmPopup.hbs'
 import userStore from "Modules/reducers/userStore";
 import cartStore from "Modules/reducers/cartStore";
 import {BaseProfileView} from "../baseProfileView";
+import {Modal} from "hme-design-system/src/components/modal/modal";
+import {Card} from "hme-design-system/src/components/card/card";
 
 /**
  * Profile view class
@@ -89,11 +90,14 @@ export class OrderingView extends BaseProfileView {
   showConfirm = () => {
     if (this.parent.querySelector('.card').checked) {
       this.confirmDiv = document.createElement('div');
-      this.confirmDiv.innerHTML = confirmPopup({sumCost: cartStore.getState().cost.sumCost});
+      this.confirmDiv.innerHTML = new Modal({
+        title: 'Онлайн оплата',
+        centerContent: [new Card({sumCost: cartStore.getState().cost.sumCost}).render()],
+      }).render();
       this.parent.appendChild(this.confirmDiv);
       document.body.style.overflowY = 'hidden';
-      this.confirmDiv.querySelector('.confirm-popup__close-button').addEventListener('click', this.removeConfirm);
-      this.confirmDiv.querySelector('.confirm-popup__pay-button').addEventListener('click', this.controller.makePay);
+      this.confirmDiv.querySelector('.modal-close-button').addEventListener('click', this.removeConfirm);
+      this.confirmDiv.querySelector('.card__pay-button').addEventListener('click', this.controller.makePay);
     } else {
       this.routeTo(urls.order.url);
     }
@@ -101,7 +105,7 @@ export class OrderingView extends BaseProfileView {
 
   removeConfirm = () => {
     if (this.confirmDiv) {
-      this.confirmDiv.querySelector('.confirm-popup__close-button').removeEventListener('click', this.removeConfirm);
+      this.confirmDiv.querySelector('.modal-close-button').removeEventListener('click', this.removeConfirm);
       this.confirmDiv.remove();
     }
     document.body.style.overflowY = 'scroll';
