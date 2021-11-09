@@ -21,4 +21,14 @@
         margin-left: auto;
     }
 
+    @media (min-width: 0px) and (max-width: 860px) {
+        &__sort {
+            display: none;
+            width: 0;
+        }
+
+        &__list {
+            width: 100%;
+        }
+    }
 }
