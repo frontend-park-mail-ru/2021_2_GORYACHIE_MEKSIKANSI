@@ -1,6 +1,7 @@
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import dishPopup from './dishPopup.hbs';
+import {DishModal} from "hme-design-system/src/components/modal/dishModal/dishModal";
 
 export class DishPopup {
   constructor({
@@ -13,29 +14,34 @@ export class DishPopup {
     this.routeTo = routeTo;
     this.parent = parent;
     this.restaurant = restaurant;
-
-    eventBus.addEventListener(RestaurantEvents.restaurantPopGetSuccess, this.render.bind(this));
   }
 
-  render(dish) {
+  async render(dish) {
+    this.number = 1;
     this.dish = dish.dishes;
     this.div = document.createElement('div');
     this.div.classList.add('dish-popup-div');
-    this.div.innerHTML = dishPopup(this.dish);
-    this.parent.appendChild(this.div);
+    // this.div.innerHTML = dishPopup(this.dish);
+    console.log('DISH', this.dish);
+    await this.div.insertAdjacentHTML('afterbegin', new DishModal(this.dish).render())
     document.body.style.overflowY = 'hidden';
 
-    document.body.querySelector('.dish-popup__close-button').addEventListener('click', this.remove);
-    document.body.querySelector('.dish-popup-wrapper').addEventListener('click', this.outsidePopupClick);
+    this.parent.appendChild(this.div);
 
-    this.div.querySelector('.plus').addEventListener('click', this.increaseNumber);
-    this.div.querySelector('.minus').addEventListener('click', this.decreaseNumber);
+    document.body.querySelector('.modal-close-button').addEventListener('click', this.remove);
+    document.body.querySelector('.modal-wrapper').addEventListener('click', this.outsidePopupClick);
 
-    document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
-      item.addEventListener('input', this.refreshSummary);
+    this.div.querySelector('.modal-dish__plus').addEventListener('click', this.increaseNumber);
+    this.div.querySelector('.modal-dish__minus').addEventListener('click', this.decreaseNumber);
+
+    document.body.querySelectorAll('.tick-form-container').forEach((item) => {
+      const input = item.querySelector('input');
+      if (input.type === 'checkbox') {
+        item.addEventListener('input', this.refreshSummary);
+      }
     });
-
-    document.body.querySelector('.dish-popup__buy-button').addEventListener('click', this.addDishToCart);
+    //
+    // document.body.querySelector('.dish-popup__buy-button').addEventListener('click', this.addDishToCart);
   }
 
   addDishToCart = () => {
@@ -83,31 +89,20 @@ export class DishPopup {
     this.remove();
   }
 
-  // getDish = (e) => {
-  //   const {target} = e;
-  //   const dishId = Number(target.closest('.dish').getAttribute('id'));
-  //   this.controller.getDish(this.restaurant.id, dishId);
-  // }
-
-  // settingUp(restaurant) {
-  //   this.restaurant = restaurant;
-  //   this.dishes = document.querySelectorAll('.dish');
-  //   this.dishes.forEach((item) => {
-  //     item.addEventListener('click', this.getDish);
-  //   });
-  // }
-
   remove = () => {
     if (document.body.querySelector('.dish-popup-div')) {
-      document.body.querySelector('.dish-popup__close-button').removeEventListener('click', this.remove);
-      document.body.querySelector('.dish-popup-wrapper').removeEventListener('click', this.outsidePopupClick);
+      document.body.querySelector('.modal-close-button').removeEventListener('click', this.remove);
+      document.body.querySelector('.modal-wrapper').removeEventListener('click', this.outsidePopupClick);
 
-      document.body.querySelector('.plus').removeEventListener('click', this.increaseNumber);
-      document.body.querySelector('.minus').removeEventListener('click', this.decreaseNumber);
-      document.body.querySelector('.dish-popup__buy-button').removeEventListener('click', this.addDishToCart);
+      document.body.querySelector('.modal-dish__plus').removeEventListener('click', this.increaseNumber);
+      document.body.querySelector('.modal-dish__minus').removeEventListener('click', this.decreaseNumber);
+      // document.body.querySelector('.dish-popup__buy-button').removeEventListener('click', this.addDishToCart);
 
-      document.body.querySelectorAll('.dish-popup__checkbox-input').forEach((item) => {
-        item.removeEventListener('input', this.refreshSummary);
+      document.body.querySelectorAll('.tick-form-container').forEach((item) => {
+        const input = item.querySelector('input');
+        if (input.type === 'checkbox') {
+          item.removeEventListener('input', this.refreshSummary);
+        }
       });
 
       document.body.removeChild(document.body.querySelector('.dish-popup-div'));
@@ -116,22 +111,25 @@ export class DishPopup {
   }
 
   outsidePopupClick = (e) => {
-    if (!document.body.querySelector('.dish-popup').contains(e.target)) {
+    console.log('CLICK');
+    if (!document.body.querySelector('.modal').contains(e.target)) {
       this.remove();
     }
   }
 
   increaseNumber = () => {
-    const number = this.div.querySelector('.dish-popup__number');
-    number.innerHTML = String(Number(number.innerHTML) + 1);
+    const number = this.div.querySelector('.modal-dish__number');
+    this.number += 1;
+    number.innerHTML = String(this.number);
 
     this.refreshSummary();
   }
 
   decreaseNumber = () => {
-    const number = this.div.querySelector('.dish-popup__number');
-    if (Number(number.innerHTML) > 1) {
-      number.innerHTML = String(Number(number.innerHTML) - 1);
+    const number = this.div.querySelector('.modal-dish__number');
+    if (this.number > 1) {
+      this.number -= 1;
+      number.innerHTML = String(this.number);
     }
 
     this.refreshSummary();
@@ -139,17 +137,33 @@ export class DishPopup {
 
   refreshSummary = () => {
     let cost = Number(this.dish.cost);
-    const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
-    checkboxes.forEach((DOMitem) => {
-      if (DOMitem.querySelector('input').checked) {
-        cost += Number(this.dish.ingredients.find((item) => {
-          return Number(DOMitem.id) === item.id;
+
+    const checkboxes = [];
+    document.body.querySelectorAll('.tick-form-container').forEach((item) => {
+      const input = item.querySelector('input');
+      if (input.type === 'checkbox') {
+        checkboxes.push(input);
+      }
+    });
+
+    checkboxes.forEach((item) => {
+      if (item.checked) {
+        cost += Number(this.dish.ingredients.find((ing) => {
+          return Number(item.id) === ing.id;
         }).cost);
       }
     });
 
-    const summary = document.body.querySelector('.dish-popup__summary-cost');
-    const number = this.div.querySelector('.dish-popup__number');
-    summary.innerHTML = String(cost * Number(number.innerHTML));
+    // const checkboxes = document.body.querySelectorAll('.dish-popup__checkbox-row');
+    // checkboxes.forEach((DOMitem) => {
+    //   if (DOMitem.querySelector('input').checked) {
+    //     cost += Number(this.dish.ingredients.find((item) => {
+    //       return Number(DOMitem.id) === item.id;
+    //     }).cost);
+    //   }
+    // });
+
+    const summary = document.body.querySelector('.modal__buy-button');
+    summary.innerHTML = String(cost * this.number) + '₽ Добавить в корзину';
   }
 }

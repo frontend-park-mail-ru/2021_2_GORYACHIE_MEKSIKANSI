@@ -31,7 +31,7 @@ class RestaurantModel {
           eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
         })
         .catch(() => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, {}); // TODO: snack
+          // eventBus.emitEventListener(RestaurantEvents.rest, {}); // TODO: snack
         });
   }
 

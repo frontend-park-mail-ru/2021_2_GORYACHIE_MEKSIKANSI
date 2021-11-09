@@ -43,6 +43,7 @@ export class RestaurantView extends View {
     })
 
     EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshNavbar);
+    EventBus.addEventListener(RestaurantEvents.restaurantPopGetSuccess, this.popup.render.bind(this.popup));
   }
 
   refreshNavbar = () => {
