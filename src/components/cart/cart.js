@@ -69,8 +69,8 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
 
   stickCart = () => {
     const cart = document.querySelector('.cart-wrapper');
-    if (window.pageYOffset + 75 +cart.offsetHeight >= this.footY) {
-      cart.style.top = String(this.footY - (window.pageYOffset + 100 + cart.offsetHeight)) + 'px';
+    if (window.pageYOffset + 200 +cart.offsetHeight >= this.footY) {
+      cart.style.top = String(this.footY - (window.pageYOffset + 200 + cart.offsetHeight)) + 'px';
       this.cartWidth = cart.offsetWidth;
     } else if (window.pageYOffset + 75 >= this.sticky) {
       cart.style.top = String(0) + 'px';
