@@ -36,6 +36,9 @@
 @import "Components/dishesList/dishesList.scss";
 @import "Components/snackBar/snackBar.scss";
 
+@import "~hme-design-system/components/fonts/fonts";
+@import "~hme-design-system/tokens/token";
+
 :root {
     --contentPadding: 3%;  // Hor paddings
     --contentBottomPadding: 150px;
