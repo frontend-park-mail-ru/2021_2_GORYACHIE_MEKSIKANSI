@@ -12,14 +12,9 @@
 </div>
 
 <div class="dishes-list__dishes">
-    {{#each menu}}
-        <div id="{{name}}" class="dishes-list__menu-title">
-            {{name}}
+    {{#each list}}
+        <div class="dishes-list__menu-block">
+            {{{this}}}
         </div>
-        {{#each dishes}}
-            <div class="dishes-list__dish">
-                {{>dish this }}
-            </div>
-        {{/each}}
     {{/each}}
 </div>

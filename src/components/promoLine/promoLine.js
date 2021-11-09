@@ -1,4 +1,5 @@
 import promoLine from './promoLine.hbs'
+import {PromoBlock} from "hme-design-system/src/components/promoBlock/promoBlock";
 
 export class PromoLine {
   constructor(props) {
@@ -7,11 +8,15 @@ export class PromoLine {
 
   render(parent) {
     this.parent = parent;
-    this.parent.innerHTML = promoLine({promos: [1, 2, 3, 4, 5, 6, 7]});
+    const promos = [];
+    for (let i = 1; i < 10; i++) {
+      promos.push(new PromoBlock().render());
+    }
+    this.parent.innerHTML = promoLine({promos: promos});
 
     this.begin = 0;
     this.promoLine = this.parent.querySelector('.promo-line');
-    this.blocks = this.parent.querySelectorAll('.promo-block');
+    this.blocks = this.parent.querySelectorAll('.promo-line-block');
     this.leftButton = this.parent.querySelector('.promo-line__button-left');
     this.rightButton = this.parent.querySelector('.promo-line__button-right');
 

@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: var(--color-background-black);
+    background-color: rgba(0, 0, 0, 0.2);
     top: 0;
     left: 0;
     opacity: 0;
@@ -10,12 +10,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     transition: all 0.1s ease 0s;
+    z-index: 9999;
 }
 
 .map-popup.open {
     opacity: 1;
     visibility: visible;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .map-popup.open .map-popup__content {
@@ -86,11 +87,6 @@
 .map-popup__close-container {
     display: flex;
     margin-bottom: 20px;
-}
-
-.map-popup__title {
-    font-size: 26px;
-    font-weight: var(--font_bold);
 }
 
 .map-popup__close {

@@ -7,13 +7,9 @@ import {ProfileController} from 'Controllers/profileController.js';
 import {RestaurantController} from 'Controllers/restaurantController.js';
 import {OrderingController} from 'Controllers/orderingController.js';
 import {urls} from 'Modules/urls.js';
-import footer from 'Components/footer/footer.hbs';
 import './main.scss';
-import 'Components/variables/colors.scss';
-import 'Components/variables/fonts.scss';
-import {updateCartPut} from 'Modules/api.js';
-import {OrderProcessView} from "./views/profileViews/orderProcess/orderProcessView";
 import {OrderProcessController} from "./controllers/orderProcessController";
+import {Footer} from "hme-design-system/src/components/footer/footer";
 
 
 const application = document.getElementById('app');
@@ -69,6 +65,25 @@ router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 router.addRoute(urls.checkout.name, orderingController);
 router.addRoute(urls.order.name, orderProcessController);
-document.getElementById('foot').innerHTML = footer({});
+document.getElementById('foot').innerHTML = new Footer({
+  nav: [
+    {
+      title: 'HMEats для ресторанов',
+      href: '',
+    },
+    {
+      title: 'HMEats для курьеров',
+      href: '',
+    },
+    {
+      title: 'Помощь',
+      href: '',
+    },
+    {
+      title: 'Контакты',
+      href: '',
+    },
+  ],
+}).render();
 router.start();
 

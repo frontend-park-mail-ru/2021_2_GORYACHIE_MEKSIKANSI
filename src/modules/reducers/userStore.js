@@ -24,7 +24,7 @@ export function userReducer(state, action) {
         name: action.name,
         email: action.email,
         phone: action.phone,
-        avatar: action.avatar,
+        avatar: 'https://img.hmeats.fra1.cdn.digitaloceanspaces.com' + action.avatar,
       };
     case userActions.storeUserDataUpdate:
       return {

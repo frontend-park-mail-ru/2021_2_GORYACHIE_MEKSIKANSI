@@ -21,7 +21,6 @@ class RestaurantModel {
           eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.body);
         })
         .catch(() => { // TODO: добавить взаимодействие с серваком...
-          eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock()); // TODO: toast на падение сервака/отсутствие связи
         });
   }
 
@@ -31,7 +30,7 @@ class RestaurantModel {
           eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
         })
         .catch(() => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, {}); // TODO: snack
+          // eventBus.emitEventListener(RestaurantEvents.rest, {}); // TODO: snack
         });
   }
 

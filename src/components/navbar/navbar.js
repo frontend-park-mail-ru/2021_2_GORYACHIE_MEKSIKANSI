@@ -7,6 +7,7 @@ import eventBus from "Modules/eventBus.js";
 import {AuthStatus} from "Events/Auth.js";
 import userStore from "Modules/reducers/userStore.js";
 import cartStore from "Modules/reducers/cartStore.js";
+import {ProfileEvents} from "../../events/Profile";
 
 /**
  * Left navigation bar class
@@ -19,6 +20,7 @@ export class Navbar {
     this.parent = parent;
     profileGet({});
     this.yMap = new MapPopup({});
+    eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, this.refresh);
   }
 
   /**
@@ -133,6 +135,7 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
+    this.yMap.remove();
     if (document.querySelector('.hamburger-wrapper') &&
       document.querySelector('.navbar')) {
       this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);

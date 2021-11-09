@@ -1,33 +1,31 @@
-<div class="cart-order-delivery">
-    <div class="cart-order-delivery__wrapper">
-        <div class="cart-order-delivery__title">Условия доставки</div>
+<div class="content-block">
+        <div class="font_h2">Условия доставки</div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Введите адрес" value="{{address}}" required class="input input_border input_radius-border_medium cart-order-delivery__input profile-page__input js-address">
+            <input placeholder="Введите адрес" value="{{address}}" required class="input input_border input_radius-border_medium cart-order-delivery__input js-address">
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw profile-page__input">
+            <input placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw">
             <input placeholder="Домофон" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
             <input placeholder="Этаж" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
             <input placeholder="Квартира" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
         </div>
-        <div class="cart-order-delivery__undertitle">
+        <div class="font_h2">
             Комментарий
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Напишите, как вас найти или пожелания к заказу..." required class="input input_border input_border-color_black cart-order-delivery__input cart-order-delivery__input_sq profile-page__input">
+            <input placeholder="Напишите, как вас найти или пожелания к заказу..." class="input input_border input_border-color_black cart-order-delivery__input cart-order-delivery__input_sq profile-page__input">
         </div>
-        <div class="cart-order-delivery__time-title">
+        <div class="font_h2">
             Время доставки составит ~ {{restaurant.minDTime}}-{{restaurant.maxDTime}} мин
         </div>
-    </div>
 </div>
 
-<div class="order cart-order">
+<div class="content-block order cart-order">
     <div class="order__main-info">
         <div class="order__main-info-text">
-            <div class="order__restaurant-title order__row-margin">
+            <a href="/restaurants/{{ restaurant.id }}/" class="order__restaurant-title order__row-margin">
                 {{restaurant.name}}
-            </div>
+            </a>
             <div class="order__address order__row-margin">
                 {{restaurant.addrs}}
             </div>

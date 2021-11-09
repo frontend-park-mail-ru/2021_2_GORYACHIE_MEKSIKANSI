@@ -20,7 +20,10 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
   render() {
     EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
     EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, this.failedToIncrease);
-    this.parent.innerHTML = cart({items: cartStore.getState().cart, restaurant: cartStore.getState().restaurant});
+    this.parent.innerHTML = cart({
+      items: cartStore.getState().cart,
+      restaurant: cartStore.getState().restaurant,
+    });
     this.refreshSummary();
 
     this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;
@@ -30,8 +33,14 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
     const rows = this.parent.querySelectorAll('.cart__order-row');
     if (rows) {
       rows.forEach((item) => {
-        item.querySelector('.plus').addEventListener('click', this.increaseNumber);
-        item.querySelector('.minus').addEventListener('click', this.decreaseNumber);
+        const plus = item.querySelector('.plus');
+        if (plus) {
+          plus.addEventListener('click', this.increaseNumber);
+        }
+        const minus = item.querySelector('.minus');
+        if (minus) {
+          minus.addEventListener('click', this.decreaseNumber);
+        }
       });
     }
 
@@ -68,9 +77,10 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
   }
 
   stickCart = () => {
+    console.log('HERE');
     const cart = document.querySelector('.cart-wrapper');
-    if (window.pageYOffset + 75 + cart.offsetHeight >= this.footY) {
-      cart.style.top = String(this.footY - (window.pageYOffset + 75 + cart.offsetHeight)) + 'px';
+    if (window.pageYOffset + 200 + cart.offsetHeight >= this.footY) {
+      cart.style.top = String(this.footY - (window.pageYOffset + 200 + cart.offsetHeight)) + 'px';
       this.cartWidth = cart.offsetWidth;
     } else if (window.pageYOffset + 75 >= this.sticky) {
       cart.style.top = String(0) + 'px';

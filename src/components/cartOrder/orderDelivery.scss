@@ -19,25 +19,7 @@
         padding: var(--cartOrderWrapperPadding);
     }
 
-    &__title {
-        margin-bottom: 32px;
-        font-size: var(--cartOrderDeliveryTitleFontSize);
-        font-weight: var(--font_bold);
-    }
-
-    &__undertitle {
-        font-size: var(--cartOrderDeliveryTitleFontSize);
-        font-weight: var(--font_medium);
-        margin-bottom: 5px;
-    }
-
-    &__time-title {
-        font-size: var(--cartOrderDeliveryTitleFontSize);
-        font-weight: var(--font_medium);
-    }
-
     &__input-row {
-        margin-bottom: 32px;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;

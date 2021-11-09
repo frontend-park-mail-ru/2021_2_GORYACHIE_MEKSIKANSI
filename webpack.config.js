@@ -37,10 +37,14 @@ module.exports = {
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader',
-                exclude: /(node_modules)/,
+                // exclude: /(node_modules)/,
+                include: [
+                  path.resolve(__dirname, 'node_modules/hme-design-system/src'),
+                  path.resolve(__dirname, 'src/'),
+                ],
                 options: {
                     partialDirs: [
-                        path.join(__dirname, './src/partials')
+                        path.join(__dirname, './src/partials'),
                     ]
                 },
             },

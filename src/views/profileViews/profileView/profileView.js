@@ -6,6 +6,7 @@ import profilePage from './profilePage1.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import userStore from 'Modules/reducers/userStore.js';
 import {BaseProfileView} from "../baseProfileView";
+import {Avatar} from "hme-design-system/src/components/avatar/avatar";
 
 /**
  * Profile view class
@@ -40,12 +41,12 @@ export class ProfileView extends BaseProfileView {
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Личные данные',
       content: profilePage({
+        avatar: new Avatar({img: userStore.getState().avatar, size: 'bg', input: true}).render(),
         user: userStore.getState(),
       }),
       rightMenu: profileButtonsNav});
 
-    document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + userStore.getState().avatar + ')';
-    document.querySelector('.profile-avatar').addEventListener('click', () => {document.getElementById('avatar').click();});
+    document.querySelector('.avatar-box').addEventListener('click', () => {document.getElementById('avatar').click();});
     document.getElementById('avatar').onchange = this.checkImage;
 
     const form = document.getElementById('save-button');
@@ -83,7 +84,7 @@ export class ProfileView extends BaseProfileView {
   }
 
   showImage = (file) => {
-    document.querySelector('.profile-avatar').style.backgroundImage = 'url(' + URL.createObjectURL(file) + ')';
+    document.querySelector('.avatar').src = URL.createObjectURL(file);
   }
 
   /**
