@@ -8,8 +8,6 @@ import {RestaurantController} from 'Controllers/restaurantController.js';
 import {OrderingController} from 'Controllers/orderingController.js';
 import {urls} from 'Modules/urls.js';
 import './main.scss';
-import 'Components/variables/colors.scss';
-import 'Components/variables/fonts.scss';
 import {OrderProcessController} from "./controllers/orderProcessController";
 import {Footer} from "hme-design-system/src/components/footer/footer";
 

@@ -5,12 +5,12 @@ import {View} from '../baseView/View.js';
 import EventBus from "Modules/eventBus.js";
 import {RestaurantEvents} from "Events/Restaurant.js";
 import page from '../baseView/page.hbs';
-import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
 import {DishesList} from '../../components/dishesList/dishesList';
 import userStore from "Modules/reducers/userStore";
 import {continueModal} from "hme-design-system/stories/modal.stories";
 import {ContinueModal} from "hme-design-system/src/components/modal/continueModal/continueModal";
+import {RestaurantHeader} from "hme-design-system/src/components/restaurantHeader/restaurantHeader";
 
 export class RestaurantView extends View {
   constructor({
@@ -57,7 +57,7 @@ export class RestaurantView extends View {
 
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
-      head: restaurantHeader(this.restaurant),
+      head: new RestaurantHeader({restaurant: this.restaurant}).render(),
       content: restaurantPage(this.restaurant),
     }));
 
