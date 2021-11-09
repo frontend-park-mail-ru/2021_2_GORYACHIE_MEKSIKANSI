@@ -41,13 +41,13 @@ export class DishPopup {
       }
     });
     //
-    // document.body.querySelector('.dish-popup__buy-button').addEventListener('click', this.addDishToCart);
+    document.body.querySelector('.modal__buy-button').addEventListener('click', this.addDishToCart);
   }
 
   addDishToCart = () => {
-    const radios = this.div.querySelectorAll('.radio-wrapper');
+    const radiosGroups = this.div.querySelector('.modal-dish__radio-group').querySelectorAll('.tick-form-group');
     const dishRadios = [];
-    radios.forEach((item) => {
+    radiosGroups.forEach((item) => {
       item.querySelectorAll('input').forEach((input) => {
         if (input.checked) {
           dishRadios.push({
@@ -58,22 +58,20 @@ export class DishPopup {
       });
     });
 
-    if (dishRadios.length !== radios.length) {
+    if (dishRadios.length !== radiosGroups.length) {
       // error
       return;
     }
 
     let dishCheckboxes = [];
-    this.div.querySelectorAll('.dish-popup__checkbox-row').forEach((item) => {
-      const input = item.querySelector('input');
-      if (input.checked) {
+    this.div.querySelector('.modal-dish__checkboxes-group').querySelectorAll('input').forEach((item) => {
+      if (item.checked) {
         dishCheckboxes.push({
           id: Number(item.id),
         });
       }
     });
 
-    const number = this.div.querySelector('.dish-popup__number').innerHTML;
     this.controller.addDishToCart({
       restaurant: {
         id: this.restaurant.id,
@@ -81,7 +79,7 @@ export class DishPopup {
       },
       dish: {
         id: this.dish.id,
-        count: Number(number),
+        count: this.number,
         radios: dishRadios,
         ingredients: dishCheckboxes,
       },
@@ -96,7 +94,7 @@ export class DishPopup {
 
       document.body.querySelector('.modal-dish__plus').removeEventListener('click', this.increaseNumber);
       document.body.querySelector('.modal-dish__minus').removeEventListener('click', this.decreaseNumber);
-      // document.body.querySelector('.dish-popup__buy-button').removeEventListener('click', this.addDishToCart);
+      document.body.querySelector('.modal__buy-button').removeEventListener('click', this.addDishToCart);
 
       document.body.querySelectorAll('.tick-form-container').forEach((item) => {
         const input = item.querySelector('input');

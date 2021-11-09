@@ -14,9 +14,11 @@ export class RestaurantsList {
   }) {
     this.parent = parent;
     const objList = [];
-    restaurantList.forEach((item) => {
-      objList.push(new RestaurantBlock(item).render());
-    });
+    if (restaurantList) {
+      restaurantList.forEach((item) => {
+        objList.push(new RestaurantBlock(item).render());
+      });
+    }
     this.parent.innerHTML = restaurantsListTemplate({restaurantList: new List({listTitle: 'Рестораны', objList: objList}).render()});
   }
 
