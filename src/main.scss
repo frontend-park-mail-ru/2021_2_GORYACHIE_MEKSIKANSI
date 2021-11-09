@@ -1,10 +1,7 @@
 @import "Components/userLoginForm/userLoginForm.scss";
 @import "Components/userSignUpForm/userSignUpForm.scss";
-@import "Components/restaurantBlock/restaurantBlock.scss";
 @import "Components/promoBlock/promoBlock.scss";
-@import "Components/input/input.scss";
 @import "Components/checkbox/checkbox.scss";
-@import "Components/dish/dish.scss";
 @import "Components/restaurantHeader/restaurantHeader.scss";
 @import "Components/dishPopup/dishPopup.scss";
 @import "Components/historyOrder/historyOrder.scss";
@@ -25,7 +22,6 @@
 @import "Views/profileViews/historyView/historyPage.scss";
 @import "Views/homeView/homePage.scss";
 
-@import "Components/button/button.scss";
 @import "Components/navbar/navbar.scss";
 @import "Components/footer/footer.scss";
 @import "Components/sortUnderheader/sortUnderheader.scss";
@@ -33,11 +29,22 @@
 @import "Components/cart/cart.scss";
 @import "Components/sortBox/sortBox.scss";
 @import "Components/restaurantsList/restaurantsList.scss";
-@import "Components/dishesList/dishesList.scss";
 @import "Components/snackBar/snackBar.scss";
 
-@import "~hme-design-system/components/fonts/fonts";
 @import "~hme-design-system/tokens/token";
+@import "~hme-design-system/src/components/button/button.scss";
+@import "~hme-design-system/src/forms/input/input.scss";
+@import "~hme-design-system/src/forms/tickForms/tickForm.scss";
+@import "~hme-design-system/src/forms/tickForms/tickFormGroup.scss";
+@import "~hme-design-system/src/components/dishBlock/dishBlock.scss";
+@import "~hme-design-system/src/components/restaurantBlock/restaurantBlock.scss";
+@import "~hme-design-system/src/components/modal/modal.scss";
+@import "~hme-design-system/src/components/modal/continueModal/continueModal.scss";
+@import "~hme-design-system/src/components/modal/dishModal/dishModal.scss";
+@import "~hme-design-system/src/components/list/list.scss";
+@import "~hme-design-system/src/components/contentBlock/contentBlock.scss";
+@import "~hme-design-system/src/components/fonts/fonts.scss";
+@import "~hme-design-system/src/components/avatar/avatar.scss";
 
 :root {
     --contentPadding: 3%;  // Hor paddings
@@ -45,7 +52,6 @@
 }
 
 body {
-    font-family: var(--raleway-font);
     margin: 0 auto;
     overflow-x: hidden;
     max-width: 1920px;

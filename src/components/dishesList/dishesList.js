@@ -1,5 +1,9 @@
 import dishesList from './dishesList.hbs';
 import {DishPopup} from 'Components/dishPopup/dishPopup.js';
+import {RestaurantBlock} from "hme-design-system/src/components/restaurantBlock/restaurantBlock";
+import restaurantsListTemplate from "../restaurantsList/restaurantsList.hbs";
+import {List} from "hme-design-system/src/components/list/list";
+import {DishBlock} from "hme-design-system/src/components/dishBlock/dishBlock";
 
 
 export class DishesList {
@@ -19,7 +23,14 @@ export class DishesList {
   }) {
     this.parent = parent;
     this.restaurant = restaurant;
-    this.parent.innerHTML = dishesList(this.restaurant);
+    console.log(this.restaurant.menu);
+    const lists = this.restaurant.menu.map((menu) => {
+      const objList = menu.dishes.map((item) => {
+        return new DishBlock(item).render();
+      });
+      return new List({listTitle: menu.name, objList: objList}).render();
+    });
+    this.parent.innerHTML = dishesList({menu: this.restaurant.menu, list: lists});
 
     this.settingUp();
   }

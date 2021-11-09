@@ -1,12 +1,6 @@
 :root {
-    --restaurantsListWidth: 81%;
+    --restaurantsListWidth: 80%;
     --sortBoxWidth: calc(100% - var(--restaurantsListWidth));
-
-    --restaurantBlockBorder: solid 1px #e2e2e2;
-    --restaurantBlockRadius: 16px;
-    --restaurantBlockMargin: 10px; // margin around
-
-    --restaurantBlockTitleFontSize: 36px;
 }
 
 .restaurants-list {
@@ -27,66 +21,4 @@
         margin-left: auto;
     }
 
-    &__restaurant-block-title {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        border-top: solid 2px #e2e2e2;
-        font-size: var(--restaurantBlockTitleFontSize);
-        font-weight: var(--font_bold);
-        min-width: 100%;
-    }
-
-    &__restaurant-block {
-        margin: var(--restaurantBlockMargin);
-
-        border: var(--restaurantBlockBorder);
-        border-radius: var(--restaurantBlockRadius);
-
-        transition-property: margin, box-shadow;
-        transition-duration: 400ms;
-    }
-
-    &__restaurant-block:hover {
-        margin: 8px 10px 12px 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
-    }
-
-    @media (min-width: 860px) and (max-width: 1040px) {
-        &__restaurant-block {
-            width: calc(100% / 2 - (45px / 2));
-            flex-grow: 0;
-        }
-    }
-
-    @media (min-width: 0px) and (max-width: 860px) {
-        &__restaurant-block {
-            width: calc(100% - 10px);
-            flex-grow: 0;
-        }
-    }
-
-    @media (min-width: 320px) and (max-width: 1600px) {
-        &__restaurant-block {
-            transition: all 0.2s ease;
-        }
-    }
-
-    @media (min-width: 1040px) {
-        &__restaurant-block {
-            width: calc(100% / 3 - (44px * 2 / 3));
-            flex-grow: 0;
-        }
-    }
-
-    @media (min-width: 0px) and (max-width: 1000px) {
-        &__list {
-            width: 100%;
-            margin-left: 0;
-        }
-
-        &__sort {
-            transition: all 0.2s ease;
-            display: none;
-        }
-    }
 }
