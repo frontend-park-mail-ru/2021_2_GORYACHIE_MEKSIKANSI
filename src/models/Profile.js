@@ -98,6 +98,13 @@ class ProfileModel {
           });
           snack.settingUp();
           snack.Open();
+          userStore.dispatch({
+            actionType: userActions.storeUserDataUpdate,
+            updated: {
+              avatar: 'https://img.hmeats.fra1.cdn.digitaloceanspaces.com' + response.body.img,
+            },
+          });
+          eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
         })
         .catch(() => {
           const snack = new SnackBar({
