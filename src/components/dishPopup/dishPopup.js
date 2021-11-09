@@ -110,7 +110,7 @@ export class DishPopup {
 
   outsidePopupClick = (e) => {
     console.log('CLICK');
-    if (!document.body.querySelector('.modal').contains(e.target)) {
+    if (!document.body.querySelector('.dish-popup-div').querySelector('.modal').contains(e.target)) {
       this.remove();
     }
   }

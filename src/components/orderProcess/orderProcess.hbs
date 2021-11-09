@@ -1,4 +1,4 @@
-<div class="order-process-wrapper">
+<div class="content-block">
     <div class="order-process">
         <div class="order-process__title">
             <div class="order-process__order-number">Заказ №12345</div>
@@ -68,7 +68,7 @@
     </div>
 </div>
 
-<div class="order cart-order">
+<div class="content-block order cart-order">
     <div class="order__main-info">
         <div class="order__main-info-text">
             <div class="order__restaurant-title order__row-margin">
@@ -82,7 +82,6 @@
             <img class="order__main-info-img" src="{{restaurant.img}}" alt="rest image">
         </div>
     </div>
-    <div class="order__info">
         {{#each items}}
             <div class="order__item">
                 <div class="order__item-wrapper">
@@ -130,5 +129,4 @@
                 {{ sumCost }} ₽
             </div>
         </div>
-    </div>
 </div>

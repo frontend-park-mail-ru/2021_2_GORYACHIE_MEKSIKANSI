@@ -110,7 +110,7 @@ export class MapPopup {
     }
 
     popupOutsideClickEvent = (e) => {
-        if (!e.target.closest('.map-popup__content')) {
+        if (!e.target.closest('.modal')) {
             this.mapPopupClose(e.target.closest('.map-popup'));
         }
     }

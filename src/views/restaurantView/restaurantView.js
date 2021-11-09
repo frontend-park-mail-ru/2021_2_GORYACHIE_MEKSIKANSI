@@ -7,9 +7,10 @@ import {RestaurantEvents} from "Events/Restaurant.js";
 import page from '../baseView/page.hbs';
 import restaurantHeader from 'Components/restaurantHeader/restaurantHeader.hbs';
 import restaurantPage from './restaurantPage.hbs';
-import continuePopup from 'Components/continuePopup/continuePopup.hbs'
 import {DishesList} from '../../components/dishesList/dishesList';
 import userStore from "Modules/reducers/userStore";
+import {continueModal} from "hme-design-system/stories/modal.stories";
+import {ContinueModal} from "hme-design-system/src/components/modal/continueModal/continueModal";
 
 export class RestaurantView extends View {
   constructor({
@@ -73,18 +74,19 @@ export class RestaurantView extends View {
     this.popup.remove();
     this.continueDiv = document.createElement('div');
     this.continueDiv.classList.add('continue-popup-div');
-    this.continueDiv.innerHTML = continuePopup({new: newR, old: oldR});
+    // this.continueDiv.innerHTML = continuePopup({new: newR, old: oldR});
+    this.continueDiv.innerHTML = new ContinueModal({newRestaurantName: newR.name, oldRestaurantName: oldR.name}).render();
     this.parent.appendChild(this.continueDiv);
     document.body.style.overflowY = 'hidden';
 
-    this.continueDiv.querySelector('.continue-popup-cancel').addEventListener('click', this.closeContinueOrdering);
-    this.continueDiv.querySelector('.continue-popup-continue').addEventListener('click', this.acceptContinueOrdering);
+    this.continueDiv.querySelector('.continue-modal__cancel').addEventListener('click', this.closeContinueOrdering);
+    this.continueDiv.querySelector('.continue-modal__accept').addEventListener('click', this.acceptContinueOrdering);
   }
 
   closeContinueOrdering = () => {
     if (this.continueDiv) {
-      this.continueDiv.querySelector('.continue-popup-cancel').removeEventListener('click', this.closeContinueOrdering);
-      this.continueDiv.querySelector('.continue-popup-continue').removeEventListener('click', this.acceptContinueOrdering);
+      this.continueDiv.querySelector('.continue-modal__cancel').removeEventListener('click', this.closeContinueOrdering);
+      this.continueDiv.querySelector('.continue-modal__accept').removeEventListener('click', this.acceptContinueOrdering);
       this.continueDiv.remove();
     }
     document.body.style.overflowY = 'scroll';
