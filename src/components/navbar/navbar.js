@@ -133,6 +133,7 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
+    this.yMap.remove();
     if (document.querySelector('.hamburger-wrapper') &&
       document.querySelector('.navbar')) {
       this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);

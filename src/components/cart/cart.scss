@@ -136,6 +136,13 @@
         width: 100%;
     }
 
+    &__order-restaurant-img {
+        width: 96px;
+        height: 96px;
+        margin-left: auto;
+        object-fit: cover;
+    }
+
     &__order-row-additional {
         margin-top: 5px;
         width: 100%;

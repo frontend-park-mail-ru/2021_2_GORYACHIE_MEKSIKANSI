@@ -16,6 +16,12 @@
         </div>
 
         <div class="cart__orders-body">
+            {{#if restaurant.name}}
+            <div class="cart__order-row">
+                <div class="font_h2">{{restaurant.name}}</div>
+                <img class="cart__order-restaurant-img" src="{{restaurant.img}}"/>
+            </div>
+            {{/if}}
             {{#each items}}
                 <div id="{{itNum}}" class="cart__order-row">
                     <div class="cart__order-row-info">

@@ -23,9 +23,9 @@
 <div class="content-block order cart-order">
     <div class="order__main-info">
         <div class="order__main-info-text">
-            <div class="order__restaurant-title order__row-margin">
+            <a href="/restaurants/{{ restaurant.id }}/" class="order__restaurant-title order__row-margin">
                 {{restaurant.name}}
-            </div>
+            </a>
             <div class="order__address order__row-margin">
                 {{restaurant.addrs}}
             </div>
