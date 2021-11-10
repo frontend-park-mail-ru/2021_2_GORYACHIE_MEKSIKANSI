@@ -1,0 +1,58 @@
+.navbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.navbar {
+    width: 272px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 100;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
+    background-color: white;
+
+    animation-name: animateleft;
+    animation-duration: 0.4s;
+}
+
+.navbar__gray-button {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar__button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.navbar__button_align-text_center {
+    width: 100%;
+    text-align: center;
+}
+
+.navbar__line {
+    border: none;
+    background-color: var(--color-primary);
+    width: 272px;
+    height: 2px;
+}
+
+@keyframes animateleft {
+    from {left: -300px; opacity: 0}
+    to {left: 0; opacity: 1}
+}

@@ -1,0 +1,30 @@
+body {
+    font-family: "Raleway", sans-serif;
+}
+
+.search-input {
+    outline: none;
+    border: none;
+
+    font-weight: 800;
+    font-size: 16px;
+
+    background-color: #F6F6F6;
+}
+
+.search-input__label {
+    height: 48px;
+    background-color: #F6F6F6;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.search-label__icon {
+    margin-left: 7px;
+    margin-right: 5px;
+}
+
+.search-input__label_size_m {
+    width: 442px;
+}

@@ -1,0 +1,70 @@
+@import "../variables/colors.css";
+@import "../variables/fonts.css";
+
+.footer {
+    background: var(--color-black);
+    padding: 30px 0 50px;
+    font-family: var(--raleway-font);
+
+    margin-top: 25vh;
+    position: absolute;
+    left: 0;
+    width: 100vw;
+}
+
+.footer__upper-footer {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.footer__image {
+    min-width: 50vw;
+    max-height: 40vw;
+    border-radius: 50%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.footer__logo {
+    margin-left: 100px;
+}
+
+.footer__navigation-ul {
+    display: flex;
+    margin-left:50px;
+    flex-flow: column wrap;
+}
+
+.footer__help {
+    display: flex;
+    letter-spacing: 0.05em;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    list-style: none;
+    color: var(--color-white);
+    margin-top: 16px;
+}
+
+.footer__line {
+    margin: 50px 40px;
+    border: none;
+    background-color: var(--color-white);
+    height: 2px;
+}
+
+.footer__lower-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer__title {
+    color: var(--color-white);
+    padding: 0 200px 0 0;
+    font-size: 21px;
+}
+
+.footer__navigation {
+    flex-grow: 1;
+}
