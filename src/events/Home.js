@@ -1,5 +1,5 @@
 export const HomeEvents = {
-    homeGetRestaurantsSuccess: 'homeGetRestaurantsSuccess',
-    homeGetRestaurantsFailed: 'homeGetRestaurantsFailed',
-    homeUserLoggedIn: 'homeUserLoggedIn',
+  homeGetRestaurantsSuccess: 'homeGetRestaurantsSuccess',
+  homeGetRestaurantsFailed: 'homeGetRestaurantsFailed',
+  homeUserLoggedIn: 'homeUserLoggedIn',
 };

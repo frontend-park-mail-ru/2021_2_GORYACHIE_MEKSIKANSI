@@ -1,9 +1,15 @@
-import eventBus from 'Modules/eventBus.js';
-import {RestaurantEvents} from 'Events/Restaurant.js';
-import dishPopup from './dishPopup.hbs';
-import {DishModal} from "hme-design-system/src/components/modal/dishModal/dishModal";
+import {DishModal} from 'hme-design-system/src/components/modal/dishModal/dishModal';
 
+/**
+ * Dish popup class
+ */
 export class DishPopup {
+  /**
+   * Constructor for DishPopup class
+   *
+   * @param {{parent: HTMLElement, routeTo: object, controller: Class, restaurant: Object}} params
+   *
+   */
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
@@ -16,14 +22,16 @@ export class DishPopup {
     this.restaurant = restaurant;
   }
 
+  /**
+   * Rendering dish popup on page
+   * @param {object} dish
+   */
   async render(dish) {
     this.number = 1;
     this.dish = dish.dishes;
     this.div = document.createElement('div');
     this.div.classList.add('dish-popup-div');
-    // this.div.innerHTML = dishPopup(this.dish);
-    console.log('DISH', this.dish);
-    await this.div.insertAdjacentHTML('afterbegin', new DishModal(this.dish).render())
+    await this.div.insertAdjacentHTML('afterbegin', new DishModal(this.dish).render());
     document.body.style.overflowY = 'hidden';
 
     this.parent.appendChild(this.div);
@@ -44,6 +52,9 @@ export class DishPopup {
     document.body.querySelector('.modal__buy-button').addEventListener('click', this.addDishToCart);
   }
 
+  /**
+   * Adding dish to cart
+   */
   addDishToCart = () => {
     const radiosGroups = this.div.querySelector('.modal-dish__radio-group').querySelectorAll('.tick-form-group');
     const dishRadios = [];
@@ -63,7 +74,7 @@ export class DishPopup {
       return;
     }
 
-    let dishCheckboxes = [];
+    const dishCheckboxes = [];
     this.div.querySelector('.modal-dish__checkboxes-group').querySelectorAll('input').forEach((item) => {
       if (item.checked) {
         dishCheckboxes.push({
@@ -87,6 +98,9 @@ export class DishPopup {
     this.remove();
   }
 
+  /**
+   * Removing dish from page
+   */
   remove = () => {
     if (document.body.querySelector('.dish-popup-div')) {
       document.body.querySelector('.modal-close-button').removeEventListener('click', this.remove);
@@ -108,6 +122,10 @@ export class DishPopup {
     }
   }
 
+  /**
+   * Closing popup on outside click
+   * @param {event} e
+   */
   outsidePopupClick = (e) => {
     console.log('CLICK');
     if (!document.body.querySelector('.dish-popup-div').querySelector('.modal').contains(e.target)) {
@@ -115,6 +133,9 @@ export class DishPopup {
     }
   }
 
+  /**
+   * Increasing amount of dish in popup
+   */
   increaseNumber = () => {
     const number = this.div.querySelector('.modal-dish__number');
     this.number += 1;
@@ -133,6 +154,9 @@ export class DishPopup {
     this.refreshSummary();
   }
 
+  /**
+   * Refreshing sum price
+   */
   refreshSummary = () => {
     let cost = Number(this.dish.cost);
 

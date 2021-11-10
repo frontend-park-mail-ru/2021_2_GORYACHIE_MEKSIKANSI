@@ -1,11 +1,11 @@
-import {BaseProfileView} from "../baseProfileView";
-import baseProfilePage from "../baseProfilePage.hbs";
-import historyPage from "../historyView/historyPage.hbs";
+import {BaseProfileView} from '../baseProfileView';
+import baseProfilePage from '../baseProfilePage.hbs';
+import historyPage from '../historyView/historyPage.hbs';
 import Navbar from 'Components/navbar/navbar.js';
 import orderProcess from 'Components/orderProcess/orderProcess.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
-import cartStore from "../../../modules/reducers/cartStore";
-import userStore from "../../../modules/reducers/userStore";
+import cartStore from '../../../modules/reducers/cartStore';
+import userStore from '../../../modules/reducers/userStore';
 
 
 /**
@@ -19,10 +19,10 @@ export class OrderProcessView extends BaseProfileView {
    * @param {Class} controller
    */
   constructor({
-                parent: parent = document.body,
-                routeTo: routeTo = () => {},
-                controller: controller,
-              }) {
+    parent: parent = document.body,
+    routeTo: routeTo = () => {},
+    controller: controller,
+  }) {
     super({
       parent: parent,
       routeTo: routeTo,

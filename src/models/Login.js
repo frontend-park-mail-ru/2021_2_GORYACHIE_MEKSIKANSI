@@ -35,6 +35,9 @@ class LoginModel {
         });
   }
 
+  /**
+   * getting profile method
+   */
   getProfile() {
     profileGet({})
         .then((response) => {

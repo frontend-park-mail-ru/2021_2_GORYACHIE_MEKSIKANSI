@@ -1,7 +1,7 @@
 import Http from './http.js';
 import {auth, logout} from './auth.js';
-import eventBus from "./eventBus";
-import {AuthStatus} from "Events/Auth";
+import eventBus from './eventBus';
+import {AuthStatus} from 'Events/Auth';
 
 const http = new Http();
 
@@ -110,14 +110,31 @@ export function dishGet({url = '/restaurants/0/dish/0'}) {
   return http.ajaxGet({url});
 }
 
+/**
+ * getting cart
+ *
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function cartGet() {
   return http.ajaxGet({url: '/user/cart/'});
 }
 
+/**
+ * upadting cart state
+ *
+ * @param {object} cartState
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function updateCartPut(cartState) {
   return http.ajaxPut({url: '/user/cart/', body: cartState});
 }
 
+/**
+ * upadting user name
+ *
+ * @param {string} name
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function updateName(name) {
   return http.ajaxPut({
     url: '/user/name/',
@@ -127,6 +144,12 @@ export function updateName(name) {
   });
 }
 
+/**
+ * upadting user mail
+ *
+ * @param {string} email
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function updateEmail(email) {
   return http.ajaxPut({
     url: '/user/email/',
@@ -136,6 +159,12 @@ export function updateEmail(email) {
   });
 }
 
+/**
+ * upadting user phone
+ *
+ * @param {string} phone
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function updatePhone(phone) {
   return http.ajaxPut({
     url: '/user/phone/',
@@ -145,6 +174,12 @@ export function updatePhone(phone) {
   });
 }
 
+/**
+ * upadting user password
+ *
+ * @param {string} password
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function updatePassword(password) {
   return http.ajaxPut({
     url: '/user/password/',
@@ -154,6 +189,12 @@ export function updatePassword(password) {
   });
 }
 
+/**
+ * upadting user avatar
+ *
+ * @param {formdata} avatar
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function updateAvatar(avatar) {
   return http.ajaxPutNoStringify({
     url: '/user/avatar/',
@@ -161,22 +202,33 @@ export function updateAvatar(avatar) {
   });
 }
 
+/**
+ * upadting user address
+ *
+ * @param {object} address
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function postAddress(address) {
   return http.ajaxPut({
     url: '/user/address',
     body: {
       address: {
         coordinates: {
-         latitude: address.latitude,
-         longitude: address.longitude,
+          latitude: address.latitude,
+          longitude: address.longitude,
         },
         city: address.city,
         alias: address.name,
-      }
+      },
     },
   });
 }
 
+/**
+ * pay method
+ *
+ * @return {Promise<{body: object, status: number}>}
+ */
 export function postPay() {
   return http.ajaxPost({
     url: '/user/pay',

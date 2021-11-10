@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack --mode development",
-    "debug": "DEBUG=true webpack serve"
+    "debug": "DEBUG=true webpack serve",
+    "lint": "eslint --config=.eslintrc.json src/"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "ymaps": "^0.2.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-promise": "^5.1.0",

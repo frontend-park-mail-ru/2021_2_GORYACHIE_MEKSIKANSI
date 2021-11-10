@@ -23,6 +23,10 @@ export const icon = '<svg class="button-icon-v__icon sort-underheader__button-ic
   '</g>\n' +
   '</svg>';
 
+/**
+ * Mocking restaurant
+ * @return {object}
+ */
 export function getRestaurantMock() {
   return {
     id: 1,
@@ -48,6 +52,10 @@ export function getRestaurantMock() {
   };
 }
 
+/**
+ * Mocking dish
+ * @return {object}
+ */
 export function getDish() {
   return {
     id: '1',
@@ -102,6 +110,11 @@ export function getDish() {
   };
 }
 
+/**
+ * Mocking random int
+ * @param {int} max
+ * @return {int}
+ */
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -143,10 +156,19 @@ const items = [
   },
 ];
 
+/**
+ * Mocking items to cart
+ *  @param {Array} dishId
+ *  @return {int}
+ */
 export function getItemToCart(dishId) {
   return items[0];
 }
 
+/**
+ * Mocking dishes list
+ * @return {object} dishesList
+ */
 function getDishesListMocks() {
   const dishesList = [];
   for (let i = 0; i < 10; i++) {
@@ -163,6 +185,10 @@ function getDishesListMocks() {
   return dishesList;
 }
 
+/**
+ * Mocking menu nav
+ * @return {object}
+ */
 function getMenuNavsMock() {
   const dishesList = getDishesListMocks();
   const menuNavs = [

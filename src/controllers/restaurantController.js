@@ -2,11 +2,13 @@ import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
-import userStore from "../modules/reducers/userStore";
-import {urls} from "../modules/urls";
-import cartStore from "Modules/reducers/cartStore";
+import userStore from '../modules/reducers/userStore';
+import {urls} from '../modules/urls';
+import cartStore from 'Modules/reducers/cartStore';
 
-
+/**
+ * Standard restaurant controller
+ */
 export class RestaurantController { // TODO: добавить джсдок
   /**
    * Constructor for controller
@@ -28,22 +30,35 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
   /**
-   * Rendering view
+   * rendering view of restaurant
+   * @param {int} id
    */
   render(id = 0) {
     RestaurantModel.getRestaurant(id);
   }
 
+  /**
+   * getting dish by rest id and dish id
+   * @param {int} restId
+   * @param {int} dishId
+   */
   getDish(restId, dishId) {
     RestaurantModel.getDish(restId, dishId);
   }
 
+  /**
+   * continue adding func
+   */
   continueAdding() {
     if (this.stash) {
       RestaurantModel.changeRestaurantAndAddDish(this.stash);
     }
   }
 
+  /**
+   * addin dish to cart controller
+   * @param {object} dishSettings
+   */
   addDishToCart(dishSettings = {}) {
     if (!userStore.getState().auth) {
       this.routeTo(urls.login.url);
@@ -58,6 +73,10 @@ export class RestaurantController { // TODO: добавить джсдок
     }
   }
 
+  /**
+   * increasing dish in cart controller
+   * @param {int} itNum
+   */
   increaseDishInCart(itNum) {
     const dish = cartStore.getState().cart.find((item) => {
       return Number(item.itNum) === Number(itNum);
@@ -67,10 +86,17 @@ export class RestaurantController { // TODO: добавить джсдок
     }
   }
 
+  /**
+   * clearing cart controller
+   */
   clearCart() {
     RestaurantModel.clearCart();
   }
 
+  /**
+   * deleting dish from cart by itNum
+   * @param {int} itNum
+   */
   deleteDishFromCart(itNum) {
     RestaurantModel.deleteDishFromCart(itNum);
   }

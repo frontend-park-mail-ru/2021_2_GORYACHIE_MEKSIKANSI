@@ -69,16 +69,11 @@ export class Router {
     this.routes.set(url, handler);
   }
 
-  back() {
-    window.history.back();
-  }
-
-  forward() {
-    window.history.forward();
-  }
-
+  /**
+   * Starting router
+   */
   start() {
-      this.open(window.location.pathname);
+    this.open(window.location.pathname);
   }
 
   /**

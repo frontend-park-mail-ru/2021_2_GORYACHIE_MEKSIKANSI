@@ -1,13 +1,11 @@
 import {profileGet, logoutPost} from 'Modules/api.js';
-import navbar from './navbar.hbs'
+import navbar from './navbar.hbs';
 import {MapPopup} from '../mapPopup/mapPopup.js';
-import {RestaurantEvents} from "../../events/Restaurant";
-import Address from 'Modules/lsAddress.js';
-import eventBus from "Modules/eventBus.js";
-import {AuthStatus} from "Events/Auth.js";
-import userStore from "Modules/reducers/userStore.js";
-import cartStore from "Modules/reducers/cartStore.js";
-import {ProfileEvents} from "../../events/Profile";
+import eventBus from 'Modules/eventBus.js';
+import {AuthStatus} from 'Events/Auth.js';
+import userStore from 'Modules/reducers/userStore.js';
+import cartStore from 'Modules/reducers/cartStore.js';
+import {ProfileEvents} from '../../events/Profile';
 
 /**
  * Left navigation bar class
@@ -45,14 +43,20 @@ export class Navbar {
     this.settingUp();
   }
 
+  /**
+   * Rerendering navbar
+   */
   refresh = () => {
     this.remove();
     this.render();
   }
 
+  /**
+   * Getting amount of items in cart
+   * @return {int}
+   */
   getNumberOfItems = () => {
     if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
-
       return cartStore.getState().cart.reduce((prev, item) => {
         prev += item.count;
         return prev;
@@ -63,6 +67,7 @@ export class Navbar {
 
   /**
    * Updating address in header
+   * @param {string} name
    */
   updateAddressName = (name) => {
     this.parent.querySelector('.map-popup__address').innerHTML = String(name);
@@ -75,6 +80,9 @@ export class Navbar {
     }
   }
 
+  /**
+   * Setting navbar settings to render
+   */
   settingUp() {
     this.updateCartButtonNumber();
     this.yMap.render();
@@ -89,11 +97,19 @@ export class Navbar {
     });
   }
 
+  /**
+   * Opening listener of event
+   * @param {event} event
+   */
   openListener = (event) => {
     event.preventDefault();
     this.open();
   }
 
+  /**
+   * Closing listener of event
+   * @param {event} event
+   */
   closeListener = (event) => {
     event.preventDefault();
     const {target} = event;
@@ -106,9 +122,13 @@ export class Navbar {
     }
   }
 
+  /**
+   * Logout button event
+   * @param {event} event
+   */
   logout = (event) => {
     event.preventDefault();
-    logoutPost();  // TODO: solve the problem of direct api use...
+    logoutPost(); // TODO: solve the problem of direct api use...
   }
 
   /**
@@ -118,7 +138,7 @@ export class Navbar {
     window.document.body.style.overflowY = 'hidden';
     this.parent.getElementsByClassName('hamburger')[0].style.display = 'flex';
     this.parent.getElementsByClassName('hamburger-wrapper')[0]
-      .style.display = 'block';
+        .style.display = 'block';
   }
 
   /**
@@ -128,7 +148,7 @@ export class Navbar {
     window.document.body.style.overflowY = 'scroll';
     this.parent.getElementsByClassName('hamburger')[0].style.display = 'none';
     this.parent.getElementsByClassName('hamburger-wrapper')[0]
-      .style.display = 'none';
+        .style.display = 'none';
   }
 
   /**

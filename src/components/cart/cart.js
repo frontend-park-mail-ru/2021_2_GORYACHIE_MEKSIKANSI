@@ -1,12 +1,21 @@
- import {RestaurantEvents} from 'Events/Restaurant.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from 'Modules/eventBus.js';
-import store from 'Modules/store.js';
-import cart from './cart.hbs'
-import cartStore from "Modules/reducers/cartStore.js";
-import {SnackBar} from "Components/snackBar/snackBar.js";
- import {ResponseEvents} from "../../events/Responses";
+import cart from './cart.hbs';
+import cartStore from 'Modules/reducers/cartStore.js';
+import {SnackBar} from 'Components/snackBar/snackBar.js';
+import {ResponseEvents} from 'Events/Responses.js';
 
- export class Cart {
+
+/**
+ * Cart class
+ */
+export class Cart {
+  /**
+   * Constructor for cart class
+   *
+   * @param {{parent: HTMLElement, routeTo: object, controller: Class}} params
+   *
+   */
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
@@ -17,9 +26,16 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
     this.parent = parent;
   }
 
+
+  /**
+   * Render for cart class
+   *
+   */
   render() {
-    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
-    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed, this.failedToIncrease);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess,
+        this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateFailed,
+        this.failedToIncrease);
     this.parent.innerHTML = cart({
       items: cartStore.getState().cart,
       restaurant: cartStore.getState().restaurant,
@@ -48,34 +64,62 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
     this.stickCart();
   }
 
+  /**
+   * Rerendering cart when update comes
+   *
+   */
   refresh = () => {
     this.remove();
     this.render();
   }
 
+  /**
+   * Increasing amount of dish in cart
+   *
+   * @param {event} e
+   *
+   */
   increaseNumber = (e) => {
     const {target} = e;
     const itNum = target.closest('.cart__order-row').id;
     this.controller.increaseDishInCart(Number(itNum));
   }
 
+  /**
+   * Decreasing amount of dish in cart
+   *
+   * @param {event} e
+   *
+   */
   decreaseNumber = (e) => {
     const {target} = e;
     const itNum = target.closest('.cart__order-row').id;
     this.controller.deleteDishFromCart(Number(itNum));
   }
 
+  /**
+   * Refreshing summary price in cart
+   *
+   */
   refreshSummary = () => {
     if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined && cartStore.getState().cart.length > 0) {
       this.parent.querySelector('.cart__summary-cost').innerHTML = String(cartStore.getState().cost.sumCost);
     }
   }
 
+  /**
+   * Adding render settings for cart
+   *
+   */
   settingUp() {
     this.parent.querySelector('.cart__clear-button').addEventListener('click', this.controller.clearCart);
     window.addEventListener('scroll', this.stickCart);
   }
 
+  /**
+   * Function to make cart sticky
+   *
+   */
   stickCart = () => {
     console.log('HERE');
     const cart = document.querySelector('.cart-wrapper');
@@ -93,6 +137,9 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
     }
   }
 
+  /**
+   * Removing cart from page
+   */
   remove() {
     EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
     EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateFailed, this.failedToIncrease);
@@ -103,33 +150,36 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
     this.parent.innerHTML = '';
   }
 
+  /**
+   * Removing cart from page
+   * @param {response} response
+   */
  failedToIncrease = (response) => {
-     let snack;
-     if (response.status === ResponseEvents.CookiesNotFound) {
+   let snack;
+   if (response.status === ResponseEvents.CookiesNotFound) {
      snack = new SnackBar({
-         message: "Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!",
-         status: "warn",
-         position: "tr",
-         width: "500px",
-         fixed: true,
-     })
+       message: 'Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!',
+       status: 'warn',
+       position: 'tr',
+       width: '500px',
+       fixed: true,
+     });
      snack.settingUp();
      snack.Open();
- } else {
+   } else {
      if ('dishesErrs' in response.body.cart) {
-         response.body.cart.dishesErrs.forEach((item) => {
-             snack = new SnackBar({
-                 message: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
-                 status: "warning",
-                 position: "tr",
-                 width: "500px",
-                 fixed: true,
-             })
-             snack.settingUp();
-             snack.Open();
-         })
+       response.body.cart.dishesErrs.forEach((item) => {
+         snack = new SnackBar({
+           message: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
+           status: 'warning',
+           position: 'tr',
+           width: '500px',
+           fixed: true,
+         });
+         snack.settingUp();
+         snack.Open();
+       });
      }
- }
-
+   }
  }
 }

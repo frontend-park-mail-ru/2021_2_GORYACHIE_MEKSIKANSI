@@ -1,4 +1,4 @@
-import {createStore} from "../store";
+import {createStore} from '../store';
 
 export const userActions = {
   storeUserLogin: 'storeUserLogin',
@@ -6,6 +6,12 @@ export const userActions = {
   storeUserDataUpdate: 'storeUserDataUpdate',
 };
 
+/**
+ * reducer for user store
+ * @param {object} state
+ * @param {object} action
+ * @return {object}
+ */
 export function userReducer(state, action) {
   switch (action.actionType) {
     case userActions.storeUserLogout:
@@ -43,7 +49,7 @@ export const initialUserState = {
   email: '',
   avatar: '',
   address: {
-    latitude:  55.751574,
+    latitude: 55.751574,
     longitude: 37.57385,
     name: 'Москва',
     street: 'ул. Пушкин',

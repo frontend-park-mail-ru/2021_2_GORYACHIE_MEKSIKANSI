@@ -7,9 +7,9 @@ import {ValidationLength} from 'Events/Validation.js';
 import store from 'Modules/store.js';
 import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
-import {urls} from "Modules/urls";
-import userStore from "Modules/reducers/userStore";
-import {SnackBar} from "../components/snackBar/snackBar";
+import {urls} from 'Modules/urls';
+import userStore from 'Modules/reducers/userStore';
+import {SnackBar} from '../components/snackBar/snackBar';
 
 /**
  *  Profile controller class
@@ -40,18 +40,22 @@ export class ProfileController {
     });
     eventBus.addEventListener(ProfileEvents.userDataUpdateFailed, (errorText) => {
       this.profileView.showError(errorText);
-    })
+    });
   }
 
+  /**
+   * Method to check image size
+   * @param {formdata} file
+   */
   checkImage(file) {
     if (file.size > 7000000) {
       const snack = new SnackBar({
-        message: "Картинка слишком большого размера! Допустимый размер 7мб",
-        status: "red",
-        position: "tr",
-        width: "500px",
+        message: 'Картинка слишком большого размера! Допустимый размер 7мб',
+        status: 'red',
+        position: 'tr',
+        width: '500px',
         fixed: true,
-      })
+      });
       snack.settingUp();
       snack.Open();
     } else {
@@ -62,6 +66,15 @@ export class ProfileController {
     }
   }
 
+  /**
+   * Method to change user data
+   * @param {string} name
+   * @param {string} phone
+   * @param {string} mail
+   * @param {string} password
+   * @param {string} repeatPassword
+   *
+   */
   dataChange(name, phone, mail, password, repeatPassword) {
     const currentUserData = userStore.getState();
     let validation = {};
@@ -72,7 +85,7 @@ export class ProfileController {
           key: Validation.validateName(name),
           value: name,
         },
-      }
+      };
     }
 
     if (currentUserData.email !== mail) {
@@ -82,7 +95,7 @@ export class ProfileController {
           key: Validation.validateEmail(mail),
           value: mail,
         },
-      }
+      };
     }
 
     if (currentUserData.phone !== phone) {
@@ -92,7 +105,7 @@ export class ProfileController {
           key: Validation.validatePhoneNumber(phone),
           value: phone,
         },
-      }
+      };
     }
 
     if (password !== '' || repeatPassword !== '') {
@@ -100,14 +113,14 @@ export class ProfileController {
         ...validation,
         cPassword: {
           key: Validation.validatePassword(password),
-          value: password
+          value: password,
         },
         cRepeatPassword: {
           key: Validation.validatePasswordRepeat(password,
-            repeatPassword),
+              repeatPassword),
           value: repeatPassword,
         },
-      }
+      };
     }
 
     const incorrectData = {
@@ -116,22 +129,22 @@ export class ProfileController {
       cMail: '',
       cPassword: '',
       cRepeatPassword: '',
-    }
+    };
     const correctData = {
       cName: '',
       cPhone: '',
       cMail: '',
       cPassword: '',
-    }
+    };
 
     Object.entries(validation).forEach(([key, value]) => {
-        if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {
-          incorrectData[key] = value.key;
-        } else {
-          if (value.key.validationCode !== ValidationLength.EmptyLine && key in correctData) {
-            correctData[key] = value.value;
-          }
+      if (value.key.validationCode === ValidationLength.Incorrect || value.key.validationCode === ValidationLength.EmptyLine) {
+        incorrectData[key] = value.key;
+      } else {
+        if (value.key.validationCode !== ValidationLength.EmptyLine && key in correctData) {
+          correctData[key] = value.value;
         }
+      }
     });
 
     Object.entries(correctData).forEach(([key, value]) => {
@@ -165,7 +178,7 @@ export class ProfileController {
     };
 
     Object.entries(correctData).forEach(([key, value]) => {
-        updateModel[key](value);
+      updateModel[key](value);
     });
   }
 
@@ -181,10 +194,16 @@ export class ProfileController {
     }
   }
 
+  /**
+   * Showing profileView
+   */
   show = () => {
     this.profileView.render();
   }
 
+  /**
+   * Rendirectiong to other page
+   */
   redirect = () => {
     this.routeTo(urls.home.url);
   }

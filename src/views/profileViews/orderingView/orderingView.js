@@ -2,16 +2,16 @@ import {View} from '../../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
 import {urls} from 'Modules/urls.js';
 import EventBus from 'Modules/eventBus.js';
-import {OrderingEvents} from "Events/Ordering.js";
+import {OrderingEvents} from 'Events/Ordering.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import Address from 'Modules/lsAddress.js';
 import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
 import orderSummary from 'Components/cartOrder/orderSummary.hbs';
-import userStore from "Modules/reducers/userStore";
-import cartStore from "Modules/reducers/cartStore";
-import {BaseProfileView} from "../baseProfileView";
-import {Modal} from "hme-design-system/src/components/modal/modal";
-import {Card} from "hme-design-system/src/components/card/card";
+import userStore from 'Modules/reducers/userStore';
+import cartStore from 'Modules/reducers/cartStore';
+import {BaseProfileView} from '../baseProfileView';
+import {Modal} from 'hme-design-system/src/components/modal/modal';
+import {Card} from 'hme-design-system/src/components/card/card';
 
 /**
  * Profile view class
@@ -52,7 +52,7 @@ export class OrderingView extends BaseProfileView {
         items: cartStore.getState().cart,
         sumCost: cartStore.getState().cost.sumCost,
         dCost: cartStore.getState().cost.dCost,
-        address: userStore.getState().address.fullAddress
+        address: userStore.getState().address.fullAddress,
       }),
       rightMenu: orderSummary({
         sumCost: cartStore.getState().cost.sumCost,

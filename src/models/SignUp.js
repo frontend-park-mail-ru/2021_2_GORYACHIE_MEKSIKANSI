@@ -34,6 +34,9 @@ class SignUpModel {
         });
   }
 
+  /**
+   * getting user profile
+   */
   getProfile() {
     profileGet({})
         .then((response) => {
