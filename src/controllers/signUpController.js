@@ -3,11 +3,11 @@ import {Validation} from 'Modules/validation.js';
 import SignUpModel from 'Models/SignUp.js';
 import eventBus from 'Modules/eventBus.js';
 import {SignUpEvents} from 'Events/SignUp.js';
-import {userStatus} from "Modules/store";
+import {userStatus} from 'Modules/store';
 import store from 'Modules/store.js';
 import {AuthStatus} from 'Events/Auth.js';
-import {urls} from "Modules/urls";
-import userStore from "Modules/reducers/userStore";
+import {urls} from 'Modules/urls';
+import userStore from 'Modules/reducers/userStore';
 
 /**
  * Signup page controller

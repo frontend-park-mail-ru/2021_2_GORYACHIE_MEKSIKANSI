@@ -1,5 +1,5 @@
-import promoLine from './promoLine.hbs'
-import {PromoBlock} from "hme-design-system/src/components/promoBlock/promoBlock";
+import promoLine from './promoLine.hbs';
+import {PromoBlock} from 'hme-design-system/src/components/promoBlock/promoBlock';
 
 export class PromoLine {
   constructor(props) {

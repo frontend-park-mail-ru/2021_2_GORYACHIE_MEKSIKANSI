@@ -3,10 +3,10 @@ import OrderingModel from 'Models/Ordering.js';
 import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
 import {urls} from 'Modules/urls.js';
 import store from 'Modules/store.js';
-import {AuthStatus} from "Events/Auth";
-import cartStore from "Modules/reducers/cartStore";
-import userStore from "Modules/reducers/userStore";
-import {OrderingEvents} from "../events/Ordering";
+import {AuthStatus} from 'Events/Auth';
+import cartStore from 'Modules/reducers/cartStore';
+import userStore from 'Modules/reducers/userStore';
+import {OrderingEvents} from '../events/Ordering';
 
 export class OrderingController {
   /**

@@ -5,8 +5,8 @@ import baseProfilePage from '../baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import userStore from 'Modules/reducers/userStore.js';
-import {BaseProfileView} from "../baseProfileView";
-import {Avatar} from "hme-design-system/src/components/avatar/avatar";
+import {BaseProfileView} from '../baseProfileView';
+import {Avatar} from 'hme-design-system/src/components/avatar/avatar';
 
 /**
  * Profile view class
@@ -46,7 +46,9 @@ export class ProfileView extends BaseProfileView {
       }),
       rightMenu: profileButtonsNav});
 
-    document.querySelector('.avatar-box').addEventListener('click', () => {document.getElementById('avatar').click();});
+    document.querySelector('.avatar-box').addEventListener('click', () => {
+      document.getElementById('avatar').click();
+    });
     document.getElementById('avatar').onchange = this.checkImage;
 
     const form = document.getElementById('save-button');
@@ -77,9 +79,9 @@ export class ProfileView extends BaseProfileView {
   }
 
   checkImage = () => {
-    const [file] = document.getElementById('avatar').files
+    const [file] = document.getElementById('avatar').files;
     if (file) {
-        this.controller.checkImage(file);
+      this.controller.checkImage(file);
     }
   }
 
@@ -94,7 +96,9 @@ export class ProfileView extends BaseProfileView {
    */
   submitListener(event) {
     event.preventDefault();
-    this.controller.dataChange(...Object.values(this.inputs).map((obj) => {return obj.input.value}));
+    this.controller.dataChange(...Object.values(this.inputs).map((obj) => {
+      return obj.input.value;
+    }));
   }
 
   showErrors = (incorrectData = {}) => {

@@ -1,7 +1,7 @@
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import dishPopup from './dishPopup.hbs';
-import {DishModal} from "hme-design-system/src/components/modal/dishModal/dishModal";
+import {DishModal} from 'hme-design-system/src/components/modal/dishModal/dishModal';
 
 export class DishPopup {
   constructor({
@@ -23,7 +23,7 @@ export class DishPopup {
     this.div.classList.add('dish-popup-div');
     // this.div.innerHTML = dishPopup(this.dish);
     console.log('DISH', this.dish);
-    await this.div.insertAdjacentHTML('afterbegin', new DishModal(this.dish).render())
+    await this.div.insertAdjacentHTML('afterbegin', new DishModal(this.dish).render());
     document.body.style.overflowY = 'hidden';
 
     this.parent.appendChild(this.div);
@@ -63,7 +63,7 @@ export class DishPopup {
       return;
     }
 
-    let dishCheckboxes = [];
+    const dishCheckboxes = [];
     this.div.querySelector('.modal-dish__checkboxes-group').querySelectorAll('input').forEach((item) => {
       if (item.checked) {
         dishCheckboxes.push({

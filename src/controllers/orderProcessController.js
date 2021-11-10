@@ -1,8 +1,8 @@
-import {OrderProcessView} from "../views/profileViews/orderProcess/orderProcessView";
-import userStore from "../modules/reducers/userStore";
-import eventBus from "../modules/eventBus";
-import {AuthStatus} from "../events/Auth";
-import {urls} from "../modules/urls";
+import {OrderProcessView} from '../views/profileViews/orderProcess/orderProcessView';
+import userStore from '../modules/reducers/userStore';
+import eventBus from '../modules/eventBus';
+import {AuthStatus} from '../events/Auth';
+import {urls} from '../modules/urls';
 
 export class OrderProcessController {
   /**
@@ -11,9 +11,9 @@ export class OrderProcessController {
    * @param {Function} routeTo router function for routing
    */
   constructor({
-                parent: parent = document.body,
-                routeTo: routeTo,
-              }) {
+    parent: parent = document.body,
+    routeTo: routeTo,
+  }) {
     this.routeTo = routeTo;
     this.parent = parent;
     this.orderProcessView = new OrderProcessView({

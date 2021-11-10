@@ -1,12 +1,12 @@
- import {RestaurantEvents} from 'Events/Restaurant.js';
+import {RestaurantEvents} from 'Events/Restaurant.js';
 import EventBus from 'Modules/eventBus.js';
 import store from 'Modules/store.js';
-import cart from './cart.hbs'
-import cartStore from "Modules/reducers/cartStore.js";
-import {SnackBar} from "Components/snackBar/snackBar.js";
- import {ResponseEvents} from "../../events/Responses";
+import cart from './cart.hbs';
+import cartStore from 'Modules/reducers/cartStore.js';
+import {SnackBar} from 'Components/snackBar/snackBar.js';
+import {ResponseEvents} from '../../events/Responses';
 
- export class Cart {
+export class Cart {
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
@@ -104,32 +104,31 @@ import {SnackBar} from "Components/snackBar/snackBar.js";
   }
 
  failedToIncrease = (response) => {
-     let snack;
-     if (response.status === ResponseEvents.CookiesNotFound) {
+   let snack;
+   if (response.status === ResponseEvents.CookiesNotFound) {
      snack = new SnackBar({
-         message: "Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!",
-         status: "warn",
-         position: "tr",
-         width: "500px",
-         fixed: true,
-     })
+       message: 'Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!',
+       status: 'warn',
+       position: 'tr',
+       width: '500px',
+       fixed: true,
+     });
      snack.settingUp();
      snack.Open();
- } else {
+   } else {
      if ('dishesErrs' in response.body.cart) {
-         response.body.cart.dishesErrs.forEach((item) => {
-             snack = new SnackBar({
-                 message: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
-                 status: "warning",
-                 position: "tr",
-                 width: "500px",
-                 fixed: true,
-             })
-             snack.settingUp();
-             snack.Open();
-         })
+       response.body.cart.dishesErrs.forEach((item) => {
+         snack = new SnackBar({
+           message: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
+           status: 'warning',
+           position: 'tr',
+           width: '500px',
+           fixed: true,
+         });
+         snack.settingUp();
+         snack.Open();
+       });
      }
- }
-
+   }
  }
 }

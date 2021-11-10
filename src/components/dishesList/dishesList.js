@@ -1,9 +1,9 @@
 import dishesList from './dishesList.hbs';
 import {DishPopup} from 'Components/dishPopup/dishPopup.js';
-import {RestaurantBlock} from "hme-design-system/src/components/restaurantBlock/restaurantBlock";
-import restaurantsListTemplate from "../restaurantsList/restaurantsList.hbs";
-import {List} from "hme-design-system/src/components/list/list";
-import {DishBlock} from "hme-design-system/src/components/dishBlock/dishBlock";
+import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
+import restaurantsListTemplate from '../restaurantsList/restaurantsList.hbs';
+import {List} from 'hme-design-system/src/components/list/list';
+import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
 
 
 export class DishesList {
@@ -78,7 +78,7 @@ export class DishesList {
     // turn off highlight
     this.menuNavsButtons.forEach((item) => {
       item.style.borderBottom = '';
-    })
+    });
 
     // find the needed title
     let title;

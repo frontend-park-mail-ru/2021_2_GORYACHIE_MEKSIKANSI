@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "es2021": true,
@@ -11,6 +12,7 @@
   },
   "ignorePatterns": ["src/assets/js/*.js"],
   "rules": {
-    "no-undef": "off"
+    "no-undef": "off",
+    "no-invalid-this": "off"
   }
 }
