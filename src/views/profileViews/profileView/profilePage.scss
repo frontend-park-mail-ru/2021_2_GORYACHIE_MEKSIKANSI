@@ -1,0 +1,95 @@
+.profile-page__wrapper {
+    width: 100%;
+    background-color: var(--color-white);
+    border-radius: 32px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
+}
+
+
+.profile-page__input-box {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 75px 40px;
+}
+
+.profile-page__input-label {
+    width: 100%;
+    font-weight: 600;
+    color: var(--color-gray);
+}
+
+.profile-page__input {
+    margin-top: 5px;
+}
+
+.profile-page__button {
+    font-size: 16px;
+    border-radius: 16px;
+    width: var(--button-width-medium)
+}
+
+.profile-page__button_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 30px;
+}
+
+.profile-page__button-color {
+    background-color: #F6F6F6;
+    margin-right: auto;
+}
+
+.profile-page__avatar-box {
+
+}
+
+.profile-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-save-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-row__name {
+    font-size: 30px;
+    font-weight: var(--font_medium);
+    margin-left: 40px;
+}
+
+.profile-row__input-label-lm {
+    margin-left: 15px;
+}
+
+.profile-page__input-date-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.profile-page__input-ml {
+    margin-left: 15px;
+}
+
+.input__days {
+    flex-shrink: 2;
+}
+
+.input__months {
+    flex-shrink: 2;
+}
+
+.input__year {
+
+}
+
+.profile-label {
+    margin-bottom: 15px;
+
+}

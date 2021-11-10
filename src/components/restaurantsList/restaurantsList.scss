@@ -1,0 +1,34 @@
+:root {
+    --restaurantsListWidth: 80%;
+    --sortBoxWidth: calc(100% - var(--restaurantsListWidth));
+}
+
+.restaurants-list {
+    &__line {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__sort {
+        display: flex;
+        max-width: var(--sortBoxWidth);
+    }
+
+    &__list {
+        width: var(--restaurantsListWidth);
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: auto;
+    }
+
+    @media (min-width: 0px) and (max-width: 860px) {
+        &__sort {
+            display: none;
+            width: 0;
+        }
+
+        &__list {
+            width: 100%;
+        }
+    }
+}

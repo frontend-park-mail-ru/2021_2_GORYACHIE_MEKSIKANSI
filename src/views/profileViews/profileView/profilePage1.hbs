@@ -1,0 +1,63 @@
+<div class="content-block">
+        <form enctype="multipart/form-data">
+        <div class="profile-row">
+            <div class="profile-page__avatar-box">
+                {{{avatar}}}
+            </div>
+            <div class="profile-row__name">
+                {{user.name}}
+            </div>
+        </div>
+        <div class="profile-row">
+            <label class="profile-page__input-label">
+                Имя
+                <input value="{{user.name}}" autocomplete="off" id="name" required class="input input_border input_radius-border_medium profile-page__input">
+                <div id="name_error" class="error-label"></div>
+            </label>
+            <label class="profile-page__input-label profile-row__input-label-lm">
+                Номер телефона
+                <input value="{{user.phone}}"  autocomplete="off"  id="phone" required class="input input_border input_radius-border_medium  profile-page__input">
+                <div id="phone_error" class="error-label"></div>
+            </label>
+        </div>
+        <div class="profile-row">
+            <label class="profile-page__input-label">
+                Электронная почта
+                <input value="{{user.email}}" autocomplete="off" id="email" required class="input input_border input_radius-border_medium  profile-page__input">
+                <div id="email_error" class="error-label"></div>
+            </label>
+<!--            <label class="profile-page__input-label profile-row__input-label-lm" for="localdate">-->
+<!--                Дата рождения:-->
+<!--                <div class="profile-page__input-date-wrapper">-->
+<!--                    <input id="localdate" placeholder="DD" maxlength="2" min="0" size="2" max="31" type="tel" required class="input input_border input_radius-border_medium  profile-page__input input__days" name="date"/>-->
+<!--                    <input id="localdate" placeholder="MM" maxlength="2" min="0" max="12" type="tel" required class="input input_border input_radius-border_medium  profile-page__input profile-page__input-ml input__months" name="date"/>-->
+<!--                    <input id="localdate" placeholder="YYYY" maxlength="4" min="1900" max="2021" type="tel" required class="input input_border input_radius-border_medium  profile-page__input profile-page__input-ml" name="date"/>-->
+<!--                </div>-->
+<!--            </label>-->
+        </div>
+        <div class="profile-row">
+            <label class="profile-page__input-label">
+                Изменение пароля. Введите новый пароль
+                <input value="" autocomplete="new-password"  type="password" id="password" required class="input input_border input_radius-border_medium  profile-page__input">
+                <div id="password_error" class="error-label"></div>
+            </label>
+        </div>
+        <div class="profile-row">
+            <label class="profile-page__input-label">
+                Повторите пароль
+                <input value="" autocomplete="off" type="password" id="repeat_password" required class="input input_border input_radius-border_medium profile-page__input">
+                <div id="password_repeat_error" class="error-label"></div>
+            </label>
+        </div>
+
+
+            <div class="info-label profile-label">
+            </div>
+            <div class="error-label main-error-label profile-label">
+
+            </div>
+        <button id="save-button" class="button button_shape_rounded_medium button_color_black profile-page__button">
+            Сохранить изменения
+        </button>
+        </form>
+</div>

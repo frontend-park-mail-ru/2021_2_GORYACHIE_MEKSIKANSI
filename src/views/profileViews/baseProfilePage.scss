@@ -1,0 +1,38 @@
+:root {
+    --profileContentTopPadding: 50px;
+}
+
+
+.base-profile-page {
+    &__content {
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        padding: var(--profileContentTopPadding) var(--contentPadding) var(--contentBottomPadding);
+    }
+
+    &__title {
+        min-width: 100%;
+        font-weight: 800;
+        font-size: 30px;
+        padding-bottom: 30px;
+    }
+
+    &__left-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        width: 60%;
+    }
+
+    &__right-box {
+        width: 40%;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+}

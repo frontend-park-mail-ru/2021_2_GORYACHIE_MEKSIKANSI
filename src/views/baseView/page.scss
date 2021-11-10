@@ -1,0 +1,8 @@
+.page__content {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: var(--contentPadding);
+    padding-right: var(--contentPadding);
+    padding-bottom: var(--contentBottomPadding);
+}

@@ -1,0 +1,70 @@
+.login-page {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-family: var(--raleway-font);
+    padding-bottom: 10%;
+
+    &__logo-container {
+        display:flex;
+        justify-content: center;
+    }
+
+    &__logo {
+        min-width: 20vw;
+        max-height: 20vw;
+        cursor: pointer;
+        margin: 50px 0 40px;
+    }
+
+    &__login-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    &__login_welcome-back-text {
+        font-weight: 300;
+    }
+
+    &__login-form {
+        display: flex;
+        flex-flow: column nowrap;
+        min-width: 30%;
+    }
+
+    &__login_input {
+        padding: 12px 20px;
+        margin: 8px 0;
+    }
+
+    &__submit-button {
+        background-color: var(--color-green);
+        color: var(--color-white);
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+
+        font-size: 20px;
+    }
+
+    &__submit-button:hover {
+        opacity: 0.8;
+    }
+
+    &__register-container_span {
+        float: right;
+        padding-top: 16px;
+    }
+
+    &__register-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__register-container_register {
+        color: var(--color-green);
+    }
+}
