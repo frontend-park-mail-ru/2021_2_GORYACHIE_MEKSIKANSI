@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="26801cd2-0392-48af-9eea-b56f1e15486b" name="hmeats web">
+        <fileTransfer rootFolder="/home/devV2/2021_2_GORYACHIE_MEKSIKANSI" accessType="SFTP" host="167.172.179.1" port="22" sshConfigId="c87b1e4c-7206-4a41-8eff-621dfa27bd61" sshConfig="root@167.172.179.1:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
