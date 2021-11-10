@@ -7,11 +7,21 @@ import {SortHeader} from 'hme-design-system/src/components/sortHeader/sortHeader
 import {ButtonIconV} from 'hme-design-system/src/components/button/button';
 import {icon} from '../../views/mocks';
 
+/**
+ * Standard class to restaurant list
+ */
 export class RestaurantsList {
+  /**
+   * Constructor to restaurant list
+   */
   constructor() {
-
   }
 
+  /**
+   * Rendering restaurant list on page
+   * @param {HTMLElement} parent
+   * @param {object} restaurantList
+   */
   render({
     parent: parent,
     restaurantsList: restaurantList,
@@ -48,6 +58,9 @@ export class RestaurantsList {
       restaurantList: new List({listTitle: 'Рестораны', objList: objList}).render()});
   }
 
+  /**
+   * Removing restaurant list from page
+   */
   remove() {
     this.parent.innerHTML = '';
   }

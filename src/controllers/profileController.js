@@ -43,6 +43,10 @@ export class ProfileController {
     });
   }
 
+  /**
+   * Method to check image size
+   * @param {formdata} file
+   */
   checkImage(file) {
     if (file.size > 7000000) {
       const snack = new SnackBar({
@@ -62,6 +66,15 @@ export class ProfileController {
     }
   }
 
+  /**
+   * Method to change user data
+   * @param {string} name
+   * @param {string} phone
+   * @param {string} mail
+   * @param {string} password
+   * @param {string} repeatPassword
+   *
+   */
   dataChange(name, phone, mail, password, repeatPassword) {
     const currentUserData = userStore.getState();
     let validation = {};
@@ -181,10 +194,16 @@ export class ProfileController {
     }
   }
 
+  /**
+   * Showing profileView
+   */
   show = () => {
     this.profileView.render();
   }
 
+  /**
+   * Rendirectiong to other page
+   */
   redirect = () => {
     this.routeTo(urls.home.url);
   }

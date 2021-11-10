@@ -5,7 +5,13 @@ import {urls} from '../modules/urls';
 import {SnackBar} from '../components/snackBar/snackBar';
 import {ResponseEvents} from 'Events/Responses.js';
 
+/**
+ * Ordering model class
+ */
 class OrderingModel {
+/**
+ * Reauest for pay on backend
+ */
   requestPay() {
     postPay()
         .then((response) => {

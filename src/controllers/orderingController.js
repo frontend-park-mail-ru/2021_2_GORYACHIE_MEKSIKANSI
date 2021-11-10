@@ -8,6 +8,10 @@ import cartStore from 'Modules/reducers/cartStore';
 import userStore from 'Modules/reducers/userStore';
 import {OrderingEvents} from '../events/Ordering';
 
+
+/**
+ * Standard class to ordering controller
+ */
 export class OrderingController {
   /**
    * Constructor for controller

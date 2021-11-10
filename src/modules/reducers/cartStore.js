@@ -15,6 +15,12 @@ export const updateStorage = () => {
 
 let itNum = 0;
 
+/**
+ * cart store reducer
+ * @param {object} state
+ * @param {Object} action
+ * @return {object}
+ */
 export function cartReducer(state, action) {
   switch (action.actionType) {
     case cartActions.update: {
@@ -27,6 +33,11 @@ export function cartReducer(state, action) {
   }
 }
 
+/**
+ * Getting dish buffer
+ * @param {object} cart
+ * @return {object}
+ */
 const getDishBuffer = (cart) => {
   const cartBuffer = [];
   if (cart !== undefined && cart !== null && cart.length > 0) {
@@ -43,6 +54,11 @@ const getDishBuffer = (cart) => {
   return cartBuffer;
 };
 
+/**
+ * Increasting dish in cart
+ * @param {int} aItNum
+ * @return {Function}
+ */
 export const increaseDishInCart = (aItNum) => {
   return (dispatch, getState) => {
     const cartBuffer = getDishBuffer(getState().cart);
@@ -59,6 +75,12 @@ export const increaseDishInCart = (aItNum) => {
   };
 };
 
+/**
+ * Adding dish to cart
+ * @param {object} aDish
+ * @param {Object} restaurant
+ * @return {Function}
+ */
 export const addDishToCart = (aDish, restaurant) => { // find and add count
   return (dispatch, getState) => {
     const cartBuffer = getDishBuffer(getState().cart);
@@ -74,12 +96,22 @@ export const addDishToCart = (aDish, restaurant) => { // find and add count
   };
 };
 
+/**
+ * Clearing cart method
+ * @param {Object} aDish
+ * @param {Object} restaurant
+ * @return {Function}
+ */
 export const clearCartAndAddDish = (aDish, restaurant) => {
   return (dispatch, getState) => {
     updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: [aDish]}});
   };
 };
 
+/**
+ * setting cart method
+ * @param {object} response
+ */
 export const setCart = (response) => {
   console.log(response.dishes);
   const wrapperStruct = {
@@ -94,6 +126,11 @@ export const setCart = (response) => {
   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
 };
 
+/**
+ * Deleting dish from cart
+ * @param {int} itNum
+ * @return {Function}
+ */
 export const deleteDishFromCart = (itNum) => {
   return (dispatch, getState) => {
     let cartBuffer = getDishBuffer(getState().cart);
@@ -190,9 +227,9 @@ const compareCheckboxes = (checkboxes1, checkboxes2) => {
 /**
  * If dish is new return true
  * If dish not new increment count and return false
- * @param dish
- * @param cart
- * @return {*}
+ * @param {object} dish
+ * @param {object} cart
+ * @return {boolean}
  */
 const isNewDish = (dish, cart) => {
   const fDish = cart.find((item) => {

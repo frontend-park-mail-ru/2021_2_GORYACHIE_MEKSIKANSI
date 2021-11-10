@@ -1,12 +1,19 @@
 import dishesList from './dishesList.hbs';
-import {DishPopup} from 'Components/dishPopup/dishPopup.js';
 import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
-import restaurantsListTemplate from '../restaurantsList/restaurantsList.hbs';
 import {List} from 'hme-design-system/src/components/list/list';
 import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
 
 
+/**
+ * DishList class
+ */
 export class DishesList {
+  /**
+   * Constructor for DishList class
+   *
+   * @param {{parent: HTMLElement, routeTo: object, controller: Class}} params
+   *
+   */
   constructor({
     parent: parent = document.body,
     routeTo: routeTo = () => {},
@@ -17,6 +24,10 @@ export class DishesList {
     this.parent = parent;
   }
 
+  /**
+   * Rendering dish list on page
+   * @param {{parent: HTMLElement, restaurant: object}} params
+   */
   render({
     parent: parent,
     restaurant: restaurant,
@@ -35,6 +46,9 @@ export class DishesList {
     this.settingUp();
   }
 
+  /**
+   * Setting up for render in dish-list
+   */
   settingUp() {
     this.dishes = document.querySelectorAll('.dish');
     this.dishes.forEach((item) => {
@@ -55,6 +69,10 @@ export class DishesList {
     this.sticky = document.querySelector('.restaurant-nav__list').offsetTop;
   }
 
+  /**
+   * Adding scroll-menu to dish-list
+   * @param {event} e
+   */
   scrollingToMenu = (e) => {
     e.preventDefault();
     const blockID = e.target.closest('a').getAttribute('href').substr(1);
@@ -65,6 +83,9 @@ export class DishesList {
     });
   }
 
+  /**
+   * Making navbar stick to dish-list
+   */
   stickNavbar = () => {
     const menuNavbar = document.querySelector('.restaurant-nav__list');
     if (window.pageYOffset >= this.sticky) {
@@ -74,6 +95,9 @@ export class DishesList {
     }
   };
 
+  /**
+   * Highlighting navbar
+   */
   navHighlight = () => {
     // turn off highlight
     this.menuNavsButtons.forEach((item) => {
@@ -93,12 +117,19 @@ export class DishesList {
     }
   }
 
+  /**
+   * getting dish to open popup
+   * @param {event} e
+   */
   getDishForPopup = (e) => {
     const {target} = e;
     const dishId = Number(target.closest('.dish').getAttribute('id'));
     this.controller.getDish(this.restaurant.id, dishId);
   }
 
+  /**
+   * Removing dish list from page
+   */
   remove() {
     if (this.dishes) {
       this.dishes.forEach((item) => {

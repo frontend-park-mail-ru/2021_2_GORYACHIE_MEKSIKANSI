@@ -78,6 +78,9 @@ export class ProfileView extends BaseProfileView {
     };
   }
 
+  /**
+   * Checking image to add
+   */
   checkImage = () => {
     const [file] = document.getElementById('avatar').files;
     if (file) {
@@ -85,6 +88,10 @@ export class ProfileView extends BaseProfileView {
     }
   }
 
+  /**
+   * Showing image
+   * @param {File} file
+   */
   showImage = (file) => {
     document.querySelector('.avatar').src = URL.createObjectURL(file);
   }
@@ -92,7 +99,6 @@ export class ProfileView extends BaseProfileView {
   /**
    * Method calling by
    * @param {Object} event
-   * @private
    */
   submitListener(event) {
     event.preventDefault();
@@ -101,6 +107,10 @@ export class ProfileView extends BaseProfileView {
     }));
   }
 
+  /**
+   * Showing errors if exist
+   * @param {Object} incorrectData
+   */
   showErrors = (incorrectData = {}) => {
     Object.entries(this.inputs).forEach(([key, value]) => {
       value.input.style.borderColor = '#e2e2e2';
@@ -112,10 +122,18 @@ export class ProfileView extends BaseProfileView {
     });
   }
 
+  /**
+   * Shows info if exist
+   * @param {string} infoText
+   */
   showInfo = (infoText) => {
     this.parent.querySelector('.info-label').innerText = infoText;
   }
 
+  /**
+   * Showing single error
+   * @param {string} errorText
+   */
   showError = (errorText) => {
     this.parent.querySelector('.main-error-label').innerText = errorText;
   }

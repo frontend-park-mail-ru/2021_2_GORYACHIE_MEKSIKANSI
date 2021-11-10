@@ -1,8 +1,18 @@
+/**
+ * Snackbar class, be carefull, containts jss
+ */
 export class SnackBar {
+  /**
+   * snackbar constructor
+   * @param {object} userOptions
+   */
   constructor(userOptions) {
     this.userOptions = userOptions;
   }
 
+  /**
+   * setting up snackbar options
+   */
   settingUp() {
     this.applyUserOptions();
     this.setContainer();
@@ -16,6 +26,9 @@ export class SnackBar {
     }
   }
 
+  /**
+   * writing flags options to snackbar options
+   */
   applyUserOptions() {
     this.Options = {
       message: this.userOptions?.message ?? 'Operation performed successfully.',
@@ -30,6 +43,9 @@ export class SnackBar {
     };
   }
 
+  /**
+   * making conatainer to snackbar
+   */
   setContainer() {
     let target = this.getOrFindContainer();
 
@@ -41,6 +57,11 @@ export class SnackBar {
     this.Container = this.getOrAddContainerIn(target);
   }
 
+  /**
+   * adding container to a target or creating new one
+   * @param {HTMLElement} target
+   * @return {HTMLElement}
+   */
   getOrAddContainerIn(target) {
     const positionClass = this.getPositionClass();
 
@@ -59,6 +80,10 @@ export class SnackBar {
     return this.createNewContainer(target);
   }
 
+  /**
+   * switching position by user settings
+   * @return {string}
+   */
   getPositionClass() {
     switch (this.Options.position) {
       case 'bl':
@@ -76,6 +101,11 @@ export class SnackBar {
     }
   }
 
+  /**
+   * creating new container to snackbar in calss container
+   * @param {HTMLElement} target
+   * @return {HTMLElement}
+   */
   createNewContainer(target) {
     const container = document.createElement('div');
     container.classList.add('js-snackbar-container');
@@ -88,12 +118,19 @@ export class SnackBar {
     return container;
   }
 
+  /**
+   * finding container on class container
+   * @return {type}
+   */
   getOrFindContainer() {
     return typeof this.Options.container === 'object' ?
             this.Options.container :
             document.getElementById(this.Options.container);
   }
 
+  /**
+   * applying positions classes to containers
+   */
   applyPositionClasses() {
     this.Container.classList.add(this.getPositionClass());
 
@@ -106,6 +143,10 @@ export class SnackBar {
     }
   }
 
+  /**
+   * setting message to snackbar
+   * @return {HTMLElement}
+   */
   createMessage() {
     const outerElement = this.createWrapper();
 
@@ -116,6 +157,10 @@ export class SnackBar {
     return outerElement;
   }
 
+  /**
+   * creating wrapper to snack container
+   * @return {HTMLElement}
+   */
   createWrapper() {
     const outerElement = document.createElement('div');
 
@@ -131,6 +176,10 @@ export class SnackBar {
     return outerElement;
   }
 
+  /**
+   * create inner div
+   * @return {HTMLElement}
+   */
   createInnerSnackbar() {
     const innerSnack = document.createElement('div');
     innerSnack.classList.add('js-snackbar', 'js-snackbar--show');
@@ -142,6 +191,10 @@ export class SnackBar {
     return innerSnack;
   }
 
+  /**
+   * editing snackbar color
+   * @param {HTMLElement} element
+   */
   applyColorAndIconTo(element) {
     if (!this.Options.status) return;
 
@@ -171,6 +224,10 @@ export class SnackBar {
     element.appendChild(status);
   }
 
+  /**
+   * inserting message to snackbar
+   * @param {HTMLElement} element
+   */
   insertMessageTo(element) {
     this.MessageWrapper = document.createElement('div');
     this.MessageWrapper.classList.add('js-snackbar__message-wrapper');
@@ -183,6 +240,10 @@ export class SnackBar {
     element.appendChild(this.MessageWrapper);
   }
 
+  /**
+   * adding close button to snackbar
+   * @param {HTMLElement} element
+   */
   addDismissButtonTo(element) {
     if (!this.Options.dismissible) {
       return;
@@ -196,12 +257,20 @@ export class SnackBar {
     element.appendChild(closeButton);
   }
 
+  /**
+   * setting width to snackbar
+   * @param {HTMLElement} element
+   */
   setWidth(element) {
     if (!this.Options.width) return;
 
     element.style.width = this.Options.width;
   }
 
+  /**
+   * set constainer closing speed
+   * @param {HTMLElement} element
+   */
   setSpeed(element) {
     const {speed} = this.Options;
 
@@ -215,55 +284,68 @@ export class SnackBar {
     }
   }
 
-    Open = () => {
-      const contentHeight = this.getMessageHeight();
+  /**
+   * open snackbar
+   */
+  Open = () => {
+    const contentHeight = this.getMessageHeight();
 
-      this.Element.style.height = contentHeight + 'px';
+    this.Element.style.height = contentHeight + 'px';
+    this.Element.style.opacity = 1;
+    this.Element.style.marginTop = '5px';
+    this.Element.style.marginBottom = '5px';
+
+    this.Element.addEventListener('transitioned', this.setStyleFunc);
+  }
+
+  /**
+   * getting summary snackbar messages height
+   * @return {float}
+   */
+  getMessageHeight() {
+    const wrapperStyles = window.getComputedStyle(this.MessageWrapper);
+
+    return this.Message.scrollHeight +
+          parseFloat(wrapperStyles.getPropertyValue('padding-top')) +
+          parseFloat(wrapperStyles.getPropertyValue('padding-bottom'));
+  }
+
+  /**
+   * setting height style
+   */
+  setStyleFunc = () => {
+    this.Element.style.height = null;
+  }
+
+  /**
+   * close snackbar
+   */
+  Close = () => {
+    if (this.Interval) {
+      clearInterval(this.Interval);
+    }
+
+    const snackbarHeight = this.Element.scrollHeight;
+    const snackbarTransitions = this.Element.style.transition;
+    this.Element.style.transition = '';
+
+    requestAnimationFrame(() => {
+      this.Element.style.height = snackbarHeight + 'px';
       this.Element.style.opacity = 1;
-      this.Element.style.marginTop = '5px';
-      this.Element.style.marginBottom = '5px';
-
-      this.Element.addEventListener('transitioned', this.setStyleFunc);
-    }
-
-    getMessageHeight() {
-      const wrapperStyles = window.getComputedStyle(this.MessageWrapper);
-
-      return this.Message.scrollHeight +
-            parseFloat(wrapperStyles.getPropertyValue('padding-top')) +
-            parseFloat(wrapperStyles.getPropertyValue('padding-bottom'));
-    }
-
-    setStyleFunc = () => {
-      this.Element.style.height = null;
-    }
-
-    Close = () => {
-      if (this.Interval) {
-        clearInterval(this.Interval);
-      }
-
-      const snackbarHeight = this.Element.scrollHeight;
-      const snackbarTransitions = this.Element.style.transition;
-      this.Element.style.transition = '';
+      this.Element.style.marginTop = '0px';
+      this.Element.style.marginBottom = '0px';
+      this.Element.style.transition = snackbarTransitions;
 
       requestAnimationFrame(() => {
-        this.Element.style.height = snackbarHeight + 'px';
-        this.Element.style.opacity = 1;
-        this.Element.style.marginTop = '0px';
-        this.Element.style.marginBottom = '0px';
-        this.Element.style.transition = snackbarTransitions;
-
-        requestAnimationFrame(() => {
-          this.Element.style.height = '0px';
-          this.Element.style.opacity = 0;
-        });
+        this.Element.style.height = '0px';
+        this.Element.style.opacity = 0;
       });
+    });
 
-      setTimeout(() => {
-        this.Container.removeChild(this.Element);
-        this.Container.remove();
-      }, 1000);
-      this.Element.removeEventListener('transitioned', this.setStyleFunc);
-    };
+    setTimeout(() => {
+      this.Container.removeChild(this.Element);
+      this.Container.remove();
+    }, 1000);
+    this.Element.removeEventListener('transitioned', this.setStyleFunc);
+  };
 }

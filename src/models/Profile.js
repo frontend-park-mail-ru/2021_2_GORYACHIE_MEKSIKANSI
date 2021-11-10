@@ -12,6 +12,10 @@ import {SnackBar} from '../components/snackBar/snackBar';
  * Class Profile Model
  */
 class ProfileModel {
+/**
+ * Updating user name method
+ * @param {string} name
+ */
   updateUserName(name) {
     updateName(name)
         .then((response) => {
@@ -32,6 +36,10 @@ class ProfileModel {
         });
   }
 
+  /**
+   * Updating user email method
+   * @param {string} email
+   */
   updateUserEmail(email) {
     updateEmail(email)
         .then((response) => {
@@ -52,6 +60,10 @@ class ProfileModel {
         });
   }
 
+  /**
+   * Updating user phone method
+   * @param {string} phone
+   */
   updateUserPhone(phone) {
     updatePhone(phone)
         .then((response) => {
@@ -72,6 +84,10 @@ class ProfileModel {
         });
   }
 
+  /**
+   * Updating user password method
+   * @param {string} password
+   */
   updateUserPassword(password) {
     updatePassword(password)
         .then((response) => {
@@ -86,6 +102,10 @@ class ProfileModel {
         });
   }
 
+  /**
+   * Updating user avatar method
+   * @param {formdata} avatar
+   */
   updateUserAvatar(avatar) {
     updateAvatar(avatar)
         .then((response) => {

@@ -1,11 +1,21 @@
 import promoLine from './promoLine.hbs';
 import {PromoBlock} from 'hme-design-system/src/components/promoBlock/promoBlock';
 
+/**
+ * Promo line standard class
+ */
 export class PromoLine {
+  /**
+   * constructor to snandard promo line
+   * @param {object} props
+   */
   constructor(props) {
-
   }
 
+  /**
+   * Rendering promo line on page
+   * @param {HTMLElement} parent
+   */
   render(parent) {
     this.parent = parent;
     const promos = [];
@@ -26,6 +36,10 @@ export class PromoLine {
     this.updateButtonVisibility();
   }
 
+  /**
+   * getting next coords to scroll line to the left
+   * @return {int}
+   */
   getNextLeftScrollCoors = () => {
     const blockWidth = this.promoLine.offsetWidth;
     const firstBlock = [...this.blocks].find((block) => {
@@ -41,6 +55,10 @@ export class PromoLine {
     return this.begin;
   };
 
+  /**
+   * getting next coords to scroll line to the right
+   * @return {int}
+   */
   getNextRightScrollCoors = () => {
     const blockWidth = this.promoLine.offsetWidth;
     const lastBlock = [...this.blocks].find((block) => {
@@ -52,6 +70,9 @@ export class PromoLine {
     return this.begin;
   };
 
+  /**
+   * update button visibility
+   */
   updateButtonVisibility = () => {
     this.leftButton.style.visibility = 'visible';
     this.rightButton.style.visibility = 'visible';
@@ -73,6 +94,9 @@ export class PromoLine {
     }
   };
 
+  /**
+   * turning to the left
+   */
   turnLeft = () => {
     document.querySelector('.promo-line').scrollTo({
       left: this.getNextLeftScrollCoors(),
@@ -81,6 +105,9 @@ export class PromoLine {
     this.updateButtonVisibility();
   };
 
+  /**
+   * turning to the right
+   */
   turnRight = () => {
     document.querySelector('.promo-line').scrollTo({
       left: this.getNextRightScrollCoors(),
@@ -89,6 +116,9 @@ export class PromoLine {
     this.updateButtonVisibility();
   };
 
+  /**
+   * removing promoline from page
+   */
   remove() {
     this.leftButton.removeEventListener('click', this.turnLeft);
     this.rightButton.removeEventListener('click', this.turnRight);

@@ -4,6 +4,9 @@ import eventBus from '../modules/eventBus';
 import {AuthStatus} from '../events/Auth';
 import {urls} from '../modules/urls';
 
+/**
+ * Standard calss to ordering process controller
+ */
 export class OrderProcessController {
   /**
    * Constructor for controller

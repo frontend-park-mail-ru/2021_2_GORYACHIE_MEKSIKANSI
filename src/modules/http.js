@@ -98,6 +98,13 @@ export default class Http {
     });
   }
 
+  /**
+   * ajaxPut request
+   *
+   * @param {{url: string, body: object}} params
+   * @return {Object<{status: number, body: object}>}
+   *
+   */
   async ajaxPut({
     url = '/',
     body = null,
@@ -109,6 +116,13 @@ export default class Http {
     });
   }
 
+  /**
+   * ajaxPutNoStringify request
+   *
+   * @param {{url: string, body: object}} params
+   * @return {Object<{status: number, body: object}>}
+   *
+   */
   async ajaxPutNoStringify({
     url = '/',
     body = null,

@@ -1,4 +1,10 @@
+/**
+ * Yandex map setting class
+ */
 export class YandexMap {
+  /**
+   * Map init constructor
+   */
   constructor() {
     this.initPos = {
       latitude: 55.751574,
@@ -6,6 +12,10 @@ export class YandexMap {
     };
   }
 
+  /**
+   * Setting standart point
+   * @param {object} pos
+   */
   customPoint(pos) {
     ymaps.ready(() => {
       this.movePosition(pos);
@@ -14,6 +24,11 @@ export class YandexMap {
     });
   }
 
+  /**
+   * Rendering map
+   * @param {{id: int, pos: object, isStatic: boolean}} params
+   * @param {Function} callback
+   */
   render({
     id,
     pos = this.initPos,
@@ -22,6 +37,11 @@ export class YandexMap {
     ymaps.ready(this.start.bind(this, {id, pos, isStatic}, callback));
   }
 
+  /**
+   *
+   * @param {{id: int, pos: object, isStatic: boolean}} params
+   * @param {Function} callback
+   */
   start({
     id,
     pos,
@@ -42,6 +62,9 @@ export class YandexMap {
     }
   }
 
+  /**
+   * Init listeners for map
+   */
   addListeners() {
     this.map.events.add('click', (e) => {
       const coords = e.get('coords');
@@ -50,6 +73,9 @@ export class YandexMap {
     });
   }
 
+  /**
+   * Getting address
+   */
   getAddress() {
     ymaps.geocode(this.refactorToArray(this.pos))
         .then((res) => {
@@ -57,6 +83,11 @@ export class YandexMap {
         });
   }
 
+  /**
+   * Catching callback
+   * @param {geoObject} res
+   * @param {boolean} isRenew
+   */
   catchCallback(res, isRenew = true) {
     this.text = this.getUserPositionAddress(res.geoObjects.get(0).properties);
     const address = {
@@ -67,16 +98,30 @@ export class YandexMap {
     this.callback(address, isRenew);
   }
 
+  /**
+   * Getting address from position
+   * @param {geoObject} properties
+   * @return {object}
+   */
   getUserPositionAddress(properties) {
     const prop = properties.get('metaDataProperty').GeocoderMetaData.AddressDetails.Country;
     console.log(prop.AddressLine);
     return prop.AddressLine;
   }
 
+  /**
+   * Setting center on map
+   * @param {object} pos
+   * @param {int} zoom
+   */
   setCenter(pos, zoom) {
     this.map.setCenter(this.refactorToArray(pos), zoom);
   }
 
+  /**
+   * Adding suggests
+   * @param {int} id
+   */
   addSuggestView(id) {
     ymaps.ready(() => {
       const suggestView = new ymaps.SuggestView(id, {
@@ -101,11 +146,21 @@ export class YandexMap {
     });
   }
 
+  /**
+   * Moving position on map
+   * @param {object} pos
+   * @param {int} radius
+   */
   movePosition(pos, radius = 0) {
     this.addPosition(pos);
     this.circle = this.changeRadius(radius);
   }
 
+
+  /**
+   * Adding position to map
+   * @param {object} pos
+   */
   addPosition(pos) {
     if (this.pos) {
       this.deletePosition(this.point);
@@ -114,10 +169,19 @@ export class YandexMap {
     this.pos = pos;
   }
 
+  /**
+   * Deleting point from map
+   * @param {object} point
+   */
   deletePosition(point) {
     this.map.geoObjects.remove(point);
   }
 
+  /**
+   * Creating position on map
+   * @param {object} pos
+   * @return {int}
+   */
   createPosition(pos) {
     const point = new ymaps.Placemark(this.refactorToArray(pos));
     this.map.geoObjects.add(point);
@@ -125,6 +189,12 @@ export class YandexMap {
     return point;
   }
 
+  /**
+   * Creating circle on map
+   * @param {object} pos
+   * @param {int} radius
+   * @return {object}
+   */
   createCircle(pos, radius) {
     if (!radius) {
       if (this.radius) {
@@ -137,6 +207,11 @@ export class YandexMap {
     return circle;
   }
 
+  /**
+   * Changing radius on map
+   * @param {int} radius
+   * @return {object}
+   */
   changeRadius(radius) {
     if (this.circle) {
       this.deleteCircle(this.circle);
@@ -148,10 +223,19 @@ export class YandexMap {
     return this.circle;
   }
 
+  /**
+   * Deleting circle from map
+   * @param {object} circle
+   */
   deleteCircle(circle) {
     this.map.geoObjects.remove(circle);
   }
 
+  /**
+   * converting array to object
+   * @param {array} coords
+   * @return {object}
+   */
   convertPosArrayToObject(coords) {
     return {
       latitude: coords[0],
@@ -159,10 +243,19 @@ export class YandexMap {
     };
   }
 
+  /**
+   * Converting object to array
+   * @param {object} pos
+   * @return {array}
+   */
   refactorToArray(pos) {
     return [pos.latitude, pos.longitude];
   }
 
+  /**
+   * Checking if address is correct
+   * @param {object} address
+   */
   static async isAddressCorrect(address) {
     const myGeocoder = ymaps.geocode(address);
     return await myGeocoder.then((res) => res.geoObjects.get(0));

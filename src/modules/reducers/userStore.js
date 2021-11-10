@@ -6,6 +6,12 @@ export const userActions = {
   storeUserDataUpdate: 'storeUserDataUpdate',
 };
 
+/**
+ * reducer for user store
+ * @param {object} state
+ * @param {object} action
+ * @return {object}
+ */
 export function userReducer(state, action) {
   switch (action.actionType) {
     case userActions.storeUserLogout:

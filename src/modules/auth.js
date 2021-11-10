@@ -39,6 +39,9 @@ export function auth(response) {
   return response;
 }
 
+/**
+ * emitting events for user logout
+ */
 export function logout() {
   userStore.dispatch({
     actionType: userActions.storeUserLogout,
