@@ -58,10 +58,7 @@ async function makeFetch({
     }
   }
 
-  return {
-    status: responseJSON.status,
-    parsedJSON: responseJSON.parsedJSON,
-  };
+  return responseJSON
 }
 
 /**

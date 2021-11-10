@@ -73,6 +73,8 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
-    this.parent.removeEventListener('click',  this.list);
+    if (document.querySelector('.navbar')) {
+      this.parent.removeEventListener('click', this.list);
+    }
   }
 }

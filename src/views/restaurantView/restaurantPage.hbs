@@ -1,0 +1,12 @@
+ <div class="restaurant-page__dishes">
+     {{#each menuNavs}}
+         <div id="{{menuId}}" class="restaurant-page__menu-title">
+             {{menuTitle}}
+         </div>
+         {{#each dishes}}
+             <div class="restaurant-page__dish">
+                 {{>dish this }}
+             </div>
+         {{/each}}
+     {{/each}}
+ </div>

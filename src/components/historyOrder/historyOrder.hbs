@@ -1,0 +1,64 @@
+<div class="history-order">
+    <div class="history-order__main-info">
+        <div class="history-order__main-info-text">
+            <div class="history-order__restaurant-title history-order__row-margin">
+                {{restaurantTitle}}
+            </div>
+            <div class="history-order__date history-order__row-margin">
+                {{date}}
+<!--                2 октября 2021, 14:07-->
+            </div>
+            <div class="history-order__address history-order__row-margin">
+                {{address}}
+<!--                Россия, Москва, ул. Пушкина д. 14к2-->
+            </div>
+            {{#if status}}
+                <div class="history-order__status history-order__row-margin history-order__status_done">
+                    Выполнен
+                </div>
+            {{else}}
+                <div class="history-order__status history-order__row-margin history-order__status_cancel">
+                    Отменен
+                </div>
+            {{/if}}
+        </div>
+        <div class="history-order__image-wrapper">
+            <img class="history-order__main-info-img" src="http://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/96672465571661.5afc10a864fc2.jpg" alt="rest image">
+        </div>
+    </div>
+    <div class="history-order__info">
+        {{#each items}}
+            <div class="history-order__item">
+                <div class="order__item-title">
+                    {{ name }}
+                </div>
+
+                <div class="history-order__item-num">
+                    {{ num }} шт
+                </div>
+
+                <div class="history-order__item-cost">
+                    {{ cost }} ₽
+                </div>
+            </div>
+        {{/each}}
+        <div class="history-order__item">
+            <div class="history-order__delivery-title">
+                Доставка
+            </div>
+
+            <div class="history-order__delivery-cost">
+                {{deliveryCost}} ₽
+            </div>
+        </div>
+        <div class="history-order__summary">
+            <div class="order__summary-title">
+                Итого
+            </div>
+
+            <div class="history-order__summary-cost">
+                {{ summaryCost }} ₽
+            </div>
+        </div>
+    </div>
+</div>
