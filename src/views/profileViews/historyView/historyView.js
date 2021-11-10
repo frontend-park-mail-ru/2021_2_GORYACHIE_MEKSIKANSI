@@ -3,7 +3,7 @@ import Navbar from 'Components/navbar/navbar.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import historyPage from './historyPage.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
-import {BaseProfileView} from "../baseProfileView";
+import {BaseProfileView} from '../baseProfileView';
 
 const orders = [
   {

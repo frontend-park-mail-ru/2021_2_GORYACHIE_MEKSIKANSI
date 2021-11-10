@@ -1,9 +1,9 @@
 import {View} from '../../baseView/View.js';
 import Navbar from 'Components/navbar/navbar.js';
-import orderDelivery from 'Components/cartOrder/orderDelivery.hbs'
-import orderSummary from 'Components/cartOrder/orderSummary.hbs'
-import baseProfilePage from '../baseProfilePage.hbs'
-import {BaseProfileView} from "../baseProfileView";
+import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
+import orderSummary from 'Components/cartOrder/orderSummary.hbs';
+import baseProfilePage from '../baseProfilePage.hbs';
+import {BaseProfileView} from '../baseProfileView';
 
 /**
  * Profile view class

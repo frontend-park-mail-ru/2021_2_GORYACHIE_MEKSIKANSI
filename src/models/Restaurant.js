@@ -5,9 +5,9 @@ import cartStore, {
   addDishToCart,
   clearCart, clearCartAndAddDish,
   deleteDishFromCart,
-  increaseDishInCart
-} from "Modules/reducers/cartStore";
-import {dishGet, restaurantGet} from "Modules/api";
+  increaseDishInCart,
+} from 'Modules/reducers/cartStore';
+import {dishGet, restaurantGet} from 'Modules/api';
 
 class RestaurantModel {
   /**
@@ -34,7 +34,7 @@ class RestaurantModel {
         });
   }
 
-//////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////
+  // ////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////
 
   addDishToCart(dishSettings = {}) {
     cartStore.dispatch(addDishToCart(dishSettings.dish, dishSettings.restaurant));

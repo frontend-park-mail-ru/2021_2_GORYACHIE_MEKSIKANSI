@@ -1,11 +1,11 @@
 import {ResponseEvents} from 'Events/Responses.js';
 import eventBus from './eventBus.js';
 import {AuthStatus} from 'Events/Auth.js';
-import {urls} from "./urls";
-import {userActions} from "./reducers/userStore";
-import userStore from "./reducers/userStore";
-import cartStore, {clearCart} from "./reducers/cartStore";
-import {cartActions, updateStorage, setCart} from "./reducers/cartStore";
+import {urls} from './urls';
+import {userActions} from './reducers/userStore';
+import userStore from './reducers/userStore';
+import cartStore, {clearCart} from './reducers/cartStore';
+import {cartActions, updateStorage, setCart} from './reducers/cartStore';
 import {cartGet, updateCartPut} from './api.js';
 
 /**

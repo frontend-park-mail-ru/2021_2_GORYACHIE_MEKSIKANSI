@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack --mode development",
-    "debug": "DEBUG=true webpack serve"
+    "debug": "DEBUG=true webpack serve",
+    "lint": "eslint --config=.eslintrc.json src/"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-import {createStore} from "../store";
+import {createStore} from '../store';
 
 export const userActions = {
   storeUserLogin: 'storeUserLogin',
@@ -43,7 +43,7 @@ export const initialUserState = {
   email: '',
   avatar: '',
   address: {
-    latitude:  55.751574,
+    latitude: 55.751574,
     longitude: 37.57385,
     name: 'Москва',
     street: 'ул. Пушкин',

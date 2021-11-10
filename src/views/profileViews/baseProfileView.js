@@ -1,11 +1,11 @@
-import {View} from "../baseView/View";
+import {View} from '../baseView/View';
 
 export class BaseProfileView extends View {
   constructor({
-                parent = document.body,
-                routeTo = () => {},
-                controller,
-              }) {
+    parent = document.body,
+    routeTo = () => {},
+    controller,
+  }) {
     super({
       parent, routeTo, controller,
     });

@@ -1,11 +1,11 @@
 import restaurantsListTemplate from './restaurantsList.hbs';
 import {List} from 'hme-design-system/src/components/list/list.js';
-import {DishBlock} from "hme-design-system/src/components/dishBlock/dishBlock";
-import {RestaurantBlock} from "hme-design-system/src/components/restaurantBlock/restaurantBlock";
-import {SortBox} from "hme-design-system/src/components/sortBox/sortBox";
-import {SortHeader} from "hme-design-system/src/components/sortHeader/sortHeader";
-import {ButtonIconV} from "hme-design-system/src/components/button/button";
-import {icon} from "../../views/mocks";
+import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
+import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
+import {SortBox} from 'hme-design-system/src/components/sortBox/sortBox';
+import {SortHeader} from 'hme-design-system/src/components/sortHeader/sortHeader';
+import {ButtonIconV} from 'hme-design-system/src/components/button/button';
+import {icon} from '../../views/mocks';
 
 export class RestaurantsList {
   constructor() {

@@ -1,6 +1,6 @@
 import {View} from '../baseView/View.js';
 import {LoginController} from 'Controllers/loginController.js';
-import loginPage from './loginPage.hbs'
+import loginPage from './loginPage.hbs';
 
 /**
  * View for Login Page

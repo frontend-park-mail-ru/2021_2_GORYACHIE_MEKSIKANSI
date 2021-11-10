@@ -78,7 +78,7 @@ export class Router {
   }
 
   start() {
-      this.open(window.location.pathname);
+    this.open(window.location.pathname);
   }
 
   /**

@@ -28,7 +28,7 @@ export function cartReducer(state, action) {
 }
 
 const getDishBuffer = (cart) => {
-  let cartBuffer = [];
+  const cartBuffer = [];
   if (cart !== undefined && cart !== null && cart.length > 0) {
     cart.forEach((dish) => {
       cartBuffer.push({
@@ -41,11 +41,11 @@ const getDishBuffer = (cart) => {
     });
   }
   return cartBuffer;
-}
+};
 
 export const increaseDishInCart = (aItNum) => {
   return (dispatch, getState) => {
-    let cartBuffer = getDishBuffer(getState().cart);
+    const cartBuffer = getDishBuffer(getState().cart);
 
     const fDish = cartBuffer.find((dish) => {
       return dish.itNum === aItNum;
@@ -55,13 +55,13 @@ export const increaseDishInCart = (aItNum) => {
       fDish.count += 1;
     }
 
-    updateCart(dispatch, {cart: { restaurant: {id: getState().restaurant.id}, dishes: cartBuffer }});
-  }
-}
+    updateCart(dispatch, {cart: {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer}});
+  };
+};
 
-export const addDishToCart = (aDish, restaurant) => {  // find and add count
-  return (dispatch, getState) =>  {
-    let cartBuffer = getDishBuffer(getState().cart);
+export const addDishToCart = (aDish, restaurant) => { // find and add count
+  return (dispatch, getState) => {
+    const cartBuffer = getDishBuffer(getState().cart);
 
     // see desc of function
     if (isNewDish(aDish, cartBuffer)) {
@@ -70,15 +70,15 @@ export const addDishToCart = (aDish, restaurant) => {  // find and add count
         itNum: itNum++,
       });
     }
-    updateCart(dispatch, {cart: { restaurant: {id: restaurant.id}, dishes: cartBuffer }});
+    updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: cartBuffer}});
   };
 };
 
 export const clearCartAndAddDish = (aDish, restaurant) => {
   return (dispatch, getState) => {
     updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: [aDish]}});
-  }
-}
+  };
+};
 
 export const setCart = (response) => {
   console.log(response.dishes);
@@ -92,7 +92,7 @@ export const setCart = (response) => {
     state: wrapperStruct,
   });
   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
-}
+};
 
 export const deleteDishFromCart = (itNum) => {
   return (dispatch, getState) => {
@@ -141,7 +141,7 @@ const updateCart = (dispatch, bufferToUpdate) => {
           const action = {
             actionType: cartActions.update,
             state: wrapperStruct,
-          }
+          };
           dispatch(action);
           eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
           return response;
@@ -159,24 +159,32 @@ const compareRadios = (radios1, radios2) => {
   if (radios1.length !== radios2.length) {
     return false;
   }
-  radios1.sort((a, b) => {return Number(a.rId) < Number(b.rId);});
-  radios2.sort((a, b) => {return Number(a.rId) < Number(b.rId);});
+  radios1.sort((a, b) => {
+    return Number(a.rId) < Number(b.rId);
+  });
+  radios2.sort((a, b) => {
+    return Number(a.rId) < Number(b.rId);
+  });
 
   return radios1.every((item, index) => {
     return item.id === radios2[index].id;
-  })
+  });
 };
 
 const compareCheckboxes = (checkboxes1, checkboxes2) => {
   if (checkboxes1.length !== checkboxes2.length) {
     return false;
   }
-  checkboxes1.sort((a, b) => {return Number(a.id) < Number(b.id);});
-  checkboxes2.sort((a, b) => {return Number(a.id) < Number(b.id);});
+  checkboxes1.sort((a, b) => {
+    return Number(a.id) < Number(b.id);
+  });
+  checkboxes2.sort((a, b) => {
+    return Number(a.id) < Number(b.id);
+  });
 
   return checkboxes1.every((item, index) => {
     return item.id === checkboxes2[index].id;
-  })
+  });
 };
 
 /**

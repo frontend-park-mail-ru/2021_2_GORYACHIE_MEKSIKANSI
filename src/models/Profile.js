@@ -5,8 +5,8 @@ import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from 'Modules/reducers/userStore.js';
-import {updateAvatar} from "../modules/api";
-import {SnackBar} from "../components/snackBar/snackBar";
+import {updateAvatar} from '../modules/api';
+import {SnackBar} from '../components/snackBar/snackBar';
 
 /**
  * Class Profile Model
@@ -24,11 +24,11 @@ class ProfileModel {
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
           } else {
-              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
         })
         .catch(() => {
-            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+          eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -44,11 +44,11 @@ class ProfileModel {
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
           } else {
-              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
         })
         .catch(() => {
-            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+          eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -64,11 +64,11 @@ class ProfileModel {
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
           } else {
-              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
         })
         .catch(() => {
-            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+          eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -78,11 +78,11 @@ class ProfileModel {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
           } else {
-              eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
           }
         })
         .catch(() => {
-            eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
+          eventBus.emitEventListener(ProfileEvents.userDataUpdateFailed, 'Произошла ошибка, профиль не обновлен :c');
         });
   }
 
@@ -90,10 +90,10 @@ class ProfileModel {
     updateAvatar(avatar)
         .then((response) => {
           const snack = new SnackBar({
-            message: "Картинка обновлена!",
-            status: "warn",
-            position: "tr",
-            width: "500px",
+            message: 'Картинка обновлена!',
+            status: 'warn',
+            position: 'tr',
+            width: '500px',
             fixed: true,
           });
           snack.settingUp();
@@ -108,10 +108,10 @@ class ProfileModel {
         })
         .catch(() => {
           const snack = new SnackBar({
-            message: "Произошла какая то ошибка!",
-            status: "red",
-            position: "tr",
-            width: "500px",
+            message: 'Произошла какая то ошибка!',
+            status: 'red',
+            position: 'tr',
+            width: '500px',
             fixed: true,
           });
           snack.settingUp();

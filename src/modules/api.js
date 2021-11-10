@@ -1,7 +1,7 @@
 import Http from './http.js';
 import {auth, logout} from './auth.js';
-import eventBus from "./eventBus";
-import {AuthStatus} from "Events/Auth";
+import eventBus from './eventBus';
+import {AuthStatus} from 'Events/Auth';
 
 const http = new Http();
 
@@ -167,12 +167,12 @@ export function postAddress(address) {
     body: {
       address: {
         coordinates: {
-         latitude: address.latitude,
-         longitude: address.longitude,
+          latitude: address.latitude,
+          longitude: address.longitude,
         },
         city: address.city,
         alias: address.name,
-      }
+      },
     },
   });
 }
