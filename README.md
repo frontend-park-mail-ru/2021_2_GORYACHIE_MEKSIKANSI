@@ -2,7 +2,7 @@
 # Delivery club reimagined
 
 # Деплой
-Ссылка: http://hmeats.ru
+Ссылка: https://hmeats.ru
 
 
 ## Team
