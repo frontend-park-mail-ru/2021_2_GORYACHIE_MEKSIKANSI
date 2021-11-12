@@ -5,8 +5,10 @@ import {ResponseEvents} from 'Events/Responses.js';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from 'Modules/reducers/userStore.js';
-import {updateAvatar} from '../modules/api';
+import {getOrderHistory, updateAvatar} from '../modules/api';
 import {SnackBar} from '../components/snackBar/snackBar';
+import {response} from "express";
+import {ordersHistoryBodyMock} from "../views/mocks";
 
 /**
  * Class Profile Model
@@ -136,6 +138,27 @@ class ProfileModel {
           });
           snack.settingUp();
           snack.Open();
+        });
+  }
+
+  /**
+   * Use api method to get orders history
+   * If successful get history, emit event
+   * Else emit failed event
+   */
+  getOrdersHistory() {
+    getOrderHistory()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            // eventBus.emitEventListener(ProfileEvents.userOrdersHistoryGetSuccess, response.body);
+            eventBus.emitEventListener(ProfileEvents.userOrdersHistoryGetSuccess, ordersHistoryBodyMock);
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrdersHistoryGetFailed, {});
+          }
+        })
+        .catch(() => {
+          // eventBus.emitEventListener(ProfileEvents.userOrdersHistoryGetFailed, {});
+          eventBus.emitEventListener(ProfileEvents.userOrdersHistoryGetSuccess, ordersHistoryBodyMock);
         });
   }
 }
