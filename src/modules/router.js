@@ -38,7 +38,6 @@ export class Router {
   open(pageUrl) {
     Object.entries(urls).forEach(([name, {url, regUrl}]) => {
       if (pageUrl === '/') {
-        console.log('Here');
         pageUrl = 'home';
       }
       if (pageUrl.includes(name) || pageUrl.match(regUrl)) {
@@ -51,7 +50,6 @@ export class Router {
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);
           } else {
             window.history.pushState({}, '', url);
-            console.log(this.routes.get(name));
             this.routes.get(name).render();
           }
           this.currControllerName = name;

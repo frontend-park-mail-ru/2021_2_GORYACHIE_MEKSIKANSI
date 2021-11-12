@@ -124,6 +124,7 @@ export class OrderingView extends BaseProfileView {
   remove() {
     super.remove();
     this.navbar.remove();
+
     window.removeEventListener('scroll', this.stickSummary);
 
     this.removeConfirm();

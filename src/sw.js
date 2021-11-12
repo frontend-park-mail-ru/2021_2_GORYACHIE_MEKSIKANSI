@@ -21,7 +21,6 @@ self.addEventListener('message', (event) => {
             .catch((err) => console.log(err)),
     );
   }
-  console.log('installed');
 });
 
 self.addEventListener('activate', (event) => {
@@ -77,12 +76,10 @@ self.addEventListener('fetch', (event) => {
                 const request = keys.find((key) => key.url.toString() === baseUrl);
                 return await caches.match(request);
               } catch (e) {
-                console.log(e);
               }
             }
           })
           .catch((err) => {
-            console.log(err);
           }),
   );
 });

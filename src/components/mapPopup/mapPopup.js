@@ -103,22 +103,23 @@ export class MapPopup {
    * Removing map from page
    */
   remove = () => {
-    if (this.mapPopupLinks.length > 0) {
+    if (this.mapPopupLinks && this.mapPopupLinks.length > 0) {
       this.mapPopupLinks.forEach((link) => {
         link.removeEventListener('click', this.eventPopupOpen);
       });
     }
 
-    if (this.mapPopupCloseIcon.length > 0) {
+    if (this.mapPopupCloseIcon && this.mapPopupCloseIcon.length > 0) {
       this.mapPopupCloseIcon.forEach((icon) => {
         icon.removeEventListener('click', this.eventPopupClose);
       });
     }
 
     const close = this.parent.querySelector('.map-popup');
-    close.querySelector('#js__add-new-address__btn')
+    if (close) {
+      close.querySelector('#js__add-new-address__btn')
         .removeEventListener('click', this.addAddress);
-
+    }
     if (this.parent.querySelector('.map-popup-div')) {
       this.parent.removeChild(this.parent.querySelector('.map-popup-div'));
     }

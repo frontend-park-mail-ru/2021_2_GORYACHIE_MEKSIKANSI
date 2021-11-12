@@ -37,7 +37,6 @@ export class HistoryView extends BaseProfileView {
    */
   render(props = {}) {
     super.render();
-    console.log(props);
     const orders = [];
     props.forEach((item) => {
       orders.push(Order(item));

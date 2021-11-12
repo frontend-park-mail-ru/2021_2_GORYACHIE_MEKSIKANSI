@@ -52,9 +52,7 @@
                               fill="white"/>
                     </svg>
                     Корзина
-                    {{#if itemNum}}
-                        <div class="navbar__button-cart-number-wrapper">{{itemNum}}</div>
-                    {{/if}}
+                    <div class="navbar__button-cart-number-wrapper">{{#if itemNum}}{{itemNum}}{{/if}}</div>
                 </div>
             </a>
             {{else}}

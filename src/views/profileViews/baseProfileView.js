@@ -27,7 +27,6 @@ export class BaseProfileView extends View {
   render(props = {}) {
     super.render(props);
     document.getElementById('app').style.backgroundColor = '#f6f6f6';
-    console.log('HERE');
   }
 
   /**

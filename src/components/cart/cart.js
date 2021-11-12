@@ -121,7 +121,6 @@ export class Cart {
    *
    */
   stickCart = () => {
-    console.log('HERE');
     const cart = document.querySelector('.cart-wrapper');
     if (window.pageYOffset + 200 + cart.offsetHeight >= this.footY) {
       cart.style.top = String(this.footY - (window.pageYOffset + 200 + cart.offsetHeight)) + 'px';

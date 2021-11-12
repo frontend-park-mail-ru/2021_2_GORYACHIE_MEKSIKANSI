@@ -15,7 +15,6 @@ class OrderingModel {
   requestPay() {
     postPay()
         .then((response) => {
-          console.log(response.status);
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(OrderingEvents.paymentSuccess, urls.order.url);
           } else {
