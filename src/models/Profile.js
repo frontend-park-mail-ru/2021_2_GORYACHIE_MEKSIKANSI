@@ -121,7 +121,7 @@ class ProfileModel {
           userStore.dispatch({
             actionType: userActions.storeUserDataUpdate,
             updated: {
-              avatar: 'https://img.hmeats.fra1.cdn.digitaloceanspaces.com' + response.body.img,
+              avatar: 'https://hmeats-spaces.fra1.cdn.digitaloceanspaces.com' + response.body.img,
             },
           });
           eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});

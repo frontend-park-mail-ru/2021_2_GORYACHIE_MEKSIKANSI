@@ -22,10 +22,10 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^9.0.1",
+    "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.5.1",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
@@ -33,7 +33,7 @@
     "handlebars": "^4.7.7",
     "handlebars-loader": "^1.7.1",
     "hbs": "^4.1.2",
-    "hme-design-system": "^1.0.27",
+    "hme-design-system": "^1.0.30",
     "http": "^0.0.1-security",
     "node-static": "^0.7.11",
     "path": "^0.12.7",
@@ -50,7 +50,7 @@
     "globstar": "^1.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.4.4",
-    "webpack": "^5.62.2",
+    "webpack": "^5.64.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.3"
   }

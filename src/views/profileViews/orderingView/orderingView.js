@@ -12,6 +12,7 @@ import cartStore from 'Modules/reducers/cartStore';
 import {BaseProfileView} from '../baseProfileView';
 import {Modal} from 'hme-design-system/src/components/modal/modal';
 import {Card} from 'hme-design-system/src/components/card/card';
+import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 
 /**
  * Profile view class
@@ -45,15 +46,20 @@ export class OrderingView extends BaseProfileView {
     EventBus.addEventListener(OrderingEvents.addressRefreshed, this.refresh);
     this.navbar.render();
 
+    const order = {
+      historyOrder: false,
+      ...cartStore.getState().restaurant,
+      items: cartStore.getState().cart,
+      dCost: cartStore.getState().cost.dCost,
+      sumCost: cartStore.getState().cost.sumCost,
+    };
+
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
       content: orderDelivery({
         restaurant: cartStore.getState().restaurant,
-        items: cartStore.getState().cart,
-        sumCost: cartStore.getState().cost.sumCost,
-        dCost: cartStore.getState().cost.dCost,
         address: userStore.getState().address.fullAddress,
-      }),
+      }) + Order(order),
       rightMenu: orderSummary({
         sumCost: cartStore.getState().cost.sumCost,
       })});
@@ -72,7 +78,8 @@ export class OrderingView extends BaseProfileView {
 
   stickSummary = () => {
     const summary = document.querySelector('.cart-order-summary');
-    this.footY = Number(document.querySelector('.cart-order').offsetTop) + Number(document.querySelector('.cart-order').offsetHeight);
+    const block = document.querySelectorAll('.content-block')[1];
+    this.footY = Number(block.offsetTop) + Number(block.offsetHeight);
     if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
       summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
       this.summaryWidth = summary.offsetWidth;
