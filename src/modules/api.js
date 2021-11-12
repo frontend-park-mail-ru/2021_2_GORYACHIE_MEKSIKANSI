@@ -236,3 +236,13 @@ export function postPay() {
   });
 }
 
+/**
+ * order history user get
+ *
+ * @return {Promise<{body: object, status: number}>}
+ */
+export function orderHistoryGet() {
+  return http.ajaxGet({url: '/user/orders'});
+}
+
+

@@ -24,7 +24,7 @@ export class HistoryController {
       routeTo: this.routeTo,
       controller: this});
 
-    eventBus.addEventListener(ProfileEvents.userOrdersHistoryGetSuccess,
+    eventBus.addEventListener(ProfileEvents.userOrderHistoryGetSuccess,
         this.historyView.render.bind(this.historyView));
     eventBus.addEventListener(AuthStatus.userLogout, this.routeTo);
   }
@@ -32,7 +32,7 @@ export class HistoryController {
    * Rendering home page with restaurants and checking auth
    */
   render() {
-    ProfileModel.getOrdersHistory();
+    ProfileModel.profileOrderHistoryGet();
   }
 
   /**

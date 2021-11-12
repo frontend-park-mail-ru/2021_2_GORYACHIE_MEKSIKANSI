@@ -1,12 +1,13 @@
 import eventBus from 'Modules/eventBus.js';
 import {ProfileEvents} from 'Events/Profile.js';
 import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from 'Modules/api.js';
-import {ResponseEvents} from 'Events/Responses.js';
+import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from 'Modules/reducers/userStore.js';
-import {updateAvatar} from '../modules/api';
+import {orderHistoryGet, updateAvatar} from '../modules/api';
 import {SnackBar} from '../components/snackBar/snackBar';
+import {ordersHistoryBodyMock} from "../views/mocks";
 
 /**
  * Class Profile Model
@@ -136,6 +137,20 @@ class ProfileModel {
           });
           snack.settingUp();
           snack.Open();
+        });
+  }
+
+  profileOrderHistoryGet() {
+    orderHistoryGet()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock)
+          }
+        })
+        .catch(() => {
+          eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
         });
   }
 }

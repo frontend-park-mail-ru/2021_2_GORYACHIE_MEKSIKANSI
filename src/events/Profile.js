@@ -3,4 +3,6 @@ export const ProfileEvents = {
   userNotAuth: 'profileUserNotAuth',
   userDataUpdateSuccess: 'userDataUpdateSuccess',
   userDataUpdateFailed: 'userDataUpdateFailed',
+  userOrderHistoryGetSuccess: 'userOrderHistoryGetSuccess',
+  userOrderHistoryGetFailed: 'userOrderHistoryGetFailed',
 };

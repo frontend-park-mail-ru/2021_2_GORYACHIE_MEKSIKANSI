@@ -10,6 +10,7 @@ import {urls} from 'Modules/urls.js';
 import './main.scss';
 import {OrderProcessController} from './controllers/orderProcessController';
 import {Footer} from 'hme-design-system/src/components/footer/footer';
+import {HistoryController} from "./controllers/historyController";
 
 
 const application = document.getElementById('app');
@@ -56,6 +57,9 @@ const orderingController = new OrderingController({
 const orderProcessController = new OrderProcessController({
   parent: application,
   routeTo: routeTo});
+const historyOrderController = new HistoryController({
+  parent: application,
+  routeTo: routeTo});
 
 
 router.addRoute(urls.login.name, loginController);
@@ -65,6 +69,7 @@ router.addRoute(urls.signup.name, signUpController);
 router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
 router.addRoute(urls.checkout.name, orderingController);
 router.addRoute(urls.order.name, orderProcessController);
+router.addRoute(urls.history.name, historyOrderController);
 document.getElementById('foot').innerHTML = new Footer({
   nav: [
     {
