@@ -34,4 +34,9 @@ export const urls = {
     regUrl: null,
     name: 'order',
   },
+  history: {
+    url: '/history',
+    regUrl: null,
+    name: 'history',
+  },
 };
