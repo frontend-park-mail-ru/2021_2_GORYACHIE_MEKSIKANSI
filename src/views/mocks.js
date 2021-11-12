@@ -214,7 +214,9 @@ function getMenuNavsMock() {
 export const ordersHistoryBodyMock = [
   {
     name: 'МакДоналдс',
+    historyOrder: true,
     date: '2 октября 2021, 14:07',
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
     addrs: 'Россия, Москва, ул. Пушкина д. 14к2',
     items: [
       {
@@ -239,7 +241,9 @@ export const ordersHistoryBodyMock = [
   },
   {
     name: 'КФС',
+    historyOrder: true,
     date: '2 октября 2021, 14:07',
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
     addrs: 'Россия, Москва, ул. Пушкина д. 14к2',
     items: [
       {

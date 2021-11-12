@@ -4,6 +4,8 @@ import baseProfilePage from '../baseProfilePage.hbs';
 import historyPage from './historyPage.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import {BaseProfileView} from '../baseProfileView';
+import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
+import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 
 
 /**
@@ -35,15 +37,16 @@ export class HistoryView extends BaseProfileView {
    */
   render(props = {}) {
     super.render();
+    console.log(props);
     const orders = [];
     props.forEach((item) => {
-      orders.push(Order());
-    })
+      orders.push(Order(item));
+    });
     this.navbar.render();
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'История заказов',
       content: historyPage({
-        orders: props,
+        orders: orders,
       }),
       rightMenu: profileButtonsNav});
   }
