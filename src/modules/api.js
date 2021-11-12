@@ -203,7 +203,7 @@ export function updateAvatar(avatar) {
 }
 
 /**
- * updating user address
+ * upadting user address
  *
  * @param {object} address
  * @return {Promise<{body: object, status: number}>}
@@ -222,15 +222,6 @@ export function postAddress(address) {
       },
     },
   });
-}
-
-/**
- * get order history method
- *
- * @return {Promise<{body: object, status: number}>}
- */
-export function getOrderHistory() {
-  return http.ajaxGet({url: 'user/orders/'});
 }
 
 /**
