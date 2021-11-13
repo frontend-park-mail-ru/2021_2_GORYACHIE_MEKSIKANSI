@@ -26,7 +26,6 @@ export class HistoryController {
 
     eventBus.addEventListener(ProfileEvents.userOrderHistoryGetSuccess,
         this.historyView.render.bind(this.historyView));
-    eventBus.addEventListener(AuthStatus.userLogout, this.routeTo);
   }
   /**
    * Rendering home page with restaurants and checking auth
