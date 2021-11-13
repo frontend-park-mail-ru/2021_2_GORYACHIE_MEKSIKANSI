@@ -7,6 +7,15 @@ import userStore from 'Modules/reducers/userStore.js';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
 
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+}
+
 /**
  * Left navigation bar class
  */
@@ -84,6 +93,9 @@ export class Navbar {
    * Setting navbar settings to render
    */
   settingUp() {
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
     this.updateCartButtonNumber();
     this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
@@ -168,6 +180,9 @@ export class Navbar {
           }
         }
       });
+      const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+      toggleSwitch.removeEventListener('change', switchTheme, false);
 
       document.querySelector('.hamburger-wrapper').remove();
       document.querySelector('.navbar').remove();
