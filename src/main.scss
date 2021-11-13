@@ -286,7 +286,7 @@ input:checked + .slider:before {
 [data-theme="dark"] {
     // FONTS
 
-    --raleway-font: "JetBrains Mono Thin", sans-serif;
+    --raleway-font: "Droid Sans";
 
     --font_bold: 800;
     --font_medium: 600;
@@ -516,6 +516,8 @@ a {
 
 body {
     font-family: var(--raleway-font);
+    //font-family: "JetBrains Mono Thin", sans-serif;
+    //font-family: "Droid Sans";
 }
 
 body::-webkit-scrollbar {
