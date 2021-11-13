@@ -13,13 +13,12 @@
 @import "Views/profileViews/historyView/historyPage.scss";
 @import "Views/homeView/homePage.scss";
 
-@import "Components/navbar/navbar.scss";
 @import "Components/promoLine/promoLine.scss";
-@import "Components/cart/cart.scss";
 @import "Components/restaurantsList/restaurantsList.scss";
 @import "Components/snackBar/snackBar.scss";
 
-@import "~hme-design-system/tokens/token";
+@import "~hme-design-system/tokens/octaviusToken";
+//@import "~hme-design-system/tokens/token";
 @import "~hme-design-system/src/components/button/button.scss";
 @import "~hme-design-system/src/forms/input/input.scss";
 @import "~hme-design-system/src/forms/tickForms/tickForm.scss";
@@ -33,6 +32,10 @@
 @import "~hme-design-system/src/components/contentBlock/contentBlock.scss";
 @import "~hme-design-system/src/components/fonts/fonts.scss";
 @import "~hme-design-system/src/components/avatar/avatar.scss";
+@import "~hme-design-system/src/components/navbar/navbar.scss";
+@import "~hme-design-system/src/components/hamburger/hamburger.scss";
+@import "~hme-design-system/src/components/profileButtonsNav/profileButtonsNav.scss";
+@import "~hme-design-system/src/components/cart/cart.scss";
 
 :root {
     --contentPadding: 3%;  // Hor paddings

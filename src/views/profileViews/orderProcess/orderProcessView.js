@@ -6,6 +6,7 @@ import orderProcess from 'Components/orderProcess/orderProcess.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import cartStore from '../../../modules/reducers/cartStore';
 import userStore from '../../../modules/reducers/userStore';
+import {Order} from "hme-design-system/src/components/contentBlock/order/order";
 
 
 /**
@@ -38,6 +39,13 @@ export class OrderProcessView extends BaseProfileView {
   render(props = {}) {
     super.render();
     this.navbar.render();
+    const order = {
+      historyOrder: false,
+      ...cartStore.getState().restaurant,
+      items: cartStore.getState().cart,
+      dCost: cartStore.getState().cost.dCost,
+      sumCost: cartStore.getState().cost.sumCost,
+    };
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Активный заказ',
       content: orderProcess({
@@ -46,6 +54,7 @@ export class OrderProcessView extends BaseProfileView {
         sumCost: cartStore.getState().cost.sumCost,
         dCost: cartStore.getState().cost.dCost,
         dTime: '20:50',
+        order: Order(order),
       }),
       rightMenu: profileButtonsNav});
   }
