@@ -39,7 +39,7 @@
                 <input placeholder="Что то ищите?" class="input input_without-border">
             </label>
             {{#if user.auth}}
-                <a href="checkout" class="navbar__right-box-spacer button button_shape_rounded button_color_black">
+                <a href="checkout" class="navbar__right-box-spacer button button_shape_rounded button_color_green">
                 <div class="button__container">
                     <svg class="button__icon_left" width="20" height="20" viewBox="0 0 20 20" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
                 </div>
             </a>
             {{else}}
-                <a href="signup" class="navbar__right-box-spacer navbar__button button_color_black button button_shape_rounded">
+                <a href="signup" class="navbar__right-box-spacer navbar__button button_color_green button button_shape_rounded">
                     Зарегистрироваться
                 </a>
                     <a href="login" class="navbar__right-box-spacer navbar__button button button_shape_rounded">
@@ -105,6 +105,7 @@
             <a href="/" class="button hamburger__button button_color_transparent">
                 <svg class="button__icon_left" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14.506 3.73882C14.7545 3.9435 14.9613 4.19734 15.1116 4.48634C15.1592 4.57779 15.1235 4.68851 15.0359 4.74276L9.81427 7.9752C8.69438 8.66847 7.28228 8.68301 6.14835 8.01296L0.89183 4.90683C0.806905 4.85665 0.767923 4.75335 0.806196 4.66243C0.958369 4.30095 1.19552 3.98574 1.49221 3.7407L1.49192 3.73822L1.50214 3.73254C1.72168 3.55318 1.97338 3.41205 2.24704 3.3187L5.67194 1.41598C7.11913 0.61199 8.87883 0.611989 10.326 1.41598L13.7469 3.31647C14.0254 3.41055 14.2812 3.55405 14.5038 3.73695L14.506 3.73882Z" fill="black"/>
+                    <path d="M14.506 3.73882C14.7545 3.9435 14.9613 4.19734 15.1116 4.48634C15.1592 4.57779 15.1235 4.68851 15.0359 4.74276L9.81427 7.9752C8.69438 8.66847 7.28228 8.68301 6.14835 8.01296L0.89183 4.90683C0.806905 4.85665 0.767923 4.75335 0.806196 4.66243C0.958369 4.30095 1.19552 3.98574 1.49221 3.7407L1.49192 3.73822L1.50214 3.73254C1.72168 3.55318 1.97338 3.41205 2.24704 3.3187L5.67194 1.41598C7.11913 0.61199 8.87883 0.611989 10.326 1.41598L13.7469 3.31647C14.0254 3.41055 14.2812 3.55405 14.5038 3.73695L14.506 3.73882Z" fill="black"/>
                     <path d="M0.490963 6.46168C0.506113 6.31148 0.671949 6.22883 0.801919 6.30563L5.51244 9.08912C7.04658 9.99566 8.95707 9.97598 10.4722 9.03803L15.176 6.12615C15.3054 6.04607 15.474 6.12719 15.4904 6.27846C15.7238 8.43468 15.679 10.6134 15.356 12.761C15.1906 13.8611 14.2928 14.7045 13.1845 14.8008L11.926 14.9102C9.31375 15.1373 6.68677 15.1373 4.07457 14.9102L2.81605 14.8008C1.70776 14.7045 0.809919 13.8611 0.644491 12.761C0.330693 10.6742 0.279517 8.55804 0.490963 6.46168Z" fill="black"/>
                 </svg>
 
@@ -112,7 +113,7 @@
             </a>
         <a href="logout" class="button hamburger__button button_color_transparent hamburger__gray-button button_hover_disabled">Выйти</a>
         {{else}}
-            <a href="login" class="button button_shape_rounded hamburger__button_align-text_center hamburger__button button_color_black">Войти</a>
+            <a href="login" class="button button_shape_rounded hamburger__button_align-text_center hamburger__button button_color_green">Войти</a>
         {{/if}}
         <hr class="hamburger__line">
         <a href="/">
