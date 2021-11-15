@@ -286,7 +286,7 @@ input:checked + .slider:before {
 [data-theme="dark"] {
     // FONTS
 
-    --raleway-font: "Droid Sans";
+    --raleway-font: Raleway, sans-serif;
 
     --font_bold: 800;
     --font_medium: 600;
