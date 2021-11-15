@@ -12,6 +12,7 @@ import {OrderProcessController} from './controllers/orderProcessController';
 import {Footer} from 'hme-design-system/src/components/footer/footer';
 import {HistoryController} from "./controllers/historyController";
 import {profileGet} from "./modules/api";
+import {MenuView} from "./views/restaurantProfile/menuView/menuView";
 
 
 const application = document.getElementById('app');
@@ -91,5 +92,13 @@ document.getElementById('foot').innerHTML = new Footer({
     },
   ],
 }).render();
-router.start();
-profileGet({});
+// router.start();
+// profileGet({});
+
+const menuView = new MenuView({
+  parent: application,
+  routeTo: routeTo,
+  controller: null,
+});
+
+menuView.render();
