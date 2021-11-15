@@ -1,4 +1,4 @@
-import {profileGet, logoutPost} from 'Modules/api.js';
+import {logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs';
 import {MapPopup} from '../mapPopup/mapPopup.js';
 import eventBus from 'Modules/eventBus.js';
@@ -25,7 +25,6 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    profileGet({});
     this.yMap = new MapPopup({});
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, this.refresh);
   }
@@ -62,7 +61,7 @@ export class Navbar {
 
   /**
    * Getting amount of items in cart
-   * @return {int}
+   * @return {number}
    */
   getNumberOfItems = () => {
     if (cartStore.getState().cart !== null && cartStore.getState().cart !== undefined) {
