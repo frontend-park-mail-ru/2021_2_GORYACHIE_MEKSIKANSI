@@ -267,3 +267,19 @@ export const ordersHistoryBodyMock = [
     sumCost: 500,
   },
 ];
+
+
+export const menuRestaurantProfileMenuBodyMock = {
+  menu: [
+    {
+      id: 1,
+      title: 'Раздел просто пушка',
+      dishes: getDishesListMocks(),
+    },
+    {
+      id: 2,
+      title: 'Еще один огненный раздел',
+      dishes: getDishesListMocks(),
+    },
+  ]
+}

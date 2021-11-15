@@ -1,13 +1,15 @@
 import Navbar from 'Components/navbar/navbar.js';
-import baseProfilePage from '../../profileViews/baseProfilePage.hbs';
+import baseRestaurantProfilePage from '../restaurantProfileBase.hbs';
+import styles from '../restaurantProfilePage.scss'
 import {BaseProfileView} from '../../profileViews/baseProfileView';
 import {DishBlock} from "hme-design-system/src/components/dishBlock/dishBlock";
 import {List} from "hme-design-system/src/components/list/list";
-import dishesList from "../../../components/dishesList/dishesList.hbs";
-import {Button} from "hme-design-system/src/components/button/button";
+import {Button, ButtonIcon} from "hme-design-system/src/components/button/button";
+import {editSvg, trashSvg} from "../../../modules/consts";
+import {menuRestaurantProfileMenuBodyMock} from "../../mocks";
 
 /**
- * Profile view class
+ * Restaurant profile page with menu settings view class
  */
 export class MenuView extends BaseProfileView {
   /**
@@ -27,6 +29,7 @@ export class MenuView extends BaseProfileView {
       controller: controller,
     });
     this.navbar = Navbar;
+    this.data = menuRestaurantProfileMenuBodyMock;
   }
 
   /**
@@ -37,18 +40,61 @@ export class MenuView extends BaseProfileView {
     super.render();
     this.navbar.render();
 
-    const lists = new List({listTitle: 'Новый раздел', objList: [DishBlock({addDishProfile: true})]}).render();
+    let content = '';
+    this.data.menu.forEach((menu) => {
+      const objList = [];
+      menu.dishes.forEach((dish) => {
+        objList.push(DishBlock(dish));
+      });
+      objList.push(DishBlock({addDishProfile: true}));
+      content += new List({
+        listTitle: menu.title,
+        objList: objList,
+        buttons: [
+          new ButtonIcon({
+            iconButtonColor: 'gray',
+            icon: editSvg,
+            classes: ['edit_button']
+          }).render(),
+          new ButtonIcon({
+            iconButtonColor: 'gray',
+            icon: trashSvg,
+            classes: ['trash_button']
+          }).render(),
+        ]
+      }).render();
+    });
 
-    this.parent.innerHTML += baseProfilePage({
+    this.parent.innerHTML += baseRestaurantProfilePage({
       pageTitle: 'Настройка меню',
-      content: lists + new Button({
+      content: content + new Button({
         label: 'Добавить раздел',
         color: 'black',
         rounded: true,
         size: 'bg',
         icon: '',
-        classes: ['button_wide'],
+        classes: ['button_wide', ' add_menu_button'],
       }).render(),
+    });
+
+    this.settingUp();
+  }
+
+  /**
+   * method for setting up listeners and other things
+   */
+  settingUp() {
+    this.parent.querySelectorAll('.edit_button').forEach((button) => {
+      button.addEventListener('click', () => console.log('CLICK'));
+    });
+    this.parent.querySelector('.add_menu_button').addEventListener('click', () => {
+      this.data.menu.push({
+        title: 'Новый раздел',
+        id: 3,
+        dishes: [],
+      });
+      this.remove();
+      this.render();
     });
   }
 

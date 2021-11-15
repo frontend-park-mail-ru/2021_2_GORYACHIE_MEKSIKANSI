@@ -1,0 +1,30 @@
+.base-restaurant-profile-page {
+    &__content {
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        padding: var(--profileContentTopPadding) var(--contentPadding) var(--contentBottomPadding);
+    }
+
+    &__title {
+        min-width: 100%;
+    }
+
+    &__left-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        width: 85%;
+    }
+
+    &__right-box {
+        width: 40%;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+}
