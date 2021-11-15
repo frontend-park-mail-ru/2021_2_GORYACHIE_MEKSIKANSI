@@ -171,7 +171,7 @@ export function getItemToCart(dishId) {
  */
 function getDishesListMocks() {
   const dishesList = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 4; i++) {
     dishesList.push(
         {
           id: '1',
@@ -274,11 +274,6 @@ export const menuRestaurantProfileMenuBodyMock = {
     {
       id: 1,
       title: 'Раздел просто пушка',
-      dishes: getDishesListMocks(),
-    },
-    {
-      id: 2,
-      title: 'Еще один огненный раздел',
       dishes: getDishesListMocks(),
     },
   ]
