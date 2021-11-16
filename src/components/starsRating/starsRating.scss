@@ -1,0 +1,18 @@
+.star {
+  cursor: pointer;
+
+  &:hover path{
+    fill: rgba(0, 0, 0, 0.5);
+  }
+
+  &-wrapper {
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+
+    &__text {
+      margin-right: 10px;
+    }
+  }
+}

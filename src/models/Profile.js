@@ -153,6 +153,16 @@ class ProfileModel {
           eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
         });
   }
+
+  /**
+   * Post request by api to publish review
+   * @param restId
+   * @param value
+   * @param rate
+   */
+  publishReviewPost(restId, value, rate) {
+    console.log('MAKE API REQUEST', restId, value, rate);
+  }
 }
 
 export default new ProfileModel();

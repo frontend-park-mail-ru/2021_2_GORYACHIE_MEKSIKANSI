@@ -9,6 +9,7 @@ import {TextArea} from "hme-design-system/src/forms/textArea/textArea";
 import Fonts from "hme-design-system/src/components/fonts/fonts";
 import {Button} from "hme-design-system/src/components/button/button";
 import userStore from "../../modules/reducers/userStore";
+import {StarsRating} from "../../components/starsRating/starsRating";
 
 
 /**
@@ -70,11 +71,12 @@ export class RestaurantReviewsView extends View {
             size: 'font_h1',
           }),
           TextArea({placeholder: 'Оставьте ваш отзыв тут!'}),
+          '<div class="stars_review_rating"></div>',
           new Button({
             label: 'Опубликовать',
             color: 'black',
             rounded: false,
-            classes: ['mt'],
+            classes: ['mt', ' publish_button'],
           }).render(),
         ]
       }).render());
@@ -94,12 +96,32 @@ export class RestaurantReviewsView extends View {
       size: 'bg',
       classes: ['button_wide'],
     }).render();
+
+    if (userStore.getState().auth) {
+      this.parent.querySelector('.publish_button').addEventListener('click', this.publishReview)
+      this.starsRating = new StarsRating(this.parent.querySelector('.stars_review_rating'));
+      this.starsRating.render();
+    }
+  }
+  /**
+   *
+   */
+  publishReview = () => {
+    const textArea = this.parent.querySelector('.textarea');
+    if (textArea.value.length < 10) {
+
+    } else {
+      this.controller.publishReview(this.restaurant.id, textArea.value, this.starsRating.getValue());
+    }
   }
 
   /**
    * Removing page
    */
   remove() {
+    if (this.starsRating) {
+      this.starsRating.remove();
+    }
     this.navbar.remove();
     this.parent.innerHTML = '';
   }

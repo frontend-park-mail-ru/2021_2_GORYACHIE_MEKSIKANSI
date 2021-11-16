@@ -270,6 +270,7 @@ export const ordersHistoryBodyMock = [
 
 export const reviewsBodyMock = {
   restaurant: {
+    id: 10,
     name: 'МакДоналдс',
     historyOrder: true,
     date: '2 октября 2021, 14:07',

@@ -2,6 +2,7 @@ import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import RestaurantModel from 'Models/Restaurant.js';
+import ProfileModel from 'Models/Profile.js';
 import userStore from '../modules/reducers/userStore';
 import {urls} from '../modules/urls';
 import cartStore from 'Modules/reducers/cartStore';
@@ -42,6 +43,12 @@ export class RestaurantReviewsController { // TODO: добавить джсдо�
     RestaurantModel.getReviews(id);
   }
 
+  /**
+   * Call Model to publish review
+   */
+  publishReview = (restId, value, rate) => {
+    ProfileModel.publishReviewPost(restId, value, rate);
+  }
 
   /**
    * Removing view
