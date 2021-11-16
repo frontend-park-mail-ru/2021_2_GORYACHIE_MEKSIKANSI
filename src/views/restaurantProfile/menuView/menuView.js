@@ -98,16 +98,23 @@ export class MenuView extends BaseProfileView {
     this.parent.querySelector('.add_menu_button').addEventListener('click', this.showAddMenuModal);
   }
 
+  /**
+   * Remove the menu
+   * @param e
+   */
   removeMenu = (e) => {
     const listId = e.target.closest('.list-title').id;
     this.data.menu = this.data.menu.filter((item) => {
       return item.title !== listId;
     });
-    console.log(this.data.menu);
     this.remove();
     this.render();
   }
 
+
+  /**
+   * Show add menu modal window
+   */
   showAddMenuModal = () => {
     this.showAddMenuModalDiv = document.createElement('div');
     this.showAddMenuModalDiv.innerHTML = ChangeInputModal({title: 'Хотите добавить раздел?'});
@@ -117,6 +124,9 @@ export class MenuView extends BaseProfileView {
     this.showAddMenuModalDiv.querySelector('.modal-close-button').addEventListener('click', this.removeAddMenuModal);
   }
 
+  /**
+   * Remove add menu modal window
+   */
   removeAddMenuModal = () => {
     this.showAddMenuModalDiv.querySelector('.modal_accept').removeEventListener('click', this.addMenu);
     this.showAddMenuModalDiv.querySelector('.modal_cancel').removeEventListener('click', this.removeAddMenuModal);
@@ -124,8 +134,11 @@ export class MenuView extends BaseProfileView {
     this.showAddMenuModalDiv.remove();
   }
 
+  /**
+   * Show change menu modal window
+   * @param e
+   */
   showChangeMenuModal = (e) => {
-    console.log(e.target.closest('.list-title').id);
     this.showChangeMenuModalId = e.target.closest('.list-title').id;
     this.showChangeMenuModalDiv = document.createElement('div');
     this.showChangeMenuModalDiv.innerHTML = ChangeInputModal({title: 'Хотите изменить название меню?'});
@@ -135,6 +148,9 @@ export class MenuView extends BaseProfileView {
     this.showChangeMenuModalDiv.querySelector('.modal-close-button').addEventListener('click', this.removeChangeMenuModal);
   }
 
+  /**
+   * Remove change menu modal window
+   */
   removeChangeMenuModal = () => {
     this.showChangeMenuModalDiv.querySelector('.modal_accept').removeEventListener('click', this.changeMenu);
     this.showChangeMenuModalDiv.querySelector('.modal_cancel').removeEventListener('click', this.removeChangeMenuModal);
@@ -158,6 +174,9 @@ export class MenuView extends BaseProfileView {
     }
   }
 
+  /**
+   * change title of menu
+   */
   changeMenu = () => {
     const value = this.showChangeMenuModalDiv.querySelector('.modal_input').value;
     if (value !== '') {
