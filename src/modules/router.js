@@ -36,7 +36,7 @@ export class Router {
    * @param {string} pageUrl
    */
   open(pageUrl) {
-    Object.entries(urls).forEach(([name, {url, regUrl}]) => {
+    Object.entries(urls).every(([name, {url, regUrl}]) => {
       if (pageUrl === '/') {
         pageUrl = 'home';
       }
@@ -45,6 +45,7 @@ export class Router {
           this.routes.get(this.currControllerName).remove();
         }
         if (this.routes.get(name)) {
+          console.log(pageUrl.match(regUrl), regUrl);
           if (pageUrl.match(regUrl)) { // TODO: инкастыляция
             window.history.pushState({}, '', pageUrl);
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);
@@ -53,10 +54,12 @@ export class Router {
             this.routes.get(name).render();
           }
           this.currControllerName = name;
+          return false;
         } else {
           this.open(urls.home.url);
         }
       }
+      return true;
     });
   }
 
@@ -88,7 +91,7 @@ export class Router {
       const href = closest.getAttribute('href');
 
       if (href) {
-        this.open(href);
+        this.open(window.location + href);
       }
     }
   }

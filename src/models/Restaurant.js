@@ -8,6 +8,7 @@ import cartStore, {
   increaseDishInCart,
 } from 'Modules/reducers/cartStore';
 import {dishGet, restaurantGet} from 'Modules/api';
+import {reviewsBodyMock} from "../views/mocks";
 
 /**
  * Restaurant model class
@@ -41,6 +42,10 @@ class RestaurantModel {
         .catch(() => {
           // eventBus.emitEventListener(RestaurantEvents.rest, {}); // TODO: snack
         });
+  }
+
+  getReviews(restId) {
+    eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, reviewsBodyMock);
   }
 
   // ////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////

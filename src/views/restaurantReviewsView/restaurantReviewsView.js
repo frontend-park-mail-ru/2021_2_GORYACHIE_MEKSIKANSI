@@ -8,7 +8,6 @@ import {ContentBlock} from "hme-design-system/src/components/contentBlock/conten
 import {TextArea} from "hme-design-system/src/forms/textArea/textArea";
 import Fonts from "hme-design-system/src/components/fonts/fonts";
 import {Button} from "hme-design-system/src/components/button/button";
-import {reviewsBodyMock} from "../mocks";
 
 
 /**
@@ -41,8 +40,7 @@ export class RestaurantReviewsView extends View {
    *
    */
   render(props = {}) {
-    this.restaurant = reviewsBodyMock;
-    // this.restaurant = props.restaurant;
+    this.restaurant = props.restaurant;
     this.reviews = this.restaurant.reviews;
     this.navbar.render();
 
@@ -66,7 +64,7 @@ export class RestaurantReviewsView extends View {
         new Button({
           label: 'Опубликовать',
           color: 'black',
-          rounded: 'high',
+          rounded: false,
           classes: ['mt'],
         }).render(),
       ]
@@ -82,7 +80,7 @@ export class RestaurantReviewsView extends View {
 
     this.parent.querySelector('.restaurant-page__cart').innerHTML = new Button({
       label: 'Назад к ресторану',
-      rounded: 'high',
+      rounded: true,
       size: 'bg',
       classes: ['button_wide'],
     }).render();
@@ -93,8 +91,6 @@ export class RestaurantReviewsView extends View {
    */
   remove() {
     this.navbar.remove();
-    this.dishesList.remove();
-    this.cart.remove();
     this.parent.innerHTML = '';
   }
 }

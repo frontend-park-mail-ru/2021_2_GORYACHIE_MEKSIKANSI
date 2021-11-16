@@ -269,38 +269,40 @@ export const ordersHistoryBodyMock = [
 ];
 
 export const reviewsBodyMock = {
-  name: 'МакДоналдс',
-  historyOrder: true,
-  date: '2 октября 2021, 14:07',
-  cost: 300,
-  minDTime: 20,
-  maxDTime: 30,
-  dCost: 300,
-  rating: 4.7,
-  img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
-  tags: [
-    {
-      name: '₽',
-    },
-    {
-      name: 'ФастФуд',
-    },
-    {
-      name: 'Американская еда',
-    },
-  ],
-  reviews: [
-    {
-      name: 'Сергей',
-      text: 'Какой то текст отзыва',
-      rate: '4',
-      date: '16 ноября, 10:22'
-    },
-    {
-      name: 'Сергей',
-      text: 'Какой то текст отзыва',
-      rate: '4',
-      date: '16 ноября, 10:22'
-    },
-  ]
+  restaurant: {
+    name: 'МакДоналдс',
+    historyOrder: true,
+    date: '2 октября 2021, 14:07',
+    cost: 300,
+    minDTime: 20,
+    maxDTime: 30,
+    dCost: 300,
+    rating: 4.7,
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+    tags: [
+      {
+        name: '₽',
+      },
+      {
+        name: 'ФастФуд',
+      },
+      {
+        name: 'Американская еда',
+      },
+    ],
+    reviews: [
+      {
+        name: 'Сергей',
+        text: 'Какой то текст отзыва',
+        rate: '4',
+        date: '16 ноября, 10:22'
+      },
+      {
+        name: 'Сергей',
+        text: 'Какой то текст отзыва',
+        rate: '4',
+        date: '16 ноября, 10:22'
+      },
+    ]
+  }
 }
