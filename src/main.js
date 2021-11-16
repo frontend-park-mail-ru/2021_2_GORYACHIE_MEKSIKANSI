@@ -11,6 +11,7 @@ import './main.scss';
 import {OrderProcessController} from './controllers/orderProcessController';
 import {Footer} from 'hme-design-system/src/components/footer/footer';
 import {HistoryController} from "./controllers/historyController";
+import {RestaurantReviewsView} from "./views/restaurantReviewsView/restaurantReviewsView";
 
 
 const application = document.getElementById('app');
@@ -90,5 +91,12 @@ document.getElementById('foot').innerHTML = new Footer({
     },
   ],
 }).render();
-router.start();
+// router.start();
+
+const reviewsView = new RestaurantReviewsView({
+  parent: application,
+  routeTo: routeTo,
+});
+
+reviewsView.render();
 

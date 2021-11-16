@@ -18,6 +18,10 @@
         margin: 20px;
     }
 
+    &__review {
+        margin-bottom: 30px;
+    }
+
     @media (min-width: 0px) and (max-width: 860px) {
         &__cart {
             width: 0;

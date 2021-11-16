@@ -38,5 +38,10 @@ export const urls = {
     url: '/history',
     regUrl: null,
     name: 'history',
+  },
+  restaurantReviews: {
+    url: null,
+    regUrl: /\/restaurants\/(\d+)\/reviews/,
+    name: null,
   }
 };
