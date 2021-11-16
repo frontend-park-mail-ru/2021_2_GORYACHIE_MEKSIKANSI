@@ -12,7 +12,7 @@ import {OrderProcessController} from './controllers/orderProcessController';
 import {Footer} from 'hme-design-system/src/components/footer/footer';
 import {HistoryController} from "./controllers/historyController";
 import {RestaurantReviewsView} from "./views/restaurantReviewsView/restaurantReviewsView";
-import {RestaurantReveiwsController} from "./controllers/restaurantReveiwsController";
+import {RestaurantReviewsController} from "./controllers/restaurantReviewsController";
 
 
 const application = document.getElementById('app');
@@ -62,7 +62,7 @@ const orderProcessController = new OrderProcessController({
 const historyOrderController = new HistoryController({
   parent: application,
   routeTo: routeTo});
-const restaurantReviewsController = new RestaurantReveiwsController({
+const restaurantReviewsController = new RestaurantReviewsController({
   parent: application,
   routeTo: routeTo});
 

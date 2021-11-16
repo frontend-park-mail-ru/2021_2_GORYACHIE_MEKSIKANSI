@@ -8,6 +8,7 @@ import {ContentBlock} from "hme-design-system/src/components/contentBlock/conten
 import {TextArea} from "hme-design-system/src/forms/textArea/textArea";
 import Fonts from "hme-design-system/src/components/fonts/fonts";
 import {Button} from "hme-design-system/src/components/button/button";
+import userStore from "../../modules/reducers/userStore";
 
 
 /**
@@ -42,8 +43,15 @@ export class RestaurantReviewsView extends View {
   render(props = {}) {
     this.restaurant = props.restaurant;
     this.reviews = this.restaurant.reviews;
-    this.navbar.render();
+    this.refresh();
+  }
 
+  /**
+   * Render view without new info about restaurant
+   */
+  refresh = () => {
+    this.remove();
+    this.navbar.render();
     const reviews = [Review({
       rate: this.restaurant.rating,
       text: 'Общая оценка складывается из общего числа отзывов'
@@ -54,21 +62,23 @@ export class RestaurantReviewsView extends View {
       });
     }
 
-    reviews.push(new ContentBlock({
-      content: [
-        Fonts({
-          text: 'Оставьте ваш отзыв!',
-          size: 'font_h1',
-        }),
-        TextArea({placeholder: 'Оставьте ваш отзыв тут!'}),
-        new Button({
-          label: 'Опубликовать',
-          color: 'black',
-          rounded: false,
-          classes: ['mt'],
-        }).render(),
-      ]
-    }).render())
+    if (userStore.getState().auth) {
+      reviews.push(new ContentBlock({
+        content: [
+          Fonts({
+            text: 'Оставьте ваш отзыв!',
+            size: 'font_h1',
+          }),
+          TextArea({placeholder: 'Оставьте ваш отзыв тут!'}),
+          new Button({
+            label: 'Опубликовать',
+            color: 'black',
+            rounded: false,
+            classes: ['mt'],
+          }).render(),
+        ]
+      }).render());
+    }
 
     this.parent.insertAdjacentHTML('afterbegin', page({
       head: new RestaurantHeader({restaurant: this.restaurant}).render(),

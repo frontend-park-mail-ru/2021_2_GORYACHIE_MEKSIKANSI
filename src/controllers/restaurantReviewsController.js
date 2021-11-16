@@ -6,11 +6,12 @@ import userStore from '../modules/reducers/userStore';
 import {urls} from '../modules/urls';
 import cartStore from 'Modules/reducers/cartStore';
 import {RestaurantReviewsView} from "../views/restaurantReviewsView/restaurantReviewsView";
+import {AuthStatus} from "../events/Auth";
 
 /**
  * Standard restaurant controller
  */
-export class RestaurantReveiwsController { // TODO: добавить джсдок
+export class RestaurantReviewsController { // TODO: добавить джсдок
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -35,6 +36,9 @@ export class RestaurantReveiwsController { // TODO: добавить джсдо�
    * @param {int} id
    */
   render(id = 0) {
+    if (!userStore.getState().auth) {
+      eventBus.addEventListener(AuthStatus.userLogin, this.restaurantReviewsView.refresh);
+    }
     RestaurantModel.getReviews(id);
   }
 
@@ -43,6 +47,7 @@ export class RestaurantReveiwsController { // TODO: добавить джсдо�
    * Removing view
    */
   remove() {
+    eventBus.unsubscribe(AuthStatus.userLogin, this.restaurantReviewsView.refresh);
     this.restaurantReviewsView.remove();
   }
 }

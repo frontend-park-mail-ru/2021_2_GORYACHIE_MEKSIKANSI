@@ -90,8 +90,10 @@ export class Router {
       event.preventDefault();
       const href = closest.getAttribute('href');
 
-      if (href) {
-        this.open(window.location + href);
+      if (href === 'reviews') {
+        this.open(window.location.pathname + href);
+      } else if (href) {
+        this.open(href);
       }
     }
   }
