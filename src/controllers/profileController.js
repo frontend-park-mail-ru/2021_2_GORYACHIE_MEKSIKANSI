@@ -10,7 +10,7 @@ import ProfileModel from 'Models/Profile.js';
 import {urls} from 'Modules/urls';
 import userStore from 'Modules/reducers/userStore';
 import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
-import {fileMaxSize} from "../modules/consts";
+import {fileMaxSize} from '../modules/consts';
 
 /**
  *  Profile controller class

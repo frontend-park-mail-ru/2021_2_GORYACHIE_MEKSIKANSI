@@ -2,7 +2,7 @@ import Http from './http.js';
 import {auth, logout} from './auth.js';
 import eventBus from './eventBus';
 import {AuthStatus} from 'Events/Auth';
-import {apiPaths} from "./consts";
+import {apiPaths} from './consts';
 
 const http = new Http();
 
@@ -257,16 +257,16 @@ export function getRestaurantReviews(restaurantId) {
 
 /**
  * post for review to the restaurant
- * @param restaurantId
- * @param text
- * @param rate
+ * @param {number} restaurantId
+ * @param {String} text
+ * @param {number} rate
  * @return {Object<{status: number, body: Object}>}
  */
 export function postReview({
   restaurantId,
   text = '',
   rate = '',
-                           }) {
+}) {
   return http.ajaxPost({
     url: apiPaths.postReview,
     body: {
@@ -275,6 +275,6 @@ export function postReview({
       },
       text: text,
       rate: rate,
-    }
+    },
   });
 }

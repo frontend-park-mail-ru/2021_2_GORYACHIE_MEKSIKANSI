@@ -4,7 +4,7 @@ import cart from './cart.hbs';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {SnackBar} from 'Components/snackBar/snackBar.js';
 import {ResponseEvents} from 'Events/Responses.js';
-import {CreateSnack} from "../snackBar/snackBar";
+import {CreateSnack} from '../snackBar/snackBar';
 
 
 /**

@@ -20,4 +20,4 @@ export const apiPaths = {
   getOrdersHistory: '/user/orders/',
   getProfile: '/user/',
   getRestaurants: '/',
-}
+};

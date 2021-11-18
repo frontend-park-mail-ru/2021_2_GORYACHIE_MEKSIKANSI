@@ -3,13 +3,16 @@ import {View} from '../baseView/View.js';
 import page from '../baseView/page.hbs';
 import restaurantReviewsPage from './restaurantReviewsPage.hbs';
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
-import {Review} from "hme-design-system/src/components/review/review";
-import {ContentBlock} from "hme-design-system/src/components/contentBlock/contentBlock";
-import {TextArea} from "hme-design-system/src/forms/textArea/textArea";
-import Fonts from "hme-design-system/src/components/fonts/fonts";
-import {Button} from "hme-design-system/src/components/button/button";
-import userStore from "../../modules/reducers/userStore";
-import {StarsRating} from "../../components/starsRating/starsRating";
+import {Review} from 'hme-design-system/src/components/review/review';
+import {ContentBlock} from 'hme-design-system/src/components/contentBlock/contentBlock';
+import {TextArea} from 'hme-design-system/src/forms/textArea/textArea';
+import Fonts from 'hme-design-system/src/components/fonts/fonts';
+import {Button} from 'hme-design-system/src/components/button/button';
+import userStore from '../../modules/reducers/userStore';
+import {StarsRating} from '../../components/starsRating/starsRating';
+import {CreateSnack} from '../../components/snackBar/snackBar';
+import eventBus from '../../modules/eventBus';
+import {ProfileEvents} from '../../events/Profile';
 
 
 /**
@@ -23,16 +26,18 @@ export class RestaurantReviewsView extends View {
    *
    */
   constructor({
-                parent: parent = document.body,
-                routeTo: routeTo = () => {},
-                controller: controller,
-              }) {
+    parent: parent = document.body,
+    routeTo: routeTo = () => {},
+    controller: controller,
+  }) {
     super({
       parent: parent,
       routeTo: routeTo,
       controller: controller,
     });
     this.navbar = Navbar;
+
+    eventBus.addEventListener(ProfileEvents.userReviewPublishSuccess, this.refresh);
   }
 
   /**
@@ -55,7 +60,7 @@ export class RestaurantReviewsView extends View {
     this.navbar.render();
     const reviews = [Review({
       rate: this.restaurant.rating,
-      text: 'Общая оценка складывается из общего числа отзывов'
+      text: 'Общая оценка складывается из общего числа отзывов',
     })];
     if (this.restaurant.reviews) {
       this.restaurant.reviews.forEach((review) => {
@@ -78,7 +83,7 @@ export class RestaurantReviewsView extends View {
             rounded: false,
             classes: ['mt', ' publish_button'],
           }).render(),
-        ]
+        ],
       }).render());
     }
 
@@ -98,7 +103,7 @@ export class RestaurantReviewsView extends View {
     }).render();
 
     if (userStore.getState().auth) {
-      this.parent.querySelector('.publish_button').addEventListener('click', this.publishReview)
+      this.parent.querySelector('.publish_button').addEventListener('click', this.publishReview);
       this.starsRating = new StarsRating(this.parent.querySelector('.stars_review_rating'));
       this.starsRating.render();
     }
@@ -109,7 +114,10 @@ export class RestaurantReviewsView extends View {
   publishReview = () => {
     const textArea = this.parent.querySelector('.textarea');
     if (textArea.value.length < 10) {
-
+      CreateSnack({
+        title: 'Слишком короткий отзыв, минимальная длина отзыва: 10 символов',
+        status: 'orange',
+      });
     } else {
       this.controller.publishReview(this.restaurant.id, textArea.value, this.starsRating.getValue());
     }

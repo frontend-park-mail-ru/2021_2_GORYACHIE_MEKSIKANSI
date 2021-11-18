@@ -76,6 +76,7 @@ self.addEventListener('fetch', (event) => {
                 const request = keys.find((key) => key.url.toString() === baseUrl);
                 return await caches.match(request);
               } catch (e) {
+                // something
               }
             }
           })

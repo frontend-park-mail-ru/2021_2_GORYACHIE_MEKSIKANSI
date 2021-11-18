@@ -1,7 +1,14 @@
-import styles from './starsRating.scss'
-import starsRatingTemplate from './starsRating.hbs'
+import styles from './starsRating.scss';
+import starsRatingTemplate from './starsRating.hbs';
 
+/**
+ * Stars rating switcher class
+ */
 export class StarsRating {
+  /**
+   * Constructor for stars switching
+   * @param {HTMLElement} parent parent renderTo switcher
+   */
   constructor(parent) {
     this.parent = parent;
     this.stars = [
@@ -14,6 +21,9 @@ export class StarsRating {
     this.rating = 5;
   }
 
+  /**
+   * Render component to the parent
+   */
   render() {
     this.parent.innerHTML = starsRatingTemplate({stars: this.stars});
 
@@ -22,6 +32,10 @@ export class StarsRating {
     });
   }
 
+  /**
+   * Update inner model and refresh visual
+   * @param {Event} e
+   */
   update = (e) => {
     const id = e.target.closest('.star').id;
     this.stars = this.stars.map((star) => {
@@ -32,16 +46,22 @@ export class StarsRating {
       }
     });
     this.rating = id;
-    console.log(this.rating);
 
     this.remove();
     this.render();
   }
 
+  /**
+   * Get stars value
+   * @return {number}
+   */
   getValue = () => {
     return this.rating;
   }
 
+  /**
+   * Remove element
+   */
   remove() {
     this.parent.querySelectorAll('.star').forEach((star) => {
       star.removeEventListener('click', this.update);

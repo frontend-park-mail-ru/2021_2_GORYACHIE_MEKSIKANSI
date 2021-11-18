@@ -50,9 +50,7 @@ class Address {
         });
         postAddress({longitude: address.longitude, latitude: address.latitude, name: address.name})
             .then((res) => {
-              if (res.status === 200) {
-              } else {
-              }
+              // something
             });
       }
     }

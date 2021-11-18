@@ -118,7 +118,7 @@ export class MapPopup {
     const close = this.parent.querySelector('.map-popup');
     if (close) {
       close.querySelector('#js__add-new-address__btn')
-        .removeEventListener('click', this.addAddress);
+          .removeEventListener('click', this.addAddress);
     }
     if (this.parent.querySelector('.map-popup-div')) {
       this.parent.removeChild(this.parent.querySelector('.map-popup-div'));

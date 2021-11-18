@@ -1,4 +1,4 @@
-import {AccessControlAllowOrigin, ServerAddress} from "./consts";
+import {AccessControlAllowOrigin, ServerAddress} from './consts';
 
 window.serverAddress = ServerAddress;
 

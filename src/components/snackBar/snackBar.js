@@ -350,10 +350,16 @@ export class SnackBar {
   };
 }
 
+/**
+ * public function for easy creating snack bars
+ * @param {String} title
+ * @param {String} status
+ * @constructor
+ */
 export function CreateSnack({
   title = '',
-  status = '',  // red, orange, green
-                            }) {
+  status = '', // red, orange, green
+}) {
   const snack = new SnackBar({
     message: title,
     status: status,
