@@ -2,6 +2,7 @@ import Http from './http.js';
 import {auth, logout} from './auth.js';
 import eventBus from './eventBus';
 import {AuthStatus} from 'Events/Auth';
+import {apiPaths} from "./consts";
 
 const http = new Http();
 
@@ -24,7 +25,7 @@ export function signupPost({
   password,
 }) {
   return http.ajaxPost({
-    url: '/user/signup',
+    url: apiPaths.signup,
     body: {
       type,
       name,
@@ -49,7 +50,7 @@ export function signupPost({
  */
 export function loginPost({type, email, phone, password}) {
   return http.ajaxPost({
-    url: '/user/login/',
+    url: apiPaths.login,
     body: {type, email, phone, password},
   });
 }
@@ -60,7 +61,7 @@ export function loginPost({type, email, phone, password}) {
  * @param {string} url
  * @return {Promise<{body: object, status: number}>}
  */
-export function profileGet({url = '/user/'}) {
+export function profileGet({url = apiPaths.getProfile}) {
   return http.ajaxGet({url})
       .then(auth)
       .catch(() => {
@@ -74,7 +75,7 @@ export function profileGet({url = '/user/'}) {
  * @param {string} url
  * @return {Promise<{body: object, status: number}>}
  */
-export function restaurantsGet({url = '/'}) {
+export function restaurantsGet({url = apiPaths.getRestaurants}) {
   return http.ajaxGet({url});
 }
 
@@ -85,7 +86,7 @@ export function restaurantsGet({url = '/'}) {
  * @return {Promise<{body: object, status: number}>}
  */
 export function logoutPost() {
-  return http.ajaxPost({url: '/user/logout/', body: {}})
+  return http.ajaxPost({url: apiPaths.logout, body: {}})
       .then(logout);
 }
 
@@ -116,7 +117,7 @@ export function dishGet({url = '/restaurants/0/dish/0'}) {
  * @return {Promise<{body: object, status: number}>}
  */
 export function cartGet() {
-  return http.ajaxGet({url: '/user/cart/'});
+  return http.ajaxGet({url: apiPaths.getCart});
 }
 
 /**
@@ -126,7 +127,7 @@ export function cartGet() {
  * @return {Promise<{body: object, status: number}>}
  */
 export function updateCartPut(cartState) {
-  return http.ajaxPut({url: '/user/cart/', body: cartState});
+  return http.ajaxPut({url: apiPaths.updateCart, body: cartState});
 }
 
 /**
@@ -137,7 +138,7 @@ export function updateCartPut(cartState) {
  */
 export function updateName(name) {
   return http.ajaxPut({
-    url: '/user/name/',
+    url: apiPaths.updateName,
     body: {
       name: name,
     },
@@ -152,7 +153,7 @@ export function updateName(name) {
  */
 export function updateEmail(email) {
   return http.ajaxPut({
-    url: '/user/email/',
+    url: apiPaths.updateEmail,
     body: {
       email: email,
     },
@@ -167,7 +168,7 @@ export function updateEmail(email) {
  */
 export function updatePhone(phone) {
   return http.ajaxPut({
-    url: '/user/phone/',
+    url: apiPaths.updatePhone,
     body: {
       phone: phone,
     },
@@ -182,7 +183,7 @@ export function updatePhone(phone) {
  */
 export function updatePassword(password) {
   return http.ajaxPut({
-    url: '/user/password/',
+    url: apiPaths.updatePassword,
     body: {
       password: password,
     },
@@ -197,7 +198,7 @@ export function updatePassword(password) {
  */
 export function updateAvatar(avatar) {
   return http.ajaxPutNoStringify({
-    url: '/user/avatar',
+    url: apiPaths.updateAvatar,
     body: avatar,
   });
 }
@@ -210,7 +211,7 @@ export function updateAvatar(avatar) {
  */
 export function postAddress(address) {
   return http.ajaxPut({
-    url: '/user/address',
+    url: apiPaths.updateAddress,
     body: {
       address: {
         coordinates: {
@@ -231,7 +232,7 @@ export function postAddress(address) {
  */
 export function postPay() {
   return http.ajaxPost({
-    url: '/user/pay',
+    url: apiPaths.pay,
     body: {},
   });
 }
@@ -242,7 +243,7 @@ export function postPay() {
  * @return {Promise<{body: object, status: number}>}
  */
 export function orderHistoryGet() {
-  return http.ajaxGet({url: '/user/orders'});
+  return http.ajaxGet({url: apiPaths.getOrdersHistory});
 }
 
 

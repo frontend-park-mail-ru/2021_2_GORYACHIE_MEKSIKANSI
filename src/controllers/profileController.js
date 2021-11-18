@@ -43,7 +43,6 @@ export class ProfileController {
       });
     });
     eventBus.addEventListener(ProfileEvents.userDataUpdateFailed, (errorText) => {
-      this.profileView.showError(errorText);
       CreateSnack({
         title: errorText,
         status: 'red',
