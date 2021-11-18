@@ -24,7 +24,6 @@ export class Router {
    * @param {string} pageUrl
    */
   open(pageUrl) {
-    console.log(pageUrl);
     // drop technical urls -_-
     if (pageUrl.startsWith('#')) {
       return;
