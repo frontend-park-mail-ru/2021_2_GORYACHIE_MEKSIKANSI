@@ -1,4 +1,5 @@
 import {createStore} from '../store';
+import {cloudPrefix} from "../consts";
 
 export const userActions = {
   storeUserLogin: 'storeUserLogin',
@@ -30,7 +31,7 @@ export function userReducer(state, action) {
         name: action.name,
         email: action.email,
         phone: action.phone,
-        avatar: 'https://hmeats-spaces.fra1.cdn.digitaloceanspaces.com' + action.avatar,
+        avatar: cloudPrefix + action.avatar,
       };
     case userActions.storeUserDataUpdate:
       return {

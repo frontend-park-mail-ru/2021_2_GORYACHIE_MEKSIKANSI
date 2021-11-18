@@ -8,6 +8,7 @@ import userStore from 'Modules/reducers/userStore.js';
 import {orderHistoryGet, updateAvatar} from '../modules/api';
 import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
 import {ordersHistoryBodyMock} from "../views/mocks";
+import {cloudPrefix} from "../modules/consts";
 
 /**
  * Class Profile Model
@@ -117,7 +118,7 @@ class ProfileModel {
           userStore.dispatch({
             actionType: userActions.storeUserDataUpdate,
             updated: {
-              avatar: 'https://hmeats-spaces.fra1.cdn.digitaloceanspaces.com' + response.body.img,
+              avatar: cloudPrefix + response.body.img,
             },
           });
           eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});

@@ -197,7 +197,7 @@ export function updatePassword(password) {
  */
 export function updateAvatar(avatar) {
   return http.ajaxPutNoStringify({
-    url: '/user/avatar/',
+    url: '/user/avatar',
     body: avatar,
   });
 }

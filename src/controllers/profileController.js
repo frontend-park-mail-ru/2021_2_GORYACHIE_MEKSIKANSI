@@ -37,10 +37,17 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, () => {
       this.remove();
       this.render();
-      this.profileView.showInfo('Профиль успешно обновлен!');
+      CreateSnack({
+        title: 'Профиль успешно обновлен!',
+        status: 'green',
+      });
     });
     eventBus.addEventListener(ProfileEvents.userDataUpdateFailed, (errorText) => {
       this.profileView.showError(errorText);
+      CreateSnack({
+        title: errorText,
+        status: 'red',
+      });
     });
   }
 
@@ -53,7 +60,7 @@ export class ProfileController {
       CreateSnack({
         title: 'Картинка слишком большого размера! Допустимый размер 7 мб',
         status: 'red',
-      })
+      });
     } else {
       const payload = new FormData();
       payload.append('avatar', file);
@@ -159,7 +166,6 @@ export class ProfileController {
     }
 
     this.profileView.showErrors(incorrectData);
-    this.profileView.showInfo('');
     this.profileView.showError('');
     if (Object.keys(incorrectData).length !== 0) {
       return;
