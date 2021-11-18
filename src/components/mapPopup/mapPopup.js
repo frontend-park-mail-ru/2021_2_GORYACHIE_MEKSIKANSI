@@ -203,7 +203,6 @@ export class MapPopup {
               });
               this.mapPopupClose(document.querySelector('.map-popup'));
               navbar.updateAddressName(address);
-              console.log(this.parent.querySelector('.js-address'));
               if (this.parent.querySelector('.js-address')) {
                 this.parent.querySelector('.js-address').value = String(isCorrect.properties._data.text);
               }

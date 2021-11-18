@@ -45,7 +45,6 @@ export class Router {
           this.routes.get(this.currControllerName).remove();
         }
         if (this.routes.get(name)) {
-          console.log(pageUrl.match(regUrl), regUrl);
           if (pageUrl.match(regUrl)) { // TODO: инкастыляция
             window.history.pushState({}, '', pageUrl);
             this.routes.get(name).render(pageUrl.match(regUrl)[1]);

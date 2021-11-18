@@ -113,7 +113,6 @@ export const clearCartAndAddDish = (aDish, restaurant) => {
  * @param {object} response
  */
 export const setCart = (response) => {
-  console.log(response.dishes);
   const wrapperStruct = {
     cart: response.dishes,
     restaurant: response.restaurant,

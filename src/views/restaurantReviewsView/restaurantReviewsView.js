@@ -47,8 +47,8 @@ export class RestaurantReviewsView extends View {
    *
    */
   render(props = {}) {
-    this.restaurant = props.restaurant;
-    this.reviews = this.restaurant.reviews;
+    this.restaurant = props.restaurant ? props.restaurant : {};
+    this.reviews = this.restaurant.reviews ? this.restaurant.reviews : [];
     this.refresh();
   }
 
