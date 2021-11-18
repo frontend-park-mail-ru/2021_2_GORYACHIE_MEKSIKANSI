@@ -39,13 +39,13 @@ export class Router {
     }
 
     // find simple path
-    let foundedPath = [...this.routes].find(([key, ]) => {
-      return key === pageUrl
+    let foundedPath = [...this.routes].find(([key]) => {
+      return key === pageUrl;
     });
 
     // if file not found -> not simple path
     if (!foundedPath) {
-      foundedPath = [...this.routes].find(([key, ]) => {
+      foundedPath = [...this.routes].find(([key]) => {
         if (key instanceof RegExp) {
           return pageUrl.match(key);
         }
@@ -67,7 +67,7 @@ export class Router {
       window.history.pushState(null, null, pageUrl);
     }
     if (foundedPath[0] instanceof RegExp) {
-      foundedPath[1].render(pageUrl.match(foundedPath[0])[1])
+      foundedPath[1].render(pageUrl.match(foundedPath[0])[1]);
     } else {
       foundedPath[1].render();
     }

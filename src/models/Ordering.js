@@ -2,8 +2,8 @@ import {postPay} from '../modules/api';
 import eventBus from '../modules/eventBus';
 import {OrderingEvents} from '../events/Ordering';
 import {urls} from '../modules/urls';
-import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
-import {ResponseEvents} from "../events/Responses";
+import {CreateSnack} from '../components/snackBar/snackBar';
+import {ResponseEvents} from '../events/Responses';
 
 /**
  * Ordering model class
