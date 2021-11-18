@@ -246,4 +246,35 @@ export function orderHistoryGet() {
   return http.ajaxGet({url: apiPaths.getOrdersHistory});
 }
 
+/**
+ * get reviews for the restaurant
+ * @param {number} restaurantId
+ * @return {Promise<{body: object, status: number}>}
+ */
+export function getRestaurantReviews(restaurantId) {
+  return http.ajaxGet({url: 'restaurants/' + restaurantId + '/reviews/'});
+}
 
+/**
+ * post for review to the restaurant
+ * @param restaurantId
+ * @param text
+ * @param rate
+ * @return {Object<{status: number, body: Object}>}
+ */
+export function postReview({
+  restaurantId,
+  text = '',
+  rate = '',
+                           }) {
+  return http.ajaxPost({
+    url: apiPaths.postReview,
+    body: {
+      restaurant: {
+        id: restaurantId,
+      },
+      text: text,
+      rate: rate,
+    }
+  });
+}

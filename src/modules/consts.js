@@ -15,6 +15,7 @@ export const apiPaths = {
   updatePassword: '/user/password/',
   updateAvatar: '/user/avatar/',
   updateAddress: '/user/address/',
+  postReview: '/user/reviews/',
   pay: '/user/pay/',
   getOrdersHistory: '/user/orders/',
   getProfile: '/user/',
