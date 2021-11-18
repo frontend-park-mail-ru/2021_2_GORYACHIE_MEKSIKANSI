@@ -62,7 +62,6 @@ class RestaurantModel {
             title: 'Не удалось получить отзывы',
             status: 'red',
           });
-          eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, reviewsBodyMock);
         });
   }
 
