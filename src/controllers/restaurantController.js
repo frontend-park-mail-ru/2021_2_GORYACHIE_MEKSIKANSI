@@ -61,7 +61,7 @@ export class RestaurantController { // TODO: добавить джсдок
    */
   addDishToCart(dishSettings = {}) {
     if (!userStore.getState().auth) {
-      this.routeTo(urls.login.url);
+      this.routeTo(urls.login);
     }
 
     const cartRestaurant = cartStore.getState().restaurant;

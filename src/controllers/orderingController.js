@@ -40,7 +40,7 @@ export class OrderingController {
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
       if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-        this.routeTo(urls.home.url);
+        this.routeTo(urls.home);
       } else {
         this.orderingView.render();
       }
@@ -49,7 +49,7 @@ export class OrderingController {
 
   show = () => {
     if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-      this.routeTo(urls.home.url);
+      this.routeTo(urls.home);
       // history.back(); // TODO: разобраться с историей при первом заходе
       // return;
     } else {
@@ -58,7 +58,7 @@ export class OrderingController {
   }
 
   redirect = () => {
-    this.routeTo(urls.home.url);
+    this.routeTo(urls.home);
   }
 
   makePay = () => {

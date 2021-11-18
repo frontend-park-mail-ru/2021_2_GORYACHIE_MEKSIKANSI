@@ -56,5 +56,5 @@ export function logout() {
       cart: [],
     },
   });
-  eventBus.emitEventListener(AuthStatus.userLogout, urls.home.url);
+  eventBus.emitEventListener(AuthStatus.userLogout, urls.home);
 }

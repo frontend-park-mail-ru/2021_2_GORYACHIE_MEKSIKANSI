@@ -123,6 +123,11 @@ class ProfileModel {
               },
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          } else {
+            CreateSnack({
+              title: 'Произошла какая-то ошибка!',
+              status: 'red',
+            });
           }
         })
         .catch(() => {

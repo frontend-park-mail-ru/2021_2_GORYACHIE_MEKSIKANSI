@@ -103,13 +103,9 @@ export class Navbar {
     this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.hamburger-wrapper').addEventListener('click', this.closeListener);
-    this.parent.querySelectorAll('a').forEach((item) => {
-      if (item.hasAttribute('href')) {
-        if (item.getAttribute('href') === 'logout') {
-          item.addEventListener('click', this.logout);
-        }
-      }
-    });
+    if (userStore.getState().auth) {
+      document.getElementById('logout').addEventListener('click', this.logout);
+    }
   }
 
   /**
@@ -176,13 +172,11 @@ export class Navbar {
       document.querySelector('.navbar')) {
       this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);
       this.parent.querySelector('.hamburger-wrapper').removeEventListener('click', this.closeListener);
-      this.parent.querySelectorAll('a').forEach((item) => {
-        if (item.hasAttribute('href')) {
-          if (item.getAttribute('href') === 'logout') {
-            item.removeEventListener('click', this.logout);
-          }
-        }
-      });
+
+      const logoutButton = document.getElementById('logout');
+      if (logoutButton) {
+        logoutButton.removeEventListener('click', this.logout);
+      }
       const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
       toggleSwitch.removeEventListener('change', switchTheme, false);

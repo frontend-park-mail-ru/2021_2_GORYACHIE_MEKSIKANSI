@@ -3,7 +3,7 @@ import eventBus from '../modules/eventBus';
 import {OrderingEvents} from '../events/Ordering';
 import {urls} from '../modules/urls';
 import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
-import {ResponseEvents} from 'Events/Responses.js';
+import {ResponseEvents} from "../events/Responses";
 
 /**
  * Ordering model class
@@ -16,7 +16,7 @@ class OrderingModel {
     postPay()
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(OrderingEvents.paymentSuccess, urls.order.url);
+            eventBus.emitEventListener(OrderingEvents.paymentSuccess, urls.order);
           } else {
             CreateSnack({
               title: 'Ошибка оплаты!',
