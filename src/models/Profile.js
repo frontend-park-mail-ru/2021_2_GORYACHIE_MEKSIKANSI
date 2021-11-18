@@ -6,7 +6,7 @@ import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from 'Modules/reducers/userStore.js';
 import {orderHistoryGet, updateAvatar} from '../modules/api';
-import {SnackBar} from '../components/snackBar/snackBar';
+import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
 import {ordersHistoryBodyMock} from "../views/mocks";
 
 /**
@@ -110,15 +110,10 @@ class ProfileModel {
   updateUserAvatar(avatar) {
     updateAvatar(avatar)
         .then((response) => {
-          const snack = new SnackBar({
-            message: 'Картинка обновлена!',
-            status: 'warn',
-            position: 'tr',
-            width: '500px',
-            fixed: true,
+          CreateSnack({
+            title: 'Картинка обновлена!',
+            status: 'green',
           });
-          snack.settingUp();
-          snack.Open();
           userStore.dispatch({
             actionType: userActions.storeUserDataUpdate,
             updated: {
@@ -128,15 +123,10 @@ class ProfileModel {
           eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
         })
         .catch(() => {
-          const snack = new SnackBar({
-            message: 'Произошла какая то ошибка!',
+          CreateSnack({
+            title: 'Произошла какая-то ошибка!',
             status: 'red',
-            position: 'tr',
-            width: '500px',
-            fixed: true,
           });
-          snack.settingUp();
-          snack.Open();
         });
   }
 

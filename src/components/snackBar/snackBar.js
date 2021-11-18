@@ -349,3 +349,18 @@ export class SnackBar {
     this.Element.removeEventListener('transitioned', this.setStyleFunc);
   };
 }
+
+export function CreateSnack({
+  title = '',
+  status = '',  // red, orange, green
+                            }) {
+  const snack = new SnackBar({
+    message: title,
+    status: status,
+    position: 'tr',
+    width: '500px',
+    fixed: true,
+  });
+  snack.settingUp();
+  snack.Open();
+}
