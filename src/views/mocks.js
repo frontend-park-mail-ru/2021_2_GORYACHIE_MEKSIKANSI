@@ -307,3 +307,44 @@ export const reviewsBodyMock = {
     ],
   },
 };
+
+export const restaurantsBodyMock = {
+  restaurants: [
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    }
+  ]
+}

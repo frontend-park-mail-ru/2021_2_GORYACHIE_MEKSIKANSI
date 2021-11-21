@@ -34,7 +34,7 @@
     "handlebars": "^4.7.7",
     "handlebars-loader": "^1.7.1",
     "hbs": "^4.2.0",
-    "hme-design-system": "^1.0.46",
+    "hme-design-system": "^1.0.47",
     "http": "^0.0.1-security",
     "node-static": "^0.7.11",
     "path": "^0.12.7",

@@ -11,6 +11,8 @@ import userStore from 'Modules/reducers/userStore.js';
 import {continueModal} from 'hme-design-system/stories/modal.stories';
 import {ContinueModal} from 'hme-design-system/src/components/modal/continueModal/continueModal';
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
+import eventBus from "../../modules/eventBus";
+import {SearchEvents} from "../../events/Search";
 
 
 /**
@@ -87,6 +89,14 @@ export class RestaurantView extends View {
 
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render();
+
+    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
+      item.onclick = this.makeSearchRequestByTag;
+    });
+  }
+
+  makeSearchRequestByTag = (e) => {
+    eventBus.emitEventListener(SearchEvents.searchRequest, e.target.innerHTML);
   }
 
   /**
@@ -136,6 +146,7 @@ export class RestaurantView extends View {
     if (this.continueDiv) {
       this.closeContinueOrdering();
     }
+
     this.navbar.remove();
     this.dishesList.remove();
     this.popup.remove();

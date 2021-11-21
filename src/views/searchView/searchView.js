@@ -38,7 +38,7 @@ export class SearchView extends View {
     this.restaurantList.render({
       parent: this.parent.querySelector('.page__content'),
       restaurantsList: props.restaurants ? props.restaurants : [],
-      title: 'Поиск по какому-то запросу',
+      title: 'Поиск по запросу: "' + props.title + '"',
       addHeader: false,
     });
   }
@@ -47,8 +47,7 @@ export class SearchView extends View {
    */
   remove() {
     this.navbar.remove();
-    this.promo.remove();
-    this.restaurantsList.remove();
+    this.restaurantList.remove();
     this.parent.innerHTML = '';
   }
 }

@@ -8,4 +8,5 @@ export const urls = {
   restaurant: /\/restaurants\/(\d+)/,
   order: '/order',
   history: '/history',
+  search: '/search',
 };

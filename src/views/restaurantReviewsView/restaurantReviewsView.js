@@ -13,6 +13,7 @@ import {StarsRating} from '../../components/starsRating/starsRating';
 import {CreateSnack} from '../../components/snackBar/snackBar';
 import eventBus from '../../modules/eventBus';
 import {ProfileEvents} from '../../events/Profile';
+import {SearchEvents} from "../../events/Search";
 
 
 /**
@@ -107,9 +108,18 @@ export class RestaurantReviewsView extends View {
       this.starsRating = new StarsRating(this.parent.querySelector('.stars_review_rating'));
       this.starsRating.render();
     }
+
+    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
+      item.onclick = this.makeSearchRequestByTag;
+    });
   }
+
+  makeSearchRequestByTag = (e) => {
+    eventBus.emitEventListener(SearchEvents.searchRequest, e.target.innerHTML);
+  }
+
   /**
-   *
+   * Make check and call controller to publish review on restaurant
    */
   publishReview = () => {
     const textArea = this.parent.querySelector('.textarea');

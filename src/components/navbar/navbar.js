@@ -1,3 +1,4 @@
+import styles from './navbar.scss';
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs';
 import {MapPopup} from '../mapPopup/mapPopup.js';
@@ -6,6 +7,7 @@ import {AuthStatus} from 'Events/Auth.js';
 import userStore from 'Modules/reducers/userStore.js';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
+import {SearchEvents} from "../../events/Search";
 
 /**
  * switching theme crutch
@@ -103,8 +105,16 @@ export class Navbar {
     this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.hamburger-wrapper').addEventListener('click', this.closeListener);
+    document.getElementById('search-icon').onclick = this.makeSearch;
     if (userStore.getState().auth) {
       document.getElementById('logout').addEventListener('click', this.logout);
+    }
+  }
+
+  makeSearch = () => {
+    const searchText = document.getElementById('search-input').value;
+    if (searchText.length !== 0) {
+      eventBus.emitEventListener(SearchEvents.searchRequest, searchText);
     }
   }
 
