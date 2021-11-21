@@ -3,7 +3,7 @@ import {createStoreWithMiddleware} from '../store.js';
 import eventBus from '../eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import {ResponseEvents} from 'Events/Responses.js';
-import {CreateSnack} from "../../components/snackBar/snackBar";
+import {CreateSnack} from '../../components/snackBar/snackBar';
 
 export const cartActions = {
   update: 'update',

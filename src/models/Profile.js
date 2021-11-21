@@ -12,7 +12,7 @@ import {cloudPrefix} from '../modules/consts';
 import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
 import {OrderingEvents} from '../events/Ordering';
-import {cart} from "hme-design-system/stories/cart.stories";
+import {cart} from 'hme-design-system/stories/cart.stories';
 
 /**
  * Class Profile Model
@@ -28,15 +28,15 @@ class ProfileModel {
             setCart(cartResponse.body.cart);
           } else if (cartResponse.status === ResponseEvents.NotFound) {
             cartStore.dispatch({
-                actionType: cartActions.update,
-                state: {
-                  restaurant: {
-                    id: -1,
-                    name: '',
-                  },
-                  cart: [],
+              actionType: cartActions.update,
+              state: {
+                restaurant: {
+                  id: -1,
+                  name: '',
                 },
-              }
+                cart: [],
+              },
+            },
             );
           }
         })
@@ -189,13 +189,13 @@ class ProfileModel {
             });
             eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, response.body);
           }
-        })
-        // .catch(() => {
-        //   CreateSnack({
-        //     title: 'Не получилось получить историю заказов.',
-        //     status: 'red',
-        //   });
-        // });
+        });
+    // .catch(() => {
+    //   CreateSnack({
+    //     title: 'Не получилось получить историю заказов.',
+    //     status: 'red',
+    //   });
+    // });
   }
 
   /**

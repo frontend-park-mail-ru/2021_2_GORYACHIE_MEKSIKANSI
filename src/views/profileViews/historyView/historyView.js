@@ -39,11 +39,10 @@ export class HistoryView extends BaseProfileView {
     super.render();
     const orders = [];
     props.orders.forEach((item) => {
-      console.log(item);
       orders.push(Order({
         historyOrder: true,
         date: item.date,
-        addrs: item.restaurant.address.city + ', ' + item.restaurant.address.street  + ', ' + item.restaurant.address.house,
+        addrs: item.restaurant.address.city + ', ' + item.restaurant.address.street + ', ' + item.restaurant.address.house,
         status: true,
         id: item.restaurant.id,
         img: item.restaurant.img,
