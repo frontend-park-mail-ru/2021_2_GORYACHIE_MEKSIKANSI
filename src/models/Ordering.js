@@ -10,7 +10,7 @@ import {ResponseEvents} from '../events/Responses';
  */
 class OrderingModel {
 /**
- * Reauest for pay on backend
+ * Request for pay on backend
  */
   requestPay() {
     postPay()
