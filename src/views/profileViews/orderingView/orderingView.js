@@ -12,8 +12,8 @@ import {BaseProfileView} from '../baseProfileView';
 import {Modal} from 'hme-design-system/src/components/modal/modal';
 import {Card} from 'hme-design-system/src/components/card/card';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
-import {CreateSnack} from "../../../components/snackBar/snackBar";
-import {paymentMethods} from "../../../modules/consts";
+import {CreateSnack} from '../../../components/snackBar/snackBar';
+import {paymentMethods} from '../../../modules/consts';
 
 /**
  * Profile view class
@@ -130,7 +130,7 @@ export class OrderingView extends BaseProfileView {
       flat: document.getElementById('flat').value,
       intercom: document.getElementById('intercom').value,
       comment: document.getElementById('comment').value,
-    }
+    };
   }
 
   callControllerCreateOrder = () => {

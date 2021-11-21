@@ -26,4 +26,4 @@ export const apiPaths = {
 export const paymentMethods = {
   card: 'Card',
   cash: 'Cash',
-}
+};

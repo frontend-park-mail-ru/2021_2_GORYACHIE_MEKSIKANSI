@@ -4,40 +4,39 @@ import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from '
 import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
-import userStore from "../modules/reducers/userStore";
+import userStore from '../modules/reducers/userStore';
 import {cartGet, createOrder, orderHistoryGet, postPay, postReview, updateAvatar} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
 import {ordersHistoryBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
-import {setCart} from "../modules/reducers/cartStore";
-import {AuthStatus} from "../events/Auth";
-import {OrderingEvents} from "../events/Ordering";
+import {setCart} from '../modules/reducers/cartStore';
+import {AuthStatus} from '../events/Auth';
+import {OrderingEvents} from '../events/Ordering';
 
 /**
  * Class Profile Model
  */
 class ProfileModel {
-
   /**
    * Use api to get cart
    */
   getCart() {
     cartGet()
-      .then((cartResponse) => {
-        if (cartResponse.status === ResponseEvents.OK) {
-          setCart(cartResponse.body.cart);
-        }
-      })
-      .then(() => {
-        if (userStore.getState().auth) {
-          eventBus.emitEventListener(AuthStatus.userLogin, {});
-        }
-      })
-      .catch(() => {
+        .then((cartResponse) => {
+          if (cartResponse.status === ResponseEvents.OK) {
+            setCart(cartResponse.body.cart);
+          }
+        })
+        .then(() => {
+          if (userStore.getState().auth) {
+            eventBus.emitEventListener(AuthStatus.userLogin, {});
+          }
+        })
+        .catch(() => {
         // TODO: user login but without cart
-      });
+        });
   }
-/**
+  /**
  * Updating user name method
  * @param {string} name
  */
@@ -209,21 +208,21 @@ class ProfileModel {
    * Function of creating order
    * creating order by request on server
    * and emit signals of success or not
-   * @param methodPay
-   * @param comment
-   * @param flat
-   * @param porch
-   * @param floor
-   * @param intercom
+   * @param {string} methodPay
+   * @param {string} comment
+   * @param {string} flat
+   * @param {string} porch
+   * @param {string} floor
+   * @param {string} intercom
    */
   createOrder({
-                 methodPay,
-                 comment,
-                 flat,
-                 porch,
-                 floor,
-                 intercom,
-               }) {
+    methodPay,
+    comment,
+    flat,
+    porch,
+    floor,
+    intercom,
+  }) {
     const order = {
       methodPay: methodPay,
       comment: comment,
@@ -238,69 +237,69 @@ class ProfileModel {
         porch: porch,
         floor: floor,
         intercom: intercom,
-      }
-    }
+      },
+    };
     createOrder(order)
-      .then((response) => {
-        if (response.status === ResponseEvents.OK) {
-          this.getCart();
-          eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
-        } else {
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            this.getCart();
+            eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
+          } else {
           // Something went wrong
-        }
-        return response;
-      })
-      .catch(() => {
-        CreateSnack({
-          title: 'Не получилось создать заказ :(',
-          status: 'red',
+          }
+          return response;
+        })
+        .catch(() => {
+          CreateSnack({
+            title: 'Не получилось создать заказ :(',
+            status: 'red',
+          });
+          eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
         });
-        eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
-      });
   }
 
   /**
    * Outer function,
    * Request server with the pay and create order if pay is success
-   * @param methodPay
-   * @param comment
-   * @param flat
-   * @param porch
-   * @param floor
-   * @param intercom
+   * @param {string} methodPay
+   * @param {string} comment
+   * @param {string} flat
+   * @param {string} porch
+   * @param {string} floor
+   * @param {string} intercom
    */
   createOrderWithPay({
-                    methodPay,
-                    comment,
-                    flat,
-                    porch,
-                    floor,
-                    intercom,
+    methodPay,
+    comment,
+    flat,
+    porch,
+    floor,
+    intercom,
   }) {
     postPay()
-      .then((response) => {
-        if (response.status === ResponseEvents.OK) {
-          this.createOrder({
-            methodPay,
-            comment,
-            flat,
-            porch,
-            floor,
-            intercom,
-          });
-        } else {
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            this.createOrder({
+              methodPay,
+              comment,
+              flat,
+              porch,
+              floor,
+              intercom,
+            });
+          } else {
+            CreateSnack({
+              title: 'Ошибка оплаты!',
+              status: 'red',
+            });
+          }
+        })
+        .catch(() => {
           CreateSnack({
-            title: 'Ошибка оплаты!',
+            title: 'Сервер не отвечает!',
             status: 'red',
           });
-        }
-      })
-      .catch(() => {
-        CreateSnack({
-          title: 'Сервер не отвечает!',
-          status: 'red',
         });
-      });
   }
 }
 

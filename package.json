@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode development",
     "debug": "DEBUG=true webpack serve",
-    "lint": "eslint --config=.eslintrc.json src/"
+    "lint": "eslint --config=.eslintrc.json src/",
+    "lintFix": "eslint --fix --config=.eslintrc.json src/"
   },
   "repository": {
     "type": "git",

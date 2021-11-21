@@ -7,7 +7,7 @@ import userStore from './reducers/userStore';
 import cartStore, {clearCart} from './reducers/cartStore';
 import {cartActions, updateStorage, setCart} from './reducers/cartStore';
 import {cartGet, updateCartPut} from './api.js';
-import Profile from "../models/Profile";
+import Profile from '../models/Profile';
 
 /**
  * emitting events for user auth

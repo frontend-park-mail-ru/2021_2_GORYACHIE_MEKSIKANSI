@@ -7,8 +7,8 @@ import cartStore from 'Modules/reducers/cartStore';
 import userStore from 'Modules/reducers/userStore';
 import {OrderingEvents} from '../events/Ordering';
 import ProfileModel from '../models/Profile';
-import {paymentMethods} from "../modules/consts";
-import {ProfileEvents} from "../events/Profile";
+import {paymentMethods} from '../modules/consts';
+import {ProfileEvents} from '../events/Profile';
 
 
 /**

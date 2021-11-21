@@ -305,6 +305,6 @@ export function createOrder(order) {
       methodPay: order.methodPay,
       address: order.address,
       comment: order.comment,
-    }
+    },
   });
 }
