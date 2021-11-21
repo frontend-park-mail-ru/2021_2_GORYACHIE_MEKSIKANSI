@@ -15,7 +15,9 @@
         <div class="cart-order-delivery__input-row">
             <input placeholder="Напишите, как вас найти или пожелания к заказу..." class="input input_border input_border-color_black cart-order-delivery__input cart-order-delivery__input_sq profile-page__input">
         </div>
+        {{#if restaurant.minDTime}}
         <div class="font_h2">
             Время доставки составит ~ {{restaurant.minDTime}}-{{restaurant.maxDTime}} мин
         </div>
+        {{/if}}
 </div>

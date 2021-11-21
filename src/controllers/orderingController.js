@@ -39,22 +39,12 @@ export class OrderingController {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-        this.routeTo(urls.home);
-      } else {
-        this.orderingView.render();
-      }
+      this.show();
     }
   }
 
   show = () => {
-    if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-      this.routeTo(urls.home);
-      // history.back(); // TODO: разобраться с историей при первом заходе
-      // return;
-    } else {
-      this.orderingView.render();
-    }
+    this.orderingView.render();
   }
 
   redirect = () => {
