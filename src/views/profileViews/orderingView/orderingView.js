@@ -13,6 +13,7 @@ import {Modal} from 'hme-design-system/src/components/modal/modal';
 import {Card} from 'hme-design-system/src/components/card/card';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {CreateSnack} from "../../../components/snackBar/snackBar";
+import {paymentMethods} from "../../../modules/consts";
 
 /**
  * Profile view class
@@ -109,9 +110,9 @@ export class OrderingView extends BaseProfileView {
         this.parent.appendChild(this.confirmDiv);
         document.body.style.overflowY = 'hidden';
         this.confirmDiv.querySelector('.modal-close-button').addEventListener('click', this.removeConfirm);
-        this.confirmDiv.querySelector('.card__pay-button').addEventListener('click', this.controller.makePay);
+        this.confirmDiv.querySelector('.card__pay-button').addEventListener('click', this.callControllerCreateOrder);
       } else {
-        this.routeTo(urls.order);
+        this.callControllerCreateOrder();
       }
     } else {
       CreateSnack({
@@ -119,6 +120,21 @@ export class OrderingView extends BaseProfileView {
         status: 'orange',
       });
     }
+  }
+
+  getOrderInfoFromInputs = () => {
+    return {
+      methodPay: this.parent.querySelector('.card').checked ? paymentMethods.card : paymentMethods.cash,
+      porch: document.getElementById('porch').value,
+      floor: document.getElementById('floor').value,
+      flat: document.getElementById('flat').value,
+      intercom: document.getElementById('intercom').value,
+      comment: document.getElementById('comment').value,
+    }
+  }
+
+  callControllerCreateOrder = () => {
+    this.controller.createOrder(this.getOrderInfoFromInputs());
   }
 
   removeConfirm = () => {

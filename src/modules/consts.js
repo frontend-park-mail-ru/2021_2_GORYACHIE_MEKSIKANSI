@@ -22,3 +22,8 @@ export const apiPaths = {
   getProfile: '/user/',
   getRestaurants: '/',
 };
+
+export const paymentMethods = {
+  card: 'Card',
+  cash: 'Cash',
+}

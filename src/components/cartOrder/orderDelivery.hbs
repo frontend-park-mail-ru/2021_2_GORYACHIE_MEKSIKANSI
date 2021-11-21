@@ -4,16 +4,16 @@
             <input placeholder="Введите адрес" disabled value="{{address}}" required class="input input_border input_radius-border_medium cart-order-delivery__input js-address">
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw profile-page__input">
-            <input placeholder="Домофон" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
-            <input placeholder="Этаж" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
-            <input placeholder="Квартира" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
+            <input id="porch" placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw profile-page__input">
+            <input id="intercom" placeholder="Домофон" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
+            <input id="floor" placeholder="Этаж" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
+            <input id="flat" placeholder="Квартира" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
         </div>
         <div class="font_h2">
             Комментарий
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Напишите, как вас найти или пожелания к заказу..." class="input input_border input_border-color_black cart-order-delivery__input cart-order-delivery__input_sq profile-page__input">
+            <input id="comment" placeholder="Напишите, как вас найти или пожелания к заказу..." class="input input_border input_border-color_black cart-order-delivery__input cart-order-delivery__input_sq profile-page__input">
         </div>
         {{#if restaurant.minDTime}}
         <div class="font_h2">

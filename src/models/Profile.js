@@ -255,6 +255,7 @@ class ProfileModel {
           title: 'Не получилось создать заказ :(',
           status: 'red',
         });
+        eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
       });
   }
 

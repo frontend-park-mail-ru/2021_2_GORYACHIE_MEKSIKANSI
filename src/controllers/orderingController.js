@@ -6,6 +6,9 @@ import {AuthStatus} from 'Events/Auth';
 import cartStore from 'Modules/reducers/cartStore';
 import userStore from 'Modules/reducers/userStore';
 import {OrderingEvents} from '../events/Ordering';
+import ProfileModel from '../models/Profile';
+import {paymentMethods} from "../modules/consts";
+import {ProfileEvents} from "../events/Profile";
 
 
 /**
@@ -29,6 +32,7 @@ export class OrderingController {
       controller: this,
     });
     eventBus.addEventListener(OrderingEvents.paymentSuccess, this.routeTo);
+    eventBus.addEventListener(ProfileEvents.userOrderCreatedSuccess, this.redirectToOrder);
   }
 
   /**
@@ -51,8 +55,16 @@ export class OrderingController {
     this.routeTo(urls.home);
   }
 
-  makePay = () => {
-    OrderingModel.requestPay();
+  redirectToOrder = () => {
+    this.routeTo(urls.order);
+  }
+
+  createOrder = (order) => {
+    if (order.methodPay === paymentMethods.card) {
+      ProfileModel.createOrderWithPay(order);
+    } else {
+      ProfileModel.createOrder(order);
+    }
   }
 
   /**
