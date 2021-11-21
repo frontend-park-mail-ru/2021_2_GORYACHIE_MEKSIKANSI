@@ -89,9 +89,11 @@ export class OrderingView extends BaseProfileView {
       summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
       this.summaryWidth = summary.offsetWidth;
     } else if (window.pageYOffset + 75 >= this.sticky) {
-      summary.style.top = String(0) + 'px';
       summary.classList.add('cart-order-summary-sticky');
-      summary.style.width = this.summaryWidth + 'px';
+      if (summary.style.width !== '100%') {
+        summary.style.top = String(0) + 'px';
+        summary.style.width = this.summaryWidth + 'px';
+      }
     } else {
       summary.classList.remove('cart-order-summary-sticky');
       summary.style.width = '';

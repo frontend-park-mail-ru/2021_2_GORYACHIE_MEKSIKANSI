@@ -24,6 +24,19 @@
         margin-top: var(--orderSummaryStickyMarginTop);
     }
 
+    @media (min-width: 0px) and (max-width: 860px) {
+        &-sticky {
+            position: relative;
+        }
+
+        & {
+            width: 100%;
+            margin-top: 50px;
+            margin-left: 0;
+            top: 0;
+        }
+    }
+
     &__payment-title {
         font-size: var(--orderSummaryTitleFontSize);
         font-weight: var(--font_bold);

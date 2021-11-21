@@ -35,4 +35,14 @@
         flex-direction: column;
     }
 
+    @media (min-width: 0px) and (max-width: 860px) {
+        &__left-box {
+            width: 100%;
+        }
+
+        &__right-box {
+            width: 100%;
+        }
+    }
+
 }
