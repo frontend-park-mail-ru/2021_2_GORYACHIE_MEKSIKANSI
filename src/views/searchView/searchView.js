@@ -35,10 +35,11 @@ export class SearchView extends View {
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
     }));
+    const title = props.title ? props.title : '';
     this.restaurantList.render({
       parent: this.parent.querySelector('.page__content'),
       restaurantsList: props.restaurants ? props.restaurants : [],
-      title: 'Поиск по запросу: "' + props.title + '"',
+      title: 'Поиск по запросу: "' + title + '"',
       addHeader: false,
     });
   }

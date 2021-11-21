@@ -46,7 +46,7 @@ export class SearchController {
    * @param searchText
    */
   makeSearchRequest = (searchText) => {
-    SearchModel.getRestaurantsSearch(searchText);
+    SearchModel.getRestaurantsSearch(searchText.trim());
   }
 
   /**
