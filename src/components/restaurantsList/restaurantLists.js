@@ -25,6 +25,8 @@ export class RestaurantsList {
   render({
     parent: parent,
     restaurantsList: restaurantList,
+    title: title = '',
+    addHeader: addHeader = true,
   }) {
     this.parent = parent;
     const objList = [];
@@ -35,7 +37,7 @@ export class RestaurantsList {
     }
     this.parent.innerHTML = restaurantsListTemplate({
       sortBox: new SortBox().render(),
-      sortHeader: new SortHeader({
+      sortHeader: addHeader ? new SortHeader({
         buttons: [
           new ButtonIconV({
             label: 'Фастфуд',
@@ -54,8 +56,8 @@ export class RestaurantsList {
             icon: icon,
           }).render(),
         ],
-      }).render(),
-      restaurantList: new List({listTitle: 'Рестораны', objList: objList}).render()});
+      }).render() : '',
+      restaurantList: new List({listTitle: title, objList: objList}).render()});
   }
 
   /**
