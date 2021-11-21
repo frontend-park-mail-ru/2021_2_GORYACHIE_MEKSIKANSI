@@ -16,14 +16,14 @@ export const apiPaths = {
   updateAvatar: '/user/avatar/',
   updateAddress: '/user/address/',
   postReview: '/user/reviews/',
-  postOrder: '/user/orders/',
+  postOrder: '/user/order/',
   pay: '/user/pay/',
-  getOrdersHistory: '/user/orders/',
+  getOrdersHistory: '/user/order/',
   getProfile: '/user/',
   getRestaurants: '/',
 };
 
 export const paymentMethods = {
-  card: 'Card',
-  cash: 'Cash',
+  card: 'card',
+  cash: 'cash',
 };

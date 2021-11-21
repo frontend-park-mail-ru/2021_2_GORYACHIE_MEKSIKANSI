@@ -125,9 +125,9 @@ export class OrderingView extends BaseProfileView {
   getOrderInfoFromInputs = () => {
     return {
       methodPay: this.parent.querySelector('.card').checked ? paymentMethods.card : paymentMethods.cash,
-      porch: document.getElementById('porch').value,
-      floor: document.getElementById('floor').value,
-      flat: document.getElementById('flat').value,
+      porch: Number(document.getElementById('porch').value),
+      floor: Number(document.getElementById('floor').value),
+      flat: Number(document.getElementById('flat').value),
       intercom: document.getElementById('intercom').value,
       comment: document.getElementById('comment').value,
     };

@@ -9,9 +9,10 @@ import {cartGet, createOrder, orderHistoryGet, postPay, postReview, updateAvatar
 import {CreateSnack} from '../components/snackBar/snackBar';
 import {ordersHistoryBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
-import {setCart} from '../modules/reducers/cartStore';
+import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
 import {OrderingEvents} from '../events/Ordering';
+import {cart} from "hme-design-system/stories/cart.stories";
 
 /**
  * Class Profile Model
@@ -25,6 +26,18 @@ class ProfileModel {
         .then((cartResponse) => {
           if (cartResponse.status === ResponseEvents.OK) {
             setCart(cartResponse.body.cart);
+          } else if (cartResponse.status === ResponseEvents.NotFound) {
+            cartStore.dispatch({
+                actionType: cartActions.update,
+                state: {
+                  restaurant: {
+                    id: -1,
+                    name: '',
+                  },
+                  cart: [],
+                },
+              }
+            );
           }
         })
         .then(() => {
@@ -168,14 +181,21 @@ class ProfileModel {
     orderHistoryGet()
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, response.body);
           } else {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+            CreateSnack({
+              title: 'Не получилось получить историю заказов.',
+              status: 'red',
+            });
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, response.body);
           }
         })
-        .catch(() => {
-          eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
-        });
+        // .catch(() => {
+        //   CreateSnack({
+        //     title: 'Не получилось получить историю заказов.',
+        //     status: 'red',
+        //   });
+        // });
   }
 
   /**

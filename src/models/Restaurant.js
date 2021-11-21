@@ -39,7 +39,14 @@ class RestaurantModel {
   getDish(restId, dishId) {
     dishGet({url: '/restaurant/' + restId + '/dish/' + dishId})
         .then((response) => {
-          eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(RestaurantEvents.restaurantPopGetSuccess, response.body);
+          } else {
+            CreateSnack({
+              title: 'Что-то пошло не так! Не удалось получить блюдо.',
+              status: 'red',
+            });
+          }
         })
         .catch(() => {
           // eventBus.emitEventListener(RestaurantEvents.rest, {}); // TODO: snack
