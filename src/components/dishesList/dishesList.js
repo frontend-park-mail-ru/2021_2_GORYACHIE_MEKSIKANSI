@@ -34,10 +34,9 @@ export class DishesList {
   }) {
     this.parent = parent;
     this.restaurant = restaurant;
-    console.log(this.restaurant.menu);
     const lists = this.restaurant.menu.map((menu) => {
       const objList = menu.dishes.map((item) => {
-        return new DishBlock(item).render();
+        return DishBlock(item);
       });
       return new List({listTitle: menu.name, objList: objList}).render();
     });

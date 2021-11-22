@@ -210,3 +210,60 @@ function getMenuNavsMock() {
   ];
   return menuNavs;
 }
+
+export const ordersHistoryBodyMock = [
+  {
+    name: 'МакДоналдс',
+    historyOrder: true,
+    date: '2 октября 2021, 14:07',
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+    addrs: 'Россия, Москва, ул. Пушкина д. 14к2',
+    items: [
+      {
+        name: 'МакНаггетс',
+        count: 3,
+        cost: 100,
+      },
+      {
+        name: 'МакНаггетс',
+        count: 1,
+        cost: 100,
+      },
+      {
+        name: 'МакНаггетс',
+        count: 1,
+        cost: 100,
+      },
+    ],
+    dCost: 123,
+    status: true,
+    sumCost: 500,
+  },
+  {
+    name: 'КФС',
+    historyOrder: true,
+    date: '2 октября 2021, 14:07',
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+    addrs: 'Россия, Москва, ул. Пушкина д. 14к2',
+    items: [
+      {
+        name: 'МакНаггетс',
+        count: 1,
+        cost: 100,
+      },
+      {
+        name: 'МакНаггетс',
+        count: 1,
+        cost: 100,
+      },
+      {
+        name: 'МакНаггетс',
+        count: 1,
+        cost: 100,
+      },
+    ],
+    dCost: 400,
+    status: false,
+    sumCost: 500,
+  },
+];

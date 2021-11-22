@@ -62,7 +62,6 @@ export class ProfileController {
       const payload = new FormData();
       payload.append('avatar', file);
       ProfileModel.updateUserAvatar(payload);
-      this.profileView.showImage(file);
     }
   }
 

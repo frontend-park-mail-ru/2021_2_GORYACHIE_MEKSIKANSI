@@ -1,10 +1,10 @@
-<div class="content-block">
+<div class="content-block delivery-block-mb">
         <div class="font_h2">Условия доставки</div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Введите адрес" value="{{address}}" required class="input input_border input_radius-border_medium cart-order-delivery__input js-address">
+            <input placeholder="Введите адрес" disabled value="{{address}}" required class="input input_border input_radius-border_medium cart-order-delivery__input js-address">
         </div>
         <div class="cart-order-delivery__input-row">
-            <input placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw">
+            <input placeholder="Подъезд" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw profile-page__input">
             <input placeholder="Домофон" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
             <input placeholder="Этаж" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
             <input placeholder="Квартира" required class="input input_border input_radius-border_medium cart-order-delivery__input cart-order-delivery__input-mw cart-order-delivery__input_margin-left profile-page__input">
@@ -18,69 +18,4 @@
         <div class="font_h2">
             Время доставки составит ~ {{restaurant.minDTime}}-{{restaurant.maxDTime}} мин
         </div>
-</div>
-
-<div class="content-block order cart-order">
-    <div class="order__main-info">
-        <div class="order__main-info-text">
-            <a href="/restaurants/{{ restaurant.id }}/" class="order__restaurant-title order__row-margin">
-                {{restaurant.name}}
-            </a>
-            <div class="order__address order__row-margin">
-                {{restaurant.addrs}}
-            </div>
-        </div>
-        <div class="order__image-wrapper">
-            <img class="order__main-info-img" src="{{restaurant.img}}" alt="rest image">
-        </div>
-    </div>
-    <div class="order__info">
-        {{#each items}}
-            <div class="order__item">
-                <div class="order__item-wrapper">
-                    <div class="order__item-title">
-                        {{ name }}
-                    </div>
-                    {{#each radios}}
-                        <div>
-                            • {{ name }}
-                        </div>
-
-                    {{/each}}
-                    {{#each ingredients}}
-                        <div>
-                            + {{ name }}
-                        </div>
-                    {{/each}}
-                </div>
-
-
-                <div class="order__item-num">
-                    {{ count }} шт
-                </div>
-
-                <div class="order__item-cost">
-                    {{ cost }} ₽
-                </div>
-            </div>
-        {{/each}}
-        <div class="order__item">
-            <div class="order__delivery-title">
-                Доставка
-            </div>
-
-            <div class="order__delivery-cost">
-                {{ dCost }} ₽
-            </div>
-        </div>
-        <div class="order__summary">
-            <div class="order__summary-title">
-                Итого
-            </div>
-
-            <div class="order__summary-cost">
-                {{ sumCost }} ₽
-            </div>
-        </div>
-    </div>
 </div>

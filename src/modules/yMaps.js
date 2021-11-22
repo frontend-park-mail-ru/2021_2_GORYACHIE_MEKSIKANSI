@@ -105,7 +105,6 @@ export class YandexMap {
    */
   getUserPositionAddress(properties) {
     const prop = properties.get('metaDataProperty').GeocoderMetaData.AddressDetails.Country;
-    console.log(prop.AddressLine);
     return prop.AddressLine;
   }
 

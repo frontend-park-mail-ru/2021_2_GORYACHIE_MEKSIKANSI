@@ -10,10 +10,12 @@
 }
 
 .cart-order-summary {
+
     margin-left: var(--orderSummaryMarginLeft);
-    background-color: var(--color-white);
+    background-color: var(--contentBlockBackgroundColor);
+    color: var(--contentBlockColor);
     width: var(--orderSummaryWidth);
-    border-radius: var(--orderSummaryBorderRadius);
+    border-radius: var(--modalRadius);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
 
     &-sticky {

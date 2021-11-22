@@ -2,7 +2,6 @@ import eventBus from 'Modules/eventBus.js';
 import OrderingModel from 'Models/Ordering.js';
 import {OrderingView} from 'Views/profileViews/orderingView/orderingView.js';
 import {urls} from 'Modules/urls.js';
-import store from 'Modules/store.js';
 import {AuthStatus} from 'Events/Auth';
 import cartStore from 'Modules/reducers/cartStore';
 import userStore from 'Modules/reducers/userStore';
@@ -36,24 +35,26 @@ export class OrderingController {
    * Rendering view
    */
   render() {
-    if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-      this.routeTo(urls.home.url);
-      return;
-      // history.back(); // TODO: разобраться с историей при первом заходе
-      // return;
-    }
-
-
     if (!userStore.getState().auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      this.orderingView.render();
+      if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
+        this.routeTo(urls.home.url);
+      } else {
+        this.orderingView.render();
+      }
     }
   }
 
   show = () => {
-    this.orderingView.render();
+    if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
+      this.routeTo(urls.home.url);
+      // history.back(); // TODO: разобраться с историей при первом заходе
+      // return;
+    } else {
+      this.orderingView.render();
+    }
   }
 
   redirect = () => {
