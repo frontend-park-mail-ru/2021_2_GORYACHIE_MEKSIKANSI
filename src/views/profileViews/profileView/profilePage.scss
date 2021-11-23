@@ -35,6 +35,12 @@
     margin-left: 30px;
 }
 
+@media (min-width: 0px) and (max-width: 860px) {
+    .profile-page__button_wrapper {
+        display: none;
+    }
+}
+
 .profile-page__button-color {
     background-color: #F6F6F6;
     margin-right: auto;

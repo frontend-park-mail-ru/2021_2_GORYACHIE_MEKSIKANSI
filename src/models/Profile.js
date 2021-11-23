@@ -12,7 +12,6 @@ import {cloudPrefix} from '../modules/consts';
 import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
 import {OrderingEvents} from '../events/Ordering';
-import {cart} from 'hme-design-system/stories/cart.stories';
 
 /**
  * Class Profile Model

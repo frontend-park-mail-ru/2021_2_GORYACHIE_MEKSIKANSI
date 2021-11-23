@@ -193,10 +193,7 @@
 
 @media (min-width: 0px) and (max-width: 860px)  {
   .cart-wrapper {
-    height: 800px;
-  }
-
-  .cart__orders-body {
     height: 500px;
+    min-width: 0;
   }
 }

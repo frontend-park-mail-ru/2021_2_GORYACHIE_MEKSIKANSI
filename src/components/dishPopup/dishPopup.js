@@ -185,6 +185,6 @@ export class DishPopup {
     // });
 
     const summary = document.body.querySelector('.modal__buy-button');
-    summary.innerHTML = String(cost * this.number) + '₽ Добавить в корзину';
+    summary.innerHTML = 'Добавить ' + String(cost * this.number) + '₽';
   }
 }
