@@ -33,7 +33,7 @@ export class SnackBar {
     this.Options = {
       message: this.userOptions?.message ?? 'Operation performed successfully.',
       dismissible: this.userOptions?.dismissible ?? true,
-      timeout: this.userOptions?.timeout ?? 50000000,
+      timeout: this.userOptions?.timeout ?? 5000,
       status: this.userOptions?.status ? this.userOptions.status.toLowerCase().trim() : '',
       fixed: this.userOptions?.fixed ?? false,
       position: this.userOptions?.position ?? 'br',
