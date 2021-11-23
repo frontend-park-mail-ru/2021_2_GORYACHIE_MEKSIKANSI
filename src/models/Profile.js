@@ -200,11 +200,11 @@ class ProfileModel {
   /**
    * Post request by api to publish review
    * @param {number} restId
-   * @param {number} value
-   * @param {number} rate
+   * @param {string} value
+   * @param {string} rate
    */
   publishReviewPost(restId, value, rate) {
-    postReview({restId, value, rate})
+    postReview({restId: restId, text: value, rate: rate})
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userReviewPublishSuccess, {});

@@ -48,7 +48,8 @@ export class RestaurantReviewsView extends View {
    *
    */
   render(props = {}) {
-    this.restaurant = props.restaurant ? props.restaurant : {};
+
+    this.restaurant = props.restaurants ? props.restaurants : {};
     this.reviews = this.restaurant.reviews ? this.restaurant.reviews : [];
     this.refresh();
   }
@@ -60,7 +61,7 @@ export class RestaurantReviewsView extends View {
     this.remove();
     this.navbar.render();
     const reviews = [Review({
-      rate: this.restaurant.rating,
+      rate: this.restaurant.rate,
       text: 'Общая оценка складывается из общего числа отзывов',
     })];
     if (this.restaurant.reviews) {

@@ -252,7 +252,7 @@ export function orderHistoryGet() {
  * @return {Promise<{body: object, status: number}>}
  */
 export function getRestaurantReviews(restaurantId) {
-  return http.ajaxGet({url: 'restaurants/' + restaurantId + '/reviews/'});
+  return http.ajaxGet({url: '/restaurant/' + restaurantId + '/review'});
 }
 
 /**
@@ -263,18 +263,19 @@ export function getRestaurantReviews(restaurantId) {
  * @return {Object<{status: number, body: Object}>}
  */
 export function postReview({
-  restaurantId,
+  restId,
   text = '',
   rate = '',
 }) {
+  console.log('RESTAURANT ID', restId);
   return http.ajaxPost({
     url: apiPaths.postReview,
     body: {
       restaurant: {
-        id: restaurantId,
+        id: restId,
       },
       text: text,
-      rate: rate,
+      rate: Number(rate),
     },
   });
 }
