@@ -31,7 +31,7 @@
     }
 
     &__input-mw {
-        max-width: 200px;
+        max-width: 110px;
     }
 
     &__input_sq {
@@ -43,6 +43,23 @@
         font-weight: var(--font_medium);
     }
 
+
+    @media (min-width: 0px) and (max-width: 860px) {
+        &__input-row {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+        &__input-mw {
+            max-width: 100%;
+        }
+    }
+
+    &__input {
+        width: 100%;
+    }
 }
 
 .cart-order {
