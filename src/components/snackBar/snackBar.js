@@ -33,7 +33,7 @@ export class SnackBar {
     this.Options = {
       message: this.userOptions?.message ?? 'Operation performed successfully.',
       dismissible: this.userOptions?.dismissible ?? true,
-      timeout: this.userOptions?.timeout ?? 5000,
+      timeout: this.userOptions?.timeout ?? 50000000,
       status: this.userOptions?.status ? this.userOptions.status.toLowerCase().trim() : '',
       fixed: this.userOptions?.fixed ?? false,
       position: this.userOptions?.position ?? 'br',
@@ -330,7 +330,7 @@ export class SnackBar {
     this.Element.style.transition = '';
 
     requestAnimationFrame(() => {
-      this.Element.style.height = snackbarHeight + 'px';
+      // this.Element.style.height = snackbarHeight + 'px';
       this.Element.style.opacity = 1;
       this.Element.style.marginTop = '0px';
       this.Element.style.marginBottom = '0px';
@@ -364,7 +364,6 @@ export function CreateSnack({
     message: title,
     status: status,
     position: 'tr',
-    width: '500px',
     fixed: true,
   });
   snack.settingUp();

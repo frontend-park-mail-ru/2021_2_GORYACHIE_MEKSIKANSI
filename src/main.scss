@@ -108,17 +108,24 @@ input:checked + .slider:before {
     --font_thin: 300;
 
     --fontSizeH1: 32px;
+    --fontSizeH1M: 24px;
     --fontH1-MarginBottom: 20px;
     --fontSizeH2: 24px;
+    --fontSizeH2M: 20px;
     --fontH2-MarginBottom: 16px;
     --fontSizeH3: 20px;
+    --fontSizeH3M: 17px;
     --fontH3-MarginBottom: 12px;
     --fontSizeH4: 17px;
+    --fontSizeH4M: 15px;
     --fontH4-MarginBottom: 12px;
 
     --fontSizeBody: 17px;
+    --fontSizeBodyM: 15px;
     --fontSizeParagraph: 15px;
+    --fontSizeParagraphM: 13px;
     --fontSizeLabel: 13px;
+    --fontSizeLabelM: 11px;
 
 
     // COLORS
