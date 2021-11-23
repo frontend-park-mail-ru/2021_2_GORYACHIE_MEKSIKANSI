@@ -267,7 +267,6 @@ export function postReview({
   text = '',
   rate = '',
 }) {
-  console.log('RESTAURANT ID', restId);
   return http.ajaxPost({
     url: apiPaths.postReview,
     body: {
@@ -308,4 +307,8 @@ export function createOrder(order) {
       comment: order.comment,
     },
   });
+}
+
+export function search(searchText) {
+  return http.ajaxGet({url: apiPaths.search + '?searchText=' + searchText});
 }
