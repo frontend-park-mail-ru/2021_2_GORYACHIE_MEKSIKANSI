@@ -4,6 +4,11 @@
 }
 
 .restaurants-list {
+    &__sort-header {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
     &__line {
         display: flex;
         align-items: flex-start;

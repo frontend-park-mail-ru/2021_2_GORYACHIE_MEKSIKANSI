@@ -100,7 +100,7 @@ export class Navbar {
   settingUp() {
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
-    toggleSwitch.addEventListener('change', switchTheme, false);
+    // toggleSwitch.addEventListener('change', switchTheme, false);
     this.updateCartButtonNumber();
     this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
@@ -187,9 +187,9 @@ export class Navbar {
       if (logoutButton) {
         logoutButton.removeEventListener('click', this.logout);
       }
-      const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+      // const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
-      toggleSwitch.removeEventListener('change', switchTheme, false);
+      // toggleSwitch.removeEventListener('change', switchTheme, false);
 
       document.querySelector('.hamburger-wrapper').remove();
       document.querySelector('.navbar').remove();

@@ -47,3 +47,10 @@
         margin-right: 10px;
     }
 }
+
+@media (min-width: 0px) and (max-width: 860px) {
+    .promo-line-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

@@ -15,12 +15,12 @@
         </div>
 
         <div class="navbar__right-box">
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="checkbox">
-                    <input type="checkbox" id="checkbox" />
-                    <div class="slider round"></div>
-                </label>
-            </div>
+<!--            <div class="theme-switch-wrapper">-->
+<!--                <label class="theme-switch" for="checkbox">-->
+<!--                    <input type="checkbox" id="checkbox" />-->
+<!--                    <div class="slider round"></div>-->
+<!--                </label>-->
+<!--            </div>-->
                 <a href="#popup" class="map-popup__link navbar__right-box-spacer button button_shape_rounded">
                     <svg href="#popup" class="map-popup__link button__icon_left" width="11" height="14" viewBox="0 0 11 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -62,10 +62,10 @@
                 </div>
             </a>
             {{else}}
-                <a href="signup" class="navbar__right-box-spacer navbar__button button_color_green button button_shape_rounded">
+                <a href="signup" class="navbar__right-box-spacer navbar__button button_color_green button button_shape_rounded navbar__hide">
                     Зарегистрироваться
                 </a>
-                    <a href="login" class="navbar__right-box-spacer navbar__button button button_shape_rounded">
+                <a href="login" class="navbar__right-box-spacer navbar__button button button_shape_rounded navbar__hide">
                     Войти
                 </a>
             {{/if}}
@@ -120,8 +120,12 @@
         <a id="logout" class="button hamburger__button button_color_transparent hamburger__gray-button button_hover_disabled">Выйти</a>
         {{else}}
             <a href="login" class="button button_shape_rounded hamburger__button_align-text_center hamburger__button button_color_green">Войти</a>
+            <a href="signup" class="button button_shape_rounded hamburger__button_align-text_center hamburger__button">Зарегистрироваться</a>
         {{/if}}
         <hr class="hamburger__line">
+        {{#unless user.auth}}
+            <a href="/" class="button button_color_transparent hamburger__button">Главная</a>
+        {{/unless}}
         <a href="/">
             <button class="button button_color_transparent hamburger__button">Войти как ресторан</button>
         </a>
