@@ -181,6 +181,20 @@ class ProfileModel {
           eventBus.emitEventListener(ProfileEvents.userReviewPublishSuccess, {});
         });
   }
+
+  profileOrderHistoryGet() {
+    orderHistoryGet()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock)
+          }
+        })
+        .catch(() => {
+          eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+        });
+  }
 }
 
 export default new ProfileModel();
