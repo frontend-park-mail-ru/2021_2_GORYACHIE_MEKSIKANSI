@@ -76,6 +76,7 @@ router.addRoute(urls.restaurant, restaurantController); // TODO: поправи�
 router.addRoute(urls.checkout, orderingController);
 router.addRoute(urls.order, orderProcessController);
 router.addRoute(urls.history, historyOrderController);
+
 document.getElementById('foot').innerHTML = new Footer({
   nav: [
     {
