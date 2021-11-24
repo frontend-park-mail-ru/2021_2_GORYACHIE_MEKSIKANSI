@@ -7,6 +7,15 @@ import userStore from 'Modules/reducers/userStore.js';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
 
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+}
+
 /**
  * switching theme crutch
  * @param {event} e

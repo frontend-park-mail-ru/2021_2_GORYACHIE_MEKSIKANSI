@@ -76,6 +76,7 @@ router.addRoute(urls.checkout.name, orderingController);
 router.addRoute(urls.order.name, orderProcessController);
 router.addRoute(urls.history.name, historyOrderController);
 router.addRoute('restaurantReviews', restaurantReviewsController);
+
 document.getElementById('foot').innerHTML = new Footer({
   nav: [
     {
