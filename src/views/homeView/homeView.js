@@ -42,7 +42,7 @@ export class HomeView extends View {
     this.restaurantsList.render({
       parent: this.parent.querySelector('.home-page__restaurants-list'),
       restaurantsList: props.restaurants,
-      title: 'Рестораны'
+      title: 'Рестораны',
     });
   }
   /**

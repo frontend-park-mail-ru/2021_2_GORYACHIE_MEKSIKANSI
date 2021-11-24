@@ -7,7 +7,7 @@ import {AuthStatus} from 'Events/Auth.js';
 import userStore from 'Modules/reducers/userStore.js';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
-import {SearchEvents} from "../../events/Search";
+import {SearchEvents} from '../../events/Search';
 
 /**
  * switching theme crutch

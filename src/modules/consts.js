@@ -21,7 +21,7 @@ export const apiPaths = {
   getOrdersHistory: '/user/order/',
   getProfile: '/user/',
   getRestaurants: '/',
-  search: '/restaurant/search'
+  search: '/restaurant/search',
 };
 
 export const paymentMethods = {

@@ -11,8 +11,8 @@ import userStore from 'Modules/reducers/userStore.js';
 import {continueModal} from 'hme-design-system/stories/modal.stories';
 import {ContinueModal} from 'hme-design-system/src/components/modal/continueModal/continueModal';
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
-import eventBus from "../../modules/eventBus";
-import {SearchEvents} from "../../events/Search";
+import eventBus from '../../modules/eventBus';
+import {SearchEvents} from '../../events/Search';
 
 
 /**
@@ -95,6 +95,10 @@ export class RestaurantView extends View {
     });
   }
 
+  /**
+   * Emit request event for a search
+   * @param {event} e
+   */
   makeSearchRequestByTag = (e) => {
     eventBus.emitEventListener(SearchEvents.searchRequest, e.target.innerHTML);
   }

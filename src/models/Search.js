@@ -1,7 +1,7 @@
 import eventBus from 'Modules/eventBus.js';
-import {SearchEvents} from "../events/Search";
-import {ordersHistoryBodyMock, restaurantsBodyMock} from "../views/mocks";
-import {search} from "../modules/api";
+import {SearchEvents} from '../events/Search';
+import {ordersHistoryBodyMock, restaurantsBodyMock} from '../views/mocks';
+import {search} from '../modules/api';
 
 /**
  * Class Search Model
@@ -9,6 +9,7 @@ import {search} from "../modules/api";
 class SearchModel {
   /**
    * getting restaurants with the search name
+   * @param {string} searchText
    */
   getRestaurantsSearch(searchText) {
     search(searchText)
@@ -21,16 +22,16 @@ class SearchModel {
           } else {
             eventBus.emitEventListener(SearchEvents.searchSuccess, {
               title: searchText,
-              restaurants: []
+              restaurants: [],
             });
           }
         })
         .catch(() => {
           eventBus.emitEventListener(SearchEvents.searchSuccess, {
             title: searchText,
-            restaurants: []
+            restaurants: [],
           });
-        })
+        });
   }
 }
 

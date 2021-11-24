@@ -1,5 +1,5 @@
 import {RestaurantEvents} from 'Events/Restaurant.js';
-import styles from './cart.scss'
+import styles from './cart.scss';
 import EventBus from 'Modules/eventBus.js';
 import cart from './cart.hbs';
 import cartStore from 'Modules/reducers/cartStore.js';

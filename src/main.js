@@ -13,7 +13,7 @@ import {Footer} from 'hme-design-system/src/components/footer/footer';
 import {HistoryController} from './controllers/historyController';
 import {RestaurantReviewsView} from './views/restaurantReviewsView/restaurantReviewsView';
 import {RestaurantReviewsController} from './controllers/restaurantReviewsController';
-import {SearchController} from "./controllers/searchController";
+import {SearchController} from './controllers/searchController';
 
 
 const application = document.getElementById('app');

@@ -309,6 +309,11 @@ export function createOrder(order) {
   });
 }
 
+/**
+ *
+ * @param {string} searchText
+ * @return {Object<{status: string, body: Object}>}
+ */
 export function search(searchText) {
   return http.ajaxGet({url: apiPaths.search + '?searchText=' + searchText});
 }

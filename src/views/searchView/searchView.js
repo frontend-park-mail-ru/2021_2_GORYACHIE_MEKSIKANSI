@@ -1,7 +1,7 @@
 import {View} from '../baseView/View.js';
 import Navbar from 'Components/navbar/navbar';
 import page from '../baseView/page.hbs';
-import {RestaurantsList} from '../../components/restaurantsList/restaurantLists'
+import {RestaurantsList} from '../../components/restaurantsList/restaurantLists';
 import {PromoLine} from 'Components/promoLine/promoLine.js';
 
 /**
@@ -15,10 +15,10 @@ export class SearchView extends View {
    * @param {Class}controller
    */
   constructor({
-                parent: parent = document.body,
-                routeTo: routeTo = () => {},
-                controller: controller,
-              }) {
+    parent: parent = document.body,
+    routeTo: routeTo = () => {},
+    controller: controller,
+  }) {
     super({
       parent: parent,
       routeTo: routeTo,

@@ -13,7 +13,7 @@ import {StarsRating} from '../../components/starsRating/starsRating';
 import {CreateSnack} from '../../components/snackBar/snackBar';
 import eventBus from '../../modules/eventBus';
 import {ProfileEvents} from '../../events/Profile';
-import {SearchEvents} from "../../events/Search";
+import {SearchEvents} from '../../events/Search';
 
 
 /**
@@ -48,7 +48,6 @@ export class RestaurantReviewsView extends View {
    *
    */
   render(props = {}) {
-
     this.restaurant = props.restaurants ? props.restaurants : {};
     this.reviews = this.restaurant.reviews ? this.restaurant.reviews : [];
     this.refresh();
@@ -114,7 +113,10 @@ export class RestaurantReviewsView extends View {
       item.onclick = this.makeSearchRequestByTag;
     });
   }
-
+  /**
+   * Request for a search
+   * @param {event} e
+   */
   makeSearchRequestByTag = (e) => {
     eventBus.emitEventListener(SearchEvents.searchRequest, e.target.innerHTML);
   }

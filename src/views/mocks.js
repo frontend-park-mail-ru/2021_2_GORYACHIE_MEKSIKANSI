@@ -345,6 +345,6 @@ export const restaurantsBodyMock = {
       minDTime: 15,
       maxDTime: 30,
       rate: 4,
-    }
-  ]
-}
+    },
+  ],
+};
