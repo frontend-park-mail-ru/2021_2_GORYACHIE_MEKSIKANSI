@@ -1,4 +1,6 @@
-window.serverAddress = 'http://127.0.0.1:5000/api/v1';
+import {AccessControlAllowOrigin, ServerAddress} from './consts';
+
+window.serverAddress = ServerAddress;
 
 /**
  * Getting object data with info to fetch
@@ -17,7 +19,7 @@ function getData({
     mode: 'cors',
     credentials: 'include',
     headers: {
-      'Access-Control-Allow-Origin': 'http://127.0.0.1',
+      'Access-Control-Allow-Origin': AccessControlAllowOrigin,
     },
   };
 

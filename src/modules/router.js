@@ -36,7 +36,7 @@ export class Router {
    * @param {string} pageUrl
    */
   open(pageUrl) {
-    Object.entries(urls).forEach(([name, {url, regUrl}]) => {
+    Object.entries(urls).every(([name, {url, regUrl}]) => {
       if (pageUrl === '/') {
         pageUrl = 'home';
       }
@@ -53,10 +53,12 @@ export class Router {
             this.routes.get(name).render();
           }
           this.currControllerName = name;
+          return false;
         } else {
           this.open(urls.home.url);
         }
       }
+      return true;
     });
   }
 
@@ -87,7 +89,9 @@ export class Router {
       event.preventDefault();
       const href = closest.getAttribute('href');
 
-      if (href) {
+      if (href === 'reviews') {
+        this.open(window.location.pathname + href);
+      } else if (href) {
         this.open(href);
       }
     }

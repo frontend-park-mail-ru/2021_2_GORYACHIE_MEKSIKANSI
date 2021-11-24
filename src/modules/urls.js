@@ -24,6 +24,11 @@ export const urls = {
     regUrl: null,
     name: 'checkout',
   },
+  restaurantReviews: {
+    url: null,
+    regUrl: /\/restaurants\/(\d+)\/reviews/,
+    name: null,
+  },
   restaurant: {
     url: null,
     regUrl: /\/restaurants\/(\d+)/,
@@ -38,5 +43,5 @@ export const urls = {
     url: '/history',
     regUrl: null,
     name: 'history',
-  }
+  },
 };

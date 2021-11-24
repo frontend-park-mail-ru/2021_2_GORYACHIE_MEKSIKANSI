@@ -10,7 +10,9 @@ import {urls} from 'Modules/urls.js';
 import './main.scss';
 import {OrderProcessController} from './controllers/orderProcessController';
 import {Footer} from 'hme-design-system/src/components/footer/footer';
-import {HistoryController} from "./controllers/historyController";
+import {HistoryController} from './controllers/historyController';
+import {RestaurantReviewsView} from './views/restaurantReviewsView/restaurantReviewsView';
+import {RestaurantReviewsController} from './controllers/restaurantReviewsController';
 
 
 const application = document.getElementById('app');
@@ -60,6 +62,9 @@ const orderProcessController = new OrderProcessController({
 const historyOrderController = new HistoryController({
   parent: application,
   routeTo: routeTo});
+const restaurantReviewsController = new RestaurantReviewsController({
+  parent: application,
+  routeTo: routeTo});
 
 
 router.addRoute(urls.login.name, loginController);
@@ -70,6 +75,8 @@ router.addRoute('restaurant', restaurantController); // TODO: поправить
 router.addRoute(urls.checkout.name, orderingController);
 router.addRoute(urls.order.name, orderProcessController);
 router.addRoute(urls.history.name, historyOrderController);
+router.addRoute('restaurantReviews', restaurantReviewsController);
+
 document.getElementById('foot').innerHTML = new Footer({
   nav: [
     {

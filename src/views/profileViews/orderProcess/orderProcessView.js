@@ -6,7 +6,7 @@ import orderProcess from 'Components/orderProcess/orderProcess.hbs';
 import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import cartStore from '../../../modules/reducers/cartStore';
 import userStore from '../../../modules/reducers/userStore';
-import {Order} from "hme-design-system/src/components/contentBlock/order/order";
+import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 
 
 /**

@@ -349,3 +349,24 @@ export class SnackBar {
     this.Element.removeEventListener('transitioned', this.setStyleFunc);
   };
 }
+
+/**
+ * public function for easy creating snack bars
+ * @param {String} title
+ * @param {String} status
+ * @constructor
+ */
+export function CreateSnack({
+  title = '',
+  status = '', // red, orange, green
+}) {
+  const snack = new SnackBar({
+    message: title,
+    status: status,
+    position: 'tr',
+    width: '500px',
+    fixed: true,
+  });
+  snack.settingUp();
+  snack.Open();
+}

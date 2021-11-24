@@ -9,7 +9,8 @@ import {Validation} from 'Modules/validation.js';
 import ProfileModel from 'Models/Profile.js';
 import {urls} from 'Modules/urls';
 import userStore from 'Modules/reducers/userStore';
-import {SnackBar} from '../components/snackBar/snackBar';
+import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
+import {fileMaxSize} from '../modules/consts';
 
 /**
  *  Profile controller class
@@ -36,10 +37,16 @@ export class ProfileController {
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, () => {
       this.remove();
       this.render();
-      this.profileView.showInfo('Профиль успешно обновлен!');
+      CreateSnack({
+        title: 'Профиль успешно обновлен!',
+        status: 'green',
+      });
     });
     eventBus.addEventListener(ProfileEvents.userDataUpdateFailed, (errorText) => {
-      this.profileView.showError(errorText);
+      CreateSnack({
+        title: errorText,
+        status: 'red',
+      });
     });
   }
 
@@ -48,16 +55,11 @@ export class ProfileController {
    * @param {formdata} file
    */
   checkImage(file) {
-    if (file.size > 7000000) {
-      const snack = new SnackBar({
-        message: 'Картинка слишком большого размера! Допустимый размер 7мб',
+    if (file.size > fileMaxSize) {
+      CreateSnack({
+        title: 'Картинка слишком большого размера! Допустимый размер 7 мб',
         status: 'red',
-        position: 'tr',
-        width: '500px',
-        fixed: true,
       });
-      snack.settingUp();
-      snack.Open();
     } else {
       const payload = new FormData();
       payload.append('avatar', file);
@@ -163,7 +165,6 @@ export class ProfileController {
     }
 
     this.profileView.showErrors(incorrectData);
-    this.profileView.showInfo('');
     this.profileView.showError('');
     if (Object.keys(incorrectData).length !== 0) {
       return;

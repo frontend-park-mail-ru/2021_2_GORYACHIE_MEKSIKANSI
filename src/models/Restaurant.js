@@ -1,4 +1,4 @@
-import {ResponseEvents} from 'Events/Responses.js';
+import {ResponseEvents} from '../events/Responses';
 import eventBus from 'Modules/eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import cartStore, {
@@ -8,6 +8,9 @@ import cartStore, {
   increaseDishInCart,
 } from 'Modules/reducers/cartStore';
 import {dishGet, restaurantGet} from 'Modules/api';
+import {reviewsBodyMock} from '../views/mocks';
+import {getRestaurantReviews} from '../modules/api';
+import {CreateSnack} from '../components/snackBar/snackBar';
 
 /**
  * Restaurant model class
@@ -40,6 +43,26 @@ class RestaurantModel {
         })
         .catch(() => {
           // eventBus.emitEventListener(RestaurantEvents.rest, {}); // TODO: snack
+        });
+  }
+
+  /**
+   * Get reviews for the restaurant by api
+   * @param {number} restId
+   */
+  getReviews(restId) {
+    getRestaurantReviews(restId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, response.body);
+          }
+        })
+        .catch(() => {
+          CreateSnack({
+            title: 'Не удалось получить отзывы',
+            status: 'red',
+          });
+          eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, {});
         });
   }
 

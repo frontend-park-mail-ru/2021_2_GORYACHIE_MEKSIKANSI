@@ -5,9 +5,10 @@ import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from 'Modules/reducers/userStore.js';
-import {orderHistoryGet, updateAvatar} from '../modules/api';
-import {SnackBar} from '../components/snackBar/snackBar';
-import {ordersHistoryBodyMock} from "../views/mocks";
+import {orderHistoryGet, postReview, updateAvatar} from '../modules/api';
+import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
+import {ordersHistoryBodyMock} from '../views/mocks';
+import {cloudPrefix} from '../modules/consts';
 
 /**
  * Class Profile Model
@@ -110,33 +111,69 @@ class ProfileModel {
   updateUserAvatar(avatar) {
     updateAvatar(avatar)
         .then((response) => {
-          const snack = new SnackBar({
-            message: 'Картинка обновлена!',
-            status: 'warn',
-            position: 'tr',
-            width: '500px',
-            fixed: true,
-          });
-          snack.settingUp();
-          snack.Open();
-          userStore.dispatch({
-            actionType: userActions.storeUserDataUpdate,
-            updated: {
-              avatar: 'https://hmeats-spaces.fra1.cdn.digitaloceanspaces.com' + response.body.img,
-            },
-          });
-          eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          if (response.status === ResponseEvents.OK) {
+            CreateSnack({
+              title: 'Картинка обновлена!',
+              status: 'green',
+            });
+            userStore.dispatch({
+              actionType: userActions.storeUserDataUpdate,
+              updated: {
+                avatar: cloudPrefix + response.body.img,
+              },
+            });
+            eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          }
         })
         .catch(() => {
-          const snack = new SnackBar({
-            message: 'Произошла какая то ошибка!',
+          CreateSnack({
+            title: 'Произошла какая-то ошибка!',
             status: 'red',
-            position: 'tr',
-            width: '500px',
-            fixed: true,
           });
-          snack.settingUp();
-          snack.Open();
+        });
+  }
+
+  /**
+   * get history order for user
+   * emit events for orders get success of failed
+   */
+  profileOrderHistoryGet() {
+    orderHistoryGet()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+          }
+        })
+        .catch(() => {
+          eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+        });
+  }
+
+  /**
+   * Post request by api to publish review
+   * @param {number} restId
+   * @param {number} value
+   * @param {number} rate
+   */
+  publishReviewPost(restId, value, rate) {
+    postReview({restId, value, rate})
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userReviewPublishSuccess, {});
+            CreateSnack({
+              title: 'Отзыв успешно опубликован',
+              status: 'green',
+            });
+          }
+        })
+        .catch(() => {
+          CreateSnack({
+            title: 'Не удалось опубликовать отзыв',
+            status: 'red',
+          });
+          eventBus.emitEventListener(ProfileEvents.userReviewPublishSuccess, {});
         });
   }
 

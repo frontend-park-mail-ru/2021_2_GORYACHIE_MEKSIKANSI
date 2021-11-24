@@ -17,6 +17,18 @@ function switchTheme(e) {
 }
 
 /**
+ * switching theme crutch
+ * @param {event} e
+ */
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+}
+
+/**
  * Left navigation bar class
  */
 export class Navbar {

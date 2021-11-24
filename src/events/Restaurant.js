@@ -4,4 +4,6 @@ export const RestaurantEvents = {
   restaurantPopGetSuccess: 'restaurantPopGetSuccess',
   restaurantCartUpdateSuccess: 'restaurantCartUpdate',
   restaurantCartUpdateFailed: 'restaurantCartUpdateFailed',
+  restaurantReviewsGetSuccess: 'restaurantReviewsGetSuccess',
+  restaurantReviewsGetFailed: 'restaurantReviewsGetFailed',
 };

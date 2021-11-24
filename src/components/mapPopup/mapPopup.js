@@ -118,7 +118,7 @@ export class MapPopup {
     const close = this.parent.querySelector('.map-popup');
     if (close) {
       close.querySelector('#js__add-new-address__btn')
-        .removeEventListener('click', this.addAddress);
+          .removeEventListener('click', this.addAddress);
     }
     if (this.parent.querySelector('.map-popup-div')) {
       this.parent.removeChild(this.parent.querySelector('.map-popup-div'));
@@ -203,7 +203,6 @@ export class MapPopup {
               });
               this.mapPopupClose(document.querySelector('.map-popup'));
               navbar.updateAddressName(address);
-              console.log(this.parent.querySelector('.js-address'));
               if (this.parent.querySelector('.js-address')) {
                 this.parent.querySelector('.js-address').value = String(isCorrect.properties._data.text);
               }

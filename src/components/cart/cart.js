@@ -4,6 +4,7 @@ import cart from './cart.hbs';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {SnackBar} from 'Components/snackBar/snackBar.js';
 import {ResponseEvents} from 'Events/Responses.js';
+import {CreateSnack} from '../snackBar/snackBar';
 
 
 /**
@@ -156,27 +157,17 @@ export class Cart {
  failedToIncrease = (response) => {
    let snack;
    if (response.status === ResponseEvents.CookiesNotFound) {
-     snack = new SnackBar({
-       message: 'Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!',
-       status: 'warn',
-       position: 'tr',
-       width: '500px',
-       fixed: true,
+     CreateSnack({
+       title: 'Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!',
+       status: 'warning',
      });
-     snack.settingUp();
-     snack.Open();
    } else {
      if ('dishesErrs' in response.body.cart) {
        response.body.cart.dishesErrs.forEach((item) => {
-         snack = new SnackBar({
-           message: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
+         CreateSnack({
+           title: 'Товар ' + item.nameDish.toLowerCase() + ' доступен только в количестве ' + String(item.countAvail) + ' штук',
            status: 'warning',
-           position: 'tr',
-           width: '500px',
-           fixed: true,
          });
-         snack.settingUp();
-         snack.Open();
        });
      }
    }
