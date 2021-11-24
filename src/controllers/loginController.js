@@ -69,7 +69,7 @@ export class LoginController {
    */
   render() {
     if (userStore.getState().auth) {
-      this.routeTo(urls.home.url);
+      this.routeTo(urls.home);
     } else {
       eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
       this.loginView.render();
@@ -77,7 +77,7 @@ export class LoginController {
   }
 
   redirect = () => {
-    this.routeTo(urls.home.url);
+    this.routeTo(urls.home);
   }
 
 

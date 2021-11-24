@@ -7,6 +7,7 @@ import userStore from './reducers/userStore';
 import cartStore, {clearCart} from './reducers/cartStore';
 import {cartActions, updateStorage, setCart} from './reducers/cartStore';
 import {cartGet, updateCartPut} from './api.js';
+import Profile from '../models/Profile';
 
 /**
  * emitting events for user auth
@@ -21,18 +22,7 @@ export function auth(response) {
       ...response.body.user,
     });
 
-    cartGet()
-        .then((cartResponse) => {
-          if (cartResponse.status === ResponseEvents.OK) {
-            setCart(cartResponse.body.cart);
-          }
-        })
-        .then((cartResponse) => {
-          eventBus.emitEventListener(AuthStatus.userLogin, {});
-        })
-        .catch(() => {
-          // TODO: user login but without cart
-        });
+    Profile.getCart();
   } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
@@ -56,5 +46,5 @@ export function logout() {
       cart: [],
     },
   });
-  eventBus.emitEventListener(AuthStatus.userLogout, urls.home.url);
+  eventBus.emitEventListener(AuthStatus.userLogout, urls.home);
 }

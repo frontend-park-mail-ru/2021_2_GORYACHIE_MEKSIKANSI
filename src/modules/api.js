@@ -278,3 +278,33 @@ export function postReview({
     },
   });
 }
+
+/**
+ * order: {
+ *   address: {
+ *     coordinates: {
+ *       latitude,
+ *       longitude,
+ *     },
+ *     city,
+ *     street,
+ *     house,
+ *   },
+ *   comment,
+ * }
+ *
+ * Make request to the server to create an order
+ *
+ * @param {Object} order
+ * @return {Object<{status: number, body: Object}>}
+ */
+export function createOrder(order) {
+  return http.ajaxPost({
+    url: apiPaths.postOrder,
+    body: {
+      methodPay: order.methodPay,
+      address: order.address,
+      comment: order.comment,
+    },
+  });
+}

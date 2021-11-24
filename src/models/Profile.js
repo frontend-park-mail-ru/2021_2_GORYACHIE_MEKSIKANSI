@@ -4,17 +4,52 @@ import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from '
 import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
-import userStore from 'Modules/reducers/userStore.js';
-import {orderHistoryGet, postReview, updateAvatar} from '../modules/api';
-import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
+import userStore from '../modules/reducers/userStore';
+import {cartGet, createOrder, orderHistoryGet, postPay, postReview, updateAvatar} from '../modules/api';
+import {CreateSnack} from '../components/snackBar/snackBar';
 import {ordersHistoryBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
+import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
+import {AuthStatus} from '../events/Auth';
+import {OrderingEvents} from '../events/Ordering';
+import {cart} from 'hme-design-system/stories/cart.stories';
 
 /**
  * Class Profile Model
  */
 class ProfileModel {
-/**
+  /**
+   * Use api to get cart
+   */
+  getCart() {
+    cartGet()
+        .then((cartResponse) => {
+          if (cartResponse.status === ResponseEvents.OK) {
+            setCart(cartResponse.body.cart);
+          } else if (cartResponse.status === ResponseEvents.NotFound) {
+            cartStore.dispatch({
+              actionType: cartActions.update,
+              state: {
+                restaurant: {
+                  id: -1,
+                  name: '',
+                },
+                cart: [],
+              },
+            },
+            );
+          }
+        })
+        .then(() => {
+          if (userStore.getState().auth) {
+            eventBus.emitEventListener(AuthStatus.userLogin, {});
+          }
+        })
+        .catch(() => {
+        // TODO: user login but without cart
+        });
+  }
+  /**
  * Updating user name method
  * @param {string} name
  */
@@ -123,6 +158,11 @@ class ProfileModel {
               },
             });
             eventBus.emitEventListener(ProfileEvents.userDataUpdateSuccess, {});
+          } else {
+            CreateSnack({
+              title: 'Произошла какая-то ошибка!',
+              status: 'red',
+            });
           }
         })
         .catch(() => {
@@ -141,14 +181,21 @@ class ProfileModel {
     orderHistoryGet()
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, response.body);
           } else {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+            CreateSnack({
+              title: 'Не получилось получить историю заказов.',
+              status: 'red',
+            });
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, response.body);
           }
-        })
-        .catch(() => {
-          eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
         });
+    // .catch(() => {
+    //   CreateSnack({
+    //     title: 'Не получилось получить историю заказов.',
+    //     status: 'red',
+    //   });
+    // });
   }
 
   /**
@@ -177,17 +224,101 @@ class ProfileModel {
         });
   }
 
-  profileOrderHistoryGet() {
-    orderHistoryGet()
+  /**
+   * Function of creating order
+   * creating order by request on server
+   * and emit signals of success or not
+   * @param {string} methodPay
+   * @param {string} comment
+   * @param {string} flat
+   * @param {string} porch
+   * @param {string} floor
+   * @param {string} intercom
+   */
+  createOrder({
+    methodPay,
+    comment,
+    flat,
+    porch,
+    floor,
+    intercom,
+  }) {
+    const order = {
+      methodPay: methodPay,
+      comment: comment,
+      address: {
+        coordinates: {
+          latitude: userStore.getState().address.latitude,
+          longitude: userStore.getState().address.longitude,
+        },
+        city: userStore.getState().city,
+        street: userStore.getState().street,
+        flat: flat,
+        porch: porch,
+        floor: floor,
+        intercom: intercom,
+      },
+    };
+    createOrder(order)
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+            this.getCart();
+            eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
           } else {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock)
+          // Something went wrong
+          }
+          return response;
+        })
+        .catch(() => {
+          CreateSnack({
+            title: 'Не получилось создать заказ :(',
+            status: 'red',
+          });
+          eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
+        });
+  }
+
+  /**
+   * Outer function,
+   * Request server with the pay and create order if pay is success
+   * @param {string} methodPay
+   * @param {string} comment
+   * @param {string} flat
+   * @param {string} porch
+   * @param {string} floor
+   * @param {string} intercom
+   */
+  createOrderWithPay({
+    methodPay,
+    comment,
+    flat,
+    porch,
+    floor,
+    intercom,
+  }) {
+    postPay()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            this.createOrder({
+              methodPay,
+              comment,
+              flat,
+              porch,
+              floor,
+              intercom,
+            });
+          } else {
+            CreateSnack({
+              title: 'Ошибка оплаты!',
+              status: 'red',
+            });
           }
         })
         .catch(() => {
-          eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, ordersHistoryBodyMock);
+          CreateSnack({
+            title: 'Сервер не отвечает!',
+            status: 'red',
+          });
         });
   }
 }

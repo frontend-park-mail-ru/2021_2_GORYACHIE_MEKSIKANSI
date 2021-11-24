@@ -38,8 +38,19 @@ export class HistoryView extends BaseProfileView {
   render(props = {}) {
     super.render();
     const orders = [];
-    props.forEach((item) => {
-      orders.push(Order(item));
+    props.orders.forEach((item) => {
+      orders.push(Order({
+        historyOrder: true,
+        date: item.date,
+        addrs: item.restaurant.address.city + ', ' + item.restaurant.address.street + ', ' + item.restaurant.address.house,
+        status: true,
+        id: item.restaurant.id,
+        img: item.restaurant.img,
+        name: item.restaurant.name,
+        items: item.cart.dishes,
+        dCost: item.cart.cost.dCost,
+        sumCost: item.cart.cost.sumCost,
+      }));
     });
     this.navbar.render();
     this.parent.innerHTML += baseProfilePage({

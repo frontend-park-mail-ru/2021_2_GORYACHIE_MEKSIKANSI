@@ -67,15 +67,15 @@ const restaurantReviewsController = new RestaurantReviewsController({
   routeTo: routeTo});
 
 
-router.addRoute(urls.login.name, loginController);
-router.addRoute(urls.profile.name, profileController);
-router.addRoute(urls.home.name, homeController);
-router.addRoute(urls.signup.name, signUpController);
-router.addRoute('restaurant', restaurantController); // TODO: поправить инкастыляцию с именем
-router.addRoute(urls.checkout.name, orderingController);
-router.addRoute(urls.order.name, orderProcessController);
-router.addRoute(urls.history.name, historyOrderController);
-router.addRoute('restaurantReviews', restaurantReviewsController);
+router.addRoute(urls.login, loginController);
+router.addRoute(urls.profile, profileController);
+router.addRoute(urls.home, homeController);
+router.addRoute(urls.signup, signUpController);
+router.addRoute(urls.restaurantReviews, restaurantReviewsController);
+router.addRoute(urls.restaurant, restaurantController); // TODO: поправить инкастыляцию с именем
+router.addRoute(urls.checkout, orderingController);
+router.addRoute(urls.order, orderProcessController);
+router.addRoute(urls.history, historyOrderController);
 
 document.getElementById('foot').innerHTML = new Footer({
   nav: [
