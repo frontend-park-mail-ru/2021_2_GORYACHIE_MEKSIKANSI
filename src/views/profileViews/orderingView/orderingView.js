@@ -106,7 +106,7 @@ export class OrderingView extends BaseProfileView {
       this.confirmDiv.querySelector('.modal-close-button').addEventListener('click', this.removeConfirm);
       this.confirmDiv.querySelector('.card__pay-button').addEventListener('click', this.controller.makePay);
     } else {
-      this.routeTo(urls.order.url);
+      this.routeTo(urls.order);
     }
   }
 

@@ -38,7 +38,7 @@ export class SignUpController {
    */
   render() {
     if (userStore.getState().auth) {
-      this.routeTo(urls.home.url);
+      this.routeTo(urls.home);
     } else {
       eventBus.addEventListener(AuthStatus.userLogin, this.redirect);
       this.signUpView.render();
@@ -46,7 +46,7 @@ export class SignUpController {
   }
 
   redirect = () => {
-    this.routeTo(urls.home.url);
+    this.routeTo(urls.home);
   }
 
   /**

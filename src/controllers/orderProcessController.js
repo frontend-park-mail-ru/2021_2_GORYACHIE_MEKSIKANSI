@@ -43,7 +43,7 @@ export class OrderProcessController {
   }
 
   redirect = () => {
-    this.routeTo(urls.home.url);
+    this.routeTo(urls.home);
   }
 
   /**

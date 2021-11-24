@@ -205,7 +205,7 @@ export class ProfileController {
    * Rendirectiong to other page
    */
   redirect = () => {
-    this.routeTo(urls.home.url);
+    this.routeTo(urls.home);
   }
 
   /**
