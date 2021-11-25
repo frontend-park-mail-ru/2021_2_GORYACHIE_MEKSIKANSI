@@ -5,9 +5,9 @@ import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from '../modules/reducers/userStore';
-import {cartGet, createOrder, orderHistoryGet, postPay, postReview, updateAvatar} from '../modules/api';
+import {cartGet, createOrder, getOrderInfo, orderHistoryGet, postPay, postReview, updateAvatar} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
-import {ordersHistoryBodyMock} from '../views/mocks';
+import {orderBodyMock, ordersHistoryBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
 import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
@@ -318,6 +318,26 @@ class ProfileModel {
             title: 'Сервер не отвечает!',
             status: 'red',
           });
+        });
+  }
+
+  /**
+   * Method for calling api and get information about order with status
+   * @param {number | string} orderId
+   */
+  getOrder(orderId) {
+    getOrderInfo(orderId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, response.body);
+          } else if (response.status === ResponseEvents.Forbidden) {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, {});
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, {});
+          }
+        })
+        .catch(() => {
+          eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
         });
   }
 }

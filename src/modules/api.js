@@ -310,10 +310,20 @@ export function createOrder(order) {
 }
 
 /**
- *
+ * Function calling backend to do search
  * @param {string} searchText
  * @return {Object<{status: string, body: Object}>}
  */
 export function search(searchText) {
   return http.ajaxGet({url: apiPaths.search + '?searchText=' + searchText});
+}
+
+/**
+ * Function for calling backend to get info
+ * about order with status of order
+ * @param {number | string} orderId
+ * @return {Object<{status: string, body: Object}>}
+ */
+export function getOrderInfo(orderId) {
+  return http.ajaxGet({url: apiPaths.getOrder + orderId});
 }

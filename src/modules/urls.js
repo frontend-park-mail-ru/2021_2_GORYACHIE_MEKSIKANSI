@@ -6,7 +6,7 @@ export const urls = {
   checkout: '/checkout',
   restaurantReviews: /\/restaurants\/(\d+)\/reviews/,
   restaurant: /\/restaurants\/(\d+)/,
-  order: '/order',
+  order: /\/order\/(\d+)/,
   history: '/history',
   search: '/search',
 };

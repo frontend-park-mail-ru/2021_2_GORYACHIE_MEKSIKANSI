@@ -7,10 +7,11 @@ import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hb
 import cartStore from '../../../modules/reducers/cartStore';
 import userStore from '../../../modules/reducers/userStore';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
+import {updateStatusTimeout} from '../../../modules/consts';
 
 
 /**
- * Profile view class
+ * Order view class
  */
 export class OrderProcessView extends BaseProfileView {
   /**
@@ -41,23 +42,51 @@ export class OrderProcessView extends BaseProfileView {
     this.navbar.render();
     const order = {
       historyOrder: false,
-      ...cartStore.getState().restaurant,
-      items: cartStore.getState().cart,
-      dCost: cartStore.getState().cost.dCost,
-      sumCost: cartStore.getState().cost.sumCost,
+      ...props.restaurant,
+      items: props.items,
+      dCost: props.cost.dCost,
+      sumCost: props.cost.sumCost,
     };
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Активный заказ',
       content: orderProcess({
-        restaurant: cartStore.getState().restaurant,
-        items: cartStore.getState().cart,
-        sumCost: cartStore.getState().cost.sumCost,
-        dCost: cartStore.getState().cost.dCost,
+        restaurant: props.restaurant,
+        date: props.date,
+        id: props.id,
+        sumCost: props.cost.sumCost,
+        dCost: props.cost.dCost,
         dTime: '20:50',
         order: Order(order),
       }),
       rightMenu: profileButtonsNav});
+    this.updateStatus(props.status);
+    this.orderId = props.id;
+    this.updateRetry = window.setTimeout(this.callControllerToUpdate, updateStatusTimeout);
   }
+
+  callControllerToUpdate = () => {
+    this.controller.callModelToGetOrder(this.orderId);
+    this.updateRetry = window.setTimeout(this.callControllerToUpdate, updateStatusTimeout);
+  }
+
+  /**
+   * Method for visual updating of status
+   * @param {number} status
+   */
+  updateStatus = (status) => {
+    const statuses = this.parent.querySelectorAll('.status');
+    statuses.forEach((item) => {
+      item.classList.remove('order-process__do', 'order-process__wait', 'order-process__done');
+      if (item.id < status) {
+        item.classList.add('order-process__done');
+      } else if (item.id > status) {
+        item.classList.add('order-process__wait');
+      } else {
+        item.classList.add('order-process__do');
+      }
+    });
+  }
+
   /**
    * Method for setting up before rendering elements
    */
@@ -68,6 +97,7 @@ export class OrderProcessView extends BaseProfileView {
    * Method for removing setted up listeners and other data
    */
   remove() {
+    window.clearTimeout(this.updateRetry);
     super.remove();
     this.navbar.remove();
     this.parent.innerHTML = '';

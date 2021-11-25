@@ -3,6 +3,8 @@ import userStore from '../modules/reducers/userStore';
 import eventBus from '../modules/eventBus';
 import {AuthStatus} from '../events/Auth';
 import {urls} from '../modules/urls';
+import ProfileModel from '../models/Profile';
+import {ProfileEvents} from '../events/Profile';
 
 /**
  * Standard calss to ordering process controller
@@ -24,22 +26,37 @@ export class OrderProcessController {
       routeTo: this.routeTo,
       controller: this,
     });
+    eventBus.addEventListener(ProfileEvents.userOrderGetSuccess, this.orderProcessView.render.bind(this.orderProcessView));
   }
 
   /**
    * Rendering view
+   * @param {number | string} orderId
    */
-  render() {
+  render(orderId) {
     if (!userStore.getState().auth) {
-      eventBus.addEventListener(AuthStatus.userLogin, this.show);
+      this.stashOrderId = orderId;
+      eventBus.addEventListener(AuthStatus.userLogin, this.show.bind(orderId));
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      this.orderProcessView.render();
+      ProfileModel.getOrder(orderId);
     }
   }
 
   show = () => {
-    this.orderProcessView.render();
+    if (this.stashOrderId) {
+      ProfileModel.getOrder(this.stashOrderId);
+    } else {
+      this.routeTo(urls.home);
+    }
+  }
+
+  /**
+   * Function for rerendering status page with new data
+   * @param {string | number} orderId
+   */
+  callModelToGetOrder(orderId) {
+    this.routeTo('/order/' + orderId);
   }
 
   redirect = () => {

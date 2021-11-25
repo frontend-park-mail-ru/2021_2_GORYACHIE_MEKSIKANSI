@@ -7,4 +7,6 @@ export const ProfileEvents = {
   userOrderHistoryGetFailed: 'userOrderHistoryGetFailed',
   userReviewPublishSuccess: 'userReviewPublishSuccess',
   userOrderCreatedSuccess: 'userOrderCreatedSuccess',
+  userOrderGetSuccess: 'userOrderGetSuccess',
+  userOrderGetFailed: 'userOrderGetFailed',
 };
