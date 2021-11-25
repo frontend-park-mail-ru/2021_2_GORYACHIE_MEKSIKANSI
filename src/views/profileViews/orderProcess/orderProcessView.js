@@ -61,12 +61,11 @@ export class OrderProcessView extends BaseProfileView {
       rightMenu: profileButtonsNav});
     this.updateStatus(props.status);
     this.orderId = props.id;
-    this.updateRetry = window.setTimeout(this.callControllerToUpdate, updateStatusTimeout);
+    this.updateRetry = setInterval(this.callControllerToUpdate, updateStatusTimeout);
   }
 
   callControllerToUpdate = () => {
     this.controller.callModelToGetOrder(this.orderId);
-    this.updateRetry = window.setTimeout(this.callControllerToUpdate, updateStatusTimeout);
   }
 
   /**
@@ -97,7 +96,7 @@ export class OrderProcessView extends BaseProfileView {
    * Method for removing setted up listeners and other data
    */
   remove() {
-    window.clearTimeout(this.updateRetry);
+    clearInterval(this.updateRetry);
     super.remove();
     this.navbar.remove();
     this.parent.innerHTML = '';
