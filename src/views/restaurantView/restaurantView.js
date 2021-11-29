@@ -13,7 +13,7 @@ import {ContinueModal} from 'hme-design-system/src/components/modal/continueModa
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
 import eventBus from '../../modules/eventBus';
 import {SearchEvents} from '../../events/Search';
-import {ProfileEvents} from "../../events/Profile";
+import {ProfileEvents} from '../../events/Profile';
 
 
 /**
@@ -152,6 +152,10 @@ export class RestaurantView extends View {
     this.closeContinueOrdering();
   }
 
+  /**
+   * Refresh restaurant header
+   * @param {boolean} favourite
+   */
   refreshHeader = (favourite) => {
     this.restaurant = {
       ...this.restaurant,

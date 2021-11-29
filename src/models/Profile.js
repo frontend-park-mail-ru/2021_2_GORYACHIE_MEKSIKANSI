@@ -7,21 +7,21 @@ import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from '../modules/reducers/userStore';
 import {
   cartGet,
-  createOrder,
+  createOrder, getFavouritesRestaurants,
   getOrderInfo,
   orderHistoryGet,
   postPay,
   postReview,
   putSwitchFavourite,
-  updateAvatar
+  updateAvatar,
 } from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
-import {orderBodyMock, ordersHistoryBodyMock} from '../views/mocks';
+import {orderBodyMock, ordersHistoryBodyMock, restaurantsBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
 import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
 import {OrderingEvents} from '../events/Ordering';
-import RestaurantModel from './Restaurant'
+import RestaurantModel from './Restaurant';
 
 /**
  * Class Profile Model
@@ -347,6 +347,10 @@ class ProfileModel {
         });
   }
 
+  /**
+   * Use api to switch restaurant favourite for user
+   * @param {number} restId
+   */
   switchFavourite(restId) {
     putSwitchFavourite(restId)
         .then((response) => {
@@ -355,6 +359,21 @@ class ProfileModel {
           }
         })
         .catch(() => {
+        });
+  }
+
+  /**
+   * Use api to get favourite restaurants for user
+   */
+  getFavourite() {
+    getFavouritesRestaurants()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userFavouriteRestaurantsGetSuccess, response.body);
+          }
+        })
+        .catch(() => {
+          eventBus.emitEventListener(ProfileEvents.userFavouriteRestaurantsGetSuccess, restaurantsBodyMock);
         });
   }
 }

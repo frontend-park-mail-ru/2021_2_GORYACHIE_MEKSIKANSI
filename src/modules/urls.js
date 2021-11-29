@@ -9,4 +9,5 @@ export const urls = {
   order: /\/order\/(\d+)/,
   history: '/history',
   search: '/search',
+  favourite: '/favourite',
 };

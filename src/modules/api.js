@@ -337,3 +337,12 @@ export function getOrderInfo(orderId) {
 export function putSwitchFavourite(restId) {
   return http.ajaxPut({url: apiPaths.favourite, body: {restaurant: {id: restId}}});
 }
+
+/**
+ * Function for calling backend to get favourite
+ * restaurants for user
+ * @return {Object<{status: string, body: Object}>}
+ */
+export function getFavouritesRestaurants() {
+  return http.ajaxGet({url: apiPaths.favourite});
+}

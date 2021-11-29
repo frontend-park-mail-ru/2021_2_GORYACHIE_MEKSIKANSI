@@ -88,6 +88,11 @@ export class RestaurantController { // TODO: добавить джсдок
     }
   }
 
+  /**
+   * Call model to switch favourite restaurant
+   * by restId
+   * @param {number} restId
+   */
   switchFavourite(restId) {
     ProfileModel.switchFavourite(restId);
   }

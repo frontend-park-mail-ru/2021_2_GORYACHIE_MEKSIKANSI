@@ -123,6 +123,10 @@ export class RestaurantReviewsView extends View {
     eventBus.addEventListener(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
   }
 
+  /**
+   * Refresh header
+   * @param {boolean} favourite
+   */
   refreshHeader = (favourite) => {
     this.restaurant = {
       ...this.restaurant,
