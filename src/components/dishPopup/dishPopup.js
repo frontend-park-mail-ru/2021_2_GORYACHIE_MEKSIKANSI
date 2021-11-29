@@ -56,32 +56,36 @@ export class DishPopup {
    * Adding dish to cart
    */
   addDishToCart = () => {
-    const radiosGroups = this.div.querySelector('.modal-dish__radio-group').querySelectorAll('.tick-form-group');
     const dishRadios = [];
-    radiosGroups.forEach((item) => {
-      item.querySelectorAll('input').forEach((input) => {
-        if (input.checked) {
-          dishRadios.push({
-            rId: Number(item.id),
-            id: Number(input.id),
-          });
-        }
+    if (this.div.querySelector('.modal-dish__radio-group')) {
+      const radiosGroups = this.div.querySelector('.modal-dish__radio-group').querySelectorAll('.tick-form-group');
+      radiosGroups.forEach((item) => {
+        item.querySelectorAll('input').forEach((input) => {
+          if (input.checked) {
+            dishRadios.push({
+              rId: Number(item.id),
+              id: Number(input.id),
+            });
+          }
+        });
       });
-    });
 
-    if (dishRadios.length !== radiosGroups.length) {
-      // error
-      return;
+      if (dishRadios.length !== radiosGroups.length) {
+        // error
+        return;
+      }
     }
 
     const dishCheckboxes = [];
-    this.div.querySelector('.modal-dish__checkboxes-group').querySelectorAll('input').forEach((item) => {
-      if (item.checked) {
-        dishCheckboxes.push({
-          id: Number(item.id),
-        });
-      }
-    });
+    if (this.div.querySelector('.modal-dish__checkboxes-group')) {
+      this.div.querySelector('.modal-dish__checkboxes-group').querySelectorAll('input').forEach((item) => {
+        if (item.checked) {
+          dishCheckboxes.push({
+            id: Number(item.id),
+          });
+        }
+      });
+    }
 
     this.controller.addDishToCart({
       restaurant: {

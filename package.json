@@ -34,11 +34,11 @@
     "handlebars": "^4.7.7",
     "handlebars-loader": "^1.7.1",
     "hbs": "^4.2.0",
-    "hme-design-system": "^1.0.54",
+    "hme-design-system": "^1.0.56",
     "http": "^0.0.1-security",
     "node-static": "^0.7.11",
     "path": "^0.12.7",
-    "sass": "^1.43.4",
+    "sass": "^1.43.5",
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",
     "ymaps": "^0.2.1"
@@ -51,7 +51,7 @@
     "globstar": "^1.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.4.5",
-    "webpack": "^5.64.2",
+    "webpack": "^5.64.4",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.3"
   }

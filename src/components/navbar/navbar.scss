@@ -26,6 +26,11 @@
   fill: var(--fontColor);
 }
 
+.navbar .button-icon{
+  padding-left: 0;
+  margin-right: auto;
+}
+
 .navbar {
   width: 100%;
   height: var(--navbarHeight);
@@ -76,14 +81,16 @@
   }
 
   &__button-cart-number-wrapper {
-    display: flex;
+    width: 16px;
+    height: 16px;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     background-color: var(--color-white);
     color: var(--color-black);
-    margin-left: 5px;
-    padding: 1px 3px 1px 3px;
-    border-radius: 5px;
+    padding: 2px 3px 2px 2px;
+    margin-left: 10px;
+    border-radius: 30%;
   }
 
   &__button-cart-number-wrapper {

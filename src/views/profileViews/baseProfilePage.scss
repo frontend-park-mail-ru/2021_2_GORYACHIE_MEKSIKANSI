@@ -10,7 +10,7 @@
         flex-wrap: wrap;
         flex-direction: row;
 
-        padding: var(--profileContentTopPadding) var(--contentPadding) var(--contentBottomPadding);
+        padding: var(--profileContentTopPadding) var(--contentPadding) var(--contentBottomPadding) var(--contentPadding);
     }
 
     &__title {
