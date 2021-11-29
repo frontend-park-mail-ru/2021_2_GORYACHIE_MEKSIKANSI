@@ -123,6 +123,7 @@ export class RestaurantView extends View {
     document.body.style.overflowY = 'hidden';
 
     this.continueDiv.querySelector('.continue-modal__cancel').addEventListener('click', this.closeContinueOrdering);
+    this.continueDiv.querySelector('.modal-close-button').addEventListener('click', this.closeContinueOrdering);
     this.continueDiv.querySelector('.continue-modal__accept').addEventListener('click', this.acceptContinueOrdering);
   }
 
@@ -133,6 +134,7 @@ export class RestaurantView extends View {
     if (this.continueDiv) {
       this.continueDiv.querySelector('.continue-modal__cancel').removeEventListener('click', this.closeContinueOrdering);
       this.continueDiv.querySelector('.continue-modal__accept').removeEventListener('click', this.acceptContinueOrdering);
+      this.continueDiv.querySelector('.modal-close-button').removeEventListener('click', this.closeContinueOrdering);
       this.continueDiv.remove();
     }
     document.body.style.overflowY = 'scroll';

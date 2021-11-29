@@ -37,26 +37,26 @@ export class RestaurantsList {
     }
     this.parent.innerHTML = restaurantsListTemplate({
       // sortBox: new SortBox().render(),
-      sortHeader: addHeader ? new SortHeader({
-        buttons: [
-          new ButtonIconV({
-            label: 'Фастфуд',
-            icon: icon,
-          }).render(),
-          new ButtonIconV({
-            label: 'Суши',
-            icon: icon,
-          }).render(),
-          new ButtonIconV({
-            label: 'Креветки',
-            icon: icon,
-          }).render(),
-          new ButtonIconV({
-            label: 'Шаурма',
-            icon: icon,
-          }).render(),
-        ],
-      }).render() : '',
+      // sortHeader: addHeader ? new SortHeader({
+      //   buttons: [
+      //     new ButtonIconV({
+      //       label: 'Фастфуд',
+      //       icon: icon,
+      //     }).render(),
+      //     new ButtonIconV({
+      //       label: 'Суши',
+      //       icon: icon,
+      //     }).render(),
+      //     new ButtonIconV({
+      //       label: 'Креветки',
+      //       icon: icon,
+      //     }).render(),
+      //     new ButtonIconV({
+      //       label: 'Шаурма',
+      //       icon: icon,
+      //     }).render(),
+      //   ],
+      // }).render() : '',
       restaurantList: new List({listTitle: title, objList: objList}).render()});
   }
 
