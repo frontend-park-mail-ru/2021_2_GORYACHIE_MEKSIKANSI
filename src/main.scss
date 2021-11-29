@@ -103,7 +103,7 @@ input:checked + .slider:before {
 
     --raleway-font: Raleway, sans-serif;
 
-    --font_bold: 800;
+    --font_bold: 500;
     --font_medium: 600;
     --font_thin: 300;
 
@@ -162,9 +162,9 @@ input:checked + .slider:before {
     --buttonIconPadding: 10px; // padding around in icon button
     --buttonIconVPaddingHor: 10px; // x paddings inside vertical icon button
 
-    --buttonBorderRadius: 2px; // std radius
+    --buttonBorderRadius: 10px; // std radius
     --buttonBorderRadiusMedium: 10px; // medium radius
-    --buttonBorderRadiusHigh: 16px; // high radius
+    --buttonBorderRadiusHigh: 10px; // high radius
 
     --buttonIconMarginInside: 10px; // margin between text and icon in button
 

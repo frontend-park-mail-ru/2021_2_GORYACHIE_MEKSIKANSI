@@ -14,7 +14,7 @@
   --cartOrderRowFontSize: 20px;
   --cartOrderRowInfoFontSize: 15px;
 
-  --cartBorderRadius: 2px;
+  --cartBorderRadius: 16px;
 }
 
 .dish-popup__num-selector-box {
@@ -40,7 +40,8 @@
   border-radius: var(--cartBorderRadius);
 
   &__buy-button {
-    margin-top: 15px;
+    margin: 0 15px 15px 15px;
+    border-radius: 10px;
     height: var(--cartBuyButtonHeight);
     font-size: var(--cartBuyButtonFontSize);
     display: flex;
@@ -64,8 +65,12 @@
     flex-wrap: nowrap;
     align-items: center;
 
-    margin-bottom: 15px;
+    margin-bottom: 0;
     border-bottom: solid 1px darkgrey;
+  }
+
+  &__header .font_h1 {
+    margin-bottom: 0;
   }
 
   &__title {

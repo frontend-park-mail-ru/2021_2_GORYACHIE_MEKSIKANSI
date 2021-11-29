@@ -35,6 +35,14 @@
     margin-left: 30px;
 }
 
+.profile-page__button_wrapper .button {
+    color: #7e7e7e;
+}
+
+.profile-page__button_wrapper path {
+    fill: #7e7e7e !important;
+}
+
 @media (min-width: 0px) and (max-width: 860px) {
     .profile-page__button_wrapper {
         display: none;

@@ -2,7 +2,7 @@
 <div class="cart-wrapper">
     <div class="cart">
         <div class="cart__header">
-            <div class="cart__title">
+            <div class="font_h1">
                 Мой заказ
             </div>
             <div class="button-icon button-icon_color_gray cart__clear-button">
@@ -25,10 +25,10 @@
             {{#each items}}
                 <div id="{{itNum}}" class="cart__order-row">
                     <div class="cart__order-row-info">
-                        <div class="cart__order-row-title">
+                        <div class="font_h3">
                             {{ name }}
                         </div>
-                        <div class="cart__order-row-info">
+                        <div class="font-label">
                             {{ weight }}г • {{ ccal }}ккал
                         </div>
                     </div>
@@ -67,19 +67,19 @@
 
         <div class="cart__summary">
             <div class="cart__time-summary-box">
-                <div class="cart__summary-title">
+                <div class="font_h3">
                     Время доставки
                 </div>
-                <div class="cart__summary-val">
+                <div class="font_h1">
                     {{ restaurant.minDTime }}-{{ restaurant.maxDTime}} мин
                 </div>
             </div>
             <div class="cart__cost-summary-box">
-                <div class="cart__summary-title">
+                <div class="font_h3">
                     Итого
                 </div>
                 <div class="cart__summary-val-cost">
-                    <div class="cart__summary-cost">0</div><div class="cart__P">₽</div>
+                    <div class="cart__summary-cost font_h1">0</div><div class="font_h1">₽</div>
                 </div>
             </div>
         </div>
