@@ -18,9 +18,14 @@
 }
 
 .dish-popup__num-selector-box {
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cart .cart__minus-button {
+  padding-left: 0 !important;
 }
 
 .cart {
