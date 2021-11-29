@@ -9,4 +9,6 @@ export const ProfileEvents = {
   userOrderCreatedSuccess: 'userOrderCreatedSuccess',
   userOrderGetSuccess: 'userOrderGetSuccess',
   userOrderGetFailed: 'userOrderGetFailed',
+  userFavouriteSwitchSuccess: 'userFavouriteSwitchSuccess',
+  userFavouriteSwitchFailed: 'userFavouriteSwitchFailed',
 };

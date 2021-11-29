@@ -327,3 +327,13 @@ export function search(searchText) {
 export function getOrderInfo(orderId) {
   return http.ajaxGet({url: apiPaths.getOrder + orderId + '/active'});
 }
+
+/**
+ * Function for calling backend to switch the favourite
+ * of restaurant by rest Id
+ * @param {number} restId
+ * @return {Object<{status: number, body: Object}>}
+ */
+export function putSwitchFavourite(restId) {
+  return http.ajaxPut({url: apiPaths.favourite, body: {restaurant: {id: restId}}});
+}

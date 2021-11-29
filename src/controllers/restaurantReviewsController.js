@@ -53,6 +53,10 @@ export class RestaurantReviewsController { // TODO: добавить джсдо�
     ProfileModel.publishReviewPost(restId, value, rate);
   }
 
+  switchFavourite(restId) {
+    ProfileModel.switchFavourite(restId);
+  }
+
   /**
    * Removing view
    */

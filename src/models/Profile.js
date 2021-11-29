@@ -5,7 +5,16 @@ import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from '../modules/reducers/userStore';
-import {cartGet, createOrder, getOrderInfo, orderHistoryGet, postPay, postReview, updateAvatar} from '../modules/api';
+import {
+  cartGet,
+  createOrder,
+  getOrderInfo,
+  orderHistoryGet,
+  postPay,
+  postReview,
+  putSwitchFavourite,
+  updateAvatar
+} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
 import {orderBodyMock, ordersHistoryBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
@@ -335,6 +344,17 @@ class ProfileModel {
         })
         .catch(() => {
           // eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
+        });
+  }
+
+  switchFavourite(restId) {
+    putSwitchFavourite(restId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.favourite);
+          }
+        })
+        .catch(() => {
         });
   }
 }
