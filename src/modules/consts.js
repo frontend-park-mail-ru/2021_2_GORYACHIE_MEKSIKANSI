@@ -18,7 +18,7 @@ export const apiPaths = {
   updateAddress: '/user/address/',
   postReview: '/user/review/',
   postOrder: '/user/order/',
-  getOrder: '/order/',
+  getOrder: '/user/order/',
   pay: '/user/pay/',
   getOrdersHistory: '/user/order/',
   getProfile: '/user/',

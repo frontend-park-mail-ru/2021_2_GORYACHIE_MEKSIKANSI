@@ -38,30 +38,29 @@ export class OrderProcessView extends BaseProfileView {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
-    console.log(props);
+    this.orderId = props.id;
     super.render();
     this.navbar.render();
     const order = {
       historyOrder: false,
       ...props.restaurant,
-      items: props.items,
-      dCost: props.cost.dCost,
-      sumCost: props.cost.sumCost,
+      items: props.cart.dishes,
+      dCost: props.cart.cost.dCost,
+      sumCost: props.cart.cost.sumCost,
     };
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Активный заказ',
       content: orderProcess({
         restaurant: props.restaurant,
-        date: props.date,
+        date: props.date + ', ' + props.time,
         id: props.id,
-        sumCost: props.cost.sumCost,
-        dCost: props.cost.dCost,
+        sumCost: props.cart.cost.sumCost,
+        dCost: props.cart.cost.dCost,
         dTime: '20:50',
         order: Order(order),
       }),
       rightMenu: profileButtonsNav});
     this.updateStatus(props.status);
-    this.orderId = props.id;
     this.updateRetry = setInterval(this.callControllerToUpdate, updateStatusTimeout);
   }
 
@@ -77,14 +76,17 @@ export class OrderProcessView extends BaseProfileView {
     const statuses = this.parent.querySelectorAll('.status');
     statuses.forEach((item) => {
       item.classList.remove('order-process__do', 'order-process__wait', 'order-process__done');
-      if (item.id < status) {
+      if (item.id < status + 1) {
         item.classList.add('order-process__done');
-      } else if (item.id > status) {
+      } else if (item.id > status + 1) {
         item.classList.add('order-process__wait');
       } else {
         item.classList.add('order-process__do');
       }
     });
+    if (status === 4) {
+      clearInterval(this.updateRetry);
+    }
   }
 
   /**

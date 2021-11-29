@@ -326,13 +326,13 @@ class ProfileModel {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, response.body);
           } else if (response.status === ResponseEvents.Forbidden) {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, {});
+            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
           } else {
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, {});
+            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
           }
         })
         .catch(() => {
-          eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
+          // eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
         });
   }
 }
