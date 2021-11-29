@@ -109,6 +109,17 @@ export class Navbar {
     if (userStore.getState().auth) {
       document.getElementById('logout').addEventListener('click', this.logout);
     }
+    window.addEventListener('keypress', this.makeSearchByEnter);
+  }
+
+  /**
+   * Listener for Enter key
+   * @param {Object} e
+   */
+  makeSearchByEnter = (e) => {
+    if (e.key === 'Enter') {
+      this.makeSearch();
+    }
   }
 
   makeSearch = () => {
@@ -177,6 +188,8 @@ export class Navbar {
    */
   remove() {
     this.yMap.remove();
+    window.removeEventListener('keypress', this.makeSearchByEnter);
+
 
     if (document.querySelector('.hamburger-wrapper') &&
       document.querySelector('.navbar')) {

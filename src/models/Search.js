@@ -1,6 +1,6 @@
 import eventBus from 'Modules/eventBus.js';
 import {SearchEvents} from '../events/Search';
-import {ordersHistoryBodyMock, restaurantsBodyMock} from '../views/mocks';
+import {ResponseEvents} from "../events/Responses";
 import {search} from '../modules/api';
 
 /**
