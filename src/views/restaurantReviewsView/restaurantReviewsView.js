@@ -100,7 +100,7 @@ export class RestaurantReviewsView extends View {
       label: 'Назад к ресторану',
       rounded: true,
       size: 'bg',
-      classes: ['button_wide'],
+      classes: ['button_wide', ' back_button'],
     }).render();
 
     if (userStore.getState().auth) {
@@ -111,6 +111,10 @@ export class RestaurantReviewsView extends View {
 
     this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
       item.onclick = this.makeSearchRequestByTag;
+    });
+
+    this.parent.querySelector('.back_button').addEventListener('click', () => {
+      this.controller.routeTo('/restaurants/' + this.restaurant.id);
     });
   }
   /**

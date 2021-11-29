@@ -36,7 +36,7 @@ export class RestaurantsList {
       });
     }
     this.parent.innerHTML = restaurantsListTemplate({
-      sortBox: new SortBox().render(),
+      // sortBox: new SortBox().render(),
       sortHeader: addHeader ? new SortHeader({
         buttons: [
           new ButtonIconV({

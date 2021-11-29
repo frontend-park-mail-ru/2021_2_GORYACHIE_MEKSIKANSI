@@ -63,7 +63,7 @@ class RestaurantModel {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, response.body);
           } else if (response.status === ResponseEvents.NotFound) {
-            eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, {});
+            eventBus.emitEventListener(RestaurantEvents.restaurantReviewsGetSuccess, response.body);
           }
         })
         .catch(() => {

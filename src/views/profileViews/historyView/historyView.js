@@ -51,19 +51,19 @@ export class HistoryView extends BaseProfileView {
             statuses = {
               ...statuses,
               cancel: true,
-            }
+            };
             break;
           case 2:
             statuses = {
               ...statuses,
               inProgress: true,
-            }
+            };
             break;
           case 3:
             statuses = {
               ...statuses,
               done: true,
-            }
+            };
             break;
         }
 
