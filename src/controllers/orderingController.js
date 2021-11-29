@@ -55,8 +55,8 @@ export class OrderingController {
     this.routeTo(urls.home);
   }
 
-  redirectToOrder = () => {
-    this.routeTo(urls.order);
+  redirectToOrder = (id) => {
+    this.routeTo('/order/' + id);
   }
 
   createOrder = (order) => {

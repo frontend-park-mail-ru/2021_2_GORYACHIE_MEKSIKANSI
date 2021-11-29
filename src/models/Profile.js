@@ -262,17 +262,12 @@ class ProfileModel {
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
             this.getCart();
-            eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
+            eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, response.body.order.id);
           } else {
           // Something went wrong
           }
-          return response;
         })
         .catch(() => {
-          CreateSnack({
-            title: 'Не получилось создать заказ :(',
-            status: 'red',
-          });
           eventBus.emitEventListener(ProfileEvents.userOrderCreatedSuccess, {});
         });
   }

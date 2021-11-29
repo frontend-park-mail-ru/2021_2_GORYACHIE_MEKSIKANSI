@@ -325,5 +325,5 @@ export function search(searchText) {
  * @return {Object<{status: string, body: Object}>}
  */
 export function getOrderInfo(orderId) {
-  return http.ajaxGet({url: apiPaths.getOrder + orderId});
+  return http.ajaxGet({url: apiPaths.getOrder + orderId + '/active'});
 }

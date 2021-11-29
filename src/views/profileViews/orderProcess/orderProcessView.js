@@ -38,6 +38,7 @@ export class OrderProcessView extends BaseProfileView {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    console.log(props);
     super.render();
     this.navbar.render();
     const order = {
