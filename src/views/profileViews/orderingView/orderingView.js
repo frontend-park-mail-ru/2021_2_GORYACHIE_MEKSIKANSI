@@ -15,6 +15,8 @@ import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {CreateSnack} from '../../../components/snackBar/snackBar';
 import {paymentMethods} from '../../../modules/consts';
 
+
+// eslint-disable-next-line valid-jsdoc
 /**
  * Profile view class
  */
@@ -79,26 +81,6 @@ export class OrderingView extends BaseProfileView {
   refresh = () => {
     this.remove();
     this.render();
-  }
-
-  stickSummary = () => {
-    // const summary = document.querySelector('.cart-order-summary');
-    // const block = document.querySelectorAll('.content-block')[1];
-    // this.footY = Number(block.offsetTop) + Number(block.offsetHeight);
-    // if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
-    //   summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
-    //   this.summaryWidth = summary.offsetWidth;
-    // } else if (window.pageYOffset + 75 >= this.sticky) {
-    //   summary.classList.add('cart-order-summary-sticky');
-    //   if (summary.style.width !== '100%') {
-    //     summary.style.top = String(0) + 'px';
-    //     summary.style.width = this.summaryWidth + 'px';
-    //   }
-    // } else {
-    //   summary.classList.remove('cart-order-summary-sticky');
-    //   summary.style.width = '';
-    //   this.summaryWidth = summary.offsetWidth;
-    // }
   }
 
   showConfirm = () => {

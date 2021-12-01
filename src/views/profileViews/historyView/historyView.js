@@ -90,11 +90,6 @@ export class HistoryView extends BaseProfileView {
       }),
       rightMenu: profileButtonsNav});
   }
-  /**
-   * Method for setting up before rendering elements
-   */
-  settingUp() {
-  }
 
   /**
    * Method for removing setted up listeners and other data

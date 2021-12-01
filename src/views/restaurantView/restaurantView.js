@@ -14,7 +14,7 @@ import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeade
 import eventBus from '../../modules/eventBus';
 import {SearchEvents} from '../../events/Search';
 import {ProfileEvents} from '../../events/Profile';
-import {CreateSnack} from "../../components/snackBar/snackBar";
+import {CreateSnack} from '../../components/snackBar/snackBar';
 
 
 /**

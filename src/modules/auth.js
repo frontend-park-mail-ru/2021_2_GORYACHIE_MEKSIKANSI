@@ -30,7 +30,6 @@ export function auth(response) {
             Socket.connect(responseKey.body.web_socket.key);
           }
         });
-
   } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
   }

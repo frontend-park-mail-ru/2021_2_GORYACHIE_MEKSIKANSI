@@ -51,11 +51,6 @@ export class FavouriteView extends BaseProfileView {
       }).render(),
       rightMenu: profileButtonsNav});
   }
-  /**
-   * Method for setting up before rendering elements
-   */
-  settingUp() {
-  }
 
   /**
    * Method for removing setted up listeners and other data

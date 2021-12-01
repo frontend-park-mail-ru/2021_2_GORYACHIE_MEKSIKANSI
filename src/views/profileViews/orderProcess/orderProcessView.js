@@ -81,15 +81,6 @@ export class OrderProcessView extends BaseProfileView {
         item.classList.add('order-process__do');
       }
     });
-    // if (status === 4) {
-    //   clearInterval(this.updateRetry);
-    // }
-  }
-
-  /**
-   * Method for setting up before rendering elements
-   */
-  settingUp() {
   }
 
   /**

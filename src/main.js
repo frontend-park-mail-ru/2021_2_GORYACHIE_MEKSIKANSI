@@ -15,6 +15,7 @@ import {RestaurantReviewsView} from './views/restaurantReviewsView/restaurantRev
 import {RestaurantReviewsController} from './controllers/restaurantReviewsController';
 import {SearchController} from './controllers/searchController';
 import {FavouriteController} from './controllers/favouriteController';
+import {profileGet} from "./modules/api";
 
 
 const application = document.getElementById('app');
@@ -109,3 +110,5 @@ document.getElementById('foot').innerHTML = new Footer({
 }).render();
 router.start();
 
+// Start of application
+profileGet({});

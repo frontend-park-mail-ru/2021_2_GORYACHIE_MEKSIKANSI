@@ -1,5 +1,5 @@
 import styles from './navbar.scss';
-import {profileGet, logoutPost} from 'Modules/api.js';
+import {logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs';
 import {MapPopup} from '../mapPopup/mapPopup.js';
 import eventBus from 'Modules/eventBus.js';
@@ -34,7 +34,6 @@ export class Navbar {
    */
   constructor(parent = document.body) {
     this.parent = parent;
-    profileGet({});
     this.yMap = new MapPopup({});
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, this.refresh);
     Socket.subscribe(this.navbarWSHandler.bind(this));

@@ -124,7 +124,6 @@ export class RestaurantReviewsView extends View {
   }
 
 
-
   /**
    * Refresh header
    * @param {boolean} favourite
