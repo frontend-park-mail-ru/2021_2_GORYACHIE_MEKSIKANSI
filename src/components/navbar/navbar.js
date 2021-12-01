@@ -9,17 +9,9 @@ import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
 import {SearchEvents} from '../../events/Search';
 import Socket from 'Modules/webSocket';
-import {CreateSnack} from 'Components/snackBar/snackBar'
-import {statusMap} from "../../modules/consts";
+import {CreateSnack} from 'Components/snackBar/snackBar';
+import {statusMap} from '../../modules/consts';
 
-function switchTheme(e) {
-  if (e.target.checked) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-  else {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
-}
 
 /**
  * switching theme crutch

@@ -38,7 +38,7 @@ export class OrderProcessController {
   render(orderId) {
     if (!userStore.getState().auth) {
       this.stashOrderId = orderId;
-      eventBus.addEventListener(AuthStatus.userLogin, this.show.bind(orderId));
+      eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
       ProfileModel.getOrder(orderId);
