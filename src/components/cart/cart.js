@@ -1,4 +1,5 @@
 import {RestaurantEvents} from 'Events/Restaurant.js';
+import styles from './cart.scss';
 import EventBus from 'Modules/eventBus.js';
 import cart from './cart.hbs';
 import cartStore from 'Modules/reducers/cartStore.js';
@@ -122,19 +123,19 @@ export class Cart {
    *
    */
   stickCart = () => {
-    const cart = document.querySelector('.cart-wrapper');
-    if (window.pageYOffset + 200 + cart.offsetHeight >= this.footY) {
-      cart.style.top = String(this.footY - (window.pageYOffset + 200 + cart.offsetHeight)) + 'px';
-      this.cartWidth = cart.offsetWidth;
-    } else if (window.pageYOffset + 75 >= this.sticky) {
-      cart.style.top = String(0) + 'px';
-      cart.classList.add('cart__sticky');
-      cart.style.width = this.cartWidth + 'px';
-    } else {
-      cart.classList.remove('cart__sticky');
-      cart.style.width = '';
-      this.cartWidth = cart.offsetWidth;
-    }
+    // const cart = document.querySelector('.cart-wrapper');
+    // if (window.pageYOffset + 200 + cart.offsetHeight >= this.footY) {
+    //   cart.style.top = String(this.footY - (window.pageYOffset + 200 + cart.offsetHeight)) + 'px';
+    //   this.cartWidth = cart.offsetWidth;
+    // } else if (window.pageYOffset + 75 >= this.sticky) {
+    //   cart.style.top = String(0) + 'px';
+    //   cart.classList.add('cart__sticky');
+    //   cart.style.width = this.cartWidth + 'px';
+    // } else {
+    //   cart.classList.remove('cart__sticky');
+    //   cart.style.width = '';
+    //   this.cartWidth = cart.offsetWidth;
+    // }
   }
 
   /**

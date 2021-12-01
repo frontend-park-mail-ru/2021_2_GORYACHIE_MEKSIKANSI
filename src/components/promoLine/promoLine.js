@@ -62,6 +62,9 @@ export class PromoLine {
   getNextRightScrollCoors = () => {
     const blockWidth = this.promoLine.offsetWidth;
     const lastBlock = [...this.blocks].find((block) => {
+      if (block.offsetWidth > blockWidth) {
+        return block.offsetLeft - block.parentNode.offsetLeft > this.begin;
+      }
       return block.offsetLeft + block.offsetWidth - block.parentNode.offsetLeft > this.begin + blockWidth;
     });
     if (lastBlock) {

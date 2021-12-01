@@ -1,3 +1,4 @@
+import styles from './navbar.scss';
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs';
 import {MapPopup} from '../mapPopup/mapPopup.js';
@@ -6,6 +7,10 @@ import {AuthStatus} from 'Events/Auth.js';
 import userStore from 'Modules/reducers/userStore.js';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
+import {SearchEvents} from '../../events/Search';
+import Socket from 'Modules/webSocket';
+import {CreateSnack} from 'Components/snackBar/snackBar'
+import {statusMap} from "../../modules/consts";
 
 function switchTheme(e) {
   if (e.target.checked) {
@@ -40,6 +45,7 @@ export class Navbar {
     profileGet({});
     this.yMap = new MapPopup({});
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, this.refresh);
+    Socket.subscribe(this.navbarWSHandler.bind(this));
   }
 
   /**
@@ -70,6 +76,20 @@ export class Navbar {
   refresh = () => {
     this.remove();
     this.render();
+  }
+
+  /**
+   * WebSocket handler to update order status
+   * @param {object} message
+   */
+  navbarWSHandler = (message) => {
+    const body = message.body.web_socket;
+    if (body.action === 'status') {
+      CreateSnack({
+        title: `Статус заказа ${body.order.id} обновлен на: ${statusMap[body.order.status]}`,
+        status: 'green',
+      });
+    }
   }
 
   /**
@@ -107,13 +127,32 @@ export class Navbar {
   settingUp() {
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
-    toggleSwitch.addEventListener('change', switchTheme, false);
+    // toggleSwitch.addEventListener('change', switchTheme, false);
     this.updateCartButtonNumber();
     this.yMap.render();
     this.parent.querySelector('.nav-button').addEventListener('click', this.openListener);
     this.parent.querySelector('.hamburger-wrapper').addEventListener('click', this.closeListener);
+    document.getElementById('search-icon').onclick = this.makeSearch;
     if (userStore.getState().auth) {
       document.getElementById('logout').addEventListener('click', this.logout);
+    }
+    window.addEventListener('keypress', this.makeSearchByEnter);
+  }
+
+  /**
+   * Listener for Enter key
+   * @param {Object} e
+   */
+  makeSearchByEnter = (e) => {
+    if (e.key === 'Enter') {
+      this.makeSearch();
+    }
+  }
+
+  makeSearch = () => {
+    const searchText = document.getElementById('search-input').value;
+    if (searchText.length !== 0) {
+      eventBus.emitEventListener(SearchEvents.searchRequest, searchText);
     }
   }
 
@@ -175,20 +214,22 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
+    Socket.unsubscribe(this.navbarWSHandler);
     this.yMap.remove();
+    window.removeEventListener('keypress', this.makeSearchByEnter);
+
 
     if (document.querySelector('.hamburger-wrapper') &&
       document.querySelector('.navbar')) {
       this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);
       this.parent.querySelector('.hamburger-wrapper').removeEventListener('click', this.closeListener);
-
       const logoutButton = document.getElementById('logout');
       if (logoutButton) {
         logoutButton.removeEventListener('click', this.logout);
       }
-      const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+      // const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
-      toggleSwitch.removeEventListener('change', switchTheme, false);
+      // toggleSwitch.removeEventListener('change', switchTheme, false);
 
       document.querySelector('.hamburger-wrapper').remove();
       document.querySelector('.navbar').remove();

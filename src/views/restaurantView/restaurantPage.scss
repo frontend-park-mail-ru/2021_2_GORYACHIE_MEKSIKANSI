@@ -23,11 +23,25 @@
     }
 
     @media (min-width: 0px) and (max-width: 860px) {
+        &__menu-cart-wrapper {
+            flex-wrap: nowrap;
+            flex-direction: column;
+        }
+
         &__cart {
-            width: 0;
-            margin: 0;
-            visibility: hidden;
+            width: 100%;
+            margin: 20px 0 0 0;
+            order: 0;
+        }
+
+        &__menu {
+            order: 1;
+            width: 100%;
         }
     }
 
+}
+
+.restaurant-underheader__tag {
+    cursor: pointer;
 }

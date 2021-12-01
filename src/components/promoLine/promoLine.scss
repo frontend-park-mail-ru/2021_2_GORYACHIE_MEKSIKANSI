@@ -31,7 +31,7 @@
         box-shadow: 0 4px 8px 0 rgb(0 0 0 / 8%);
         box-sizing: border-box;
         display: flex;
-        z-index: 100;
+        z-index: 30;
     }
 
     &__button-left {
@@ -45,5 +45,12 @@
     &-block {
         flex-shrink: 0;
         margin-right: 10px;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 860px) {
+    .promo-line-wrapper {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

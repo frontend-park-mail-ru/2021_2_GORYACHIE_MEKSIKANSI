@@ -307,3 +307,73 @@ export const reviewsBodyMock = {
     ],
   },
 };
+
+export const restaurantsBodyMock = {
+  restaurants: [
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+    {
+      id: 1,
+      name: 'MAC',
+      img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+      costFFD: 100,
+      minDTime: 15,
+      maxDTime: 30,
+      rate: 4,
+    },
+  ],
+};
+
+export const orderBodyMock = {
+  restaurant: {
+    id: 10,
+    name: 'МакДоналдс',
+    minDTime: 20,
+    maxDTime: 30,
+    img: 'https://calorizator.ru/sites/default/files/imagecache/product_512/product/chicken-mcnuggets.jpg',
+  },
+  id: 12346,
+  date: '27.10.2021, 20:10',
+  cost: {
+    dCost: 200,
+    sumCost: 500,
+  },
+  items: [
+    {
+      name: 'МакНаггетс',
+      count: 1,
+      cost: 100,
+    },
+    {
+      name: 'МакНаггетс',
+      count: 1,
+      cost: 100,
+    },
+  ],
+  status: 3,
+};

@@ -11,6 +11,10 @@ import userStore from 'Modules/reducers/userStore.js';
 import {continueModal} from 'hme-design-system/stories/modal.stories';
 import {ContinueModal} from 'hme-design-system/src/components/modal/continueModal/continueModal';
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
+import eventBus from '../../modules/eventBus';
+import {SearchEvents} from '../../events/Search';
+import {ProfileEvents} from '../../events/Profile';
+import {CreateSnack} from "../../components/snackBar/snackBar";
 
 
 /**
@@ -87,6 +91,24 @@ export class RestaurantView extends View {
 
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render();
+
+    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
+      item.onclick = this.makeSearchRequestByTag;
+    });
+
+    this.parent.querySelector('.restaurant-header__love-icon').addEventListener('click', () => {
+      this.controller.switchFavourite(this.restaurant.id);
+    });
+
+    eventBus.addEventListener(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
+  }
+
+  /**
+   * Emit request event for a search
+   * @param {event} e
+   */
+  makeSearchRequestByTag = (e) => {
+    eventBus.emitEventListener(SearchEvents.searchRequest, e.target.innerHTML);
   }
 
   /**
@@ -109,6 +131,7 @@ export class RestaurantView extends View {
     document.body.style.overflowY = 'hidden';
 
     this.continueDiv.querySelector('.continue-modal__cancel').addEventListener('click', this.closeContinueOrdering);
+    this.continueDiv.querySelector('.modal-close-button').addEventListener('click', this.closeContinueOrdering);
     this.continueDiv.querySelector('.continue-modal__accept').addEventListener('click', this.acceptContinueOrdering);
   }
 
@@ -119,6 +142,7 @@ export class RestaurantView extends View {
     if (this.continueDiv) {
       this.continueDiv.querySelector('.continue-modal__cancel').removeEventListener('click', this.closeContinueOrdering);
       this.continueDiv.querySelector('.continue-modal__accept').removeEventListener('click', this.acceptContinueOrdering);
+      this.continueDiv.querySelector('.modal-close-button').removeEventListener('click', this.closeContinueOrdering);
       this.continueDiv.remove();
     }
     document.body.style.overflowY = 'scroll';
@@ -130,12 +154,37 @@ export class RestaurantView extends View {
   }
 
   /**
+   * Refresh restaurant header
+   * @param {boolean} favourite
+   */
+  refreshHeader = (favourite) => {
+    if (favourite.status === true) {
+      CreateSnack({
+        title: `Ресторан добавлен в избарнное!`,
+        status: 'green',
+      });
+    } else {
+      CreateSnack({
+        title: `Ресторан удален из избранного:(`,
+        status: 'red',
+      });
+    }
+    this.restaurant = {
+      ...this.restaurant,
+      favourite: favourite.status,
+    };
+    this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
+  }
+
+  /**
    * Removing page
    */
   remove() {
+    eventBus.unsubscribe(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
     if (this.continueDiv) {
       this.closeContinueOrdering();
     }
+
     this.navbar.remove();
     this.dishesList.remove();
     this.popup.remove();

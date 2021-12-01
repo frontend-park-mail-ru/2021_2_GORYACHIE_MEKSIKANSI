@@ -6,8 +6,12 @@ import {AuthStatus} from 'Events/Auth';
 import cartStore from 'Modules/reducers/cartStore';
 import userStore from 'Modules/reducers/userStore';
 import {OrderingEvents} from '../events/Ordering';
+import ProfileModel from '../models/Profile';
+import {paymentMethods} from '../modules/consts';
+import {ProfileEvents} from '../events/Profile';
 
 
+// eslint-disable-next-line valid-jsdoc
 /**
  * Standard class to ordering controller
  */
@@ -29,6 +33,7 @@ export class OrderingController {
       controller: this,
     });
     eventBus.addEventListener(OrderingEvents.paymentSuccess, this.routeTo);
+    eventBus.addEventListener(ProfileEvents.userOrderCreatedSuccess, this.redirectToOrder);
   }
 
   /**
@@ -39,30 +44,28 @@ export class OrderingController {
       eventBus.addEventListener(AuthStatus.userLogin, this.show);
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-        this.routeTo(urls.home);
-      } else {
-        this.orderingView.render();
-      }
+      this.show();
     }
   }
 
   show = () => {
-    if (cartStore.getState().cart === undefined || cartStore.getState() === null || cartStore.getState().cart.length === 0 || cartStore.getState().restaurant.id === null) {
-      this.routeTo(urls.home);
-      // history.back(); // TODO: разобраться с историей при первом заходе
-      // return;
-    } else {
-      this.orderingView.render();
-    }
+    this.orderingView.render();
   }
 
   redirect = () => {
     this.routeTo(urls.home);
   }
 
-  makePay = () => {
-    OrderingModel.requestPay();
+  redirectToOrder = (id) => {
+    this.routeTo('/order/' + id);
+  }
+
+  createOrder = (order) => {
+    if (order.methodPay === paymentMethods.card) {
+      ProfileModel.createOrderWithPay(order);
+    } else {
+      ProfileModel.createOrder(order);
+    }
   }
 
   /**

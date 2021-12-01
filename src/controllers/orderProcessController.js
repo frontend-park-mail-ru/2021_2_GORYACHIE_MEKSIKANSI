@@ -3,6 +3,9 @@ import userStore from '../modules/reducers/userStore';
 import eventBus from '../modules/eventBus';
 import {AuthStatus} from '../events/Auth';
 import {urls} from '../modules/urls';
+import ProfileModel from '../models/Profile';
+import {ProfileEvents} from '../events/Profile';
+import Socket from 'Modules/webSocket';
 
 /**
  * Standard calss to ordering process controller
@@ -24,22 +27,41 @@ export class OrderProcessController {
       routeTo: this.routeTo,
       controller: this,
     });
+    eventBus.addEventListener(ProfileEvents.userOrderGetSuccess, this.orderProcessView.render.bind(this.orderProcessView));
+    Socket.subscribe(this.orderWSHandler.bind(this));
   }
 
   /**
    * Rendering view
+   * @param {number | string} orderId
    */
-  render() {
+  render(orderId) {
     if (!userStore.getState().auth) {
-      eventBus.addEventListener(AuthStatus.userLogin, this.show);
+      this.stashOrderId = orderId;
+      eventBus.addEventListener(AuthStatus.userLogin, this.show.bind(orderId));
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
-      this.orderProcessView.render();
+      ProfileModel.getOrder(orderId);
+    }
+  }
+
+  /**
+   * WebSocket handler to update order status
+   * @param {object} message
+   */
+  orderWSHandler = (message) => {
+    const body = message.body.web_socket;
+    if (body.action === 'status') {
+      this.orderProcessView.updateStatus(body.order.status);
     }
   }
 
   show = () => {
-    this.orderProcessView.render();
+    if (this.stashOrderId) {
+      ProfileModel.getOrder(this.stashOrderId);
+    } else {
+      this.routeTo(urls.home);
+    }
   }
 
   redirect = () => {
@@ -50,6 +72,7 @@ export class OrderProcessController {
    * Removing view
    */
   remove() {
+    Socket.unsubscribe();
     eventBus.unsubscribe(AuthStatus.userLogin, this.show);
     eventBus.unsubscribe(AuthStatus.notAuth, this.redirect);
     this.orderProcessView.remove();

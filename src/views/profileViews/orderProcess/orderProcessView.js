@@ -7,10 +7,11 @@ import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hb
 import cartStore from '../../../modules/reducers/cartStore';
 import userStore from '../../../modules/reducers/userStore';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
+import {updateStatusTimeout} from '../../../modules/consts';
 
 
 /**
- * Profile view class
+ * Order view class
  */
 export class OrderProcessView extends BaseProfileView {
   /**
@@ -37,27 +38,54 @@ export class OrderProcessView extends BaseProfileView {
    * @param {Object} props objects relating for rendering view
    */
   render(props = {}) {
+    this.orderId = props.id;
     super.render();
+    this.navbar.remove();
     this.navbar.render();
     const order = {
       historyOrder: false,
-      ...cartStore.getState().restaurant,
-      items: cartStore.getState().cart,
-      dCost: cartStore.getState().cost.dCost,
-      sumCost: cartStore.getState().cost.sumCost,
+      ...props.restaurant,
+      items: props.cart.dishes,
+      dCost: props.cart.cost.dCost,
+      sumCost: props.cart.cost.sumCost,
     };
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Активный заказ',
       content: orderProcess({
-        restaurant: cartStore.getState().restaurant,
-        items: cartStore.getState().cart,
-        sumCost: cartStore.getState().cost.sumCost,
-        dCost: cartStore.getState().cost.dCost,
-        dTime: '20:50',
+        restaurant: props.restaurant,
+        date: props.date + ', ' + props.time,
+        id: props.id,
+        sumCost: props.cart.cost.sumCost,
+        dCost: props.cart.cost.dCost,
+        dTime: props.time_delivery,
         order: Order(order),
       }),
       rightMenu: profileButtonsNav});
+    this.updateStatus(props.status);
+    // this.updateRetry = setInterval(this.callControllerToUpdate, updateStatusTimeout);
   }
+
+  /**
+   * Method for visual updating of status
+   * @param {number} status
+   */
+  updateStatus = (status) => {
+    const statuses = this.parent.querySelectorAll('.status');
+    statuses.forEach((item) => {
+      item.classList.remove('order-process__do', 'order-process__wait', 'order-process__done');
+      if (item.id < status + 1) {
+        item.classList.add('order-process__done');
+      } else if (item.id > status + 1) {
+        item.classList.add('order-process__wait');
+      } else {
+        item.classList.add('order-process__do');
+      }
+    });
+    // if (status === 4) {
+    //   clearInterval(this.updateRetry);
+    // }
+  }
+
   /**
    * Method for setting up before rendering elements
    */

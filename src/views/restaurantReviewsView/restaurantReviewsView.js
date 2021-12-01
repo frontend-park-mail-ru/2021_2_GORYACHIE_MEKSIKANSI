@@ -13,6 +13,7 @@ import {StarsRating} from '../../components/starsRating/starsRating';
 import {CreateSnack} from '../../components/snackBar/snackBar';
 import eventBus from '../../modules/eventBus';
 import {ProfileEvents} from '../../events/Profile';
+import {SearchEvents} from '../../events/Search';
 
 
 /**
@@ -47,7 +48,7 @@ export class RestaurantReviewsView extends View {
    *
    */
   render(props = {}) {
-    this.restaurant = props.restaurant ? props.restaurant : {};
+    this.restaurant = props.restaurants ? props.restaurants : {};
     this.reviews = this.restaurant.reviews ? this.restaurant.reviews : [];
     this.refresh();
   }
@@ -59,7 +60,7 @@ export class RestaurantReviewsView extends View {
     this.remove();
     this.navbar.render();
     const reviews = [Review({
-      rate: this.restaurant.rating,
+      rate: this.restaurant.rate,
       text: 'Общая оценка складывается из общего числа отзывов',
     })];
     if (this.restaurant.reviews) {
@@ -99,7 +100,7 @@ export class RestaurantReviewsView extends View {
       label: 'Назад к ресторану',
       rounded: true,
       size: 'bg',
-      classes: ['button_wide'],
+      classes: ['button_wide', ' back_button'],
     }).render();
 
     if (userStore.getState().auth) {
@@ -107,9 +108,54 @@ export class RestaurantReviewsView extends View {
       this.starsRating = new StarsRating(this.parent.querySelector('.stars_review_rating'));
       this.starsRating.render();
     }
+
+    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
+      item.onclick = this.makeSearchRequestByTag;
+    });
+
+    this.parent.querySelector('.back_button').addEventListener('click', () => {
+      this.controller.routeTo('/restaurants/' + this.restaurant.id);
+    });
+
+    this.parent.querySelector('.restaurant-header__love-icon').addEventListener('click', () => {
+      this.controller.switchFavourite(this.restaurant.id);
+    });
+    eventBus.addEventListener(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
   }
+
   /**
-   *
+   * Refresh header
+   * @param {boolean} favourite
+   */
+  refreshHeader = (favourite) => {
+    if (favourite.status === true) {
+      CreateSnack({
+        title: `Ресторан добавлен в избарнное!`,
+        status: 'green',
+      });
+    } else {
+      CreateSnack({
+        title: `Ресторан удален из избранного:(`,
+        status: 'red',
+      });
+    }
+    this.restaurant = {
+      ...this.restaurant,
+      favourite: favourite.status,
+    };
+    this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
+  }
+
+  /**
+   * Request for a search
+   * @param {event} e
+   */
+  makeSearchRequestByTag = (e) => {
+    eventBus.emitEventListener(SearchEvents.searchRequest, e.target.innerHTML);
+  }
+
+  /**
+   * Make check and call controller to publish review on restaurant
    */
   publishReview = () => {
     const textArea = this.parent.querySelector('.textarea');
@@ -127,6 +173,7 @@ export class RestaurantReviewsView extends View {
    * Removing page
    */
   remove() {
+    eventBus.unsubscribe(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
     if (this.starsRating) {
       this.starsRating.remove();
     }

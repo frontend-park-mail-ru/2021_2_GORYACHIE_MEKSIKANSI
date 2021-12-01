@@ -330,7 +330,7 @@ export class SnackBar {
     this.Element.style.transition = '';
 
     requestAnimationFrame(() => {
-      this.Element.style.height = snackbarHeight + 'px';
+      // this.Element.style.height = snackbarHeight + 'px';
       this.Element.style.opacity = 1;
       this.Element.style.marginTop = '0px';
       this.Element.style.marginBottom = '0px';
@@ -364,7 +364,6 @@ export function CreateSnack({
     message: title,
     status: status,
     position: 'tr',
-    width: '500px',
     fixed: true,
   });
   snack.settingUp();

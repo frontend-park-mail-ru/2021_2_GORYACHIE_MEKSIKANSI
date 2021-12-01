@@ -1,9 +1,13 @@
 :root {
-    --restaurantsListWidth: 80%;
+    --restaurantsListWidth: 100%;
     --sortBoxWidth: calc(100% - var(--restaurantsListWidth));
 }
 
 .restaurants-list {
+    &__sort-header {
+        margin-bottom: 25px;
+    }
+
     &__line {
         display: flex;
         align-items: flex-start;

@@ -5,23 +5,32 @@
     --orderSummaryInnerPadding: 16px;
 
     --orderSummaryMarginLeft: 100px; // margin left from main content block
-    --orderSummaryWidth: 65%;
+    --orderSummaryWidth: 80%;
     --orderSummaryStickyMarginTop: 75px;
 }
 
 .cart-order-summary {
-
     margin-left: var(--orderSummaryMarginLeft);
-    background-color: var(--contentBlockBackgroundColor);
     color: var(--contentBlockColor);
     width: var(--orderSummaryWidth);
-    border-radius: var(--modalRadius);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0 ,0.19);
 
     &-sticky {
         position: fixed;
         top: 0;
         margin-top: var(--orderSummaryStickyMarginTop);
+    }
+
+    @media (min-width: 0px) and (max-width: 860px) {
+        &-sticky {
+            position: relative;
+        }
+
+        & {
+            width: 100%;
+            margin-top: 50px;
+            margin-left: 0;
+            top: 0;
+        }
     }
 
     &__payment-title {
@@ -33,7 +42,7 @@
         display: flex;
         flex-direction: column;
 
-        padding: var(--orderSummaryOuterPadding) var(--orderSummaryOuterPadding) var(--orderSummaryInnerPadding);
+        //padding: var(--orderSummaryOuterPadding) var(--orderSummaryOuterPadding) var(--orderSummaryInnerPadding);
 
         border-bottom: solid 1px #e2e2e2;
     }
@@ -54,7 +63,7 @@
     }
 
     &__summary {
-        padding: var(--orderSummaryInnerPadding) var(--orderSummaryOuterPadding) var(--orderSummaryOuterPadding);
+        //padding: var(--orderSummaryInnerPadding) var(--orderSummaryOuterPadding) var(--orderSummaryOuterPadding);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -140,6 +149,7 @@
     }
 
     &__promocode-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;

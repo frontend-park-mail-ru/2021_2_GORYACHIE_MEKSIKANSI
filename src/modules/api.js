@@ -64,8 +64,9 @@ export function loginPost({type, email, phone, password}) {
 export function profileGet({url = apiPaths.getProfile}) {
   return http.ajaxGet({url})
       .then(auth)
-      .catch(() => {
+      .catch((response) => {
         eventBus.emitEventListener(AuthStatus.notAuth, {});
+        return response;
       });
 }
 
@@ -252,7 +253,7 @@ export function orderHistoryGet() {
  * @return {Promise<{body: object, status: number}>}
  */
 export function getRestaurantReviews(restaurantId) {
-  return http.ajaxGet({url: 'restaurants/' + restaurantId + '/reviews/'});
+  return http.ajaxGet({url: '/restaurant/' + restaurantId + '/review'});
 }
 
 /**
@@ -263,7 +264,7 @@ export function getRestaurantReviews(restaurantId) {
  * @return {Object<{status: number, body: Object}>}
  */
 export function postReview({
-  restaurantId,
+  restId,
   text = '',
   rate = '',
 }) {
@@ -271,10 +272,76 @@ export function postReview({
     url: apiPaths.postReview,
     body: {
       restaurant: {
-        id: restaurantId,
+        id: restId,
       },
       text: text,
-      rate: rate,
+      rate: Number(rate),
     },
+  });
+}
+
+/**
+ *
+ * Make request to the server to create an order
+ *
+ * @param {Object} order
+ * @return {Object<{status: number, body: Object}>}
+ */
+export function createOrder(order) {
+  return http.ajaxPost({
+    url: apiPaths.postOrder,
+    body: {
+      methodPay: order.methodPay,
+      address: order.address,
+      comment: order.comment,
+    },
+  });
+}
+
+/**
+ * Function calling backend to do search
+ * @param {string} searchText
+ * @return {Object<{status: string, body: Object}>}
+ */
+export function search(searchText) {
+  return http.ajaxGet({url: apiPaths.search + '?searchText=' + searchText});
+}
+
+/**
+ * Function for calling backend to get info
+ * about order with status of order
+ * @param {number | string} orderId
+ * @return {Object<{status: string, body: Object}>}
+ */
+export function getOrderInfo(orderId) {
+  return http.ajaxGet({url: apiPaths.getOrder + orderId + '/active'});
+}
+
+/**
+ * Function for calling backend to switch the favourite
+ * of restaurant by rest Id
+ * @param {number} restId
+ * @return {Object<{status: number, body: Object}>}
+ */
+export function putSwitchFavourite(restId) {
+  return http.ajaxPut({url: apiPaths.favourite, body: {id: restId}});
+}
+
+/**
+ * Function for calling backend to get favourite
+ * restaurants for user
+ * @return {Object<{status: string, body: Object}>}
+ */
+export function getFavouritesRestaurants() {
+  return http.ajaxGet({url: apiPaths.favourite});
+}
+
+/**
+* Function to get key for websocket
+ * @return {Object<{status: string, body: Object}>}
+*/
+export function getWSKey() {
+  return http.ajaxGet({
+    url: '/user/ws/key',
   });
 }

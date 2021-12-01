@@ -6,4 +6,11 @@ export const ProfileEvents = {
   userOrderHistoryGetSuccess: 'userOrderHistoryGetSuccess',
   userOrderHistoryGetFailed: 'userOrderHistoryGetFailed',
   userReviewPublishSuccess: 'userReviewPublishSuccess',
+  userOrderCreatedSuccess: 'userOrderCreatedSuccess',
+  userOrderGetSuccess: 'userOrderGetSuccess',
+  userOrderGetFailed: 'userOrderGetFailed',
+  userFavouriteSwitchSuccess: 'userFavouriteSwitchSuccess',
+  userFavouriteSwitchFailed: 'userFavouriteSwitchFailed',
+  userFavouriteRestaurantsGetSuccess: 'userFavouriteRestaurantsGetSuccess',
+  userOrderGetSuccessForStatus: 'userOrderGetSuccessForStatus',
 };
