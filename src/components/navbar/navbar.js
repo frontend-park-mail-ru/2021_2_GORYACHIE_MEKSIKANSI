@@ -10,6 +10,7 @@ import {ProfileEvents} from '../../events/Profile';
 import {SearchEvents} from '../../events/Search';
 import Socket from 'Modules/webSocket';
 import {CreateSnack} from 'Components/snackBar/snackBar'
+import {statusMap} from "../../modules/consts";
 
 /**
  * switching theme crutch
@@ -73,9 +74,10 @@ export class Navbar {
    * @param {object} message
    */
   navbarWSHandler = (message) => {
-    if (message.action === 'status') {
+    const body = message.body.web_socket;
+    if (body.action === 'status') {
       CreateSnack({
-        title: 'Статус заказа обновлен!',
+        title: `Статус заказа ${body.order.id} обновлен на: ${statusMap[body.order.status]}`,
         status: 'green',
       });
     }

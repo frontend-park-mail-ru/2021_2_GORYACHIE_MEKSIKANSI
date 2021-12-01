@@ -50,8 +50,9 @@ export class OrderProcessController {
    * @param {object} message
    */
   orderWSHandler = (message) => {
-    if (message.action === 'status') {
-      this.orderProcessView.updateStatus(message.status);
+    const body = message.body.web_socket;
+    if (body.action === 'status') {
+      this.orderProcessView.updateStatus(body.order.status);
     }
   }
 

@@ -3,6 +3,12 @@ export const cloudPrefix = 'https://hmeats-spaces.fra1.cdn.digitaloceanspaces.co
 export const AccessControlAllowOrigin = 'http://127.0.0.1';
 export const ServerAddress = 'http://127.0.0.1:5000/api/v1';
 export const updateStatusTimeout = 20000;
+export const statusMap = {
+  1: `обработан`,
+  2: `готовится`,
+  3: `еда уже едет к вам`,
+  4: `успешно доставлен`,
+};
 
 export const apiPaths = {
   signup: '/user/signup/',

@@ -24,14 +24,17 @@ export function auth(response) {
     });
 
     Profile.getCart();
+    getWSKey()
+        .then((responseKey) => {
+          console.log("I'M HERE");
+          if (responseKey.status === ResponseEvents.OK) {
+            Socket.connect(responseKey.body.web_socket.key);
+          }
+        });
+
   } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
-
-  getWSKey()
-      .then((responseKey) => {
-        Socket.connect(responseKey.body.key);
-      });
 
   return response;
 }
@@ -53,5 +56,6 @@ export function logout() {
       cart: [],
     },
   });
+  Socket.disconnect();
   eventBus.emitEventListener(AuthStatus.userLogout, urls.home);
 }

@@ -64,8 +64,9 @@ export function loginPost({type, email, phone, password}) {
 export function profileGet({url = apiPaths.getProfile}) {
   return http.ajaxGet({url})
       .then(auth)
-      .catch(() => {
+      .catch((response) => {
         eventBus.emitEventListener(AuthStatus.notAuth, {});
+        return response;
       });
 }
 
@@ -321,7 +322,7 @@ export function getOrderInfo(orderId) {
  * @return {Object<{status: string, body: Object}>}
  */
 export function getWSKey() {
-  return Http.ajaxGet({
-    url: '/connect/ws',
+  return http.ajaxGet({
+    url: '/user/ws/key',
   });
 }

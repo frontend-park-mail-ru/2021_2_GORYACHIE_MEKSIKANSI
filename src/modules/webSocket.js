@@ -1,4 +1,4 @@
-import {wsConnect} from 'Modules/consts.js';
+import {apiPaths} from 'Modules/consts.js';
 
 /**
  * Socket is class implementing webSocket connection
@@ -37,7 +37,7 @@ class Socket {
      *
      */
   send(data) {
-    console.log('socket send -> ', data);
+    // console.log('socket send -> ', data);
     this.socket.send(JSON.stringify(data));
   }
 
@@ -49,17 +49,17 @@ class Socket {
   connect(id) {
     this.id = id;
     const connectionState = this.socket?.readyState;
-    if (connectionState === WebSocket.OPEN || connectionState === WebSocket.CONNECTING) {
-      console.log('Socked already connected');
+    if (connectionState && connectionState === WebSocket.OPEN || connectionState === WebSocket.CONNECTING) {
+      // console.log('Socked already connected');
       return;
     }
 
-    this.socket = new WebSocket(wsConnect + `${this.id}`);
+    this.socket = new WebSocket(apiPaths.wsConnect + `?key=${this.id}`);
     this.socket.onopen = () => {
       console.log('Socked connected');
     };
     this.socket.onmessage = (event) => {
-      console.log('Socked message -> ', event);
+      // console.log('Socked message -> ', event);
       this.messageHandlers.forEach((handler) => {
         handler(JSON.parse(event.data));
       });
@@ -75,7 +75,7 @@ class Socket {
      */
   disconnect() {
     const connectionState = this.socket?.readyState;
-    if (connectionState !== WebSocket.CLOSED && connectionState !== WebSocket.CLOSING) {
+    if (connectionState && connectionState !== WebSocket.CLOSED && connectionState !== WebSocket.CLOSING) {
       this.socket.close();
     }
   }
