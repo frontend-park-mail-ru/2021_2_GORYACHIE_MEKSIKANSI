@@ -174,6 +174,9 @@ export class RestaurantView extends View {
       favourite: favourite.status,
     };
     this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
+    this.parent.querySelector('.restaurant-header__love-icon').addEventListener('click', () => {
+      this.controller.switchFavourite(this.restaurant.id);
+    });
   }
 
   /**
