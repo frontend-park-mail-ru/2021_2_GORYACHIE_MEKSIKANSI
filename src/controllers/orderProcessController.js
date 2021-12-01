@@ -64,14 +64,6 @@ export class OrderProcessController {
     }
   }
 
-  /**
-   * Function for rerendering status page with new data
-   * @param {string | number} orderId
-   */
-  callModelToGetOrder(orderId) {
-    ProfileModel.getOrderForStatus(orderId);
-  }
-
   redirect = () => {
     this.routeTo(urls.home);
   }

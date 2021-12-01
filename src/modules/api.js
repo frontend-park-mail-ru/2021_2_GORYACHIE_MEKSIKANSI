@@ -324,7 +324,7 @@ export function getOrderInfo(orderId) {
  * @return {Object<{status: number, body: Object}>}
  */
 export function putSwitchFavourite(restId) {
-  return http.ajaxPut({url: apiPaths.favourite, body: {restaurant: {id: restId}}});
+  return http.ajaxPut({url: apiPaths.favourite, body: {id: restId}});
 }
 
 /**

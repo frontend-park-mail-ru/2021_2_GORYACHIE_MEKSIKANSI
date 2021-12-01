@@ -117,7 +117,7 @@ export class RestaurantReviewsView extends View {
       this.controller.routeTo('/restaurants/' + this.restaurant.id);
     });
 
-    this.parent.querySelector('.favourite_button').addEventListener('click', () => {
+    this.parent.querySelector('.restaurant-header__love-icon').addEventListener('click', () => {
       this.controller.switchFavourite(this.restaurant.id);
     });
     eventBus.addEventListener(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
@@ -128,9 +128,20 @@ export class RestaurantReviewsView extends View {
    * @param {boolean} favourite
    */
   refreshHeader = (favourite) => {
+    if (favourite.status === true) {
+      CreateSnack({
+        title: `Ресторан добавлен в избарнное!`,
+        status: 'green',
+      });
+    } else {
+      CreateSnack({
+        title: `Ресторан удален из избранного:(`,
+        status: 'red',
+      });
+    }
     this.restaurant = {
       ...this.restaurant,
-      favourite: favourite,
+      favourite: favourite.status,
     };
     this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
   }

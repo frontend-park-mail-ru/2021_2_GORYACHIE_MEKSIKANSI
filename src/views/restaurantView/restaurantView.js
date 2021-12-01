@@ -14,6 +14,7 @@ import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeade
 import eventBus from '../../modules/eventBus';
 import {SearchEvents} from '../../events/Search';
 import {ProfileEvents} from '../../events/Profile';
+import {CreateSnack} from "../../components/snackBar/snackBar";
 
 
 /**
@@ -95,7 +96,7 @@ export class RestaurantView extends View {
       item.onclick = this.makeSearchRequestByTag;
     });
 
-    this.parent.querySelector('.favourite_button').addEventListener('click', () => {
+    this.parent.querySelector('.restaurant-header__love-icon').addEventListener('click', () => {
       this.controller.switchFavourite(this.restaurant.id);
     });
 
@@ -157,9 +158,20 @@ export class RestaurantView extends View {
    * @param {boolean} favourite
    */
   refreshHeader = (favourite) => {
+    if (favourite.status === true) {
+      CreateSnack({
+        title: `Ресторан добавлен в избарнное!`,
+        status: 'green',
+      });
+    } else {
+      CreateSnack({
+        title: `Ресторан удален из избранного:(`,
+        status: 'red',
+      });
+    }
     this.restaurant = {
       ...this.restaurant,
-      favourite: favourite,
+      favourite: favourite.status,
     };
     this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
   }

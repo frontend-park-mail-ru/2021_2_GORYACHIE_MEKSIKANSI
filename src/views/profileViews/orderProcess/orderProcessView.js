@@ -40,6 +40,7 @@ export class OrderProcessView extends BaseProfileView {
   render(props = {}) {
     this.orderId = props.id;
     super.render();
+    this.navbar.remove();
     this.navbar.render();
     const order = {
       historyOrder: false,
@@ -56,16 +57,12 @@ export class OrderProcessView extends BaseProfileView {
         id: props.id,
         sumCost: props.cart.cost.sumCost,
         dCost: props.cart.cost.dCost,
-        dTime: '20:50',
+        dTime: props.time_delivery,
         order: Order(order),
       }),
       rightMenu: profileButtonsNav});
     this.updateStatus(props.status);
     // this.updateRetry = setInterval(this.callControllerToUpdate, updateStatusTimeout);
-  }
-
-  callControllerToUpdate = () => {
-    this.controller.callModelToGetOrder(this.orderId);
   }
 
   /**
@@ -99,7 +96,6 @@ export class OrderProcessView extends BaseProfileView {
    * Method for removing setted up listeners and other data
    */
   remove() {
-    clearInterval(this.updateRetry);
     super.remove();
     this.navbar.remove();
     this.parent.innerHTML = '';

@@ -17,7 +17,7 @@ import {
 } from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
 import {orderBodyMock, ordersHistoryBodyMock, restaurantsBodyMock} from '../views/mocks';
-import {cloudPrefix} from '../modules/consts';
+import {cloudPrefix, statusMap} from '../modules/consts';
 import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
 import {OrderingEvents} from '../events/Ordering';
@@ -355,42 +355,7 @@ class ProfileModel {
     putSwitchFavourite(restId)
         .then((response) => {
           if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.favourite);
-          }
-        })
-        .catch(() => {
-        });
-  }
-
-  /**
-     * Method for calling api and get information about order with status
-     * @param {number | string} orderId
-     */
-  getOrderForStatus(orderId) {
-    getOrderInfo(orderId)
-        .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userOrderGetSuccessForStatus, response.body.status);
-          } else if (response.status === ResponseEvents.Forbidden) {
-            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
-          } else {
-            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
-          }
-        })
-        .catch(() => {
-          // eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
-        });
-  }
-
-  /**
-     * Use api to switch restaurant favourite for user
-     * @param {number} restId
-     */
-  switchFavourite(restId) {
-    putSwitchFavourite(restId)
-        .then((response) => {
-          if (response.status === ResponseEvents.OK) {
-            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.favourite);
+            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.restaurants);
           }
         })
         .catch(() => {
