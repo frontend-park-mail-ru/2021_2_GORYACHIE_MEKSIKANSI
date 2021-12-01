@@ -11,6 +11,7 @@ import {paymentMethods} from '../modules/consts';
 import {ProfileEvents} from '../events/Profile';
 
 
+// eslint-disable-next-line valid-jsdoc
 /**
  * Standard class to ordering controller
  */

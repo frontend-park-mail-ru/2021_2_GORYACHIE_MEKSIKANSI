@@ -12,6 +12,15 @@ import Socket from 'Modules/webSocket';
 import {CreateSnack} from 'Components/snackBar/snackBar'
 import {statusMap} from "../../modules/consts";
 
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+}
+
 /**
  * switching theme crutch
  * @param {event} e
@@ -214,7 +223,6 @@ export class Navbar {
       document.querySelector('.navbar')) {
       this.parent.querySelector('.nav-button').removeEventListener('click', this.openListener);
       this.parent.querySelector('.hamburger-wrapper').removeEventListener('click', this.closeListener);
-
       const logoutButton = document.getElementById('logout');
       if (logoutButton) {
         logoutButton.removeEventListener('click', this.logout);

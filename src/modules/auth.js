@@ -26,7 +26,6 @@ export function auth(response) {
     Profile.getCart();
     getWSKey()
         .then((responseKey) => {
-          console.log("I'M HERE");
           if (responseKey.status === ResponseEvents.OK) {
             Socket.connect(responseKey.body.web_socket.key);
           }
