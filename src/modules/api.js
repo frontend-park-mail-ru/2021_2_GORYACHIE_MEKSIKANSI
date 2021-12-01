@@ -318,9 +318,28 @@ export function getOrderInfo(orderId) {
 }
 
 /**
- * Function to get key for websocket
+ * Function for calling backend to switch the favourite
+ * of restaurant by rest Id
+ * @param {number} restId
+ * @return {Object<{status: number, body: Object}>}
+ */
+export function putSwitchFavourite(restId) {
+  return http.ajaxPut({url: apiPaths.favourite, body: {restaurant: {id: restId}}});
+}
+
+/**
+ * Function for calling backend to get favourite
+ * restaurants for user
  * @return {Object<{status: string, body: Object}>}
  */
+export function getFavouritesRestaurants() {
+  return http.ajaxGet({url: apiPaths.favourite});
+}
+
+/**
+* Function to get key for websocket
+ * @return {Object<{status: string, body: Object}>}
+*/
 export function getWSKey() {
   return http.ajaxGet({
     url: '/user/ws/key',

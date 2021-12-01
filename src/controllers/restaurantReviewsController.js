@@ -54,6 +54,15 @@ export class RestaurantReviewsController { // TODO: добавить джсдо�
   }
 
   /**
+   * Call model to switch favourite restaurant
+   * by rest Id
+   * @param {number} restId
+   */
+  switchFavourite(restId) {
+    ProfileModel.switchFavourite(restId);
+  }
+
+  /**
    * Removing view
    */
   remove() {

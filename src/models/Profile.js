@@ -5,9 +5,18 @@ import {ResponseEvents} from '../events/Responses';
 import {urls} from 'Modules/urls.js';
 import {userActions} from 'Modules/reducers/userStore.js';
 import userStore from '../modules/reducers/userStore';
-import {cartGet, createOrder, getOrderInfo, orderHistoryGet, postPay, postReview, updateAvatar} from '../modules/api';
+import {
+  cartGet,
+  createOrder, getFavouritesRestaurants,
+  getOrderInfo,
+  orderHistoryGet,
+  postPay,
+  postReview,
+  putSwitchFavourite,
+  updateAvatar,
+} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
-import {orderBodyMock, ordersHistoryBodyMock} from '../views/mocks';
+import {orderBodyMock, ordersHistoryBodyMock, restaurantsBodyMock} from '../views/mocks';
 import {cloudPrefix} from '../modules/consts';
 import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
 import {AuthStatus} from '../events/Auth';
@@ -335,6 +344,71 @@ class ProfileModel {
         })
         .catch(() => {
           // eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
+        });
+  }
+
+  /**
+   * Use api to switch restaurant favourite for user
+   * @param {number} restId
+   */
+  switchFavourite(restId) {
+    putSwitchFavourite(restId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.favourite);
+          }
+        })
+        .catch(() => {
+        });
+  }
+
+  /**
+     * Method for calling api and get information about order with status
+     * @param {number | string} orderId
+     */
+  getOrderForStatus(orderId) {
+    getOrderInfo(orderId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetSuccessForStatus, response.body.status);
+          } else if (response.status === ResponseEvents.Forbidden) {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
+          }
+        })
+        .catch(() => {
+          // eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
+        });
+  }
+
+  /**
+     * Use api to switch restaurant favourite for user
+     * @param {number} restId
+     */
+  switchFavourite(restId) {
+    putSwitchFavourite(restId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.favourite);
+          }
+        })
+        .catch(() => {
+        });
+  }
+
+  /**
+   * Use api to get favourite restaurants for user
+   */
+  getFavourite() {
+    getFavouritesRestaurants()
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userFavouriteRestaurantsGetSuccess, response.body);
+          }
+        })
+        .catch(() => {
+          eventBus.emitEventListener(ProfileEvents.userFavouriteRestaurantsGetSuccess, restaurantsBodyMock);
         });
   }
 }

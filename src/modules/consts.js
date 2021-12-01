@@ -26,6 +26,7 @@ export const apiPaths = {
   postOrder: '/user/order/',
   getOrder: '/user/order/',
   pay: '/user/pay/',
+  favourite: '/user/favourite',
   getOrdersHistory: '/user/order/',
   getProfile: '/user/',
   getRestaurants: '/',

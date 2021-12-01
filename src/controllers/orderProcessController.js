@@ -69,7 +69,7 @@ export class OrderProcessController {
    * @param {string | number} orderId
    */
   callModelToGetOrder(orderId) {
-    this.routeTo('/order/' + orderId);
+    ProfileModel.getOrderForStatus(orderId);
   }
 
   redirect = () => {

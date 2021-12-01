@@ -116,7 +116,25 @@ export class RestaurantReviewsView extends View {
     this.parent.querySelector('.back_button').addEventListener('click', () => {
       this.controller.routeTo('/restaurants/' + this.restaurant.id);
     });
+
+    this.parent.querySelector('.favourite_button').addEventListener('click', () => {
+      this.controller.switchFavourite(this.restaurant.id);
+    });
+    eventBus.addEventListener(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
   }
+
+  /**
+   * Refresh header
+   * @param {boolean} favourite
+   */
+  refreshHeader = (favourite) => {
+    this.restaurant = {
+      ...this.restaurant,
+      favourite: favourite,
+    };
+    this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
+  }
+
   /**
    * Request for a search
    * @param {event} e
@@ -144,6 +162,7 @@ export class RestaurantReviewsView extends View {
    * Removing page
    */
   remove() {
+    eventBus.unsubscribe(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
     if (this.starsRating) {
       this.starsRating.remove();
     }

@@ -13,6 +13,7 @@ import {ContinueModal} from 'hme-design-system/src/components/modal/continueModa
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
 import eventBus from '../../modules/eventBus';
 import {SearchEvents} from '../../events/Search';
+import {ProfileEvents} from '../../events/Profile';
 
 
 /**
@@ -93,6 +94,12 @@ export class RestaurantView extends View {
     this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
       item.onclick = this.makeSearchRequestByTag;
     });
+
+    this.parent.querySelector('.favourite_button').addEventListener('click', () => {
+      this.controller.switchFavourite(this.restaurant.id);
+    });
+
+    eventBus.addEventListener(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
   }
 
   /**
@@ -146,9 +153,22 @@ export class RestaurantView extends View {
   }
 
   /**
+   * Refresh restaurant header
+   * @param {boolean} favourite
+   */
+  refreshHeader = (favourite) => {
+    this.restaurant = {
+      ...this.restaurant,
+      favourite: favourite,
+    };
+    this.parent.querySelector('.page__head').innerHTML = new RestaurantHeader({restaurant: this.restaurant}).render();
+  }
+
+  /**
    * Removing page
    */
   remove() {
+    eventBus.unsubscribe(ProfileEvents.userFavouriteSwitchSuccess, this.refreshHeader);
     if (this.continueDiv) {
       this.closeContinueOrdering();
     }
