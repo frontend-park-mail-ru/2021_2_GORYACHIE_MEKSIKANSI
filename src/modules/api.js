@@ -280,18 +280,6 @@ export function postReview({
 }
 
 /**
- * order: {
- *   address: {
- *     coordinates: {
- *       latitude,
- *       longitude,
- *     },
- *     city,
- *     street,
- *     house,
- *   },
- *   comment,
- * }
  *
  * Make request to the server to create an order
  *
@@ -326,4 +314,14 @@ export function search(searchText) {
  */
 export function getOrderInfo(orderId) {
   return http.ajaxGet({url: apiPaths.getOrder + orderId + '/active'});
+}
+
+/**
+ * Function to get key for websocket
+ * @return {Object<{status: string, body: Object}>}
+ */
+export function getWSKey() {
+  return Http.ajaxGet({
+    url: '/connect/ws',
+  });
 }

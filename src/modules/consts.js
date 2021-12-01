@@ -24,6 +24,7 @@ export const apiPaths = {
   getProfile: '/user/',
   getRestaurants: '/',
   search: '/restaurant/search',
+  wsConnect: `ws://127.0.0.1:5000/api/v1/ws/`,
 };
 
 export const paymentMethods = {

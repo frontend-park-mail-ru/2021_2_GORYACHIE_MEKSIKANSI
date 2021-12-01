@@ -8,6 +8,8 @@ import userStore from 'Modules/reducers/userStore.js';
 import cartStore from 'Modules/reducers/cartStore.js';
 import {ProfileEvents} from '../../events/Profile';
 import {SearchEvents} from '../../events/Search';
+import Socket from 'Modules/webSocket';
+import {CreateSnack} from 'Components/snackBar/snackBar'
 
 /**
  * switching theme crutch
@@ -33,6 +35,7 @@ export class Navbar {
     profileGet({});
     this.yMap = new MapPopup({});
     eventBus.addEventListener(ProfileEvents.userDataUpdateSuccess, this.refresh);
+    Socket.subscribe(this.navbarWSHandler.bind(this));
   }
 
   /**
@@ -63,6 +66,19 @@ export class Navbar {
   refresh = () => {
     this.remove();
     this.render();
+  }
+
+  /**
+   * WebSocket handler to update order status
+   * @param {object} message
+   */
+  navbarWSHandler = (message) => {
+    if (message.action === 'status') {
+      CreateSnack({
+        title: 'Статус заказа обновлен!',
+        status: 'green',
+      });
+    }
   }
 
   /**
@@ -187,6 +203,7 @@ export class Navbar {
    * Remove event listeners relates for navbar
    */
   remove() {
+    Socket.unsubscribe(this.navbarWSHandler);
     this.yMap.remove();
     window.removeEventListener('keypress', this.makeSearchByEnter);
 

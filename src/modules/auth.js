@@ -6,8 +6,9 @@ import {userActions} from './reducers/userStore';
 import userStore from './reducers/userStore';
 import cartStore, {clearCart} from './reducers/cartStore';
 import {cartActions, updateStorage, setCart} from './reducers/cartStore';
-import {cartGet, updateCartPut} from './api.js';
-import Profile from '../models/Profile';
+import {cartGet, getWSKey, updateCartPut} from './api.js';
+import Profile from 'Models/Profile';
+import Socket from 'Modules/webSocket';
 
 /**
  * emitting events for user auth
@@ -26,6 +27,12 @@ export function auth(response) {
   } else {
     eventBus.emitEventListener(AuthStatus.notAuth, {});
   }
+
+  getWSKey()
+      .then((responseKey) => {
+        Socket.connect(responseKey.body.key);
+      });
+
   return response;
 }
 

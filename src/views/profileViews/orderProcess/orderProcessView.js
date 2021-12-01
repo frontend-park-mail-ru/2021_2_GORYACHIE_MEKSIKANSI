@@ -61,7 +61,7 @@ export class OrderProcessView extends BaseProfileView {
       }),
       rightMenu: profileButtonsNav});
     this.updateStatus(props.status);
-    this.updateRetry = setInterval(this.callControllerToUpdate, updateStatusTimeout);
+    // this.updateRetry = setInterval(this.callControllerToUpdate, updateStatusTimeout);
   }
 
   callControllerToUpdate = () => {
@@ -84,9 +84,9 @@ export class OrderProcessView extends BaseProfileView {
         item.classList.add('order-process__do');
       }
     });
-    if (status === 4) {
-      clearInterval(this.updateRetry);
-    }
+    // if (status === 4) {
+    //   clearInterval(this.updateRetry);
+    // }
   }
 
   /**

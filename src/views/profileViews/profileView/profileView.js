@@ -7,9 +7,9 @@ import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hb
 import userStore from 'Modules/reducers/userStore.js';
 import {BaseProfileView} from '../baseProfileView';
 import {Avatar} from 'hme-design-system/src/components/avatar/avatar';
-import {List} from "hme-design-system/src/components/list/list.js";
-import {restaurantsBodyMock} from "../../mocks";
-import {RestaurantBlock} from "hme-design-system/src/components/restaurantBlock/restaurantBlock";
+import {List} from 'hme-design-system/src/components/list/list.js';
+import {restaurantsBodyMock} from '../../mocks';
+import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
 
 /**
  * Profile view class

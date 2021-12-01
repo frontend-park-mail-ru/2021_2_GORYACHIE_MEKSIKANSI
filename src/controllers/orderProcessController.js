@@ -5,6 +5,7 @@ import {AuthStatus} from '../events/Auth';
 import {urls} from '../modules/urls';
 import ProfileModel from '../models/Profile';
 import {ProfileEvents} from '../events/Profile';
+import Socket from 'Modules/webSocket';
 
 /**
  * Standard calss to ordering process controller
@@ -27,6 +28,7 @@ export class OrderProcessController {
       controller: this,
     });
     eventBus.addEventListener(ProfileEvents.userOrderGetSuccess, this.orderProcessView.render.bind(this.orderProcessView));
+    Socket.subscribe(this.orderWSHandler.bind(this));
   }
 
   /**
@@ -40,6 +42,16 @@ export class OrderProcessController {
       eventBus.addEventListener(AuthStatus.notAuth, this.redirect);
     } else {
       ProfileModel.getOrder(orderId);
+    }
+  }
+
+  /**
+   * WebSocket handler to update order status
+   * @param {object} message
+   */
+  orderWSHandler = (message) => {
+    if (message.action === 'status') {
+      this.orderProcessView.updateStatus(message.status);
     }
   }
 
@@ -67,6 +79,7 @@ export class OrderProcessController {
    * Removing view
    */
   remove() {
+    Socket.unsubscribe();
     eventBus.unsubscribe(AuthStatus.userLogin, this.show);
     eventBus.unsubscribe(AuthStatus.notAuth, this.redirect);
     this.orderProcessView.remove();
