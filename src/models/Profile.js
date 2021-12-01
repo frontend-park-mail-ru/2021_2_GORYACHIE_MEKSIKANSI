@@ -363,6 +363,41 @@ class ProfileModel {
   }
 
   /**
+     * Method for calling api and get information about order with status
+     * @param {number | string} orderId
+     */
+  getOrderForStatus(orderId) {
+    getOrderInfo(orderId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetSuccessForStatus, response.body.status);
+          } else if (response.status === ResponseEvents.Forbidden) {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
+          } else {
+            eventBus.emitEventListener(ProfileEvents.userOrderGetFailed, {});
+          }
+        })
+        .catch(() => {
+          // eventBus.emitEventListener(ProfileEvents.userOrderGetSuccess, orderBodyMock);
+        });
+  }
+
+  /**
+     * Use api to switch restaurant favourite for user
+     * @param {number} restId
+     */
+  switchFavourite(restId) {
+    putSwitchFavourite(restId)
+        .then((response) => {
+          if (response.status === ResponseEvents.OK) {
+            eventBus.emitEventListener(ProfileEvents.userFavouriteSwitchSuccess, response.body.favourite);
+          }
+        })
+        .catch(() => {
+        });
+  }
+
+  /**
    * Use api to get favourite restaurants for user
    */
   getFavourite() {

@@ -12,4 +12,5 @@ export const ProfileEvents = {
   userFavouriteSwitchSuccess: 'userFavouriteSwitchSuccess',
   userFavouriteSwitchFailed: 'userFavouriteSwitchFailed',
   userFavouriteRestaurantsGetSuccess: 'userFavouriteRestaurantsGetSuccess',
+  userOrderGetSuccessForStatus: 'userOrderGetSuccessForStatus',
 };

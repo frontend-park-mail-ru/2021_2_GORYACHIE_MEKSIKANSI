@@ -27,6 +27,7 @@ export class OrderProcessController {
       controller: this,
     });
     eventBus.addEventListener(ProfileEvents.userOrderGetSuccess, this.orderProcessView.render.bind(this.orderProcessView));
+    eventBus.addEventListener(ProfileEvents.userOrderGetSuccessForStatus, this.orderProcessView.updateStatus.bind(this.orderProcessView));
   }
 
   /**
@@ -56,7 +57,7 @@ export class OrderProcessController {
    * @param {string | number} orderId
    */
   callModelToGetOrder(orderId) {
-    this.routeTo('/order/' + orderId);
+    ProfileModel.getOrderForStatus(orderId);
   }
 
   redirect = () => {
