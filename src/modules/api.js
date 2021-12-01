@@ -64,8 +64,9 @@ export function loginPost({type, email, phone, password}) {
 export function profileGet({url = apiPaths.getProfile}) {
   return http.ajaxGet({url})
       .then(auth)
-      .catch(() => {
+      .catch((response) => {
         eventBus.emitEventListener(AuthStatus.notAuth, {});
+        return response;
       });
 }
 
@@ -280,18 +281,6 @@ export function postReview({
 }
 
 /**
- * order: {
- *   address: {
- *     coordinates: {
- *       latitude,
- *       longitude,
- *     },
- *     city,
- *     street,
- *     house,
- *   },
- *   comment,
- * }
  *
  * Make request to the server to create an order
  *
@@ -345,4 +334,14 @@ export function putSwitchFavourite(restId) {
  */
 export function getFavouritesRestaurants() {
   return http.ajaxGet({url: apiPaths.favourite});
+}
+
+/**
+* Function to get key for websocket
+ * @return {Object<{status: string, body: Object}>}
+*/
+export function getWSKey() {
+  return http.ajaxGet({
+    url: '/user/ws/key',
+  });
 }
