@@ -1,11 +1,11 @@
 import userStore from '@/modules/reducers/userStore';
 import {urls} from '@/modules/urls';
 import cartStore from '@/modules/reducers/cartStore';
-import eventBus from '@/modules/eventBus.js';
-import {RestaurantEvents} from '@/events/Restaurant.js';
-import {RestaurantView} from '@/views/restaurantView/restaurantView.js';
-import RestaurantModel from '@/models/Restaurant.js';
-import ProfileModel from '@/models/Profile.js';
+import eventBus from '@/modules/eventBus';
+import {RestaurantEvents} from '@/events/Restaurant';
+import {RestaurantView} from '@/views/restaurantView/restaurantView';
+import RestaurantModel from '@/models/Restaurant';
+import ProfileModel from '@/models/Profile';
 
 /**
  * Standard restaurant controller

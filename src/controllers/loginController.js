@@ -1,11 +1,11 @@
 import userStore from '@/modules/reducers/userStore';
-import eventBus from '@/modules/eventBus.js';
-import {urls} from '@/modules/urls.js';
-import {Validation} from '@/modules/validation.js';
-import {LoginEvents} from '@/events/Login.js';
-import {AuthStatus} from '@/events/Auth.js';
-import {LoginView} from '@/views/LoginView/loginView.js';
-import LoginModel from '@/models/Login.js';
+import eventBus from '@/modules/eventBus';
+import {urls} from '@/modules/urls';
+import {Validation} from '@/modules/validation';
+import {LoginEvents} from '@/events/Login';
+import {AuthStatus} from '@/events/Auth';
+import {LoginView} from '@/views/LoginView/loginView';
+import LoginModel from '@/models/Login';
 
 /**
  *  Login controller class

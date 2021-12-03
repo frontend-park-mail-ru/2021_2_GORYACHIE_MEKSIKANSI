@@ -4,16 +4,24 @@ import homePage from './homePage.hbs';
 import page from '../baseView/page.hbs';
 import {RestaurantsList} from 'Components/restaurantsList/restaurantLists';
 import {PromoLine} from 'Components/promoLine/promoLine.js';
+import {RestaurantReviewsView} from "@/views/restaurantReviewsView/restaurantReviewsView";
 
 /**
  * Home view class
  */
 export class HomeView extends View {
+  private readonly routeTo: Function;
+  private readonly controller: Object;
+  private parent: HTMLElement;
+  private promo: PromoLine;
+  private restaurantList: RestaurantsList;
+
+
   /**
    *
    * @param {HTMLElement} parent
    * @param {Function} routeTo
-   * @param {Class}controller
+   * @param {Object} controller
    */
   constructor({
     parent: parent = document.body,

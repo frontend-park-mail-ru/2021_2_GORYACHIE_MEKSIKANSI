@@ -1,11 +1,11 @@
-import eventBus from '@/modules/eventBus.js';
-import {urls} from '@/modules/urls.js';
+import eventBus from '@/modules/eventBus';
+import {urls} from '@/modules/urls';
 import userStore from '@/modules/reducers/userStore';
 import {paymentMethods} from '@/modules/consts';
 import {AuthStatus} from '@/events/Auth';
 import {OrderingEvents} from '@/events/Ordering';
 import {ProfileEvents} from '@/events/Profile';
-import {OrderingView} from '@/views/profileViews/orderingView/orderingView.js';
+import {OrderingView} from '@/views/profileViews/orderingView/orderingView';
 import ProfileModel from '@/models/Profile';
 
 /**

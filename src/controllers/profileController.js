@@ -1,14 +1,14 @@
-import eventBus from '@/modules/eventBus.js';
-import {Validation} from '@/modules/validation.js';
+import eventBus from '@/modules/eventBus';
+import {Validation} from '@/modules/validation';
 import {urls} from '@/modules/urls';
 import userStore from '@/modules/reducers/userStore';
 import {fileMaxSize} from '@/modules/consts';
-import {ProfileEvents} from '@/events/Profile.js';
-import {AuthStatus} from '@/events/Auth.js';
-import {ValidationLength} from '@/events/Validation.js';
+import {ProfileEvents} from '@/events/Profile';
+import {AuthStatus} from '@/events/Auth';
+import {ValidationLength} from '@/events/Validation';
 import {CreateSnack} from '@/components/snackBar/snackBar';
-import {ProfileView} from '@/views/profileViews/profileView/profileView.js';
-import ProfileModel from '@/models/Profile.js';
+import {ProfileView} from '@/views/profileViews/profileView/profileView';
+import ProfileModel from '@/models/Profile';
 
 /**
  *  Profile controller class

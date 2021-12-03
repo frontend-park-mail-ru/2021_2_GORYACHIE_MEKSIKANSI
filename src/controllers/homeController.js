@@ -1,8 +1,8 @@
-import eventBus from '@/modules/eventBus.js';
-import {HomeEvents} from '@/events/Home.js';
-import {AuthStatus} from '@/events/Auth.js';
-import HomeModel from '@/models/Home.js';
-import {HomeView} from '@/views/homeView/homeView.js';
+import eventBus from '@/modules/eventBus';
+import {HomeEvents} from '@/events/Home';
+import {AuthStatus} from '@/events/Auth';
+import HomeModel from '@/models/Home';
+import {HomeView} from '@/views/homeView/homeView';
 
 /**
  * Home page controller

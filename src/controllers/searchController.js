@@ -1,4 +1,4 @@
-import eventBus from '@/modules/eventBus.js';
+import eventBus from '@/modules/eventBus';
 import {urls} from '@/modules/urls';
 import {SearchEvents} from '@/events/Search';
 import SearchModel from '@/models/Search';

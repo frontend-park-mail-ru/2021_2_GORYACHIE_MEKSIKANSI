@@ -1,9 +1,9 @@
-import {SignUpView} from '@/views/SignUpPage/signUpView.js';
-import {Validation} from '@/modules/validation.js';
-import SignUpModel from '@/models/SignUp.js';
-import eventBus from '@/modules/eventBus.js';
-import {SignUpEvents} from '@/events/SignUp.js';
-import {AuthStatus} from '@/events/Auth.js';
+import {SignUpView} from '@/views/SignUpPage/signUpView';
+import {Validation} from '@/modules/validation';
+import SignUpModel from '@/models/SignUp';
+import eventBus from '@/modules/eventBus';
+import {SignUpEvents} from '@/events/SignUp';
+import {AuthStatus} from '@/events/Auth';
 import {urls} from '@/modules/urls';
 import userStore from '@/modules/reducers/userStore';
 
