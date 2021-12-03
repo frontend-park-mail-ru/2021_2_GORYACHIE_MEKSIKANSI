@@ -192,19 +192,9 @@ class ProfileModel {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, response.body);
           } else {
-            CreateSnack({
-              title: 'Не получилось получить историю заказов.',
-              status: 'red',
-            });
-            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetFailed, response.body);
+            eventBus.emitEventListener(ProfileEvents.userOrderHistoryGetSuccess, {});
           }
         });
-    // .catch(() => {
-    //   CreateSnack({
-    //     title: 'Не получилось получить историю заказов.',
-    //     status: 'red',
-    //   });
-    // });
   }
 
   /**
@@ -371,9 +361,6 @@ class ProfileModel {
           if (response.status === ResponseEvents.OK) {
             eventBus.emitEventListener(ProfileEvents.userFavouriteRestaurantsGetSuccess, response.body);
           }
-        })
-        .catch(() => {
-          eventBus.emitEventListener(ProfileEvents.userFavouriteRestaurantsGetSuccess, restaurantsBodyMock);
         });
   }
 }

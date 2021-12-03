@@ -38,7 +38,7 @@ export class FavouriteView extends BaseProfileView {
    */
   render(props = {}) {
     super.render();
-    const restaurants = props.restaurants;
+    const restaurants = props.restaurants ? props.restaurants : [];
 
     this.navbar.render();
     this.parent.innerHTML += baseProfilePage({
