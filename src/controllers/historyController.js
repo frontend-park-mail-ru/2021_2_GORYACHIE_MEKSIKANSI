@@ -1,15 +1,18 @@
-import eventBus from '../modules/eventBus';
-import {HistoryView} from '../views/profileViews/historyView/historyView';
-import {AuthStatus} from '../events/Auth';
-import ProfileModel from '../models/Profile';
-import {ProfileEvents} from '../events/Profile';
-import userStore from '../modules/reducers/userStore';
-import {urls} from '../modules/urls';
+import eventBus from '@/modules/eventBus';
+import {HistoryView} from '@/views/profileViews/historyView/historyView';
+import {AuthStatus} from '@/events/Auth';
+import ProfileModel from '@/models/Profile';
+import {ProfileEvents} from '@/events/Profile';
+import userStore from '@/modules/reducers/userStore';
+import {urls} from '@/modules/urls';
 
 /**
  * History page controller
  */
 export class HistoryController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly historyView: HistoryView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

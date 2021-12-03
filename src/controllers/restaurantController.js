@@ -1,16 +1,19 @@
-import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
-import eventBus from 'Modules/eventBus.js';
-import {RestaurantEvents} from 'Events/Restaurant.js';
-import RestaurantModel from 'Models/Restaurant.js';
-import ProfileModel from 'Models/Profile.js';
-import userStore from '../modules/reducers/userStore';
-import {urls} from '../modules/urls';
-import cartStore from 'Modules/reducers/cartStore';
+import userStore from '@/modules/reducers/userStore';
+import {urls} from '@/modules/urls';
+import cartStore from '@/modules/reducers/cartStore';
+import eventBus from '@/modules/eventBus.js';
+import {RestaurantEvents} from '@/events/Restaurant.js';
+import {RestaurantView} from '@/views/restaurantView/restaurantView.js';
+import RestaurantModel from '@/models/Restaurant.js';
+import ProfileModel from '@/models/Profile.js';
 
 /**
  * Standard restaurant controller
  */
-export class RestaurantController { // TODO: добавить джсдок
+export class RestaurantController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly restaurantView: RestaurantView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

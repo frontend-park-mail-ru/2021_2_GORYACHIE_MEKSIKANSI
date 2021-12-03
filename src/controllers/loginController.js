@@ -1,19 +1,19 @@
-import LoginModel from 'Models/Login.js';
-import {Validation} from 'Modules/validation.js';
-import eventBus from 'Modules/eventBus.js';
-import {LoginEvents} from 'Events/Login.js';
-import {LoginView} from 'Views/LoginView/loginView.js';
-import {ResponseEvents} from 'Events/Responses.js';
-import {ErrorsText} from 'Events/Errors.js';
-import {urls} from 'Modules/urls.js';
-import {userStatus} from 'Modules/store';
-import {AuthStatus} from 'Events/Auth.js';
-import userStore from 'Modules/reducers/userStore';
+import userStore from '@/modules/reducers/userStore';
+import eventBus from '@/modules/eventBus.js';
+import {urls} from '@/modules/urls.js';
+import {Validation} from '@/modules/validation.js';
+import {LoginEvents} from '@/events/Login.js';
+import {AuthStatus} from '@/events/Auth.js';
+import {LoginView} from '@/views/LoginView/loginView.js';
+import LoginModel from '@/models/Login.js';
 
 /**
  *  Login controller class
  */
 export class LoginController {
+  private readonly routeTo: Function;
+  private readonly loginView: LoginView;
+  private parent: HTMLElement;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

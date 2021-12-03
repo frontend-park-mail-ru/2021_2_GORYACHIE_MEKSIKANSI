@@ -1,16 +1,19 @@
-import {OrderProcessView} from '../views/profileViews/orderProcess/orderProcessView';
-import userStore from '../modules/reducers/userStore';
-import eventBus from '../modules/eventBus';
-import {AuthStatus} from '../events/Auth';
-import {urls} from '../modules/urls';
-import ProfileModel from '../models/Profile';
-import {ProfileEvents} from '../events/Profile';
-import Socket from 'Modules/webSocket';
+import userStore from '@/modules/reducers/userStore';
+import eventBus from '@/modules/eventBus';
+import {urls} from '@/modules/urls';
+import Socket from '@/modules/webSocket';
+import {AuthStatus} from '@/events/Auth';
+import {ProfileEvents} from '@/events/Profile';
+import {OrderProcessView} from '@/views/profileViews/orderProcess/orderProcessView';
+import ProfileModel from '@/models/Profile';
 
 /**
- * Standard calss to ordering process controller
+ * Standard class to ordering process controller
  */
 export class OrderProcessController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly orderProcessView: OrderProcessView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

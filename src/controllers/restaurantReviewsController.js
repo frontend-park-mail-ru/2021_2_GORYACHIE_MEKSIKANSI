@@ -1,18 +1,18 @@
-import {RestaurantView} from 'Views/restaurantView/restaurantView.js';
-import eventBus from 'Modules/eventBus.js';
-import {RestaurantEvents} from 'Events/Restaurant.js';
-import RestaurantModel from 'Models/Restaurant.js';
-import ProfileModel from 'Models/Profile.js';
-import userStore from '../modules/reducers/userStore';
-import {urls} from '../modules/urls';
-import cartStore from 'Modules/reducers/cartStore';
-import {RestaurantReviewsView} from '../views/restaurantReviewsView/restaurantReviewsView';
-import {AuthStatus} from '../events/Auth';
+import eventBus from '@/modules/eventBus.js';
+import {RestaurantEvents} from '@/events/Restaurant.js';
+import RestaurantModel from '@/models/Restaurant.js';
+import ProfileModel from '@/models/Profile.js';
+import userStore from '@/modules/reducers/userStore';
+import {RestaurantReviewsView} from '@/views/restaurantReviewsView/restaurantReviewsView';
+import {AuthStatus} from '@/events/Auth';
 
 /**
  * Standard restaurant controller
  */
-export class RestaurantReviewsController { // TODO: добавить джсдок
+export class RestaurantReviewsController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly restaurantReviewsView: RestaurantReviewsView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -34,9 +34,9 @@ export class RestaurantReviewsController { // TODO: добавить джсдо�
 
   /**
    * rendering view of restaurant
-   * @param {int} id
+   * @param {number} id
    */
-  render(id = 0) {
+  render(id: number = 0) {
     if (!userStore.getState().auth) {
       eventBus.addEventListener(AuthStatus.userLogin, this.restaurantReviewsView.refresh);
     }
@@ -46,10 +46,10 @@ export class RestaurantReviewsController { // TODO: добавить джсдо�
   /**
    * Call Model to publish review
    * @param {number} restId
-   * @param {number} value
+   * @param {string} value
    * @param {number} rate
    */
-  publishReview = (restId, value, rate) => {
+  publishReview = (restId: number, value: string, rate: number): void => {
     ProfileModel.publishReviewPost(restId, value, rate);
   }
 

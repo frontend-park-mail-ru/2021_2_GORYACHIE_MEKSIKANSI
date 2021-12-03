@@ -1,16 +1,18 @@
-import eventBus from '../modules/eventBus';
-import {HistoryView} from '../views/profileViews/historyView/historyView';
-import {AuthStatus} from '../events/Auth';
-import ProfileModel from '../models/Profile';
-import {ProfileEvents} from '../events/Profile';
-import {FavouriteView} from '../views/profileViews/favouriteView/favouriteView';
-import {urls} from '../modules/urls';
-import userStore from '../modules/reducers/userStore';
+import eventBus from '@/modules/eventBus';
+import {urls} from '@/modules/urls';
+import userStore from '@/modules/reducers/userStore';
+import {AuthStatus} from '@/events/Auth';
+import ProfileModel from '@/models/Profile';
+import {ProfileEvents} from '@/events/Profile';
+import {FavouriteView} from '@/views/profileViews/favouriteView/favouriteView';
 
 /**
  * Favourite page controller
  */
 export class FavouriteController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly favouriteView: FavouriteView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
@@ -43,7 +45,7 @@ export class FavouriteController {
   }
 
   /**
-   * Rendirectiong to other page
+   * Redirecting to other page
    */
   redirect = () => {
     this.routeTo(urls.home);

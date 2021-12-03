@@ -1,13 +1,16 @@
-import {HomeView} from 'Views/homeView/homeView.js';
-import eventBus from 'Modules/eventBus.js';
-import {HomeEvents} from 'Events/Home.js';
-import HomeModel from 'Models/Home.js';
-import {AuthStatus} from 'Events/Auth.js';
+import eventBus from '@/modules/eventBus.js';
+import {HomeEvents} from '@/events/Home.js';
+import {AuthStatus} from '@/events/Auth.js';
+import HomeModel from '@/models/Home.js';
+import {HomeView} from '@/views/homeView/homeView.js';
 
 /**
  * Home page controller
  */
 export class HomeController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly homeView: HomeView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

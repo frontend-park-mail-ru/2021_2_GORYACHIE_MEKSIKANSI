@@ -1,11 +1,13 @@
 import {View} from '../baseView/View.js';
-import {LoginController} from 'Controllers/loginController.js';
+import {LoginController} from '@/controllers/loginController.js';
 import loginPage from './loginPage.hbs';
 
 /**
  * View for Login Page
  */
 export class LoginView extends View {
+  private parent: HTMLElement;
+  private controller: LoginController;
   /**
    * Constructor for login view
    * @param {HTMLElement} parent

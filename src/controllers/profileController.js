@@ -1,21 +1,22 @@
-import {ProfileView} from 'Views/profileViews/profileView/profileView.js';
-import eventBus from 'Modules/eventBus.js';
-import {ProfileEvents} from 'Events/Profile.js';
-import {AuthStatus} from 'Events/Auth.js';
-import {ValidationLength} from 'Events/Validation.js';
-
-import store from 'Modules/store.js';
-import {Validation} from 'Modules/validation.js';
-import ProfileModel from 'Models/Profile.js';
-import {urls} from 'Modules/urls';
-import userStore from 'Modules/reducers/userStore';
-import {CreateSnack, SnackBar} from '../components/snackBar/snackBar';
-import {fileMaxSize} from '../modules/consts';
+import eventBus from '@/modules/eventBus.js';
+import {Validation} from '@/modules/validation.js';
+import {urls} from '@/modules/urls';
+import userStore from '@/modules/reducers/userStore';
+import {fileMaxSize} from '@/modules/consts';
+import {ProfileEvents} from '@/events/Profile.js';
+import {AuthStatus} from '@/events/Auth.js';
+import {ValidationLength} from '@/events/Validation.js';
+import {CreateSnack} from '@/components/snackBar/snackBar';
+import {ProfileView} from '@/views/profileViews/profileView/profileView.js';
+import ProfileModel from '@/models/Profile.js';
 
 /**
  *  Profile controller class
  */
 export class ProfileController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly profileView: ProfileView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

@@ -1,13 +1,16 @@
-import eventBus from 'Modules/eventBus.js';
-import {SearchView} from '../views/searchView/searchView';
-import {SearchEvents} from '../events/Search';
-import {urls} from '../modules/urls';
-import SearchModel from '../models/Search';
+import eventBus from '@/modules/eventBus.js';
+import {urls} from '@/modules/urls';
+import {SearchEvents} from '@/events/Search';
+import SearchModel from '@/models/Search';
+import {SearchView} from '@/views/searchView/searchView';
 
 /**
  * Search page controller
  */
 export class SearchController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly searchView: SearchView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element

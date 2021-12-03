@@ -1,18 +1,19 @@
-import {SignUpView} from 'Views/SignUpPage/signUpView.js';
-import {Validation} from 'Modules/validation.js';
-import SignUpModel from 'Models/SignUp.js';
-import eventBus from 'Modules/eventBus.js';
-import {SignUpEvents} from 'Events/SignUp.js';
-import {userStatus} from 'Modules/store';
-import store from 'Modules/store.js';
-import {AuthStatus} from 'Events/Auth.js';
-import {urls} from 'Modules/urls';
-import userStore from 'Modules/reducers/userStore';
+import {SignUpView} from '@/views/SignUpPage/signUpView.js';
+import {Validation} from '@/modules/validation.js';
+import SignUpModel from '@/models/SignUp.js';
+import eventBus from '@/modules/eventBus.js';
+import {SignUpEvents} from '@/events/SignUp.js';
+import {AuthStatus} from '@/events/Auth.js';
+import {urls} from '@/modules/urls';
+import userStore from '@/modules/reducers/userStore';
 
 /**
  * Signup page controller
  */
 export class SignUpController {
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private readonly signUpView: SignUpView;
   /**
    * Constructor for controller
    * @param {HTMLElement} parent parent html element
