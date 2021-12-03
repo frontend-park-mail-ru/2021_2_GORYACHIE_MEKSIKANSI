@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CheckerPlugin } = require('awesome-typescript-loader')
 
 const PATHS = {
     src: path.join(__dirname, './src/'),
@@ -15,18 +16,18 @@ const PATHS = {
 module.exports = {
     resolve: {
         alias: {
-            Assets: path.resolve('src/assets'),
-            Components: path.resolve('src/components'),
-            Controllers: path.resolve('src/controllers'),
-            Events: path.resolve('src/events'),
-            Models: path.resolve('src/models'),
-            Modules: path.resolve('src/modules'),
-            Views: path.resolve('src/views'),
+            '@': path.resolve(__dirname, 'src'),
+            // Components: path.resolve('src/components'),
+            // Controllers: path.resolve('src/controllers'),
+            // Events: path.resolve('src/events'),
+            // Models: path.resolve('src/models'),
+            // Modules: path.resolve('src/modules'),
+            // Views: path.resolve('src/views'),
         },
-        extensions: ['.js'],
+        extensions: ['.js', '.ts', '.tsx', '.js', '.jsx'],
     },
     mode: debug ? 'development' : 'production',
-    entry: path.resolve('./src/main.js'),
+    entry: path.resolve('./src/main.ts'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
@@ -60,6 +61,10 @@ module.exports = {
                 test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
                 use: 'file-loader'
             },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+            }
         ]
     },
     plugins: [
@@ -83,6 +88,7 @@ module.exports = {
             DEBUG: debug,
         }),
         new CleanWebpackPlugin(),
+        new CheckerPlugin(),
     ],
     devServer: {
         hot: debug,

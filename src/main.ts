@@ -1,20 +1,22 @@
 'use strict';
-import {Router} from 'Modules/router.js';
-import {LoginController} from 'Controllers/loginController.js';
-import {HomeController} from 'Controllers/homeController.js';
-import {SignUpController} from 'Controllers/signUpController.js';
-import {ProfileController} from 'Controllers/profileController.js';
-import {RestaurantController} from 'Controllers/restaurantController.js';
-import {OrderingController} from 'Controllers/orderingController.js';
-import {urls} from 'Modules/urls.js';
 import './main.scss';
-import {OrderProcessController} from './controllers/orderProcessController';
+
+import {Router} from '@/modules/router.ts';
+import {LoginController} from '@/controllers/loginController.js';
+import {HomeController} from '@/controllers/homeController.js';
+import {SignUpController} from '@/controllers/signUpController.js';
+import {ProfileController} from '@/controllers/profileController.js';
+import {RestaurantController} from '@/controllers/restaurantController.js';
+import {OrderingController} from '@/controllers/orderingController.js';
+import {RestaurantReviewsController} from '@/controllers/restaurantReviewsController';
+import {SearchController} from '@/controllers/searchController';
+import {FavouriteController} from '@/controllers/favouriteController';
+import {HistoryController} from '@/controllers/historyController';
+import {OrderProcessController} from '@/controllers/orderProcessController';
+
+import {urls} from '@/modules/urls.js';
+
 import {Footer} from 'hme-design-system/src/components/footer/footer';
-import {HistoryController} from './controllers/historyController';
-import {RestaurantReviewsView} from './views/restaurantReviewsView/restaurantReviewsView';
-import {RestaurantReviewsController} from './controllers/restaurantReviewsController';
-import {SearchController} from './controllers/searchController';
-import {FavouriteController} from './controllers/favouriteController';
 
 
 const application = document.getElementById('app');
@@ -108,4 +110,3 @@ document.getElementById('foot').innerHTML = new Footer({
   ],
 }).render();
 router.start();
-

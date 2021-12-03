@@ -1,4 +1,4 @@
-import Http from './http.js';
+import Http from './http.ts';
 import {auth, logout} from './auth.js';
 import eventBus from './eventBus';
 import {AuthStatus} from 'Events/Auth';

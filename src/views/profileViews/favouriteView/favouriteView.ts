@@ -1,14 +1,18 @@
-import {View} from '../../baseView/View.js';
+import {View} from '../../baseView/View.ts';
 import Navbar from 'Components/navbar/navbar.js';
-import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
-import orderSummary from 'Components/cartOrder/orderSummary.hbs';
 import baseProfilePage from '../baseProfilePage.hbs';
+import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
 import {BaseProfileView} from '../baseProfileView';
+import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
+import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
+import {List} from 'hme-design-system/src/components/list/list.js';
+import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
+
 
 /**
  * Profile view class
  */
-export class CartView extends BaseProfileView {
+export class FavouriteView extends BaseProfileView {
   /**
    *
    * @param {HTMLElement} parent
@@ -34,26 +38,23 @@ export class CartView extends BaseProfileView {
    */
   render(props = {}) {
     super.render();
+    const restaurants = props.restaurants ? props.restaurants : [];
+
     this.navbar.render();
     this.parent.innerHTML += baseProfilePage({
-      pageTitle: 'Оформление заказа',
-      content: orderDelivery(orders),
-      rightMenu: orderSummary({})});
-    document.querySelector('.footer').style.marginTop = '0';
+      pageTitle: 'Избранное',
+      content: new List({
+        listTitle: '',
+        objList: restaurants.map((restaurant) => {
+          return new RestaurantBlock(restaurant).render();
+        }),
+      }).render(),
+      rightMenu: profileButtonsNav});
   }
-
-  /**
-   * Method calling by
-   * @param {string} event
-   */
-  _submitListener(event) {}
-
   /**
    * Method for setting up before rendering elements
    */
   settingUp() {
-    const form = document.getElementById('form_submit');
-    form.addEventListener('click', this._submitListener.bind(this));
   }
 
   /**

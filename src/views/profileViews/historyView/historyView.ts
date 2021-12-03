@@ -1,4 +1,4 @@
-import {View} from '../../baseView/View.js';
+import {View} from '../../baseView/View.ts';
 import Navbar from 'Components/navbar/navbar.js';
 import baseProfilePage from '../baseProfilePage.hbs';
 import historyPage from './historyPage.hbs';

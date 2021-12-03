@@ -1,7 +1,7 @@
 import styles from './navbar.scss';
 import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs';
-import {MapPopup} from '../mapPopup/mapPopup.js';
+import {MapPopup} from '../mapPopup/mapPopup.ts';
 import eventBus from 'Modules/eventBus.js';
 import {AuthStatus} from 'Events/Auth.js';
 import userStore from 'Modules/reducers/userStore.js';

@@ -1,12 +1,12 @@
 import {ResponseEvents} from 'Events/Responses.js';
-import eventBus from './eventBus.js';
+import eventBus from './eventBus.ts';
 import {AuthStatus} from 'Events/Auth.js';
 import {urls} from './urls';
 import {userActions} from './reducers/userStore';
 import userStore from './reducers/userStore';
 import cartStore, {clearCart} from './reducers/cartStore';
 import {cartActions, updateStorage, setCart} from './reducers/cartStore';
-import {cartGet, getWSKey, updateCartPut} from './api.js';
+import {cartGet, getWSKey, updateCartPut} from './api.ts';
 import Profile from 'Models/Profile';
 import Socket from 'Modules/webSocket';
 
