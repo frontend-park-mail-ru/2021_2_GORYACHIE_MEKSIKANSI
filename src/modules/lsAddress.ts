@@ -1,7 +1,7 @@
-import eventBus from './eventBus.js';
-import {AuthStatus} from 'Events/Auth.js';
-import {userActions} from './reducers/userStore.js';
-import userStore from './reducers/userStore.js';
+import eventBus from './eventBus';
+import {AuthStatus} from 'Events/Auth';
+import {userActions} from './reducers/userStore';
+import userStore from './reducers/userStore';
 import {postAddress} from './api';
 
 /**

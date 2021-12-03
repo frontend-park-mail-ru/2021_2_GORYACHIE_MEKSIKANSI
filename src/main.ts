@@ -1,20 +1,20 @@
 'use strict';
 import './main.scss';
 
-import {Router} from '@/modules/router.ts';
-import {LoginController} from '@/controllers/loginController.js';
-import {HomeController} from '@/controllers/homeController.js';
-import {SignUpController} from '@/controllers/signUpController.js';
-import {ProfileController} from '@/controllers/profileController.js';
-import {RestaurantController} from '@/controllers/restaurantController.js';
-import {OrderingController} from '@/controllers/orderingController.js';
+import {Router} from '@/modules/router';
+import {LoginController} from '@/controllers/loginController';
+import {HomeController} from '@/controllers/homeController';
+import {SignUpController} from '@/controllers/signUpController';
+import {ProfileController} from '@/controllers/profileController';
+import {RestaurantController} from '@/controllers/restaurantController';
+import {OrderingController} from '@/controllers/orderingController';
 import {RestaurantReviewsController} from '@/controllers/restaurantReviewsController';
 import {SearchController} from '@/controllers/searchController';
 import {FavouriteController} from '@/controllers/favouriteController';
 import {HistoryController} from '@/controllers/historyController';
 import {OrderProcessController} from '@/controllers/orderProcessController';
 
-import {urls} from '@/modules/urls.js';
+import {urls} from '@/modules/urls';
 
 import {Footer} from 'hme-design-system/src/components/footer/footer';
 
@@ -26,7 +26,7 @@ const routeTo = (url) => {
 };
 
 // if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('/sw.js', { scope: './' })
+//   navigator.serviceWorker.register('/sw.ts', { scope: './' })
 //       .then((registration) => {
 //         const data = {
 //           type: 'CACHE_URLS',

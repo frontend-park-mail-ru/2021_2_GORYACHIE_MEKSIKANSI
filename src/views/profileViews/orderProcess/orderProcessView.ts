@@ -1,13 +1,13 @@
-import {BaseProfileView} from '../baseProfileView';
-import baseProfilePage from '../baseProfilePage.hbs';
-import historyPage from '../historyView/historyPage.hbs';
-import Navbar from 'Components/navbar/navbar.js';
-import orderProcess from 'Components/orderProcess/orderProcess.hbs';
-import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
-import cartStore from '../../../modules/reducers/cartStore';
-import userStore from '../../../modules/reducers/userStore';
+import {BaseProfileView} from '@/views/profileViews/baseProfileView';
+import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
+import historyPage from '@/views/historyView/historyPage.hbs';
+import Navbar from '@/components/navbar/navbar';
+import orderProcess from '@/components/orderProcess/orderProcess.hbs';
+import profileButtonsNav from '@/components/profileButtonsNav/profileButtonsNav.hbs';
+import cartStore from '@/modules/reducers/cartStore';
+import userStore from '@/modules/reducers/userStore';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
-import {updateStatusTimeout} from '../../../modules/consts';
+import {updateStatusTimeout} from '@/modules/consts';
 
 
 /**

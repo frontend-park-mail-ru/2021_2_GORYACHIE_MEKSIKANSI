@@ -1,6 +1,6 @@
-import eventBus from 'Modules/eventBus.js';
-import {HomeEvents} from 'Events/Home.js';
-import {profileGet, restaurantsGet} from 'Modules/api.js';
+import {profileGet, restaurantsGet} from '@/modules/api';
+import eventBus from '@/modules/eventBus';
+import {HomeEvents} from '@/events/Home';
 
 /**
  * Class Home Model

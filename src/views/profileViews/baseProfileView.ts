@@ -1,4 +1,4 @@
-import {View} from '../baseView/View';
+import {View} from '@/views/baseView/View';
 
 /**
  * Baase profile view class

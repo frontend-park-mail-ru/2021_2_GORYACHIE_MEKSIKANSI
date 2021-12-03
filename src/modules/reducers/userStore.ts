@@ -1,5 +1,5 @@
-import {createStore} from '../store';
-import {cloudPrefix} from '../consts';
+import {createStore} from '@/modules/store';
+import {cloudPrefix} from '@/modules/consts';
 
 export const userActions = {
   storeUserLogin: 'storeUserLogin',

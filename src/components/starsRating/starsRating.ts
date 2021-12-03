@@ -1,10 +1,18 @@
 import styles from './starsRating.scss';
 import starsRatingTemplate from './starsRating.hbs';
 
+type Star = {
+  id: number;
+  checked: boolean;
+}
+
 /**
  * Stars rating switcher class
  */
 export class StarsRating {
+  private parent: HTMLElement;
+  private stars: Array<Star>;
+  private rating: number;
   /**
    * Constructor for stars switching
    * @param {HTMLElement} parent parent renderTo switcher
@@ -38,7 +46,7 @@ export class StarsRating {
    */
   update = (e) => {
     const id = e.target.closest('.star').id;
-    this.stars = this.stars.map((star) => {
+    this.stars = this.stars.map((star: Star) => {
       if (star.id <= id) {
         return {id: star.id, checked: true};
       } else {

@@ -17,6 +17,7 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'src'),
+            'node_modules': path.resolve(__dirname, 'node_modules'),
             // Components: path.resolve('src/components'),
             // Controllers: path.resolve('src/controllers'),
             // Events: path.resolve('src/events'),

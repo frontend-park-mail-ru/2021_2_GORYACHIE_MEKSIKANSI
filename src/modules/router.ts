@@ -1,4 +1,4 @@
-import {urls} from './urls.js';
+import {urls} from './urls';
 
 /**
  * Router class

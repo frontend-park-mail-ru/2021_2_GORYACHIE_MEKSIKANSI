@@ -1,17 +1,16 @@
 import styles from './navbar.scss';
-import {profileGet, logoutPost} from 'Modules/api.js';
 import navbar from './navbar.hbs';
-import {MapPopup} from '../mapPopup/mapPopup.ts';
-import eventBus from 'Modules/eventBus.js';
-import {AuthStatus} from 'Events/Auth.js';
-import userStore from 'Modules/reducers/userStore.js';
-import cartStore from 'Modules/reducers/cartStore.js';
-import {ProfileEvents} from '../../events/Profile';
-import {SearchEvents} from '../../events/Search';
-import Socket from 'Modules/webSocket';
-import {CreateSnack} from 'Components/snackBar/snackBar';
-import {statusMap} from '../../modules/consts';
-
+import {profileGet, logoutPost} from '@/modules/api';
+import userStore from '@/modules/reducers/userStore';
+import cartStore from '@/modules/reducers/cartStore';
+import eventBus from '@/modules/eventBus';
+import {statusMap} from '@/modules/consts';
+import Socket from '@/modules/webSocket';
+import {AuthStatus} from '@/events/Auth';
+import {ProfileEvents} from '@/events/Profile';
+import {SearchEvents} from '@/events/Search';
+import {MapPopup} from '@/components/mapPopup/mapPopup';
+import {CreateSnack} from '@/components/snackBar/snackBar';
 
 /**
  * switching theme crutch
@@ -29,6 +28,8 @@ function switchTheme(e) {
  * Left navigation bar class
  */
 export class Navbar {
+  private parent: HTMLElement;
+  private yMap: MapPopup;
   /**
    * @param {HTMLElement} parent
    */
@@ -187,8 +188,8 @@ export class Navbar {
    */
   open() {
     window.document.body.style.overflowY = 'hidden';
-    this.parent.getElementsByClassName('hamburger')[0].style.display = 'flex';
-    this.parent.getElementsByClassName('hamburger-wrapper')[0]
+    this.parent.querySelector<HTMLElement>('.hamburger').style.display = 'flex';
+    this.parent.querySelector<HTMLElement>('.hamburger-wrapper')
         .style.display = 'block';
   }
 
@@ -197,8 +198,8 @@ export class Navbar {
    */
   close() {
     window.document.body.style.overflowY = 'scroll';
-    this.parent.getElementsByClassName('hamburger')[0].style.display = 'none';
-    this.parent.getElementsByClassName('hamburger-wrapper')[0]
+    this.parent.querySelector<HTMLElement>('.hamburger').style.display = 'none';
+    this.parent.querySelector<HTMLElement>('.hamburger-wrapper')
         .style.display = 'none';
   }
 
@@ -219,8 +220,8 @@ export class Navbar {
       if (logoutButton) {
         logoutButton.removeEventListener('click', this.logout);
       }
-      // const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
+      // const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
       // toggleSwitch.removeEventListener('change', switchTheme, false);
 
       document.querySelector('.hamburger-wrapper').remove();

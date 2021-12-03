@@ -1,9 +1,9 @@
-import {View} from '../baseView/View.js';
-import Navbar from 'Components/navbar/navbar';
+import {View} from '@/views/baseView/View';
+import Navbar from '@/components/navbar/navbar';
 import homePage from './homePage.hbs';
-import page from '../baseView/page.hbs';
-import {RestaurantsList} from 'Components/restaurantsList/restaurantLists';
-import {PromoLine} from 'Components/promoLine/promoLine.js';
+import page from '@/views/baseView/page.hbs';
+import {RestaurantsList} from '@/components/restaurantsList/restaurantLists';
+import {PromoLine} from '@/components/promoLine/promoLine';
 import {RestaurantReviewsView} from "@/views/restaurantReviewsView/restaurantReviewsView";
 
 /**
@@ -14,9 +14,7 @@ export class HomeView extends View {
   private readonly controller: Object;
   private parent: HTMLElement;
   private promo: PromoLine;
-  private restaurantList: RestaurantsList;
-
-
+  private restaurantsList: RestaurantsList;
   /**
    *
    * @param {HTMLElement} parent
@@ -35,14 +33,13 @@ export class HomeView extends View {
     });
     this.promo = new PromoLine();
     this.restaurantsList = new RestaurantsList();
-    this.navbar = Navbar;
   }
   /**
    * Method that render home page in inner HTML of element
    * @param {Object} props
    */
-  render(props = {}) {
-    this.navbar.render();
+  render(props: any = {}) {
+    Navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage(),
     }));
@@ -57,7 +54,7 @@ export class HomeView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
-    this.navbar.remove();
+    Navbar.remove();
     this.promo.remove();
     this.restaurantsList.remove();
     this.parent.innerHTML = '';

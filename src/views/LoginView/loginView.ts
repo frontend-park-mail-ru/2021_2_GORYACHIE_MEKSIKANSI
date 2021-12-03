@@ -1,5 +1,5 @@
-import {View} from '../baseView/View.js';
-import {LoginController} from '@/controllers/loginController.js';
+import {View} from '@/views/baseView/View';
+import {LoginController} from '@/controllers/loginController';
 import loginPage from './loginPage.hbs';
 
 /**
@@ -43,8 +43,8 @@ export class LoginView extends View {
    * @private
    */
   submitListener(event) {
-    const login = document.getElementById('login');
-    const password = document.getElementById('password');
+    const login = <HTMLInputElement>document.getElementById('login');
+    const password = <HTMLInputElement>document.getElementById('password');
     event.preventDefault();
     const loginResult = this.controller.login(login.value, password.value);
 

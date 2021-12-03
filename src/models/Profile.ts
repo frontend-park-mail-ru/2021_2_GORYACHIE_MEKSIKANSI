@@ -1,26 +1,23 @@
-import eventBus from 'Modules/eventBus.js';
-import {ProfileEvents} from 'Events/Profile.js';
-import {profileGet, updateEmail, updateName, updatePassword, updatePhone} from 'Modules/api.js';
-import {ResponseEvents} from '../events/Responses';
-import {urls} from 'Modules/urls.js';
-import {userActions} from 'Modules/reducers/userStore.js';
-import userStore from '../modules/reducers/userStore';
+import cartStore, {cartActions, setCart} from '@/modules/reducers/cartStore';
+import {userActions} from '@/modules/reducers/userStore';
+import userStore from '@/modules/reducers/userStore';
+import eventBus from '@/modules/eventBus';
+import {updateEmail, updateName, updatePassword, updatePhone} from '@/modules/api';
+import {cloudPrefix} from '@/modules/consts';
 import {
-  cartGet,
-  createOrder, getFavouritesRestaurants,
-  getOrderInfo,
-  orderHistoryGet,
-  postPay,
-  postReview,
-  putSwitchFavourite,
-  updateAvatar,
-} from '../modules/api';
-import {CreateSnack} from '../components/snackBar/snackBar';
-import {orderBodyMock, ordersHistoryBodyMock, restaurantsBodyMock} from '../views/mocks';
-import {cloudPrefix, statusMap} from '../modules/consts';
-import cartStore, {cartActions, setCart} from '../modules/reducers/cartStore';
-import {AuthStatus} from '../events/Auth';
-import {OrderingEvents} from '../events/Ordering';
+    cartGet,
+    createOrder, getFavouritesRestaurants,
+    getOrderInfo,
+    orderHistoryGet,
+    postPay,
+    postReview,
+    putSwitchFavourite,
+    updateAvatar,
+} from '@/modules/api';
+import {ProfileEvents} from '@/events/Profile';
+import {ResponseEvents} from '@/events/Responses';
+import {AuthStatus} from '@/events/Auth';
+import {CreateSnack} from '@/components/snackBar/snackBar';
 import RestaurantModel from './Restaurant';
 
 /**

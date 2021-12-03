@@ -1,13 +1,11 @@
-import {loginPost, profileGet} from 'Modules/api.js';
-import eventBus from 'Modules/eventBus.js';
-import {LoginEvents} from 'Events/Login.js';
-import {ResponseEvents} from 'Events/Responses.js';
-import {urls} from 'Modules/urls.js';
-import {ErrorsText} from 'Events/Errors.js';
+import {loginPost, profileGet} from '@/modules/api';
+import eventBus from '@/modules/eventBus';
+import {LoginEvents} from '@/events/Login';
+import {ResponseEvents} from '@/events/Responses';
+import {ErrorsText} from '@/events/Errors';
 
 /**
  * class login model
- *
  */
 class LoginModel {
   /**

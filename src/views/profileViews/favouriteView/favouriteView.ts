@@ -1,11 +1,11 @@
-import {View} from '../../baseView/View.ts';
-import Navbar from 'Components/navbar/navbar.js';
-import baseProfilePage from '../baseProfilePage.hbs';
-import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
-import {BaseProfileView} from '../baseProfileView';
+import {View} from '@/views/baseView/View';
+import Navbar from '@/components/navbar/navbar';
+import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
+import profileButtonsNav from '@/components/profileButtonsNav/profileButtonsNav.hbs';
+import {BaseProfileView} from '@/views/profileViews/baseProfileView';
 import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
-import {List} from 'hme-design-system/src/components/list/list.js';
+import {List} from 'hme-design-system/src/components/list/list';
 import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
 
 

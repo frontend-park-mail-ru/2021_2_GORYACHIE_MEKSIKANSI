@@ -1,7 +1,7 @@
-import Http from './http.ts';
-import {auth, logout} from './auth.js';
+import Http from './http';
+import {auth, logout} from './auth';
 import eventBus from './eventBus';
-import {AuthStatus} from 'Events/Auth';
+import {AuthStatus} from '@/events/Auth';
 import {apiPaths} from './consts';
 
 const http = new Http();

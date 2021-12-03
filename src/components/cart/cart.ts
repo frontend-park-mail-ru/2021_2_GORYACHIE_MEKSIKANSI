@@ -1,17 +1,20 @@
-import {RestaurantEvents} from 'Events/Restaurant.js';
 import styles from './cart.scss';
-import EventBus from 'Modules/eventBus.js';
 import cart from './cart.hbs';
-import cartStore from 'Modules/reducers/cartStore.js';
-import {SnackBar} from 'Components/snackBar/snackBar.js';
-import {ResponseEvents} from 'Events/Responses.js';
-import {CreateSnack} from '../snackBar/snackBar';
+import {RestaurantEvents} from 'events/Restaurant';
+import EventBus from 'modules/eventBus';
+import cartStore from 'modules/reducers/cartStore';
+import {ResponseEvents} from 'events/Responses';
+import {CreateSnack} from 'components/snackBar/snackBar';
+import {RestaurantController} from '@/controllers/restaurantController';
 
 
 /**
  * Cart class
  */
 export class Cart {
+  private controller: RestaurantController;
+  private routeTo: Function;
+  private parent: HTMLElement;
   /**
    * Constructor for cart class
    *
@@ -44,10 +47,6 @@ export class Cart {
     });
     this.refreshSummary();
 
-    this.sticky = this.parent.querySelector('.cart-wrapper').offsetTop;
-    this.footY = document.getElementById('foot').offsetTop;
-    this.cartWidth = this.parent.querySelector('.cart-wrapper').offsetWidth;
-
     const rows = this.parent.querySelectorAll('.cart__order-row');
     if (rows) {
       rows.forEach((item) => {
@@ -63,7 +62,6 @@ export class Cart {
     }
 
     this.settingUp();
-    this.stickCart();
   }
 
   /**
@@ -115,27 +113,6 @@ export class Cart {
    */
   settingUp() {
     this.parent.querySelector('.cart__clear-button').addEventListener('click', this.controller.clearCart);
-    window.addEventListener('scroll', this.stickCart);
-  }
-
-  /**
-   * Function to make cart sticky
-   *
-   */
-  stickCart = () => {
-    // const cart = document.querySelector('.cart-wrapper');
-    // if (window.pageYOffset + 200 + cart.offsetHeight >= this.footY) {
-    //   cart.style.top = String(this.footY - (window.pageYOffset + 200 + cart.offsetHeight)) + 'px';
-    //   this.cartWidth = cart.offsetWidth;
-    // } else if (window.pageYOffset + 75 >= this.sticky) {
-    //   cart.style.top = String(0) + 'px';
-    //   cart.classList.add('cart__sticky');
-    //   cart.style.width = this.cartWidth + 'px';
-    // } else {
-    //   cart.classList.remove('cart__sticky');
-    //   cart.style.width = '';
-    //   this.cartWidth = cart.offsetWidth;
-    // }
   }
 
   /**
@@ -145,9 +122,6 @@ export class Cart {
     EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateSuccess, this.refresh);
     EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateFailed, this.failedToIncrease);
     const cart = this.parent.querySelector('.cart-wrapper');
-    if (cart) {
-      window.removeEventListener('scroll', this.stickCart);
-    }
     this.parent.innerHTML = '';
   }
 
@@ -156,7 +130,6 @@ export class Cart {
    * @param {response} response
    */
  failedToIncrease = (response) => {
-   let snack;
    if (response.status === ResponseEvents.CookiesNotFound) {
      CreateSnack({
        title: 'Войдите или зарегистрируйтесь, чтобы добавить блюдо в корзину!',

@@ -1,20 +1,20 @@
-import Navbar from 'Components/navbar/navbar.js';
-import {DishPopup} from 'Components/dishPopup/dishPopup.js';
-import {Cart} from 'Components/cart/cart.js';
-import {View} from '../baseView/View.js';
-import EventBus from 'Modules/eventBus.js';
-import {RestaurantEvents} from 'Events/Restaurant.js';
-import page from '../baseView/page.hbs';
+import Navbar from '@/components/navbar/navbar';
+import {DishPopup} from '@/components/dishPopup/dishPopup';
+import {Cart} from '@/components/cart/cart';
+import {View} from '@/views/baseView/View';
+import EventBus from '@/modules/eventBus';
+import {RestaurantEvents} from '@/events/Restaurant';
+import page from '@/views/baseView/page.hbs';
 import restaurantPage from './restaurantPage.hbs';
-import {DishesList} from '../../components/dishesList/dishesList';
-import userStore from 'Modules/reducers/userStore.js';
+import {DishesList} from '@/components/dishesList/dishesList';
+import userStore from '@/modules/reducers/userStore';
 import {continueModal} from 'hme-design-system/stories/modal.stories';
 import {ContinueModal} from 'hme-design-system/src/components/modal/continueModal/continueModal';
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
-import eventBus from '../../modules/eventBus';
-import {SearchEvents} from '../../events/Search';
-import {ProfileEvents} from '../../events/Profile';
-import {CreateSnack} from "../../components/snackBar/snackBar";
+import eventBus from '@/modules/eventBus';
+import {SearchEvents} from '@/events/Search';
+import {ProfileEvents} from '@/events/Profile';
+import {CreateSnack} from "@/components/snackBar/snackBar";
 
 
 /**

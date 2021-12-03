@@ -1,9 +1,9 @@
-import {postPay} from '../modules/api';
-import eventBus from '../modules/eventBus';
-import {OrderingEvents} from '../events/Ordering';
-import {urls} from '../modules/urls';
-import {CreateSnack} from '../components/snackBar/snackBar';
-import {ResponseEvents} from '../events/Responses';
+import {postPay} from '@/modules/api';
+import eventBus from '@/modules/eventBus';
+import {urls} from '@/modules/urls';
+import {OrderingEvents} from '@/events/Ordering';
+import {ResponseEvents} from '@/events/Responses';
+import {CreateSnack} from '@/components/snackBar/snackBar';
 
 /**
  * Ordering model class

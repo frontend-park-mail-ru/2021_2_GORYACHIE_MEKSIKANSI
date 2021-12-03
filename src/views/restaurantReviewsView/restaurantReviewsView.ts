@@ -1,6 +1,6 @@
-import Navbar from 'Components/navbar/navbar.js';
-import {View} from '../baseView/View.js';
-import page from '../baseView/page.hbs';
+import Navbar from 'Components/navbar/navbar';
+import {View} from '@/views/baseView/View';
+import page from '@/views/baseView/page.hbs';
 import restaurantReviewsPage from './restaurantReviewsPage.hbs';
 import {RestaurantHeader} from 'hme-design-system/src/components/restaurantHeader/restaurantHeader';
 import {Review} from 'hme-design-system/src/components/review/review';
@@ -8,12 +8,12 @@ import {ContentBlock} from 'hme-design-system/src/components/contentBlock/conten
 import {TextArea} from 'hme-design-system/src/forms/textArea/textArea';
 import Fonts from 'hme-design-system/src/components/fonts/fonts';
 import {Button} from 'hme-design-system/src/components/button/button';
-import userStore from '../../modules/reducers/userStore';
-import {StarsRating} from '../../components/starsRating/starsRating';
-import {CreateSnack} from '../../components/snackBar/snackBar';
-import eventBus from '../../modules/eventBus';
-import {ProfileEvents} from '../../events/Profile';
-import {SearchEvents} from '../../events/Search';
+import userStore from '@/modules/reducers/userStore';
+import {StarsRating} from '@/components/starsRating/starsRating';
+import {CreateSnack} from '@/components/snackBar/snackBar';
+import eventBus from '@/modules/eventBus';
+import {ProfileEvents} from '@/events/Profile';
+import {SearchEvents} from '@/events/Search';
 
 
 /**

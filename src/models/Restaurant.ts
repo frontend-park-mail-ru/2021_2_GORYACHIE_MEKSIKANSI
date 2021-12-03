@@ -1,16 +1,15 @@
-import {ResponseEvents} from '../events/Responses';
-import eventBus from 'Modules/eventBus.js';
-import {RestaurantEvents} from 'Events/Restaurant.js';
+import {dishGet, restaurantGet} from '@/modules/api';
+import {getRestaurantReviews} from '@/modules/api';
+import eventBus from '@/modules/eventBus';
 import cartStore, {
-  addDishToCart,
-  clearCart, clearCartAndAddDish,
-  deleteDishFromCart,
-  increaseDishInCart,
-} from 'Modules/reducers/cartStore';
-import {dishGet, restaurantGet} from 'Modules/api';
-import {reviewsBodyMock} from '../views/mocks';
-import {getRestaurantReviews} from '../modules/api';
-import {CreateSnack} from '../components/snackBar/snackBar';
+    addDishToCart,
+    clearCart, clearCartAndAddDish,
+    deleteDishFromCart,
+    increaseDishInCart,
+} from '@/modules/reducers/cartStore';
+import {ResponseEvents} from '@/events/Responses';
+import {RestaurantEvents} from '@/events/Restaurant';
+import {CreateSnack} from '@/components/snackBar/snackBar';
 
 /**
  * Restaurant model class
@@ -75,13 +74,11 @@ class RestaurantModel {
         });
   }
 
-  // ////////////////////////////////////Cart Model////////////////////////////////////////////////////////////////////////
-
   /**
    * Adding dish to cart with it settings
    * @param {object} dishSettings
    */
-  addDishToCart(dishSettings = {}) {
+  addDishToCart(dishSettings: any = {}) {
     cartStore.dispatch(addDishToCart(dishSettings.dish, dishSettings.restaurant));
   }
 
@@ -104,7 +101,7 @@ class RestaurantModel {
    * Changing restaurant when dish from other restaurant added
    * @param {object} dishSettings
    */
-  changeRestaurantAndAddDish(dishSettings = {}) {
+  changeRestaurantAndAddDish(dishSettings: any = {}) {
     cartStore.dispatch(clearCartAndAddDish(dishSettings.dish, dishSettings.restaurant));
   }
 

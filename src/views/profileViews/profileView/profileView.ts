@@ -1,14 +1,13 @@
-import {View} from '../../baseView/View.ts';
-import Navbar from 'Components/navbar/navbar.js';
-import {updateName} from 'Modules/api.js';
-import baseProfilePage from '../baseProfilePage.hbs';
+import {View} from '@/views/baseView/View';
+import Navbar from '@/components/navbar/navbar';
+import {updateName} from '@/modules/api';
+import baseProfilePage from '@/views/profile/baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
-import profileButtonsNav from 'Components/profileButtonsNav/profileButtonsNav.hbs';
-import userStore from 'Modules/reducers/userStore.js';
-import {BaseProfileView} from '../baseProfileView';
+import profileButtonsNav from '@/components/profileButtonsNav/profileButtonsNav.hbs';
+import userStore from '@/modules/reducers/userStore';
+import {BaseProfileView} from '@/views/baseProfileView';
 import {Avatar} from 'hme-design-system/src/components/avatar/avatar';
-import {List} from 'hme-design-system/src/components/list/list.js';
-import {restaurantsBodyMock} from '../../mocks';
+import {List} from 'hme-design-system/src/components/list/list';
 import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
 
 /**

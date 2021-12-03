@@ -5,11 +5,16 @@ import {PromoBlock} from 'hme-design-system/src/components/promoBlock/promoBlock
  * Promo line standard class
  */
 export class PromoLine {
+  private parent: HTMLElement;
+  private begin: number;
+  private promoLine: HTMLElement;
+  private blocks: NodeListOf<HTMLElement>;
+  private leftButton: HTMLElement;
+  private rightButton: HTMLElement;
   /**
    * constructor to snandard promo line
-   * @param {object} props
    */
-  constructor(props) {
+  constructor() {
   }
 
   /**

@@ -1,8 +1,8 @@
-import {View} from '../baseView/View.js';
-import Navbar from 'Components/navbar/navbar';
-import page from '../baseView/page.hbs';
-import {RestaurantsList} from '../../components/restaurantsList/restaurantLists';
-import {PromoLine} from 'Components/promoLine/promoLine.js';
+import {View} from '@/views/baseView/View';
+import Navbar from '@/components/navbar/navbar';
+import page from '@/views/baseView/page.hbs';
+import {RestaurantsList} from '@/components/restaurantsList/restaurantLists';
+import {PromoLine} from '@/components/promoLine/promoLine';
 
 /**
  * Home view class

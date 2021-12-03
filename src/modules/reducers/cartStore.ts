@@ -1,9 +1,9 @@
-import {updateCartPut} from '../api.ts';
-import {createStoreWithMiddleware} from '../store.ts';
-import eventBus from '../eventBus.ts';
-import {RestaurantEvents} from 'Events/Restaurant.js';
-import {ResponseEvents} from 'Events/Responses.js';
-import {CreateSnack} from '../../components/snackBar/snackBar';
+import {updateCartPut} from '@/modules/api';
+import {createStoreWithMiddleware} from '@/modules/store';
+import eventBus from '@/modules/eventBus';
+import {RestaurantEvents} from '@/events/Restaurant';
+import {ResponseEvents} from '@/events/Responses';
+import {CreateSnack} from '@/components/snackBar/snackBar';
 
 export const cartActions = {
   update: 'update',

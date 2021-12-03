@@ -1,4 +1,4 @@
-import {apiPaths} from 'Modules/consts.js';
+import {apiPaths} from 'Modules/consts';
 
 /**
  * Socket is class implementing webSocket connection

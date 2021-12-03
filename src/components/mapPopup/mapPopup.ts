@@ -1,14 +1,22 @@
-import {YandexMap} from 'Modules/yMaps.js';
-import address from 'Modules/lsAddress.js';
-import eventBus from 'Modules/eventBus.js';
-import {AuthStatus} from 'Events/Auth.js';
-import navbar from '../navbar/navbar.js';
+import {YandexMap} from '@/modules/yMaps';
+import address from '@/modules/lsAddress';
+import eventBus from '@/modules/eventBus';
+import {AuthStatus} from '@/events/Auth';
+import navbar from '@/components/navbar/navbar';
 import mapPopup from './mapPopup.hbs';
 
 /**
  * Map class
  */
 export class MapPopup {
+  private parent: HTMLElement;
+  private unlock: boolean;
+  private readonly timeout: number;
+  private mapPopupCloseIcon: NodeListOf<Element>;
+  private mapPopupLinks: NodeListOf<Element>;
+  private yaMap: YandexMap;
+  private latitude: number;
+  private longitude: number;
   /**
    * Constructor for Map class
    *
@@ -50,16 +58,17 @@ export class MapPopup {
     }
 
     this.yaMap = new YandexMap();
-    this.yaMap.render({id: 'js__map', isStatic: false}, (address, isRenew) => {
+    this.yaMap.render({id: 'js__map', isStatic: false}, (address, isRenew): void => {
       if (isRenew) {
-        document.getElementById('js__map-add-address').value = address.name;
+        let smth = <HTMLInputElement>document.getElementById('js__map-add-address');
+        smth.value = address.name;
       }
       this.setCoords(address.latitude, address.longitude);
     });
 
     this.yaMap.addSuggestView('js__map-add-address');
     const address_ = address.getAddress();
-    this.addCloseConfirmationEventListeners(div);
+    this.addCloseConfirmationEventListeners();
 
     if (address_.name) {
       this.yaMap.customPoint(address_);
@@ -204,7 +213,7 @@ export class MapPopup {
               this.mapPopupClose(document.querySelector('.map-popup'));
               navbar.updateAddressName(address);
               if (this.parent.querySelector('.js-address')) {
-                this.parent.querySelector('.js-address').value = String(isCorrect.properties._data.text);
+                this.parent.querySelector<HTMLInputElement>('.js-address').value = String(isCorrect.properties._data.text);
               }
             } else {
               // TODO нужно сделать ошибку...
@@ -234,7 +243,7 @@ export class MapPopup {
     const outer = document.createElement('div');
     outer.style.visibility = 'hidden';
     outer.style.overflow = 'scroll';
-    outer.style.msOverflowStyle = 'scrollbar';
+    // outer.style.msOverflowStyle = 'scrollbar';
     document.body.appendChild(outer);
 
     const inner = document.createElement('div');

@@ -33,7 +33,7 @@ export class YandexMap {
     id,
     pos = this.initPos,
     isStatic = false,
-  } = {}, callback = () => {}) {
+  } = {}, callback = (address: any, isRenew: any) => {}) {
     ymaps.ready(this.start.bind(this, {id, pos, isStatic}, callback));
   }
 
@@ -255,7 +255,7 @@ export class YandexMap {
    * Checking if address is correct
    * @param {object} address
    */
-  static async isAddressCorrect(address) {
+  static async isAddressCorrect(address: HTMLInputElement) {
     const myGeocoder = ymaps.geocode(address);
     return await myGeocoder.then((res) => res.geoObjects.get(0));
   }

@@ -1,19 +1,22 @@
-import {View} from '../../baseView/View.ts';
-import Navbar from 'Components/navbar/navbar.js';
-import orderDelivery from 'Components/cartOrder/orderDelivery.hbs';
-import orderSummary from 'Components/cartOrder/orderSummary.hbs';
-import baseProfilePage from '../baseProfilePage.hbs';
-import {BaseProfileView} from '../baseProfileView';
+import {View} from '@/views/baseView/View';
+import Navbar from '@/components/navbar/navbar';
+import orderDelivery from '@/components/cartOrder/orderDelivery.hbs';
+import orderSummary from '@/components/cartOrder/orderSummary.hbs';
+import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
+import {BaseProfileView} from '@/views/profileViews/baseProfileView';
 
 /**
  * Profile view class
  */
 export class CartView extends BaseProfileView {
+  private parent: HTMLElement;
+  private readonly routeTo: Function;
+  private controller: Object;
   /**
    *
    * @param {HTMLElement} parent
    * @param {Function} routeTo
-   * @param {Class} controller
+   * @param {Object} controller
    */
   constructor({
     parent: parent = document.body,
@@ -25,21 +28,20 @@ export class CartView extends BaseProfileView {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
   }
 
   /**
    * Method that render login page in inner HTML of element
    * @param {Object} props objects relating for rendering view
    */
-  render(props = {}) {
+  render(props: any = {}) {
     super.render();
-    this.navbar.render();
+    Navbar.render();
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Оформление заказа',
-      content: orderDelivery(orders),
+      content: orderDelivery(props.orders),
       rightMenu: orderSummary({})});
-    document.querySelector('.footer').style.marginTop = '0';
+    document.querySelector<HTMLElement>('.footer').style.marginTop = '0';
   }
 
   /**
@@ -61,7 +63,7 @@ export class CartView extends BaseProfileView {
    */
   remove() {
     super.remove();
-    this.navbar.remove();
+    Navbar.remove();
     this.parent.innerHTML = '';
   }
 }
