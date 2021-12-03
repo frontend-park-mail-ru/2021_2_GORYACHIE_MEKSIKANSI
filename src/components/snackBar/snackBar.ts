@@ -2,6 +2,13 @@
  * Snackbar class, be carefull, containts jss
  */
 export class SnackBar {
+  private userOptions: any;
+  private Element: HTMLDivElement;
+  private Container: any;
+  private Options: any;
+  private Interval: number;
+  private MessageWrapper: HTMLDivElement;
+  private Message: HTMLSpanElement;
   /**
    * snackbar constructor
    * @param {object} userOptions
@@ -291,7 +298,7 @@ export class SnackBar {
     const contentHeight = this.getMessageHeight();
 
     this.Element.style.height = contentHeight + 'px';
-    this.Element.style.opacity = 1;
+    this.Element.style.opacity = '1';
     this.Element.style.marginTop = '5px';
     this.Element.style.marginBottom = '5px';
 
@@ -331,14 +338,14 @@ export class SnackBar {
 
     requestAnimationFrame(() => {
       // this.Element.style.height = snackbarHeight + 'px';
-      this.Element.style.opacity = 1;
+      this.Element.style.opacity = '1';
       this.Element.style.marginTop = '0px';
       this.Element.style.marginBottom = '0px';
       this.Element.style.transition = snackbarTransitions;
 
       requestAnimationFrame(() => {
         this.Element.style.height = '0px';
-        this.Element.style.opacity = 0;
+        this.Element.style.opacity = '0';
       });
     });
 

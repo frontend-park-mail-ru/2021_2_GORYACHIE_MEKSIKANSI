@@ -10,7 +10,7 @@ import {AuthStatus} from '@/events/Auth';
  * Standard restaurant controller
  */
 export class RestaurantReviewsController {
-  private readonly routeTo: Function;
+  readonly routeTo: Function;
   private parent: HTMLElement;
   private readonly restaurantReviewsView: RestaurantReviewsView;
   /**

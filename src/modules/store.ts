@@ -1,4 +1,3 @@
-
 /**
  * Create specific store
  * @param {function} reducer
@@ -55,7 +54,7 @@ function applyMiddleware(middleware) {
  * @param {object} reducersMap
  * @return {object}
  */
-export function combineReducers(reducersMap) {
+export function combineReducers(reducersMap: Object) {
   return function combinationReducers(state, action) {
     const nextState = {};
     Object.entries(reducersMap).forEach(([key, reducer]) => {

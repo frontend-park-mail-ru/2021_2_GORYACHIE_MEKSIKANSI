@@ -1,4 +1,6 @@
-import dishesList from './dishesList.hbs';
+// import dishesList from './dishesList.hbs';
+declare function require(module: string): any;
+let dishesList = require('./dishesList.hbs');
 import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
 import {List} from 'hme-design-system/src/components/list/list';
 import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
@@ -8,6 +10,15 @@ import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
  * DishList class
  */
 export class DishesList {
+  private controller: any;
+  private readonly routeTo: Function;
+  private parent: HTMLElement;
+  private restaurant: any;
+  private dishes: NodeListOf<HTMLElement>;
+  private anchors: NodeListOf<HTMLElement>;
+  private menuNavsTitles: NodeListOf<HTMLElement>;
+  private menuNavsButtons: NodeListOf<HTMLElement>;
+  private sticky: number;
   /**
    * Constructor for DishList class
    *
@@ -65,7 +76,7 @@ export class DishesList {
     window.addEventListener('scroll', this.stickNavbar);
     window.addEventListener('scroll', this.navHighlight);
 
-    this.sticky = document.querySelector('.restaurant-nav__list').offsetTop;
+    this.sticky = document.querySelector<HTMLElement>('.restaurant-nav__list').offsetTop;
   }
 
   /**

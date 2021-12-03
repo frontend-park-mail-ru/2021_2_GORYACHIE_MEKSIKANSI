@@ -1,4 +1,4 @@
-import restaurantsListTemplate from './restaurantsList.hbs';
+import restaurantsListTemplate from 'restaurantsList.hbs';
 import {List} from 'hme-design-system/src/components/list/list';
 import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
 import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';

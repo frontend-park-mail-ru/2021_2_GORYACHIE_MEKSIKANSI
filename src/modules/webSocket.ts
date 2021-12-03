@@ -1,10 +1,13 @@
-import {apiPaths} from 'Modules/consts';
+import {apiPaths} from '@/modules/consts';
 
 /**
  * Socket is class implementing webSocket connection
  *
  */
 class Socket {
+  private messageHandlers: Set<any>;
+  private socket: any;
+  private id: any;
   /**
      * Constructor is setting new Set variable to contain sockets
      *
@@ -37,7 +40,6 @@ class Socket {
      *
      */
   send(data) {
-    // console.log('socket send -> ', data);
     this.socket.send(JSON.stringify(data));
   }
 

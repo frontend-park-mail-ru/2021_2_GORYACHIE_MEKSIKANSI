@@ -1,4 +1,3 @@
-import {View} from '@/views/baseView/View';
 import Navbar from '@/components/navbar/navbar';
 import orderDelivery from '@/components/cartOrder/orderDelivery.hbs';
 import orderSummary from '@/components/cartOrder/orderSummary.hbs';

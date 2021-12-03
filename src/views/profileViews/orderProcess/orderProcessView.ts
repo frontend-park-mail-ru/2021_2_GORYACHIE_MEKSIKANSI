@@ -1,19 +1,16 @@
 import {BaseProfileView} from '@/views/profileViews/baseProfileView';
 import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
-import historyPage from '@/views/historyView/historyPage.hbs';
 import Navbar from '@/components/navbar/navbar';
 import orderProcess from '@/components/orderProcess/orderProcess.hbs';
 import profileButtonsNav from '@/components/profileButtonsNav/profileButtonsNav.hbs';
-import cartStore from '@/modules/reducers/cartStore';
-import userStore from '@/modules/reducers/userStore';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
-import {updateStatusTimeout} from '@/modules/consts';
 
 
 /**
  * Order view class
  */
 export class OrderProcessView extends BaseProfileView {
+  private orderId: number;
   /**
    *
    * @param {HTMLElement} parent
@@ -30,18 +27,17 @@ export class OrderProcessView extends BaseProfileView {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
   }
 
   /**
    * Method that render login page in inner HTML of element
    * @param {Object} props objects relating for rendering view
    */
-  render(props = {}) {
+  render(props: any) {
     this.orderId = props.id;
     super.render();
-    this.navbar.remove();
-    this.navbar.render();
+    Navbar.remove();
+    Navbar.render();
     const order = {
       historyOrder: false,
       ...props.restaurant,
@@ -81,9 +77,6 @@ export class OrderProcessView extends BaseProfileView {
         item.classList.add('order-process__do');
       }
     });
-    // if (status === 4) {
-    //   clearInterval(this.updateRetry);
-    // }
   }
 
   /**
@@ -97,7 +90,7 @@ export class OrderProcessView extends BaseProfileView {
    */
   remove() {
     super.remove();
-    this.navbar.remove();
+    Navbar.remove();
     this.parent.innerHTML = '';
   }
 }

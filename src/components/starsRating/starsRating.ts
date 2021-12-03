@@ -1,5 +1,6 @@
 import styles from './starsRating.scss';
-import starsRatingTemplate from './starsRating.hbs';
+declare function require(module: string): any;
+let starsRatingTemplate = require('./starsRating.hbs');
 
 type Star = {
   id: number;

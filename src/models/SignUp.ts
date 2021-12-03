@@ -1,9 +1,9 @@
-import {profileGet, signupPost} from 'Modules/api';
-import {SignUpEvents} from 'Events/SignUp';
-import eventBus from 'Modules/eventBus';
-import {ResponseEvents} from 'Events/Responses';
-import {ErrorsText} from 'Events/Errors';
-import {urls} from 'Modules/urls';
+import {profileGet, signupPost} from '@/modules/api';
+import {SignUpEvents} from '@/events/SignUp';
+import eventBus from '@/modules/eventBus';
+import {ResponseEvents} from '@/events/Responses';
+import {ErrorsText} from '@/events/Errors';
+import {urls} from '@/modules/urls';
 
 /**
  * Class SignUp Model

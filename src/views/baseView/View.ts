@@ -2,9 +2,9 @@
  * Base View class
  */
 export class View {
-  private parent: HTMLElement;
+  protected parent: HTMLElement;
   private readonly routeTo: Function;
-  private readonly controller: Object;
+  protected readonly controller: Object;
   /**
    * View constructor
    * @param {Object} parent HTMLElement for rendering View

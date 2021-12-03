@@ -6,6 +6,7 @@ import signUpPage from './signUpPage.hbs';
  * SignUp View Class
  */
 export class SignUpView extends View {
+  private controller: SignUpController;
   /**
    * Constructor for signup view
    * @param {HTMLElement} parent
@@ -41,15 +42,15 @@ export class SignUpView extends View {
    * @private
    */
   submitListener(event) {
-    const email = document.getElementById('email');
-    const name = document.getElementById('name');
-    const phone = document.getElementById('phone_number');
-    const password = document.getElementById('password');
-    const passwordRepeat = document.getElementById('password_repeat');
+    const email = <HTMLInputElement>document.getElementById('email');
+    const name = <HTMLInputElement>document.getElementById('name');
+    const phone = <HTMLInputElement>document.getElementById('phone_number');
+    const password = <HTMLInputElement>document.getElementById('password');
+    const passwordRepeat = <HTMLInputElement>document.getElementById('password_repeat');
     event.preventDefault();
 
     const type = 'client';
-    const signUpResult = this.controller.signUp(type,
+    const signUpResult: any = this.controller.signUp(type,
         name.value,
         email.value,
         phone.value,

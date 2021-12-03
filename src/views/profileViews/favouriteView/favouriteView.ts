@@ -1,10 +1,7 @@
-import {View} from '@/views/baseView/View';
 import Navbar from '@/components/navbar/navbar';
 import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
 import profileButtonsNav from '@/components/profileButtonsNav/profileButtonsNav.hbs';
 import {BaseProfileView} from '@/views/profileViews/baseProfileView';
-import {DishBlock} from 'hme-design-system/src/components/dishBlock/dishBlock';
-import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {List} from 'hme-design-system/src/components/list/list';
 import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
 
@@ -29,18 +26,17 @@ export class FavouriteView extends BaseProfileView {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
   }
 
   /**
    * Method that render login page in inner HTML of element
    * @param {Object} props objects relating for rendering view
    */
-  render(props = {}) {
+  render(props: any = {}) {
     super.render();
     const restaurants = props.restaurants ? props.restaurants : [];
 
-    this.navbar.render();
+    Navbar.render();
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Избранное',
       content: new List({
@@ -62,7 +58,7 @@ export class FavouriteView extends BaseProfileView {
    */
   remove() {
     super.remove();
-    this.navbar.remove();
+    Navbar.remove();
     this.parent.innerHTML = '';
   }
 }

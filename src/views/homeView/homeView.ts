@@ -4,7 +4,6 @@ import homePage from './homePage.hbs';
 import page from '@/views/baseView/page.hbs';
 import {RestaurantsList} from '@/components/restaurantsList/restaurantLists';
 import {PromoLine} from '@/components/promoLine/promoLine';
-import {RestaurantReviewsView} from "@/views/restaurantReviewsView/restaurantReviewsView";
 
 /**
  * Home view class

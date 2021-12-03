@@ -1,9 +1,7 @@
 import Navbar from '@/components/navbar/navbar';
-import {urls} from '@/modules/urls';
 import EventBus from '@/modules/eventBus';
 import {OrderingEvents} from '@/events/Ordering';
 import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
-import Address from '@/modules/lsAddress';
 import orderDelivery from '@/components/cartOrder/orderDelivery.hbs';
 import orderSummary from '@/components/cartOrder/orderSummary.hbs';
 import userStore from '@/modules/reducers/userStore';
@@ -14,11 +12,14 @@ import {Card} from 'hme-design-system/src/components/card/card';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {CreateSnack} from '@/components/snackBar/snackBar';
 import {paymentMethods} from '@/modules/consts';
+import {OrderingController} from "@/controllers/orderingController";
 
 /**
  * Profile view class
  */
 export class OrderingView extends BaseProfileView {
+  private confirmDiv: HTMLDivElement;
+  private controller: OrderingController;
   /**
    *
    * @param {HTMLElement} parent
@@ -35,7 +36,6 @@ export class OrderingView extends BaseProfileView {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
   }
 
   /**
@@ -45,7 +45,7 @@ export class OrderingView extends BaseProfileView {
   render(props = {}) {
     super.render();
     EventBus.addEventListener(OrderingEvents.addressRefreshed, this.refresh);
-    this.navbar.render();
+    Navbar.render();
 
     let order = {};
     if (cartStore.getState().restaurant.id !== -1) {
@@ -67,13 +67,7 @@ export class OrderingView extends BaseProfileView {
       rightMenu: orderSummary({
         sumCost: cartStore.getState().cost ? cartStore.getState().cost.sumCost : '',
       })});
-    this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
-    window.addEventListener('scroll', this.stickSummary);
     this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
-
-
-    this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
-    this.stickSummary();
   }
 
   refresh = () => {
@@ -81,29 +75,9 @@ export class OrderingView extends BaseProfileView {
     this.render();
   }
 
-  stickSummary = () => {
-    // const summary = document.querySelector('.cart-order-summary');
-    // const block = document.querySelectorAll('.content-block')[1];
-    // this.footY = Number(block.offsetTop) + Number(block.offsetHeight);
-    // if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
-    //   summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
-    //   this.summaryWidth = summary.offsetWidth;
-    // } else if (window.pageYOffset + 75 >= this.sticky) {
-    //   summary.classList.add('cart-order-summary-sticky');
-    //   if (summary.style.width !== '100%') {
-    //     summary.style.top = String(0) + 'px';
-    //     summary.style.width = this.summaryWidth + 'px';
-    //   }
-    // } else {
-    //   summary.classList.remove('cart-order-summary-sticky');
-    //   summary.style.width = '';
-    //   this.summaryWidth = summary.offsetWidth;
-    // }
-  }
-
   showConfirm = () => {
     if (cartStore.getState().restaurant.id !== -1) {
-      if (this.parent.querySelector('.card').checked) {
+      if (this.parent.querySelector<HTMLInputElement>('.card').checked) {
         this.confirmDiv = document.createElement('div');
         this.confirmDiv.innerHTML = new Modal({
           title: 'Онлайн оплата',
@@ -126,12 +100,12 @@ export class OrderingView extends BaseProfileView {
 
   getOrderInfoFromInputs = () => {
     return {
-      methodPay: this.parent.querySelector('.card').checked ? paymentMethods.card : paymentMethods.cash,
-      porch: Number(document.getElementById('porch').value),
-      floor: Number(document.getElementById('floor').value),
-      flat: document.getElementById('flat').value,
-      intercom: document.getElementById('intercom').value,
-      comment: document.getElementById('comment').value,
+      methodPay: this.parent.querySelector<HTMLInputElement>('.card').checked ? paymentMethods.card : paymentMethods.cash,
+      porch: Number((<HTMLInputElement>document.getElementById('porch')).value),
+      floor: Number((<HTMLInputElement>document.getElementById('floor')).value),
+      flat: (<HTMLInputElement>document.getElementById('flat')).value,
+      intercom: (<HTMLInputElement>document.getElementById('intercom')).value,
+      comment: (<HTMLInputElement>document.getElementById('comment')).value,
     };
   }
 
@@ -152,9 +126,7 @@ export class OrderingView extends BaseProfileView {
    */
   remove() {
     super.remove();
-    this.navbar.remove();
-
-    window.removeEventListener('scroll', this.stickSummary);
+    Navbar.remove();
 
     this.removeConfirm();
     this.parent.innerHTML = '';

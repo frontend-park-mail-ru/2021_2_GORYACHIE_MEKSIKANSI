@@ -4,6 +4,9 @@ import {urls} from './urls';
  * Router class
  */
 export class Router {
+  private root: HTMLElement;
+  private currController: any | undefined;
+  private routes: Map<any, any>;
   /**
    * Router constructor
    * @param {HTMLElement} root

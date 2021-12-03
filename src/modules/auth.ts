@@ -4,9 +4,9 @@ import {AuthStatus} from '@/events/Auth';
 import {urls} from './urls';
 import {userActions} from './reducers/userStore';
 import userStore from './reducers/userStore';
-import cartStore, {clearCart} from './reducers/cartStore';
-import {cartActions, updateStorage, setCart} from './reducers/cartStore';
-import {cartGet, getWSKey, updateCartPut} from './api';
+import cartStore from './reducers/cartStore';
+import {cartActions} from './reducers/cartStore';
+import {getWSKey} from './api';
 import Profile from '@/models/Profile';
 import Socket from '@/modules/webSocket';
 

@@ -1,5 +1,5 @@
 import eventBus from './eventBus';
-import {AuthStatus} from 'Events/Auth';
+import {AuthStatus} from '@/events/Auth';
 import {userActions} from './reducers/userStore';
 import userStore from './reducers/userStore';
 import {postAddress} from './api';
@@ -8,6 +8,12 @@ import {postAddress} from './api';
  * User Address class
  */
 class Address {
+  private longitude: any;
+  private latitude: any;
+  private name: any;
+  private city: any;
+  private fullAddress: any;
+  private street: any;
   /**
    * Standard constructor for address class
    */

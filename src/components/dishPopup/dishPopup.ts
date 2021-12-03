@@ -1,9 +1,17 @@
 import {DishModal} from 'hme-design-system/src/components/modal/dishModal/dishModal';
+import {RestaurantController} from "@/controllers/restaurantController";
 
 /**
  * Dish popup class
  */
 export class DishPopup {
+  private controller: RestaurantController;
+  private routeTo: Function;
+  private parent: HTMLElement;
+  restaurant: any;
+  private number: number;
+  private dish: any;
+  private div: HTMLDivElement;
   /**
    * Constructor for DishPopup class
    *

@@ -1,6 +1,8 @@
 import {View} from '@/views/baseView/View';
 import Navbar from '@/components/navbar/navbar';
-import page from '@/views/baseView/page.hbs';
+declare function require(module: string): any;
+let page = require('./page.hbs');
+// import page from '@/views/baseView/page.hbs';
 import {RestaurantsList} from '@/components/restaurantsList/restaurantLists';
 import {PromoLine} from '@/components/promoLine/promoLine';
 
@@ -8,6 +10,7 @@ import {PromoLine} from '@/components/promoLine/promoLine';
  * Home view class
  */
 export class SearchView extends View {
+  private restaurantList: RestaurantsList;
   /**
    *
    * @param {HTMLElement} parent
@@ -25,15 +28,13 @@ export class SearchView extends View {
       controller: controller,
     });
     this.restaurantList = new RestaurantsList();
-    this.navbar = Navbar;
   }
   /**
    * Method that render home page in inner HTML of element
    * @param {Object} props
    */
-  render(props = {}) {
-    console.log(props);
-    this.navbar.render();
+  render(props: any = {}) {
+    Navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
     }));
     const title = props.title ? props.title : '';
@@ -48,7 +49,7 @@ export class SearchView extends View {
    * Method for removing setted up listeners and other data
    */
   remove() {
-    this.navbar.remove();
+    Navbar.remove();
     this.restaurantList.remove();
     this.parent.innerHTML = '';
   }

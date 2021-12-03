@@ -1,4 +1,4 @@
-import promoLine from './promoLine.hbs';
+import promoLine from 'promoLine.hbs';
 import {PromoBlock} from 'hme-design-system/src/components/promoBlock/promoBlock';
 
 /**

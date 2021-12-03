@@ -1,4 +1,4 @@
-import Navbar from 'Components/navbar/navbar';
+import Navbar from '@/components/navbar/navbar';
 import {View} from '@/views/baseView/View';
 import page from '@/views/baseView/page.hbs';
 import restaurantReviewsPage from './restaurantReviewsPage.hbs';
@@ -14,12 +14,17 @@ import {CreateSnack} from '@/components/snackBar/snackBar';
 import eventBus from '@/modules/eventBus';
 import {ProfileEvents} from '@/events/Profile';
 import {SearchEvents} from '@/events/Search';
+import {RestaurantReviewsController} from "@/controllers/restaurantReviewsController";
 
 
 /**
  * RestaurantView class
  */
 export class RestaurantReviewsView extends View {
+  private restaurant: any;
+  private reviews: any;
+  private starsRating: StarsRating;
+  private controller: RestaurantReviewsController;
   /**
    * Constructor for Map class
    *
@@ -36,8 +41,6 @@ export class RestaurantReviewsView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
-
     eventBus.addEventListener(ProfileEvents.userReviewPublishSuccess, this.refresh);
   }
 
@@ -47,7 +50,7 @@ export class RestaurantReviewsView extends View {
    * @param {object} props
    *
    */
-  render(props = {}) {
+  render(props:any = {}) {
     this.restaurant = props.restaurants ? props.restaurants : {};
     this.reviews = this.restaurant.reviews ? this.restaurant.reviews : [];
     this.refresh();
@@ -58,7 +61,7 @@ export class RestaurantReviewsView extends View {
    */
   refresh = () => {
     this.remove();
-    this.navbar.render();
+    Navbar.render();
     const reviews = [Review({
       rate: this.restaurant.rate,
       text: 'Общая оценка складывается из общего числа отзывов',
@@ -109,7 +112,7 @@ export class RestaurantReviewsView extends View {
       this.starsRating.render();
     }
 
-    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
+    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item: HTMLElement) => {
       item.onclick = this.makeSearchRequestByTag;
     });
 
@@ -163,7 +166,7 @@ export class RestaurantReviewsView extends View {
    * Make check and call controller to publish review on restaurant
    */
   publishReview = () => {
-    const textArea = this.parent.querySelector('.textarea');
+    const textArea = this.parent.querySelector<HTMLInputElement>('.textarea');
     if (textArea.value.length < 10) {
       CreateSnack({
         title: 'Слишком короткий отзыв, минимальная длина отзыва: 10 символов',
@@ -182,7 +185,7 @@ export class RestaurantReviewsView extends View {
     if (this.starsRating) {
       this.starsRating.remove();
     }
-    this.navbar.remove();
+    Navbar.remove();
     this.parent.innerHTML = '';
   }
 }

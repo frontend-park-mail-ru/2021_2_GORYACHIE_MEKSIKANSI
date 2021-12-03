@@ -1,6 +1,6 @@
 import {AccessControlAllowOrigin, ServerAddress} from './consts';
 
-window.serverAddress = ServerAddress;
+const serverAddress = ServerAddress;
 
 /**
  * Getting object data with info to fetch
@@ -21,6 +21,7 @@ function getData({
     headers: {
       'Access-Control-Allow-Origin': AccessControlAllowOrigin,
     },
+    body: '',
   };
 
   if (type === 'application/json') {
@@ -50,7 +51,7 @@ async function makeFetch({
   body = null,
   type = 'application/json',
 } = {}) {
-  const response = await fetch(window.serverAddress + url,
+  const response = await fetch(serverAddress + url,
       getData({method, body, type}));
   const responseJSON = await response.json();
 

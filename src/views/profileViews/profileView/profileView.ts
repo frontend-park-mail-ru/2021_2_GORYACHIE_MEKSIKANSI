@@ -1,19 +1,18 @@
-import {View} from '@/views/baseView/View';
 import Navbar from '@/components/navbar/navbar';
-import {updateName} from '@/modules/api';
-import baseProfilePage from '@/views/profile/baseProfilePage.hbs';
+import baseProfilePage from '@/views/profileViews/baseProfilePage.hbs';
 import profilePage from './profilePage1.hbs';
 import profileButtonsNav from '@/components/profileButtonsNav/profileButtonsNav.hbs';
 import userStore from '@/modules/reducers/userStore';
-import {BaseProfileView} from '@/views/baseProfileView';
+import {BaseProfileView} from '@/views/profileViews/baseProfileView';
 import {Avatar} from 'hme-design-system/src/components/avatar/avatar';
-import {List} from 'hme-design-system/src/components/list/list';
-import {RestaurantBlock} from 'hme-design-system/src/components/restaurantBlock/restaurantBlock';
+import {ProfileController} from "@/controllers/profileController";
 
 /**
  * Profile view class
  */
 export class ProfileView extends BaseProfileView {
+  private inputs: any;
+  private controller: ProfileController;
   /**
    *
    * @param {HTMLElement} parent
@@ -30,7 +29,6 @@ export class ProfileView extends BaseProfileView {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
   }
 
   /**
@@ -39,7 +37,7 @@ export class ProfileView extends BaseProfileView {
    */
   render(props = {}) {
     super.render();
-    this.navbar.render();
+    Navbar.render();
     this.parent.innerHTML += baseProfilePage({
       pageTitle: 'Личные данные',
       content: profilePage({
@@ -84,7 +82,7 @@ export class ProfileView extends BaseProfileView {
    * Checking image to add
    */
   checkImage = () => {
-    const [file] = document.getElementById('avatar').files;
+    const [file] = ((<HTMLInputElement>document.getElementById('avatar')).files);
     if (file) {
       this.controller.checkImage(file);
     }
@@ -121,7 +119,7 @@ export class ProfileView extends BaseProfileView {
    * @param {string} errorText
    */
   showError = (errorText) => {
-    this.parent.querySelector('.main-error-label').innerText = errorText;
+    this.parent.querySelector<HTMLElement>('.main-error-label').innerText = errorText;
   }
 
   /**
@@ -137,9 +135,7 @@ export class ProfileView extends BaseProfileView {
    */
   remove() {
     super.remove();
-    if (this.navbar) {
-      this.navbar.remove();
-    }
+    Navbar.remove();
     this.parent.innerHTML = '';
   }
 }

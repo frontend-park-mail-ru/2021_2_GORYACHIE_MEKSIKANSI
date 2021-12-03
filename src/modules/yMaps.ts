@@ -1,7 +1,17 @@
-/**
- * Yandex map setting class
- */
+import ymaps from 'ymaps';
+import {Clusterer, IGeoObject} from "yandex-maps";
+
+
 export class YandexMap {
+  private initPos: { latitude: number; longitude: number };
+  private callback: any;
+  private pos: any;
+  private map: any;
+  private circle: object;
+  private position: Array<number>;
+  private point: Placemark;
+  private radius: number;
+
   /**
    * Map init constructor
    */
@@ -19,7 +29,7 @@ export class YandexMap {
   customPoint(pos) {
     ymaps.ready(() => {
       this.movePosition(pos);
-      this.setCenter(pos);
+      this.setCenter([pos, 1]);
       this.callback(pos, true);
     });
   }
@@ -41,19 +51,19 @@ export class YandexMap {
    *
    * @param {{id: int, pos: object, isStatic: boolean}} params
    * @param {Function} callback
+   * openBalloonOnClick: false,
    */
   start({
     id,
     pos,
     isStatic,
-  } = {}, callback) {
+  } = {}, callback ?) {
     this.callback = callback;
     this.pos = pos;
     document.getElementById(id).innerHTML = '';
     this.map = new ymaps.Map(id, {
       center: this.refactorToArray(this.pos),
       zoom: 11,
-      openBalloonOnClick: false,
       controls: [],
     });
 
@@ -89,9 +99,9 @@ export class YandexMap {
    * @param {boolean} isRenew
    */
   catchCallback(res, isRenew = true) {
-    this.text = this.getUserPositionAddress(res.geoObjects.get(0).properties);
+    const text = this.getUserPositionAddress(res.geoObjects.get(0).properties);
     const address = {
-      name: this.text,
+      name: text,
       latitude: this.pos.latitude,
       longitude: this.pos.longitude,
     };
@@ -113,7 +123,7 @@ export class YandexMap {
    * @param {object} pos
    * @param {int} zoom
    */
-  setCenter(pos, zoom) {
+  setCenter({pos, zoom}: Object) {
     this.map.setCenter(this.refactorToArray(pos), zoom);
   }
 
@@ -127,14 +137,11 @@ export class YandexMap {
         offset: [10, 10],
       });
       suggestView.events.add('select', (e) => {
-        const myGeocoder = ymaps.geocode(e.originalEvent.item.value, {
-          kind: 'house',
-          result: 1,
-        });
+        const myGeocoder = ymaps.geocode(e.originalEvent.item.value);
         myGeocoder
-            .then((res) => {
+            .then((res: any) => {
               this.movePosition(this.convertPosArrayToObject(res.geoObjects.get(0).geometry.getCoordinates()));
-              this.setCenter(this.convertPosArrayToObject(res.geoObjects.get(0).geometry.getCoordinates(), 1));
+              this.setCenter(this.convertPosArrayToObject([res.geoObjects.get(0).geometry.getCoordinates(), 1]));
               this.catchCallback(res, false);
             },
             ).catch(
@@ -179,10 +186,10 @@ export class YandexMap {
   /**
    * Creating position on map
    * @param {object} pos
-   * @return {int}
+   * @return {Array}
    */
   createPosition(pos) {
-    const point = new ymaps.Placemark(this.refactorToArray(pos));
+    const point = new ymaps.Placemark(...this.refactorToArray(pos));
     this.map.geoObjects.add(point);
 
     return point;
@@ -253,10 +260,10 @@ export class YandexMap {
 
   /**
    * Checking if address is correct
-   * @param {object} address
+   * @param {string} address
    */
-  static async isAddressCorrect(address: HTMLInputElement) {
+  static async isAddressCorrect(address: string) {
     const myGeocoder = ymaps.geocode(address);
-    return await myGeocoder.then((res) => res.geoObjects.get(0));
+    return await myGeocoder.then((res: any) => res.geoObjects.get(0));
   }
 }

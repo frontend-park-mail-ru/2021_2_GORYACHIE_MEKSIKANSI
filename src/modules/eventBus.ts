@@ -2,6 +2,7 @@
  * Class event bus, observer pattern
  */
 class EventBus {
+  private readonly eventTopics: Object;
   /**
    * Constructor for event bus
    */

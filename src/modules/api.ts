@@ -1,7 +1,7 @@
+import {AuthStatus} from '@/events/Auth';
 import Http from './http';
 import {auth, logout} from './auth';
 import eventBus from './eventBus';
-import {AuthStatus} from '@/events/Auth';
 import {apiPaths} from './consts';
 
 const http = new Http();

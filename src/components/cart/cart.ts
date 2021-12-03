@@ -14,7 +14,7 @@ import {RestaurantController} from '@/controllers/restaurantController';
 export class Cart {
   private controller: RestaurantController;
   private routeTo: Function;
-  private parent: HTMLElement;
+  parent: HTMLElement;
   /**
    * Constructor for cart class
    *

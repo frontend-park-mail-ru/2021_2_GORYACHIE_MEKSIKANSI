@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2021_2_GORYACHIE_MEKSIKANSI#readme",
   "dependencies": {
+    "@types/yandex-maps": "^2.1.20",
     "awesome-typescript-loader": "^5.2.1",
     "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^4.0.0",

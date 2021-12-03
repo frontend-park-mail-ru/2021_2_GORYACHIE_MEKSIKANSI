@@ -15,12 +15,21 @@ import eventBus from '@/modules/eventBus';
 import {SearchEvents} from '@/events/Search';
 import {ProfileEvents} from '@/events/Profile';
 import {CreateSnack} from "@/components/snackBar/snackBar";
+import {RestaurantController} from "@/controllers/restaurantController";
 
 
 /**
  * RestaurantView class
  */
 export class RestaurantView extends View {
+  private popup: DishPopup;
+  private cart: Cart;
+  private dishesList: DishesList;
+  public routeTo: Function;
+  private restaurant: any;
+  private controller: RestaurantController;
+  private continueDiv: HTMLDivElement;
+  private parent: HTMLElement
   /**
    * Constructor for Map class
    *
@@ -37,7 +46,6 @@ export class RestaurantView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.navbar = Navbar;
 
     this.popup = new DishPopup({
       parent: document.body,
@@ -65,7 +73,7 @@ export class RestaurantView extends View {
    * Refreshing navbar when parameters upadted
    */
   refreshNavbar = () => {
-    this.navbar.updateCartButtonNumber();
+    Navbar.updateCartButtonNumber();
   }
 
   /**
@@ -74,11 +82,11 @@ export class RestaurantView extends View {
    * @param {object} props
    *
    */
-  render(props = {}) {
+  render(props: any = {}) {
     this.restaurant = props.restaurant;
     this.popup.restaurant = this.restaurant;
 
-    this.navbar.render();
+    Navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
       head: new RestaurantHeader({restaurant: this.restaurant}).render(),
       content: restaurantPage(this.restaurant),
@@ -92,7 +100,7 @@ export class RestaurantView extends View {
     this.cart.parent = this.parent.querySelector('.restaurant-page__cart');
     this.cart.render();
 
-    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item) => {
+    this.parent.querySelectorAll('.restaurant-underheader__tag').forEach((item: HTMLElement) => {
       item.onclick = this.makeSearchRequestByTag;
     });
 
@@ -188,7 +196,7 @@ export class RestaurantView extends View {
       this.closeContinueOrdering();
     }
 
-    this.navbar.remove();
+    Navbar.remove();
     this.dishesList.remove();
     this.popup.remove();
     this.cart.remove();
