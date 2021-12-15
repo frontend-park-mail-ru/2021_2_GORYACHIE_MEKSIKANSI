@@ -1,6 +1,9 @@
 import eventBus from 'Modules/eventBus.js';
 import {HomeEvents} from 'Events/Home.js';
 import {profileGet, restaurantsGet} from 'Modules/api.js';
+import userStore from "../modules/reducers/userStore";
+import {getRecommends} from "../modules/api";
+import {ResponseEvents} from "../events/Responses";
 
 /**
  * Class Home Model
@@ -11,13 +14,20 @@ class HomeModel {
    */
   getRestaurants() {
     restaurantsGet({url: '/restaurant/'})
-        .then((response) => {
+        .then(async (response) => {
+          if (userStore.getState().auth) {
+            const recommends = await getRecommends();
+            console.log(recommends);
+            if (recommends.status === ResponseEvents.OK) {
+              response.body.recommends = {
+                restaurants: recommends.body.restaurants.restaurants_info,
+                tags: recommends.body.restaurants.tags,
+              }
+            }
+          }
           eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess,
-              response.body);
+            response.body);
         })
-        .catch(() => {
-          eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess, {});
-        });
   }
 
   /**

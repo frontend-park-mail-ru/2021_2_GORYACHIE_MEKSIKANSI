@@ -35,7 +35,7 @@ export class RestaurantsList {
         objList.push(new RestaurantBlock(item).render());
       });
     }
-    this.parent.innerHTML = restaurantsListTemplate({
+    this.parent.insertAdjacentHTML('beforeend', restaurantsListTemplate({
       // sortBox: new SortBox().render(),
       // sortHeader: addHeader ? new SortHeader({
       //   buttons: [
@@ -57,7 +57,7 @@ export class RestaurantsList {
       //     }).render(),
       //   ],
       // }).render() : '',
-      restaurantList: new List({listTitle: title, objList: objList}).render()});
+      restaurantList: new List({listTitle: title, objList: objList}).render()}));
   }
 
   /**
