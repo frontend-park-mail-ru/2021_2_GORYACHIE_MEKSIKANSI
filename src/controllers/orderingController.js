@@ -7,8 +7,12 @@ import cartStore from 'Modules/reducers/cartStore';
 import userStore from 'Modules/reducers/userStore';
 import {OrderingEvents} from '../events/Ordering';
 import ProfileModel from '../models/Profile';
+import RestaurantModel from '../models/Restaurant';
 import {paymentMethods} from '../modules/consts';
 import {ProfileEvents} from '../events/Profile';
+import {cartGet} from "../modules/api";
+import {ResponseEvents} from "../events/Responses";
+import {setCart} from "../modules/reducers/cartStore";
 
 
 // eslint-disable-next-line valid-jsdoc
@@ -66,6 +70,10 @@ export class OrderingController {
     } else {
       ProfileModel.createOrder(order);
     }
+  }
+
+  confirmPromocode = (promocode) => {
+    RestaurantModel.setPromocodeOnCart(promocode);
   }
 
   /**

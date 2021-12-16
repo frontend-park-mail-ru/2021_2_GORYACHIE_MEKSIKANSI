@@ -1,9 +1,10 @@
-import {updateCartPut} from '../api.js';
+import {cartGet, updateCartPut} from '../api.js';
 import {createStoreWithMiddleware} from '../store.js';
 import eventBus from '../eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {CreateSnack} from '../../components/snackBar/snackBar';
+import restaurant from "../../models/Restaurant";
 
 export const cartActions = {
   update: 'update',
@@ -72,7 +73,7 @@ export const increaseDishInCart = (aItNum) => {
       fDish.count += 1;
     }
 
-    updateCart(dispatch, {cart: {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer}});
+    updateCart(dispatch, {cart: {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer, promo_code: getState().code}});
   };
 };
 
@@ -93,9 +94,22 @@ export const addDishToCart = (aDish, restaurant) => { // find and add count
         itNum: itNum++,
       });
     }
-    updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: cartBuffer}});
+    updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: cartBuffer, promo_code: getState().code}});
   };
 };
+
+export const setPromocode = (promocode) => {
+  return async (dispatch, getState) => {
+    const cartBuffer = getDishBuffer(getState().cart);
+
+    await updateCart(dispatch, {cart: {restaurant: {id: getState().restaurant.id}, dishes: cartBuffer, promo_code: promocode}});
+
+    const response = await cartGet();
+    if (response.status === ResponseEvents.OK) {
+      setCart(response.body.cart);
+    }
+  }
+}
 
 /**
  * Clearing cart method
@@ -105,7 +119,7 @@ export const addDishToCart = (aDish, restaurant) => { // find and add count
  */
 export const clearCartAndAddDish = (aDish, restaurant) => {
   return (dispatch, getState) => {
-    updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: [aDish]}});
+    updateCart(dispatch, {cart: {restaurant: {id: restaurant.id}, dishes: [aDish], promo_code: getState().code}});
   };
 };
 
@@ -122,7 +136,7 @@ export const setCart = (response) => {
   cartStore.dispatch({
     actionType: cartActions.update,
     state: wrapperStruct,
-  });
+  })
   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
 };
 
@@ -165,8 +179,8 @@ export const clearCart = () => {
   };
 };
 
-const updateCart = (dispatch, bufferToUpdate) => {
-  updateCartPut(bufferToUpdate)
+const updateCart = async (dispatch, bufferToUpdate) => {
+  return updateCartPut(bufferToUpdate)
       .then((response) => {
         if (response.status === ResponseEvents.OK && !('dishesErrs' in response.body.cart)) {
           const wrapperStruct = {
@@ -256,6 +270,11 @@ let cart = {
     name: '',
   },
   cart: [],
+  promocode: {
+    name: '',
+    desc: '',
+    code: '',
+  },
 };
 
 const localCart = JSON.parse(localStorage.getItem('cart'));

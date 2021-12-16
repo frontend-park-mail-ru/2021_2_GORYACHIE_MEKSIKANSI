@@ -64,6 +64,8 @@ export class RestaurantsList {
    * Removing restaurant list from page
    */
   remove() {
-    this.parent.innerHTML = '';
+    if (this.parent) {
+      this.parent.innerHTML = '';
+    }
   }
 }

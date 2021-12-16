@@ -41,7 +41,10 @@ export class HomeView extends View {
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage(),
     }));
-    this.promo.render(this.parent.querySelector('.home-page__promo-line-blocks'));
+    this.promo.render({
+      parent: this.parent.querySelector('.home-page__promo-line-blocks'),
+      props: props.restaurants.promo_code,
+    });
     if (userStore.getState().auth && props.recommends?.restaurants) {
       this.recommendList.render({
         parent: this.parent.querySelector('.home-page__restaurants-list'),
