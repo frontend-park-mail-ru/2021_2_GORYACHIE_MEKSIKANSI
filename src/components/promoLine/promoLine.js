@@ -9,7 +9,7 @@ export class PromoLine {
    * constructor to snandard promo line
    * @param {Function} promoCallback
    */
-  constructor(promoCallback = () => console.log('clicked')) {
+  constructor(promoCallback) {
     this.promoCallback = promoCallback;
   }
 
@@ -46,7 +46,7 @@ export class PromoLine {
   }
 
   promoButtonListener = (e) => {
-    this.promoCallback(e.id);
+    this.promoCallback('/restaurants/' + e.target.id);
   }
 
   /**

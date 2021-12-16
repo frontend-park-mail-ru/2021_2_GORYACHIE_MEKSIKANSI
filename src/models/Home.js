@@ -17,7 +17,6 @@ class HomeModel {
         .then(async (response) => {
           if (userStore.getState().auth) {
             const recommends = await getRecommends();
-            console.log(recommends);
             if (recommends.status === ResponseEvents.OK) {
               response.body.recommends = {
                 restaurants: recommends.body.restaurants.restaurants_info,

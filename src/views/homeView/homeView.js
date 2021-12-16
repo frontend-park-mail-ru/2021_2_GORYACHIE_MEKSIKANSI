@@ -26,7 +26,7 @@ export class HomeView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.promo = new PromoLine();
+    this.promo = new PromoLine(this.routeTo);
     this.restaurantsList = new RestaurantsList();
     this.recommendList = new RestaurantsList();
     this.navbar = Navbar;
@@ -36,7 +36,6 @@ export class HomeView extends View {
    * @param {Object} props
    */
   render(props = {}) {
-    console.log(props);
     this.navbar.render();
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage(),
