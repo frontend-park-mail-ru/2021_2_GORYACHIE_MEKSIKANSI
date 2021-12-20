@@ -32,9 +32,9 @@ class RestaurantModel {
               title: response.explain,
               status: 'red',
             });
+          } else {
+            eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.body);
           }
-          // eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock()); // mock from mocks
-          eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.body);
         })
         .catch(() => { // TODO: добавить взаимодействие с серваком...
         });
