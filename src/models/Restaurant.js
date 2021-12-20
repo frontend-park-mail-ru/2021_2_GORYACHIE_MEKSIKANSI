@@ -12,7 +12,7 @@ import {reviewsBodyMock} from '../views/mocks';
 import {cartGet, getRestaurantReviews} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
 import {cartActions, setCart, setPromocode} from '../modules/reducers/cartStore';
-import {urls} from "../modules/urls";
+import {urls} from '../modules/urls';
 
 /**
  * Restaurant model class
@@ -26,13 +26,13 @@ class RestaurantModel {
   getRestaurant(id) {
     restaurantGet({url: '/restaurant/' + id})
         .then((response) => {
-            if (response.status !== ResponseEvents.OK) {
-                eventBus.emitEventListener(RestaurantEvents.restaurantGetFailed, urls.home);
-                CreateSnack({
-                    title: response.explain,
-                    status: 'red',
-                });
-            }
+          if (response.status !== ResponseEvents.OK) {
+            eventBus.emitEventListener(RestaurantEvents.restaurantGetFailed, urls.home);
+            CreateSnack({
+              title: response.explain,
+              status: 'red',
+            });
+          }
           // eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, getRestaurantMock()); // mock from mocks
           eventBus.emitEventListener(RestaurantEvents.restaurantGetSuccess, response.body);
         })

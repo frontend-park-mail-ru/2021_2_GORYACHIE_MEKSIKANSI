@@ -39,7 +39,6 @@ export class RestaurantController { // TODO: добавить джсдок
   }
 
 
-
   /**
    * getting dish by rest id and dish id
    * @param {int} restId
