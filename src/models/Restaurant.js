@@ -11,7 +11,7 @@ import {dishGet, restaurantGet} from 'Modules/api';
 import {reviewsBodyMock} from '../views/mocks';
 import {cartGet, getRestaurantReviews} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
-import {cartActions, setCart, setPromocode} from "../modules/reducers/cartStore";
+import {cartActions, setCart, setPromocode} from '../modules/reducers/cartStore';
 
 /**
  * Restaurant model class
@@ -87,6 +87,10 @@ class RestaurantModel {
   }
 
 
+  /**
+     * Adding dish to cart with it settings
+     * @param {string} promocode setting string promocode to cart
+     */
   setPromocodeOnCart(promocode = '') {
     cartStore.dispatch(setPromocode(promocode));
   }

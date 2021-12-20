@@ -14,7 +14,7 @@ import {Card} from 'hme-design-system/src/components/card/card';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {CreateSnack} from '../../../components/snackBar/snackBar';
 import {paymentMethods} from '../../../modules/consts';
-import {RestaurantEvents} from "../../../events/Restaurant";
+import {RestaurantEvents} from '../../../events/Restaurant';
 
 // eslint-disable-next-line valid-jsdoc
 /**
@@ -50,7 +50,7 @@ export class OrderingView extends BaseProfileView {
     EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshCart);
     this.navbar.render();
 
-    this.drawPageContent();  // rendering
+    this.drawPageContent(); // rendering
   }
 
   refresh = () => {

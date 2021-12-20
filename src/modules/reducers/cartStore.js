@@ -4,7 +4,7 @@ import eventBus from '../eventBus.js';
 import {RestaurantEvents} from 'Events/Restaurant.js';
 import {ResponseEvents} from 'Events/Responses.js';
 import {CreateSnack} from '../../components/snackBar/snackBar';
-import restaurant from "../../models/Restaurant";
+import restaurant from '../../models/Restaurant';
 
 export const cartActions = {
   update: 'update',
@@ -108,8 +108,8 @@ export const setPromocode = (promocode) => {
     if (response.status === ResponseEvents.OK) {
       setCart(response.body.cart);
     }
-  }
-}
+  };
+};
 
 /**
  * Clearing cart method
@@ -136,7 +136,7 @@ export const setCart = (response) => {
   cartStore.dispatch({
     actionType: cartActions.update,
     state: wrapperStruct,
-  })
+  });
   eventBus.emitEventListener(RestaurantEvents.restaurantCartUpdateSuccess, {});
 };
 

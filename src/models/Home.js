@@ -1,9 +1,9 @@
 import eventBus from 'Modules/eventBus.js';
 import {HomeEvents} from 'Events/Home.js';
 import {profileGet, restaurantsGet} from 'Modules/api.js';
-import userStore from "../modules/reducers/userStore";
-import {getRecommends} from "../modules/api";
-import {ResponseEvents} from "../events/Responses";
+import userStore from '../modules/reducers/userStore';
+import {getRecommends} from '../modules/api';
+import {ResponseEvents} from '../events/Responses';
 
 /**
  * Class Home Model
@@ -21,12 +21,12 @@ class HomeModel {
               response.body.recommends = {
                 restaurants: recommends.body.restaurants.restaurants_info,
                 tags: recommends.body.restaurants.tags,
-              }
+              };
             }
           }
           eventBus.emitEventListener(HomeEvents.homeGetRestaurantsSuccess,
-            response.body);
-        })
+              response.body);
+        });
   }
 
   /**

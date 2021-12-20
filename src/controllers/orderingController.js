@@ -10,9 +10,9 @@ import ProfileModel from '../models/Profile';
 import RestaurantModel from '../models/Restaurant';
 import {paymentMethods} from '../modules/consts';
 import {ProfileEvents} from '../events/Profile';
-import {cartGet} from "../modules/api";
-import {ResponseEvents} from "../events/Responses";
-import {setCart} from "../modules/reducers/cartStore";
+import {cartGet} from '../modules/api';
+import {ResponseEvents} from '../events/Responses';
+import {setCart} from '../modules/reducers/cartStore';
 
 
 // eslint-disable-next-line valid-jsdoc

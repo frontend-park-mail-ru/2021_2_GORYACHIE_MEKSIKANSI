@@ -346,8 +346,12 @@ export function getWSKey() {
   });
 }
 
+/**
+ * getting recommended restaurants for user
+ * @return {Object<{status: string, body: object}>}
+ */
 export function getRecommends() {
   return http.ajaxGet({
     url: apiPaths.recommends,
-  })
+  });
 }

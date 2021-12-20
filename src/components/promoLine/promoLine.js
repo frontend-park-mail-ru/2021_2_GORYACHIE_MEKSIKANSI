@@ -18,9 +18,9 @@ export class PromoLine {
    * @param {HTMLElement} parent
    */
   render({
-           parent: parent,
-           props: props,
-         }) {
+    parent: parent,
+    props: props,
+  }) {
     this.parent = parent;
     const promos = [];
     props.forEach((prop) => {
@@ -45,6 +45,10 @@ export class PromoLine {
     this.updateButtonVisibility();
   }
 
+  /**
+   * Rendering promo line on page
+   * @param {Event} e event that been getted from listener
+   */
   promoButtonListener = (e) => {
     this.promoCallback('/restaurants/' + e.target.id);
   }

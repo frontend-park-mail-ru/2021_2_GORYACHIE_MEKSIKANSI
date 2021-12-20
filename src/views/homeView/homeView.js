@@ -4,7 +4,7 @@ import homePage from './homePage.hbs';
 import page from '../baseView/page.hbs';
 import {RestaurantsList} from 'Components/restaurantsList/restaurantLists';
 import {PromoLine} from 'Components/promoLine/promoLine.js';
-import userStore from "../../modules/reducers/userStore";
+import userStore from '../../modules/reducers/userStore';
 
 /**
  * Home view class
@@ -49,7 +49,7 @@ export class HomeView extends View {
         parent: this.parent.querySelector('.home-page__restaurants-list'),
         restaurantsList: props.recommends.restaurants,
         title: 'Рекомендации',
-      })
+      });
     }
     this.restaurantsList.render({
       parent: this.parent.querySelector('.home-page__restaurants-list'),
