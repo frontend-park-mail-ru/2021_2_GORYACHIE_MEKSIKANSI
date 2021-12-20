@@ -9,8 +9,9 @@ import cartStore, {
 } from 'Modules/reducers/cartStore';
 import {dishGet, restaurantGet} from 'Modules/api';
 import {reviewsBodyMock} from '../views/mocks';
-import {getRestaurantReviews} from '../modules/api';
+import {cartGet, getRestaurantReviews} from '../modules/api';
 import {CreateSnack} from '../components/snackBar/snackBar';
+import {cartActions, setCart, setPromocode} from "../modules/reducers/cartStore";
 
 /**
  * Restaurant model class
@@ -83,6 +84,11 @@ class RestaurantModel {
    */
   addDishToCart(dishSettings = {}) {
     cartStore.dispatch(addDishToCart(dishSettings.dish, dishSettings.restaurant));
+  }
+
+
+  setPromocodeOnCart(promocode = '') {
+    cartStore.dispatch(setPromocode(promocode));
   }
 
   /**

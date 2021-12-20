@@ -160,7 +160,7 @@ export class RestaurantView extends View {
   refreshHeader = (favourite) => {
     if (favourite.status === true) {
       CreateSnack({
-        title: `Ресторан добавлен в избарнное!`,
+        title: `Ресторан добавлен в избранное!`,
         status: 'green',
       });
     } else {

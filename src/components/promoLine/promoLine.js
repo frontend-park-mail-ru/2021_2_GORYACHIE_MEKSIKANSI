@@ -7,21 +7,25 @@ import {PromoBlock} from 'hme-design-system/src/components/promoBlock/promoBlock
 export class PromoLine {
   /**
    * constructor to snandard promo line
-   * @param {object} props
+   * @param {Function} promoCallback
    */
-  constructor(props) {
+  constructor(promoCallback) {
+    this.promoCallback = promoCallback;
   }
 
   /**
    * Rendering promo line on page
    * @param {HTMLElement} parent
    */
-  render(parent) {
+  render({
+           parent: parent,
+           props: props,
+         }) {
     this.parent = parent;
     const promos = [];
-    for (let i = 1; i < 10; i++) {
-      promos.push(new PromoBlock().render());
-    }
+    props.forEach((prop) => {
+      promos.push(new PromoBlock(prop).render());
+    });
     this.parent.innerHTML = promoLine({promos: promos});
 
     this.begin = 0;
@@ -29,11 +33,20 @@ export class PromoLine {
     this.blocks = this.parent.querySelectorAll('.promo-line-block');
     this.leftButton = this.parent.querySelector('.promo-line__button-left');
     this.rightButton = this.parent.querySelector('.promo-line__button-right');
+    this.buttons = this.parent.querySelectorAll('.promo-block__button');
+
 
     this.leftButton.addEventListener('click', this.turnLeft);
     this.rightButton.addEventListener('click', this.turnRight);
+    this.buttons.forEach((button) => {
+      button.addEventListener('click', this.promoButtonListener);
+    });
 
     this.updateButtonVisibility();
+  }
+
+  promoButtonListener = (e) => {
+    this.promoCallback('/restaurants/' + e.target.id);
   }
 
   /**
@@ -125,6 +138,9 @@ export class PromoLine {
   remove() {
     this.leftButton.removeEventListener('click', this.turnLeft);
     this.rightButton.removeEventListener('click', this.turnRight);
+    this.buttons.forEach((button) => {
+      button.removeEventListener('click', this.promoButtonListener);
+    });
     this.parent.innerHTML = '';
   }
 }

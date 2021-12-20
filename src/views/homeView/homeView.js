@@ -4,6 +4,7 @@ import homePage from './homePage.hbs';
 import page from '../baseView/page.hbs';
 import {RestaurantsList} from 'Components/restaurantsList/restaurantLists';
 import {PromoLine} from 'Components/promoLine/promoLine.js';
+import userStore from "../../modules/reducers/userStore";
 
 /**
  * Home view class
@@ -25,8 +26,9 @@ export class HomeView extends View {
       routeTo: routeTo,
       controller: controller,
     });
-    this.promo = new PromoLine();
+    this.promo = new PromoLine(this.routeTo);
     this.restaurantsList = new RestaurantsList();
+    this.recommendList = new RestaurantsList();
     this.navbar = Navbar;
   }
   /**
@@ -38,10 +40,20 @@ export class HomeView extends View {
     this.parent.insertAdjacentHTML('afterbegin', page({
       content: homePage(),
     }));
-    this.promo.render(this.parent.querySelector('.home-page__promo-line-blocks'));
+    this.promo.render({
+      parent: this.parent.querySelector('.home-page__promo-line-blocks'),
+      props: props.restaurants.promo_code,
+    });
+    if (userStore.getState().auth && props.recommends?.restaurants) {
+      this.recommendList.render({
+        parent: this.parent.querySelector('.home-page__restaurants-list'),
+        restaurantsList: props.recommends.restaurants,
+        title: 'Рекомендации',
+      })
+    }
     this.restaurantsList.render({
       parent: this.parent.querySelector('.home-page__restaurants-list'),
-      restaurantsList: props.restaurants,
+      restaurantsList: props.restaurants.restaurants_info,
       title: 'Рестораны',
     });
   }
@@ -52,6 +64,7 @@ export class HomeView extends View {
     this.navbar.remove();
     this.promo.remove();
     this.restaurantsList.remove();
+    this.recommendList.remove();
     this.parent.innerHTML = '';
   }
 }

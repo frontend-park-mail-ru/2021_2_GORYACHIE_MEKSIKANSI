@@ -345,3 +345,9 @@ export function getWSKey() {
     url: '/user/ws/key',
   });
 }
+
+export function getRecommends() {
+  return http.ajaxGet({
+    url: apiPaths.recommends,
+  })
+}

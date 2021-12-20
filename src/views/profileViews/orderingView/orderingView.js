@@ -14,6 +14,7 @@ import {Card} from 'hme-design-system/src/components/card/card';
 import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {CreateSnack} from '../../../components/snackBar/snackBar';
 import {paymentMethods} from '../../../modules/consts';
+import {RestaurantEvents} from "../../../events/Restaurant";
 
 // eslint-disable-next-line valid-jsdoc
 /**
@@ -46,35 +47,10 @@ export class OrderingView extends BaseProfileView {
   render(props = {}) {
     super.render();
     EventBus.addEventListener(OrderingEvents.addressRefreshed, this.refresh);
+    EventBus.addEventListener(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshCart);
     this.navbar.render();
 
-    let order = {};
-    if (cartStore.getState().restaurant.id !== -1) {
-      order = {
-        historyOrder: false,
-        ...cartStore.getState().restaurant,
-        items: cartStore.getState().cart,
-        dCost: cartStore.getState().cost.dCost,
-        sumCost: cartStore.getState().cost.sumCost,
-      };
-    }
-
-    this.parent.innerHTML += baseProfilePage({
-      pageTitle: 'Оформление заказа',
-      content: orderDelivery({
-        restaurant: cartStore.getState().restaurant.id !== -1 ? cartStore.getState().restaurant : '',
-        address: userStore.getState().address.fullAddress,
-      }) + Order(order),
-      rightMenu: orderSummary({
-        sumCost: cartStore.getState().cost ? cartStore.getState().cost.sumCost : '',
-      })});
-    this.summaryWidth = document.querySelector('.cart-order-summary').offsetWidth;
-    window.addEventListener('scroll', this.stickSummary);
-    this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
-
-
-    this.sticky = this.parent.querySelector('.cart-order-summary').offsetTop;
-    this.stickSummary();
+    this.drawPageContent();  // rendering
   }
 
   refresh = () => {
@@ -82,24 +58,38 @@ export class OrderingView extends BaseProfileView {
     this.render();
   }
 
-  stickSummary = () => {
-    // const summary = document.querySelector('.cart-order-summary');
-    // const block = document.querySelectorAll('.content-block')[1];
-    // this.footY = Number(block.offsetTop) + Number(block.offsetHeight);
-    // if (window.pageYOffset + 75 + summary.offsetHeight >= this.footY) {
-    //   summary.style.top = String(this.footY - (window.pageYOffset + 75 + summary.offsetHeight)) + 'px';
-    //   this.summaryWidth = summary.offsetWidth;
-    // } else if (window.pageYOffset + 75 >= this.sticky) {
-    //   summary.classList.add('cart-order-summary-sticky');
-    //   if (summary.style.width !== '100%') {
-    //     summary.style.top = String(0) + 'px';
-    //     summary.style.width = this.summaryWidth + 'px';
-    //   }
-    // } else {
-    //   summary.classList.remove('cart-order-summary-sticky');
-    //   summary.style.width = '';
-    //   this.summaryWidth = summary.offsetWidth;
-    // }
+  drawPageContent = () => {
+    let order = {};
+    if (cartStore.getState().restaurant.id !== -1) {
+      order = {
+        historyOrder: false,
+        ...cartStore.getState().restaurant,
+        items: cartStore.getState().cart,
+        dCost: cartStore.getState().cost?.dCost,
+        sumCost: cartStore.getState().cost?.sumCost,
+      };
+    }
+    this.parent.innerHTML += baseProfilePage({
+      pageTitle: 'Оформление заказа',
+      content: orderDelivery({
+        restaurant: cartStore.getState().restaurant.id !== -1 ? cartStore.getState().restaurant : '',
+        address: userStore.getState().address?.fullAddress,
+      }) + Order(order),
+      rightMenu: orderSummary({
+        sumCost: cartStore.getState().cost ? cartStore.getState().cost?.sumCost : '',
+      })});
+    this.parent.querySelector('.cart-order-summary__pay-button').addEventListener('click', this.showConfirm);
+    document.getElementById('promocode_button').addEventListener('click', this.confirmPromocode);
+  }
+
+  refreshCart = () => {
+    this.parent.querySelector('.base-profile-page__content').remove();
+    this.drawPageContent();
+  }
+
+  confirmPromocode = () => {
+    const promocode = document.getElementById('promocode').value;
+    this.controller.confirmPromocode(promocode);
   }
 
   showConfirm = () => {
@@ -152,10 +142,9 @@ export class OrderingView extends BaseProfileView {
    * Method for removing setted up listeners and other data
    */
   remove() {
+    EventBus.unsubscribe(RestaurantEvents.restaurantCartUpdateSuccess, this.refreshCart);
     super.remove();
     this.navbar.remove();
-
-    window.removeEventListener('scroll', this.stickSummary);
 
     this.removeConfirm();
     this.parent.innerHTML = '';
