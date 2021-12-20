@@ -63,9 +63,6 @@ export class MapPopup {
 
     if (address_.name) {
       this.yaMap.customPoint(address_);
-    } else {
-      const mapCurrentPopup = document.querySelector('.map-popup');
-      this.mapPopupOpen(mapCurrentPopup);
     }
   }
 

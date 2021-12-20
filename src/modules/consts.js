@@ -1,7 +1,7 @@
 export const fileMaxSize = 7000000;
 export const cloudPrefix = 'https://hmeats-spaces.fra1.cdn.digitaloceanspaces.com';
-export const AccessControlAllowOrigin = 'http://127.0.0.1';
-export const ServerAddress = 'http://127.0.0.1:5000/api/v1';
+export const AccessControlAllowOrigin = 'https://hmeats.ru';
+export const ServerAddress = 'https://hmeats.ru/api/v1';
 export const updateStatusTimeout = 20000;
 export const statusMap = {
   1: `обработан`,
@@ -31,7 +31,7 @@ export const apiPaths = {
   getProfile: '/user/',
   getRestaurants: '/',
   search: '/restaurant/search',
-  wsConnect: `ws://127.0.0.1:5000/api/v1/ws/`,
+  wsConnect: `wss://hmeats.ru/api/v1/ws/`,
   recommends: '/restaurant/recommend/',
 };
 

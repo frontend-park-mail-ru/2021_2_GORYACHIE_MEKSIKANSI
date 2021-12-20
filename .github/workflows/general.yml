@@ -53,4 +53,4 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
           source: "dist/*"
-          target: "/home/Frontend"
+          target: "/home/devV2"
