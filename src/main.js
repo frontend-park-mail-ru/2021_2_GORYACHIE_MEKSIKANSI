@@ -15,7 +15,8 @@ import {RestaurantReviewsView} from './views/restaurantReviewsView/restaurantRev
 import {RestaurantReviewsController} from './controllers/restaurantReviewsController';
 import {SearchController} from './controllers/searchController';
 import {FavouriteController} from './controllers/favouriteController';
-
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 const application = document.getElementById('app');
 const router = new Router(document.body);
