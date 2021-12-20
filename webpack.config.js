@@ -28,7 +28,7 @@ module.exports = {
     extensions: ['.js'],
   },
   mode: debug ? 'development' : 'production',
-  entry: path.resolve('./src/main.js'),
+  entry: ['babel-polyfill', path.resolve('./src/main.js')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
