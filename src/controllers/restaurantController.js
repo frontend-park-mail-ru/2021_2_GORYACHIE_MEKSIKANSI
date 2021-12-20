@@ -26,7 +26,7 @@ export class RestaurantController { // TODO: добавить джсдок
       parent: parent,
       routeTo: this.routeTo,
       controller: this});
-
+    eventBus.addEventListener(RestaurantEvents.restaurantGetFailed, this.routeTo);
     eventBus.addEventListener(RestaurantEvents.restaurantGetSuccess, this.restaurantView.render.bind(this.restaurantView));
   }
 
@@ -37,6 +37,8 @@ export class RestaurantController { // TODO: добавить джсдок
   render(id = 0) {
     RestaurantModel.getRestaurant(id);
   }
+
+
 
   /**
    * getting dish by rest id and dish id

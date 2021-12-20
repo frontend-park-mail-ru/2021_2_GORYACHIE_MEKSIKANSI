@@ -61,7 +61,7 @@ self.addEventListener('fetch', (event) => {
             }
 
             if (url.href.includes('/api/v1/')) {
-              const data = {code: ResponseEvents.InternalError, explain: 'Нет интернетика, попробуйте позже:('};
+              const data = {status: ResponseEvents.InternalError, explain: 'Нет интернетика, попробуйте позже:('};
               const body = new Blob([JSON.stringify(data)], {type: 'application/json'});
 
               const status = {
