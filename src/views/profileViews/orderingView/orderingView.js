@@ -15,6 +15,7 @@ import {Order} from 'hme-design-system/src/components/contentBlock/order/order';
 import {CreateSnack} from '../../../components/snackBar/snackBar';
 import {paymentMethods} from '../../../modules/consts';
 
+// eslint-disable-next-line valid-jsdoc
 /**
  * Profile view class
  */
