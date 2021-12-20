@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Copy SW
-        run: cp src/sw.js dist/ && cp src/fav.png dist/ && cp src/favincon.ico dist/ && cp src/manifest.json dist/
+        run: cp src/sw.js dist/ && cp src/fav.png dist/ && cp src/favicon.ico dist/ && cp src/manifest.json dist/
 
 
       - name: Upload build result
