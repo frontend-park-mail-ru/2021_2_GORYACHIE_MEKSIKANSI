@@ -17,6 +17,8 @@ import {SearchController} from './controllers/searchController';
 import {FavouriteController} from './controllers/favouriteController';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+require('babel-core/register');
+require('babel-polyfill');
 
 const application = document.getElementById('app');
 const router = new Router(document.body);
