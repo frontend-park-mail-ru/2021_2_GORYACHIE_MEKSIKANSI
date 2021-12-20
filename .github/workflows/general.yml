@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Copy SW
-        script: |
+        run: >-
         cp src/sw.js dist/
         cp src/fav.png dist/
         cp src/favincon.ico dist/
