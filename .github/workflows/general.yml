@@ -28,7 +28,12 @@ jobs:
         run: npm run build
 
       - name: Copy SW
-        run: cp src/sw.js dist/
+        run: |
+        cp src/sw.js dist/
+        cp src/fav.png dist/
+        cp src/favincon.ico dist/
+        cp src/manifest.json dist/
+
 
       - name: Upload build result
         uses: actions/upload-artifact@v2
